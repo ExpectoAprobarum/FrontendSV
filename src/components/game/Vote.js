@@ -13,7 +13,7 @@ const Vote = ({gameState}) => {
   }
   const vote = (e) => {
     let vote = e.target.className.split(' ')[0];
-    axios.put(url, {vote: vote === 'lumos'} );
+    axios.post(url, {vote: vote === 'lumos'} );
     disableButtons();
   }
   return gameState === 1 ? (
