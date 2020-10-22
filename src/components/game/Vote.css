@@ -33,3 +33,7 @@
   background-image: url('../../assets/LumosCard.png');
   left: 30%;
 }
+
+*:disabled {
+  opacity: 0.6;
+}
