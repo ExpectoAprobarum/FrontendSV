@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 //import { Provider } from 'react-redux';
 import PageCreateGame from'./components/PageCreateGame';
-import {BrowserRouter as Router, Route, Link, useHistory} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
 class App extends Component { 
-  render(){
+
+    render(){
       return(
           <div className='App'>
               <Router>
@@ -13,11 +14,7 @@ class App extends Component {
                   <br></br>
                   <br></br>
                   <br></br>
-                  <Route exact path="/" render= { () => {
-                      return <div>
-                          < PageCreateGame/>
-                      </div>
-                  }} />
+                  <Route exact path="/" component={PageCreateGame} />
                   <Route path='/Lobby' render={() => {
                     return <h1>Lobby</h1>
                   }}/>

@@ -1,43 +1,44 @@
 import React, {Component} from 'react';
 //import { connect } from 'react-redux';
 //import {reduxForm, Field} from 'redux-form';
-//import axios from 'axios';
+import axios from 'axios';
 //instalar esta libreria
-import {BrowserRouter as Router, Route, Link, useHistory} from 'react-router-dom';
+import { Redirect, useHistory} from 'react-router-dom';
 
 
-function LobbyButton() {
-    const history = useHistory();
-    function handleClick() {
-      history.push("/Lobby");
-    }
-    return (
-      <button type="button" onClick={handleClick}>
-        go to lobby
-      </button>
-    );
-  }
-
+ 
 class PageCreateGame extends Component {
     state = {
         name:'', 
         numberplayers: 5,
         showMe: false,
     }
+    //esta funcion se encarga de hacer un post una vez apretado el boton.
     onSubmit = (e) => {
         e.preventDefault();
-        /*
-        axios.post('https://jsonplaceholder.typicode.com/todos', this.state).then(response => {
+        //esto es lo que voy a enviar al back
+        const infotosend ={
+        name: this.state.name,
+        numberplayers:this.state.numberplayers
+        };
+        
+        console.log(this.state.name)
+        axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => {
             console.log(response)
+        if(response.status === 201){
+            //aca deberia hacer algo si esta todo bien(?)
+            window.location = "/Lobby";
+           }
         })
         .catch(error => {
             console.log(error)
-        })*/
+        })
     }
     onChange = (e) => {
         this.setState({
-            name: e.target.value
+            [e.target.name]: e.target.value
         })
+        
     }
     showmetheElement = () => {
         this.setState({
@@ -48,30 +49,38 @@ class PageCreateGame extends Component {
     render(){
         return( 
             <div>
-            <button onClick={this.showmetheElement}>Create a Game</button>
-            
-           { this.state.showMe ?
+           <button onClick={this.showmetheElement}>Create a Game</button>
+           { this.state.showMe ? 
             <div className='Example'>
                 <div>
                     <form onSubmit={this.onSubmit}>
+                        <br />
+                        <br />
                         <input 
                         type='text' 
-                        placeholder='Write a game name'
+                        name="name"
                         onChange={this.onChange} 
                         value ={this.state.name}/>
                             <br/>
                             <br/>
-                        <p>Number of players:</p>
-                        
-                        <input type='checkbox'/>5 players  // aca deberia considerar mas casos de playrs
-                            <br/>
-                            <br/>
-                        <LobbyButton/>
+                            <label>Number Of Players: </label>
+                            <select
+                                name="numberplayers"
+                                value={this.state.number}
+                                onChange={this.onChange}
+                                >
+                                <option value="5">5</option>
+                                <option value="7">7</option>
+                                <option value="9">9</option>
+                            </select>
+                            <br />
+                            <br />
                         <button tpye ='submit'>Save config</button>
                     </form>
                 </div>
-            </div>
-            : <h1></h1>   
+            </div>   
+            :
+            <p></p>
             }
             </div>
              
