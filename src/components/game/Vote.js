@@ -13,7 +13,6 @@ const Vote = ({gameState}) => {
   }
   const vote = (e) => {
     let vote = e.target.className.split(' ')[0];
-    console.log(vote);
     axios.put(url, {vote: vote === 'lumos'} );
     disableButtons();
   }
