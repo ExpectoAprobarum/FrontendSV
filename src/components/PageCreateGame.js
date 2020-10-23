@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-//import { connect } from 'react-redux';
-//import {reduxForm, Field} from 'redux-form';
-import axios from 'axios';
 //instalar esta libreria
-import { Redirect, useHistory} from 'react-router-dom';
-
+import axios from 'axios';
+import "./buttonStyle.css";
 
  
 class PageCreateGame extends Component {
+    //necesito un atributo showme en el estado para poder mostrar todo este componente cdo se toca un boton.
     state = {
         name:'', 
         numberplayers: 5,
@@ -26,7 +24,7 @@ class PageCreateGame extends Component {
         axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => {
             console.log(response)
         if(response.status === 201){
-            //aca deberia hacer algo si esta todo bien(?)
+            //aca deberia hacer algo si esta todo bien(?).
             window.location = "/Lobby";
            }
         })
@@ -49,13 +47,19 @@ class PageCreateGame extends Component {
     render(){
         return( 
             <div>
-           <button onClick={this.showmetheElement}>Create a Game</button>
+                <div class="button-container-1">
+                <span class="mas">Are you ready ?</span>
+                <button id="work" type="button" name="Hover" onClick={this.showmetheElement}>
+                 Create a Game
+                </button>
+                </div>
            { this.state.showMe ? 
             <div className='Example'>
                 <div>
                     <form onSubmit={this.onSubmit}>
                         <br />
                         <br />
+                        <label>Game Name: </label>
                         <input 
                         type='text' 
                         name="name"

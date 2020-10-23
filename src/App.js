@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-//import { Provider } from 'react-redux';
 import PageCreateGame from'./components/PageCreateGame';
+//instalar esta libreria
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
