@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PageCreateGame from'./components/PageCreateGame';
 //instalar esta libreria
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 class App extends Component { 
@@ -10,14 +10,14 @@ class App extends Component {
       return(
           <div className='App'>
               <Router>
-                  <Link to ='/'>Home</Link>
+                <Switch>
+                <Route exact path="/" component={PageCreateGame} />
+                <Route path='/Lobby' render={() => {return <h1>Lobby</h1>}}/>
+                </Switch>
                   <br></br>
                   <br></br>
                   <br></br>
-                  <Route exact path="/" component={PageCreateGame} />
-                  <Route path='/Lobby' render={() => {
-                    return <h1>Lobby</h1>
-                  }}/>
+                  
               </Router>
           </div>
       );

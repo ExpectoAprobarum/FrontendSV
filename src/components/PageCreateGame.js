@@ -2,15 +2,20 @@ import React, {Component} from 'react';
 //instalar esta libreria
 import axios from 'axios';
 import "./buttonStyle.css";
+import { Redirect } from 'react-router-dom';
 
  
 class PageCreateGame extends Component {
     //necesito un atributo showme en el estado para poder mostrar todo este componente cdo se toca un boton.
-    state = {
-        name:'', 
-        numberplayers: 5,
-        showMe: false,
-    }
+    constructor(props) {
+        super(props);
+        this.state = { 
+                name:'', 
+                numberplayers: 5,
+                showMe: false, 
+                redirect: false}
+    };
+      
     //esta funcion se encarga de hacer un post una vez apretado el boton.
     onSubmit = (e) => {
         e.preventDefault();
@@ -21,17 +26,18 @@ class PageCreateGame extends Component {
         };
         
         console.log(this.state.name)
-        axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => {
-            console.log(response)
-        if(response.status === 201){
-            //aca deberia hacer algo si esta todo bien(?).
-            window.location = "/Lobby";
-           }
+        axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => { 
+            if(response.status === 201){
+                //aca deberia hacer algo si esta todo bien(?).
+            console.log(response) 
+            this.setState({redirect: true})  
+            }
         })
         .catch(error => {
-            console.log(error)
+           console.log(error)
         })
     }
+    
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -45,14 +51,19 @@ class PageCreateGame extends Component {
     }
     
     render(){
+        const redirect  = this.state.redirect
+        
+        if(redirect){ 
+            return <Redirect to="/Lobby" />
+        }
         return( 
-            <div>
-                <div class="button-container-1">
-                <span class="mas">Are you ready ?</span>
+            <div> 
+                <div className="button-container-1">
+                <span className="mas">Are you ready ?</span>
                 <button id="work" type="button" name="Hover" onClick={this.showmetheElement}>
                  Create a Game
                 </button>
-                </div>
+            </div> 
            { this.state.showMe ? 
             <div className='Example'>
                 <div>
@@ -79,7 +90,7 @@ class PageCreateGame extends Component {
                             </select>
                             <br />
                             <br />
-                        <button tpye ='submit'>Save config</button>
+                        <button tpye ='submit' value={this.state.redirect} name="redirect">Save config</button>
                     </form>
                 </div>
             </div>   
