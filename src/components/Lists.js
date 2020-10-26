@@ -117,7 +117,6 @@ class Modal extends React.Component {
             <hr />
             <button onClick={this.joinGame} className="buttonFound bttmodal">Unirse</button>
             
-            
             <button onClick={this.props.handleClose} className="buttonFound bttmodal">Close</button>
           </div>
         </div>,
