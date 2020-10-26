@@ -1,16 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import ReactDOM from 'react-dom'
-
-import '../css/styleSearch.css'
+import Modal from './modal'
 
 const liStyle = {
     paddingLeft: '45px', 
     listStyleType: "none",
     
 };
-
-const modalRoot = document.getElementById('modal-root')
 
 export default class PersonList extends React.Component {
     constructor(props) {
@@ -36,8 +32,27 @@ export default class PersonList extends React.Component {
     };
     
     hideModal() {
-        this.setState({ modalshow: false });
+        this.setState({ 
+            modalshow: false,
+            selected: []
+        });
     };
+
+    joinGame = event => {
+        // Aca deberia pasar el Usuario y la partida a la que quiere unirse.
+        event.preventDefault();
+    
+        const user = {
+            name: this.state.selected.id
+        };
+    
+        axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+            .then(res => {
+                console.log("Res: ", res);
+                console.log("res.data: ", res.data);
+            })
+    }
+
     
     handleChange(event) {
         this.setState({value: event.target.value});
@@ -81,20 +96,18 @@ export default class PersonList extends React.Component {
                         value = { this.state.text}
                         onChange={ (text) => this.filter(text)}
                     />
-                    {this.state.modalshow ? (
-                        <Modal show={this.state.modalshow} handleClose={this.hideModal}>
-                            <h3>{this.state.selected.name}</h3>
-                            <p>Estado de Sala: {this.state.selected.id}</p>
-                        </Modal>
-                    ) : null}
+
+                    <Modal open={this.state.modalshow} handleClose={this.hideModal} inPartida={this.joinGame}>
+                        <h3>{this.state.selected.name}</h3>
+                        <p style={{paddingBottom:"15px"}}>Estado de Sala: {this.state.selected.id}</p>
+                    </Modal>
 
                     <div style={{paddingTop: "20px"}}></div>
 
                     { this.state.list.map(
                         person => <li style={liStyle} key={person.id}>
                                     <button type="button" onClick= {() => this.showModal(person)} className= "buttonFound">
-                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name}
-                                        
+                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
                                     </button>
                                 </li>
                     )}
@@ -103,25 +116,3 @@ export default class PersonList extends React.Component {
         );
     }
 }
-
-class Modal extends React.Component {
-    joinGame() {
-        console.log("Press Unirse")
-    };
-
-    render() {
-      return ReactDOM.createPortal(
-        <div className='modal'>
-          <div className="modal-main">
-            {this.props.children}
-            <hr />
-            <button onClick={this.joinGame} className="buttonFound bttmodal">Unirse</button>
-            
-            <button onClick={this.props.handleClose} className="buttonFound bttmodal">Close</button>
-          </div>
-        </div>,
-        modalRoot,
-      )
-    }
-  }
-
