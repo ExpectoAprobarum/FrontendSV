@@ -4,8 +4,12 @@ import Modal from './modal'
 
 const liStyle = {
     paddingLeft: '45px', 
-    listStyleType: "none",
-    
+    listStyleType: "none", 
+};
+
+const divStyle = {
+    color: '#182d5b',
+    paddingLeft: '100px',
 };
 
 export default class PersonList extends React.Component {
@@ -43,13 +47,15 @@ export default class PersonList extends React.Component {
         event.preventDefault();
     
         const user = {
-            name: this.state.selected.id
+            id: this.state.selected.id
         };
     
         axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
             .then(res => {
-                console.log("Res: ", res);
-                console.log("res.data: ", res.data);
+                if (res.status === 201) {
+                    console.log("Res: ", res);
+                    console.log("res.data: ", res.data);
+                }
             })
     }
 
@@ -87,32 +93,40 @@ export default class PersonList extends React.Component {
 
     render() {
         return (
-            <ul>
-                <form onSubmit = {this.handleSubmit}>
-                    <input type="text" 
-                        className = "search-button"
-                        name = "name" 
-                        placeholder = "Buscar.."
-                        value = { this.state.text}
-                        onChange={ (text) => this.filter(text)}
-                    />
+            <div style={{paddingLeft:"10px"}}>
+                <h1 style={divStyle}>Unirse a Partida</h1>
+                <label>
+                    <form onSubmit = {this.handleSubmit}>
+                        <input type="text" 
+                            className = "search-button"
+                            name = "name" 
+                            placeholder = "Buscar.."
+                            value = { this.state.text}
+                            onChange={ (text) => this.filter(text)}
+                        />
 
-                    <Modal open={this.state.modalshow} handleClose={this.hideModal} inPartida={this.joinGame}>
-                        <h3>{this.state.selected.name}</h3>
-                        <p style={{paddingBottom:"15px"}}>Estado de Sala: {this.state.selected.id}</p>
-                    </Modal>
+                        <Modal open={this.state.modalshow} 
+                            handleClose={this.hideModal} 
+                            inPartida={this.joinGame}
+                            gameID={this.state.selected.id}>
+                            <h3>{this.state.selected.name}</h3>
+                            <p style={{paddingBottom:"15px"}}>Estado de Sala: {this.state.selected.id}</p>
+                        </Modal>
 
-                    <div style={{paddingTop: "20px"}}></div>
+                        <div style={{paddingTop: "20px"}}></div>
 
-                    { this.state.list.map(
-                        person => <li style={liStyle} key={person.id}>
-                                    <button type="button" onClick= {() => this.showModal(person)} className= "buttonFound">
-                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
-                                    </button>
-                                </li>
-                    )}
-                </form>
-            </ul>
+                        { this.state.list.map(
+                            person => <li style={liStyle} key={person.id}>
+                                        <button type="button" 
+                                            onClick= {() => this.showModal(person)} className= "buttonFound">
+                                            {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
+                                        </button>
+                                    </li>
+                        )}
+                    </form>
+                </label>
+                <div id="lista"></div>
+            </div>
         );
     }
 }
