@@ -1,36 +1,32 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 //instalar esta libreria
 import axios from 'axios';
 import "./buttonStyle.css";
 import { Redirect } from 'react-router-dom';
 
  
-class PageCreateGame extends Component {
+const PageCreateGame = () => {
     //necesito un atributo showme en el estado para poder mostrar todo este componente cdo se toca un boton.
-    constructor(props) {
-        super(props);
-        this.state = { 
-                name:'', 
-                numberplayers: 5,
-                showMe: false, 
-                redirect: false}
-    };
-      
+    const [name, setName] = useState('');
+    const [player_amount, setPlayer_amount] = useState(5);
+    const [showMe, setShowMe] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+       
     //esta funcion se encarga de hacer un post una vez apretado el boton.
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         //esto es lo que voy a enviar al back
         const infotosend ={
-        name: this.state.name,
-        numberplayers:this.state.numberplayers
+        name: name,
+        player_amount:this.player_amount
         };
         
-        console.log(this.state.name)
+        console.log(name)
         axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => { 
             if(response.status === 201){
                 //aca deberia hacer algo si esta todo bien(?).
             console.log(response) 
-            this.setState({redirect: true})  
+            setRedirect(true)
             }
         })
         .catch(error => {
@@ -38,20 +34,18 @@ class PageCreateGame extends Component {
         })
     }
     
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+    const onChange = (e) => {
+        if(e.target.name === 'name'){
+            setName(e.target.value)
+        }
+        else if(e.target.name === 'player_amount'){
+            setPlayer_amount(e.target.value)
+        }
         
     }
-    showmetheElement = () => {
-        this.setState({
-            showMe: !this.state.showMe
-        })
+    const showmetheElement = () => {
+        setShowMe(! showMe)
     }
-    
-    render(){
-        const redirect  = this.state.redirect
         
         if(redirect){ 
             return <Redirect to="/Lobby" />
@@ -60,37 +54,37 @@ class PageCreateGame extends Component {
             <div> 
                 <div className="button-container-1">
                 <span className="mas">Are you ready ?</span>
-                <button id="work" type="button" name="Hover" onClick={this.showmetheElement}>
+                <button id="work" type="button" name="Hover" onClick={showmetheElement}>
                  Create a Game
                 </button>
-            </div> 
-           { this.state.showMe ? 
+                </div> 
+           { showMe ? 
             <div className='Example'>
                 <div>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={onSubmit}>
                         <br />
                         <br />
                         <label>Game Name: </label>
                         <input 
                         type='text' 
                         name="name"
-                        onChange={this.onChange} 
-                        value ={this.state.name}/>
+                        onChange={onChange} 
+                        value ={name}/>
                             <br/>
                             <br/>
                             <label>Number Of Players: </label>
                             <select
-                                name="numberplayers"
-                                value={this.state.number}
-                                onChange={this.onChange}
-                                >
+                                name="player_amount"
+                                value={player_amount}
+                                onChange={onChange}
+                            >
                                 <option value="5">5</option>
                                 <option value="7">7</option>
                                 <option value="9">9</option>
                             </select>
                             <br />
                             <br />
-                        <button tpye ='submit' value={this.state.redirect} name="redirect">Save config</button>
+                        <button tpye ='submit' value={redirect} name="redirect">Save config</button>
                     </form>
                 </div>
             </div>   
@@ -100,7 +94,6 @@ class PageCreateGame extends Component {
             </div>
              
         )
-    }
 }
 
 export default PageCreateGame;
