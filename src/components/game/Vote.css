@@ -22,11 +22,16 @@
   border-image: url('../../assets/CardFrame.png') 150 round;
   border-width: 40px;
   border-radius: 0px;
+  filter: saturate(1.7);
 }
 
 .nox {
   background-image: url('../../assets/NoxCard.png');
   left: 70%;
+}
+
+.nox:hover {
+  filter: grayscale(100%);
 }
 
 .lumos {
