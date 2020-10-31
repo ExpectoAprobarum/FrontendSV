@@ -1,21 +1,31 @@
-#proclam {
-  text-align: center;
+.proclam .left {
+  left: 30%;
 }
 
-#proclam button {
+.proclam .right {
+  left: 55%;
+}
+
+.proclam .card {
+  position: absolute;
+  display: flex;
   width: 288px;
   height: 415px;
-  padding: 0;
-  margin: 6em;
-  border-radius: 0.25em;
-  border: none;
+  border-radius: 20px;
   outline: none;
+  border: 8px solid transparent;
+  background-repeat:  no-repeat;
+  background-position-x: -8px;
+  background-position-y: -9px;
 }
 
-#proclam button:hover {
+.proclam .card:hover {
   border-image: url('../../assets/CardFrame.png') 150 round;
   border-width: 40px;
   border-radius: 0px;
+  background-position-x: -40px;
+  background-position-y: -41px;
+  filter: saturate(1.7);
 }
 
 .phoenix {

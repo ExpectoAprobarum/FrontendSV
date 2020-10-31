@@ -27,9 +27,9 @@ const EmitProclamation = ({phase, cards, headmaster, gameId}) => {
   }
 
   return phase === 'EMIT_PROC' /*&& headmaster === current player user_id???*/? (
-    <div id="proclam">
-      <button className={cards[0]} ref={card1} onClick={(e) => {choose(e)}}></button>
-      <button className={cards[1]} ref={card2} onClick={(e) => {choose(e)}}></button>
+    <div className="proclam">
+      <button className={"death" + " card left"} ref={card1} onClick={(e) => {choose(e)}}></button>
+      <button className={"phoenix" + " card right"} ref={card2} onClick={(e) => {choose(e)}}></button>
     </div>
   ) : (
     <p></p>
