@@ -18,7 +18,7 @@ const PageCreateGame = () => {
         //esto es lo que voy a enviar al back
         const infotosend ={
         name: name,
-        player_amount:this.player_amount
+        player_amount:player_amount
         };
         
         console.log(name)

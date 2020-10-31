@@ -20,7 +20,7 @@
 }
 
 .proclam .card:hover {
-  border-image: url('../../assets/CardFrame.png') 150 round;
+  border-image: url('../assets/CardFrame.png') 150 round;
   border-width: 40px;
   border-radius: 0px;
   background-position-x: -40px;
@@ -29,11 +29,11 @@
 }
 
 .phoenix {
-  background-image: url('../../assets/ProclamationPhoenix.png');
+  background-image: url('../assets/ProclamationPhoenix.png');
 }
 
 .death {
-  background-image: url('../../assets/ProclamationDeathEater.png');
+  background-image: url('../assets/ProclamationDeathEater.png');
 }
 
 *.disabled {

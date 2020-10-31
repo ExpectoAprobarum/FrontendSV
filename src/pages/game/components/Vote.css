@@ -19,14 +19,14 @@
 }
 
 .card:hover {
-  border-image: url('../../assets/CardFrame.png') 150 round;
+  border-image: url('../assets/CardFrame.png') 150 round;
   border-width: 40px;
   border-radius: 0px;
   filter: saturate(1.7);
 }
 
 .nox {
-  background-image: url('../../assets/NoxCard.png');
+  background-image: url('../assets/NoxCard.png');
   left: 70%;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .lumos {
-  background-image: url('../../assets/LumosCard.png');
+  background-image: url('../assets/LumosCard.png');
   left: 30%;
 }
 

@@ -1,6 +1,7 @@
 .linked {
     color: whitesmoke;
     text-decoration: none;
+    top:500px
 }
 
 .linked:focus {

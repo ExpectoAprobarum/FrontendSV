@@ -1,4 +1,4 @@
-body{
+.formRegister body{
     height: 60vh;
     display: flex;
     justify-content: space-around;
@@ -6,7 +6,6 @@ body{
     flex-direction: column;
     font-family: sans-serif;
 }
-
 
 .formRegister{
     width: 50%;

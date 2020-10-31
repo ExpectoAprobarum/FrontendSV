@@ -93,7 +93,7 @@ export default class PersonList extends React.Component {
 
     render() {
         return (
-            <div style={{paddingLeft:"10px"}}>
+            <div style={{paddingTop:"300px"}}>
                 <h1 style={divStyle}>Unirse a Partida</h1>
                 <label>
                     <form onSubmit = {this.handleSubmit}>

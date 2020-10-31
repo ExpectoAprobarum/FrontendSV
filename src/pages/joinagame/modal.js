@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { Link } from 'react-router-dom'; // prueba
 
-import '../css/styleSearch.css'
+import './styleSearch.css'
 
 export default function Modal({open, children, handleClose, inPartida, gameID}) {
     if (open) {
