@@ -14,6 +14,8 @@
 
 #proclam button:hover {
   border-image: url('../../assets/CardFrame.png') 150 round;
+  border-width: 40px;
+  border-radius: 0px;
 }
 
 .phoenix {
@@ -22,4 +24,8 @@
 
 .death {
   background-image: url('../../assets/ProclamationDeathEater.png');
+}
+
+*.disabled {
+  opacity: 0.6;
 }
