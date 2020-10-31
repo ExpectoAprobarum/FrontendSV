@@ -1,4 +1,5 @@
 import React from 'react';
+import PageCreateGame from'./pages/PageCreateGame';
 import Register from './pages/register/register'
 import PersonList from './components/Lists'
 import LobbyPage from './components/Lobby'
@@ -12,6 +13,7 @@ function App() {
     return (
         <Router>
             <Switch>
+                <Route exact path="/home" component={PageCreateGame} />
                 <Route path="/Join">
                     <PersonList />
                 </Route>
@@ -24,7 +26,6 @@ function App() {
             </Switch>
         </Router>
     );
-
 }
 
 export default App;
