@@ -1,7 +1,9 @@
-import axios from 'axios';
-import React, { Component } from 'react';
 import EmitProclamation from './game/EmitProclamation';
-import configData from "../config.json";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Vote from './game/Vote';
+import configData from '../config.json';
+
 
 class Game extends Component {
   constructor(props) {
@@ -59,9 +61,18 @@ class Game extends Component {
     this.getGameData();
   }
 
-  changeState() {
+  changeStateProc() {
     let newStatus = this.state.gameStatus;
     newStatus.phase = 'EMIT_PROC';
+    this.setState({
+      gameStatus: newStatus
+    })
+  }  
+  
+  changeStateVote() {
+    let newStatus = this.state.gameStatus;
+    newStatus.phase = 'VOTE';
+
     this.setState({
       gameStatus: newStatus
     })
@@ -71,14 +82,18 @@ class Game extends Component {
     return (
       <div className="Game">
         <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-        <button id="changeState" onClick={this.changeState}>
-          Change to: emit proclamation phase
+        <button id="changeStateVote" onClick={this.changeStateVote} >Change to: vote phase</button>  
+        <button id="changeStateProc" onClick={this.changeStateProc} />
+        Change to: emit proclamation phase
         </button>
         <EmitProclamation
           phase={this.state.gameStatus.phase}
           cards={this.state.gameStatus.cards}
           headmaster={this.state.gameStatus.headmaster.user_id}
           gameId={this.props.gameId}
+
+        <Vote
+          phase={this.state.gameStatus.phase}
         />
       </div>
     )
