@@ -1,27 +1,31 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PageCreateGame from'./pages/PageCreateGame';
-//instalar esta libreria
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Register from './pages/register/register'
+import PersonList from './components/Lists'
+import LobbyPage from './components/Lobby'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
-
-class App extends Component { 
-
-    render(){
-      return(
-          <div className='App'>
-              <Router>
-                <Switch>
+function App() {
+    return (
+        <Router>
+            <Switch>
                 <Route exact path="/home" component={PageCreateGame} />
-                <Route path='/Lobby' render={() => {return <h1>Lobby</h1>}}/>
-                </Switch>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  
-              </Router>
-          </div>
-      );
-  }
+                <Route path="/Join">
+                    <PersonList />
+                </Route>
+                <Route path="/Lobby">
+                    <LobbyPage />
+                </Route>
+                <Route exact path="/" component={Register}>
+                    <h1>Inicio</h1>
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
