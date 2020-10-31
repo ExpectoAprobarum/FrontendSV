@@ -30,18 +30,11 @@ class Game extends Component {
       }
     }
 
-    this.changeState = this.changeState.bind(this);
+    this.getGameData = this.getGameData.bind(this);
+    this.changeState = this.changeState.bind(this)
   }
 
   getGameData() {
-    //Get game info data
-    axios.get(configData.API_URL + '/games/' + this.props.gameId)
-      .then(res => {
-        let gameInfo = res.data;
-        this.setState({
-          gameInfo: gameInfo
-        })
-      });
     //Get game status data
     axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status')
       .then(res => {
@@ -55,6 +48,14 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    //Get game info data
+    axios.get(configData.API_URL + '/games/' + this.props.gameId)
+      .then(res => {
+        let gameInfo = res.data;
+        this.setState({
+          gameInfo: gameInfo
+        })
+      });
     this.getGameData();
   }
 
