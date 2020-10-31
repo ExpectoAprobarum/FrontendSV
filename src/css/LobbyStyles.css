@@ -1,0 +1,31 @@
+.h1TittleLobby {
+    text-align: center;
+}
+
+.form-popup {
+    background-color: white;
+    display: none;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border: 1.5px solid #f1f1f1;
+    z-index: 9;
+}
+  
+.fom-popup-BoxShadow {
+    border: none;
+    padding-top: 15px;
+    border-radius: 10px;
+    margin: 0 0 15px 100px;
+    -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    width: 200px;
+    height: 35px;
+}
+
+.buttonFound.bttLobby {
+    display:table;
+    width: 50%;
+    margin: 0 auto;
+}
