@@ -1,0 +1,25 @@
+#proclam {
+  text-align: center;
+}
+
+#proclam button {
+  width: 288px;
+  height: 415px;
+  padding: 0;
+  margin: 6em;
+  border-radius: 0.25em;
+  border: none;
+  outline: none;
+}
+
+#proclam button:hover {
+  border-image: url('../../assets/CardFrame.png') 150 round;
+}
+
+.phoenix {
+  background-image: url('../../assets/ProclamationPhoenix.png');
+}
+
+.death {
+  background-image: url('../../assets/ProclamationDeathEater.png');
+}
