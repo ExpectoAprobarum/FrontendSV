@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from './modal'
-import { Redirect } from 'react-router';
-import LobbyPage from '../components/Lobby'
+import LobbyPage from '../../components/Lobby'
 
 const liStyle = {
     paddingLeft: '45px', 

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
-import configData from '../../config.json';
+import configData from '../../../config.json';
 import './EmitProclamation.css';
 
 const EmitProclamation = ({phase, cards, headmaster, gameId}) => {

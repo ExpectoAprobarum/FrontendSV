@@ -1,10 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Link, BrowserRouter, Route, Redirect } from 'react-router-dom'; // prueba
-import Game from '../components/Game'
-import PersonList from '../components/Lists'
+import Game from '../pages/game/Game'
 import '../css/LobbyStyles.css'
-import '../css/styleSearch.css'
+import '../pages/joinagame/styleSearch.css'
 
 const liStyle = {
     paddingLeft: '45px', 

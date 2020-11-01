@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-//instalar esta libreria
 import axios from 'axios';
 import "./buttonStyle.css";
 import { Redirect } from 'react-router-dom';
-import PersonList from '../components/Lists'
+import PersonList from '../joinagame/Lists'
 
  
 const PageCreateGame = () => {

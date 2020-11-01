@@ -1,4 +1,4 @@
-import EmitProclamation from './game/EmitProclamation';
+import EmitProclamation from './components/EmitProclamation';
 import React, { Component } from 'react';
 import axios from 'axios';
 import Vote from './components/Vote';
