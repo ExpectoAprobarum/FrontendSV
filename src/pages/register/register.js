@@ -63,10 +63,10 @@ const Register = () =>{
         } */
         return (
         <div className='Register'>
-            <labe className='TitleRegister'>Crea tu Usuario aqui! :</labe>
+            <label className='TitleRegister'>Crea tu Usuario aqui! :</label>
             <form onSubmit={handleOnSubmit} className='formRegister'>
                 <input className=''
-                    id='email'
+                    id='emailR'
                     type='text' 
                     name='email' 
                     placeholder='Ingrese un Email' 
@@ -81,7 +81,7 @@ const Register = () =>{
                 </div>
                 <br />
                 <input 
-                    id='contraseña'
+                    id='contraseñaR'
                     type='password' 
                     name='contraseña' 
                     placeholder='Ingrese su Contraseña' 

@@ -31,7 +31,7 @@ class Game extends Component {
         }
       }
     }
-
+    
     this.getGameData = this.getGameData.bind(this);
     this.changeStateProc = this.changeStateProc.bind(this)
     this.changeStateVote = this.changeStateVote.bind(this)
@@ -39,6 +39,7 @@ class Game extends Component {
 
   getGameData() {
     //Get game status data
+    console.log(this.props.gameId)
     axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status')
       .then(res => {
         let gameStatus = res.data;
@@ -70,6 +71,7 @@ class Game extends Component {
     })
   }  
   
+
   changeStateVote() {
     let newStatus = this.state.gameStatus;
     newStatus.phase = 'VOTE';

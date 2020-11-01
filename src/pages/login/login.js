@@ -59,10 +59,10 @@ const Login = () =>{
         } */
         return (
         <div className='Login'>
-            <labe className='TitleLogin'>Si ya tienes un Usuario podes Ingresar aqui: </labe>
+            <label className='TitleLogin'>Si ya tienes un Usuario podes Ingresar aqui: </label>
             <form onSubmit={handleOnSubmit} className='formLogin'>
                 <input className=''
-                    id='email'
+                    id='emailL'
                     type='text' 
                     name='email' 
                     placeholder='Ingrese su Email' 
@@ -74,7 +74,7 @@ const Login = () =>{
                 </div>
                 <br />
                 <input 
-                    id='contraseña'
+                    id='contraseñaL'
                     type='password' 
                     name='contraseña' 
                     placeholder='Ingrese su Contraseña' 
