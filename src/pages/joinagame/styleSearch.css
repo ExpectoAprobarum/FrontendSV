@@ -1,7 +1,11 @@
 .linked {
     color: whitesmoke;
     text-decoration: none;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .linked:focus {
@@ -95,6 +99,7 @@
     position: relative;
     overflow: hidden;
     width: 25%;
+    padding: 0px 0px;
 }
 
 .buttonFound.bttmodal:hover {
