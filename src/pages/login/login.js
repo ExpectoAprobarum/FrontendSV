@@ -59,6 +59,7 @@ const Login = () =>{
         } */
         return (
         <div className='Login'>
+            <labe className='TitleLogin'>Si ya tienes un Usuario podes Ingresar aqui: </labe>
             <form onSubmit={handleOnSubmit} className='formLogin'>
                 <input className=''
                     id='email'

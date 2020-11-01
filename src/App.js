@@ -1,12 +1,13 @@
 import React from 'react';
 import Register from './pages/register/register'
-import LobbyPage from './components/Lobby'
+import LobbyPage from './pages/lobby/Lobby'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
-import PrincipalPage from './principalpage/principalpage';
+import PrincipalPage from './principalpages/createAndjoin';
+import RegisterAndLogin from './principalpages/registerAndlogin'
 
 function App() { 
   return (
@@ -14,7 +15,7 @@ function App() {
             <Switch>
                 <Route exact path="/home" component={PrincipalPage}></Route>
                 <Route path="/Game" component={LobbyPage}></Route>
-                <Route exact path="/" component={Register}>
+                <Route exact path="/" component={RegisterAndLogin}>
                 </Route>
             </Switch>
         </Router>

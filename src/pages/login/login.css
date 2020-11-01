@@ -1,4 +1,4 @@
-body{
+.body label{
     height: 60vh;
     display: flex;
     justify-content: space-around;
@@ -10,9 +10,8 @@ body{
 
 .formLogin{
     width: 50%;
-    margin: 200px;
+    margin: 100px;
     position: relative;
-    top:300px;
 }
 
 .formLogin input{
@@ -32,4 +31,10 @@ body{
     margin-top: 3vh;
     font-weight: 300;
     font-size: 20px;
+}
+.TitleLogin {
+    width: 10px;
+    margin: 100px;
+    font-size: x-large ;
+    color:blueviolet;
 }

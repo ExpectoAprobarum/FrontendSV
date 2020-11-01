@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Game from '../pages/game/Game'
-import '../css/LobbyStyles.css'
-import '../pages/joinagame/styleSearch.css'
+import Game from '../game/Game'
+import './LobbyStyles.css'
+import '../joinagame/styleSearch.css'
 
 const liStyle = {
     paddingLeft: '45px', 
