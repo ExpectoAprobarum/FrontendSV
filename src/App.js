@@ -1,17 +1,16 @@
 import React from 'react';
-import PageCreateGame from'./pages/PageCreateGame';
+import PageCreateGame from'./pages/creategame/PageCreateGame';
 import Register from './pages/register/register'
-import PersonList from './components/Lists'
 import LobbyPage from './components/Lobby'
-import Game from './components/Game'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
+import PrincipalPage from './principalpage/principalpage';
 
-function App() {
-    return (
+function App() { 
+  return (
         <Router>
             <Switch>
                 <Route exact path="/home" component={PageCreateGame}></Route>

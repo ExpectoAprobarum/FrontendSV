@@ -1,8 +1,8 @@
 import EmitProclamation from './game/EmitProclamation';
 import React, { Component } from 'react';
 import axios from 'axios';
-import Vote from './game/Vote';
-import configData from '../config.json';
+import Vote from './components/Vote';
+import configData from '../../config.json';
 
 
 class Game extends Component {
@@ -94,10 +94,7 @@ class Game extends Component {
           headmaster={this.state.gameStatus.headmaster.user_id}
           gameId={this.props.gameId}
         />
-
-        <Vote
-          phase={this.state.gameStatus.phase}
-        />
+        <Vote phase={this.state.gameStatus.phase}/>
       </div>
     )
   }
