@@ -33,7 +33,8 @@ class Game extends Component {
     }
 
     this.getGameData = this.getGameData.bind(this);
-    this.changeState = this.changeState.bind(this)
+    this.changeStateProc = this.changeStateProc.bind(this)
+    this.changeStateVote = this.changeStateVote.bind(this)
   }
 
   getGameData() {
@@ -82,15 +83,17 @@ class Game extends Component {
     return (
       <div className="Game">
         <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-        <button id="changeStateVote" onClick={this.changeStateVote} >Change to: vote phase</button>  
-        <button id="changeStateProc" onClick={this.changeStateProc} />
-        Change to: emit proclamation phase
+        <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>  
+        <button id="changeStateProc" onClick={this.changeStateProc}>
+            Change to: emit proclamation phase
         </button>
+
         <EmitProclamation
           phase={this.state.gameStatus.phase}
           cards={this.state.gameStatus.cards}
           headmaster={this.state.gameStatus.headmaster.user_id}
           gameId={this.props.gameId}
+        />
 
         <Vote
           phase={this.state.gameStatus.phase}

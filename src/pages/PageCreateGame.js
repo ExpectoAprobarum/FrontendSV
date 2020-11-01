@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import "./buttonStyle.css";
 import { Redirect } from 'react-router-dom';
+import PersonList from '../components/Lists'
 
  
 const PageCreateGame = () => {
@@ -18,7 +19,7 @@ const PageCreateGame = () => {
         //esto es lo que voy a enviar al back
         const infotosend ={
         name: name,
-        player_amount:this.player_amount
+        player_amount: player_amount
         };
         
         console.log(name)
@@ -48,6 +49,7 @@ const PageCreateGame = () => {
     }
         
         if(redirect){ 
+            console.log("Entre")
             return <Redirect to="/Lobby" />
         }
         return( 
@@ -91,6 +93,8 @@ const PageCreateGame = () => {
             :
             <p></p>
             }
+
+            <PersonList /> 
             </div>
              
         )
