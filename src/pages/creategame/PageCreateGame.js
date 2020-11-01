@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import "./buttonStyle.css";
 import { Redirect } from 'react-router-dom';
-import PersonList from '../joinagame/Lists'
 
  
 const PageCreateGame = () => {
@@ -92,8 +91,6 @@ const PageCreateGame = () => {
             :
             <p></p>
             }
-
-            <PersonList /> 
             </div>
              
         )

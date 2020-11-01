@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from './modal'
-import LobbyPage from '../../components/Lobby'
 
 const liStyle = {
     paddingLeft: '45px', 
@@ -97,9 +96,6 @@ export default class PersonList extends React.Component {
     };
 
     render() {
-        if (this.state.redirect) {
-            return <div><LobbyPage /></div>
-        }
         return (
             <div style={{paddingLeft:"20px"}}>
                 <h1 style={divStyle}>Unirse a Partida</h1>
