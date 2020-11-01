@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, BrowserRouter, Route, Redirect } from 'react-router-dom'; // prueba
+import Game from '../components/Game'
+import PersonList from '../components/Lists'
 import '../css/LobbyStyles.css'
 import '../css/styleSearch.css'
 
@@ -14,12 +16,15 @@ export default class LobbyPage extends React.Component {
         super(props);
         this.state = {
             listPlayers: [],
+            initPartida: false,
         };
     }
 
-    componentDid = () => {
-        console.log(this.props.gameID)
-        <Redirect />
+    LobbyTransition = () => {
+        console.log("Entre al boton")
+        this.setState({
+            initPartida: true
+        })
     }
 
     componentDidMount() {
@@ -33,6 +38,9 @@ export default class LobbyPage extends React.Component {
     };
 
     render() {
+        if (this.state.initPartida) {
+            return <div><Game gameId={this.props.location.aboutProps.gameId}/></div>
+        }
         return (
             <div>
                 <h1 className="h1TittleLobby">Lobby</h1>
@@ -46,9 +54,7 @@ export default class LobbyPage extends React.Component {
                         )}
                     </form>
                 </label>
-                <Link to={`/game/`}>
-                    <button className="buttonFound bttmodal bttLobby" onClick={this.componentDid}>Iniciar Partida</button>
-                </Link>
+                <button className="buttonFound bttmodal bttLobby" onClick={this.LobbyTransition}>Iniciar Partida</button>
             </div>
         );
     }

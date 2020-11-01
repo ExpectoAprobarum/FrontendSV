@@ -10,7 +10,12 @@ export default function Modal({open, children, handleClose, inPartida, gameID}) 
             <div className='modal'>
                 <div className="modal-main">
                     {children}
-                    <button onClick={inPartida} className="buttonFound bttmodal"><Link className="linked" to={`/Lobby/${gameID}`}>Unirse</Link></button>
+                    <button onClick={inPartida} className="buttonFound bttmodal"><Link className="linked" to={{
+                        pathname: '/Game',
+                        aboutProps: {
+                            gameId: gameID
+                        }
+                    }}>Unirse</Link></button>
                     <button onClick={handleClose} className="buttonFound bttmodal">Close</button>
                 </div>
             </div>,
