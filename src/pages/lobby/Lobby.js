@@ -20,6 +20,7 @@ export default class LobbyPage extends React.Component {
 
     LobbyTransition = () => {
         console.log("Entre al boton")
+        this.gameStart()
         this.setState({
             initPartida: true
         })
@@ -70,7 +71,6 @@ export default class LobbyPage extends React.Component {
 
     render() {
         if (this.state.initPartida) {
-            this.gameStart()
             return <div><Game gameId={parseInt(this.props.location.state.gameId)}/></div>
         }
         return (
