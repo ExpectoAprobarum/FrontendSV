@@ -18,14 +18,6 @@ export default class LobbyPage extends React.Component {
         };
     }
 
-    LobbyTransition = () => {
-        console.log("Entre al boton")
-        this.gameStart()
-        this.setState({
-            initPartida: true
-        })
-    }
-
     componentDidMount() {
         console.log("passing: ", this.props.location.state.gameId)
         const usertoken = localStorage.getItem('user')
@@ -48,7 +40,7 @@ export default class LobbyPage extends React.Component {
         })
     };
 
-    gameStart(){
+    gameStart = () => {
         console.log("IDPART: ", parseInt(this.props.location.state.gameId))
         const idPart = parseInt(this.props.location.state.gameId)
         const usertoken = localStorage.getItem('user')
@@ -58,10 +50,11 @@ export default class LobbyPage extends React.Component {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
             }
-        }).then(response => { 
+        }).then(response => {
             if(response.status === 200){
-                const response_id = response.data
-                console.log("idCorrecto:", response_id)
+                this.setState({
+                    initPartida: true
+                })
             }
         })
         .catch(error => {
@@ -86,7 +79,7 @@ export default class LobbyPage extends React.Component {
                         )}
                     </form>
                 </label>
-                <button className="buttonFound bttmodal bttLobby" onClick={this.LobbyTransition}>Iniciar Partida</button>
+                <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button>
             </div>
         );
     }

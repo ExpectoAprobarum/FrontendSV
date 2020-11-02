@@ -103,16 +103,7 @@ class Game extends Component {
     if(this.state.gameStatus.phase === 'propose') {
       return(
         <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-          <div>
-            <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
-          </div>
-          <div>
-            <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
-          </div> 
-          <div>
-          <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
-          </div>     
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
           <ChooseHeadmaster
             phase={this.state.gameStatus.phase}
             ministerId={this.state.gameStatus.minister}
@@ -125,16 +116,7 @@ class Game extends Component {
     else if(this.state.gameStatus.phase === 'vote') {
       return(
         <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-          <div>
-            <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
-          </div>
-          <div>
-            <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
-          </div> 
-          <div>
-          <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
-          </div>     
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1> 
           <Vote
             phase={this.state.gameStatus.phase}
           />
@@ -144,16 +126,7 @@ class Game extends Component {
     else if(this.state.gameStatus.phase === 'headmasterPlay') {
       return(
         <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-          <div>
-            <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
-          </div>
-          <div>
-            <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
-          </div> 
-          <div>
-          <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
-          </div>     
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
           <EmitProclamation
             phase={this.state.gameStatus.phase}
             headmasterId={this.state.gameStatus.headmaster}
