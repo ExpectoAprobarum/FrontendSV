@@ -57,7 +57,6 @@ class Game extends Component {
     //Get userId from localStore
     const usertoken = localStorage.getItem('user');
     if(usertoken) {
-      //JSON.parse(usertoken) //probar
       const id = jwt_decode(usertoken).sub.id;
       this.setState({
         userId: id
