@@ -1,9 +1,10 @@
-import EmitProclamation from './components/EmitProclamation';
 import React, { Component } from 'react';
 import axios from 'axios';
 import Vote from './components/Vote';
+import EmitProclamation from './components/EmitProclamation';
+import ChooseHeadmaster from './components/ChooseHeadmaster';
 import configData from '../../config.json';
-
+import jwt_decode from 'jwt-decode';
 
 class Game extends Component {
   constructor(props) {
@@ -29,17 +30,18 @@ class Game extends Component {
           user_id: 0,
           username: ''
         }
-      }
+      },
+      userId: 0
     }
     
     this.getGameData = this.getGameData.bind(this);
-    this.changeStateProc = this.changeStateProc.bind(this)
+    this.changeStatePropose = this.changeStatePropose.bind(this);
+    this.changeStateProc = this.changeStateProc.bind(this);
     this.changeStateVote = this.changeStateVote.bind(this)
   }
 
   getGameData() {
     //Get game status data
-    console.log(this.props.gameId)
     axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status')
       .then(res => {
         let gameStatus = res.data;
@@ -52,6 +54,14 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    //Get userId from localStore
+    const usertoken = localStorage.getItem('user');
+    if(usertoken) {
+      const id = jwt_decode(usertoken).sub.id;
+      this.setState({
+        userId: id
+      })
+    }
     //Get game info data
     axios.get(configData.API_URL + '/games/' + this.props.gameId)
       .then(res => {
@@ -81,25 +91,46 @@ class Game extends Component {
     })
   }
 
+  changeStatePropose() {
+    let newStatus = this.state.gameStatus;
+    newStatus.phase = 'propose'
+
+    this.setState({
+      gameStatus: newStatus
+    })
+  }
+
   render() {
     return (
       <div className="Game">
         <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-        <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>  
-        <button id="changeStateProc" onClick={this.changeStateProc}>
-            Change to: emit proclamation phase
-        </button>
-
-        <EmitProclamation
+        <div>
+          <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
+        </div>
+        <div>
+          <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
+        </div> 
+        <div>
+        <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
+        </div>     
+        <ChooseHeadmaster
           phase={this.state.gameStatus.phase}
-          cards={this.state.gameStatus.cards}
-          headmaster={this.state.gameStatus.headmaster.user_id}
+          ministerId={this.state.gameStatus.minister.user_id}
+          userId={this.state.userId}
           gameId={this.props.gameId}
         />
-        <Vote phase={this.state.gameStatus.phase}/>
+        <EmitProclamation
+          phase={this.state.gameStatus.phase}
+          headmasterId={this.state.gameStatus.headmaster.user_id}
+          userId={this.state.userId}
+          gameId={this.props.gameId}
+        />
+        <Vote
+          phase={this.state.gameStatus.phase}
+        />
       </div>
     )
   }
 }
 
-export default Game;
+export default Game
