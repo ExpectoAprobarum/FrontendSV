@@ -4,12 +4,13 @@ import { Redirect } from 'react-router';
 import "./register.css";
 
 const Register = () =>{
+    const[usuario, setUsuario] = useState('')
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
     const[registerError, setRegisterError] = useState(true);
     const[emailAlert, setAlertEmail] = useState(false);
-    
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
         
@@ -17,20 +18,15 @@ const Register = () =>{
                 //esto es lo que voy a enviar al back
                 console.log("entro al if")
                 const infotosend ={
+                username: usuario,
                 email: email,
-                contraseña: contraseña
-            }    
-            axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend} ).then(response => { 
-            if(response.status === 201){
-                
-                //aca deberia hacer algo si esta todo bien(?).
+                password: contraseña
+                } 
+            console.log(infotosend)       
+            axios.post('http://127.0.0.1:8000/users/', infotosend ).then(response => { 
+            if(response.status === 200){
                 console.log(response.data) 
                 localStorage.setItem('user', JSON.stringify(response.data))
-                
-                //cuando recibo la info si el email esta en uso ya puedo configurar
-                //setAlertEmail(true) y setAlertEmail(false)
-                //SI EMAILALERT = 1 NO DEBO REDIRIGIR.
-                
             }
             }).catch(error => {
                 console.log(error)
@@ -44,6 +40,9 @@ const Register = () =>{
         }
         else if(e.target.name === 'contraseña'){
             setContraseña(e.target.value)
+        }
+        else if(e.target.name === 'usuario'){
+            setUsuario(e.target.value)
         }
         
         if(  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email) ){
@@ -70,6 +69,14 @@ const Register = () =>{
                     type='text' 
                     name='email' 
                     placeholder='Ingrese un Email' 
+                    value={email} 
+                    onChange={handleOnchange} 
+                />
+                <input className=''
+                    id='usuarioR'
+                    type='text' 
+                    name='usuario' 
+                    placeholder='Ingrese un Usuario' 
                     value={email} 
                     onChange={handleOnchange} 
                 />
