@@ -85,14 +85,21 @@ export default class PersonList extends React.Component {
     }
 
     componentDidMount() {
-        const URL = `https://jsonplaceholder.typicode.com/users`;
-        axios.get(URL)
-            .then(res => {
-                this.setState({ 
-                    list: res.data, 
-                    listBackup: res.data
+        const usertoken = localStorage.getItem('user')
+        axios.get('http://127.0.0.1:8000/games/', {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        }).then(response => {
+            if(response.status === 200){
+                this.setState({
+                    list: response.data.data,
                 });
-            })
+            }
+        })
+        .catch(error => {
+           console.log(error)
+        })
     };
 
     render() {
@@ -114,7 +121,7 @@ export default class PersonList extends React.Component {
                             inPartida={this.joinGame}
                             gameID={this.state.selected.id}>
                             <h3>{this.state.selected.name}</h3>
-                            <p style={{paddingBottom:"15px"}}>Estado de Sala: {this.state.selected.id}</p>
+                            <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
                         </Modal>
 
                         <div style={{paddingTop: "20px"}}></div>
