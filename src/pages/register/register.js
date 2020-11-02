@@ -62,9 +62,18 @@ const Register = () =>{
         } */
         return (
         <div className='Register'>
-            <label className='TitleRegister'>Crea tu Usuario aqui! :</label>
             <form onSubmit={handleOnSubmit} className='formRegister'>
-                <input className=''
+                <input className='UsuarioR'
+                    id='usuarioR'
+                    type='text' 
+                    name='usuario' 
+                    placeholder='Ingrese un Usuario' 
+                    value={usuario} 
+                    onChange={handleOnchange} 
+                />
+                <br/>
+                <br/>
+                <input className='EmailR'
                     id='emailR'
                     type='text' 
                     name='email' 
@@ -72,19 +81,11 @@ const Register = () =>{
                     value={email} 
                     onChange={handleOnchange} 
                 />
-                <input className=''
-                    id='usuarioR'
-                    type='text' 
-                    name='usuario' 
-                    placeholder='Ingrese un Usuario' 
-                    value={email} 
-                    onChange={handleOnchange} 
-                />
                 <div>
                     { registerError ? <label >Email ingresado no valido</label> : <p></p>}
                 </div>
                 <div>
-                    { emailAlert ? <label >Email ingresado no disponible por favor ingrese otro email</label> : <p>aca pongo el redirecto to /home o que ?</p>}
+                    { emailAlert ? <label >Email ingresado no disponible por favor ingrese otro email</label> : <p></p>}
                 </div>
                 <br />
                 <input 
