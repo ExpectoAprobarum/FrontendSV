@@ -19,13 +19,20 @@ class ChooseHeadmaster extends Component {
   }
 
   getPlayers = () => {
-    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/players')
+    const usertoken = localStorage.getItem('user');
+    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/players', {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
       .then(res => {
         if(res.status === 200) {
           this.setState({
             players: res.data
           });
-          let isMinister = this.props.minister === this.props.userId;
+          let isMinister = this.props.ministerId === res.data.data.filter(player => {
+            return player.user.id === this.props.userId
+          })[0].id
           this.setState({
             minister: isMinister
           })
@@ -44,8 +51,13 @@ class ChooseHeadmaster extends Component {
   }
 
   sendElection = (id) => {
+    const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/turn/' + this.props.gameId + '/choosehm', 
-    this.state.selected) 
+    {id: this.state.selected}, {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      }) 
       .then(res => {
         console.log(res.status)
       })

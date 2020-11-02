@@ -13,8 +13,13 @@ const Vote = ({phase, gameId}) => {
   }
   const vote = (e) => {
     let vote = e.target.className.split(' ')[0];
+    const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/games/' + gameId + '/vote', 
-      { vote: vote === 'lumos' } );
+      { vote: vote === 'lumos' }, {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        } );
     disableButtons();
   }
   return phase === 'vote' ? (

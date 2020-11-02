@@ -10,27 +10,8 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameInfo: {
-        id: 0,
-        creation_date: 0,
-        player_amount: 0,
-        board: 0,
-        players: [],
-        started: false
-      },
-      gameStatus: {
-        round: 0,
-        phase: '',
-        cards: [],
-        minister: {
-          user_id: 0,
-          username: ''
-        },
-        headmaster: {
-          user_id: 0,
-          username: ''
-        }
-      },
+      gameInfo: {},
+      gameStatus: {},
       userId: 0
     }
     
@@ -42,14 +23,24 @@ class Game extends Component {
 
   getGameData() {
     //Get game status data
-    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status')
+    const usertoken = localStorage.getItem('user');
+    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status', {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
       .then(res => {
-        let gameStatus = res.data;
-        this.setState({
-          gameStatus: gameStatus
-        });
+        if(res.status === 200) {
+          let gameStatus = res.data;
+          this.setState({
+            gameStatus: gameStatus
+          })
+        }
 
         setTimeout(this.getGameData, 2000)
+      })
+      .catch(error => {
+        console.log(error)
       })
   }
 
@@ -63,13 +54,22 @@ class Game extends Component {
       })
     }
     //Get game info data
-    axios.get(configData.API_URL + '/games/' + this.props.gameId)
+    axios.get(configData.API_URL + '/games/' + this.props.gameId, {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
       .then(res => {
-        let gameInfo = res.data;
-        this.setState({
-          gameInfo: gameInfo
-        })
-      });
+        if(res.status === 200) {
+          let gameInfo = res.data;
+          this.setState({
+            gameInfo: gameInfo
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
     //Get status info data
     this.getGameData();
   }
@@ -100,35 +100,45 @@ class Game extends Component {
   }
 
   render() {
-    return (
-      <div className="Game">
-        <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-        <div>
-          <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
+    if(this.state.gameStatus.phase === 'propose') {
+      return(
+        <div className="Game">
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
+          <ChooseHeadmaster
+            phase={this.state.gameStatus.phase}
+            ministerId={this.state.gameStatus.minister}
+            userId={this.state.userId}
+            gameId={this.props.gameId}
+          />
         </div>
-        <div>
-          <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
-        </div> 
-        <div>
-        <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
-        </div>     
-        <ChooseHeadmaster
-          phase={this.state.gameStatus.phase}
-          ministerId={this.state.gameStatus.minister.user_id}
-          userId={this.state.userId}
-          gameId={this.props.gameId}
-        />
-        <EmitProclamation
-          phase={this.state.gameStatus.phase}
-          headmasterId={this.state.gameStatus.headmaster.user_id}
-          userId={this.state.userId}
-          gameId={this.props.gameId}
-        />
-        <Vote
-          phase={this.state.gameStatus.phase}
-        />
-      </div>
-    )
+      )
+    }
+    else if(this.state.gameStatus.phase === 'vote') {
+      return(
+        <div className="Game">
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1> 
+          <Vote
+            phase={this.state.gameStatus.phase}
+          />
+        </div>
+      )
+    }
+    else if(this.state.gameStatus.phase === 'headmasterPlay') {
+      return(
+        <div className="Game">
+          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
+          <EmitProclamation
+            phase={this.state.gameStatus.phase}
+            headmasterId={this.state.gameStatus.headmaster}
+            userId={this.state.userId}
+            gameId={this.props.gameId}
+          />
+        </div>
+      )
+    }
+    else {
+      return <p></p>
+    }
   }
 }
 
