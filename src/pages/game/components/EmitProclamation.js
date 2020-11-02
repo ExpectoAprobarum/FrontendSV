@@ -3,11 +3,12 @@ import axios from 'axios';
 import configData from '../../../config.json';
 import './EmitProclamation.css';
 
-//props: phase, gameId
+//props: phase, gameId, userId, headmaster (id)
 class EmitProclamation extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      headmaster: false,
       cards: []
     }
   }
@@ -41,10 +42,14 @@ class EmitProclamation extends Component {
 
   componentDidMount() {
     this.getCards();
+    let isHeadmaster = this.props.userId === this.props.headmaster;
+    this.setState({
+      headmaster: isHeadmaster
+    })
   }
 
   render() {
-    return this.props.phase === 'headmasterPlay' ? (
+    return this.props.phase === 'headmasterPlay' && this.state.headmaster ? (
       <div className="proclam">
         <button className={this.state.cards[0] + " card left"} id="proc1" onClick={this.choose}></button>
         <button className={this.state.cards[1] + " card right"} id="proc2" onClick={this.choose}></button>
