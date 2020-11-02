@@ -1,39 +1,57 @@
-.proclam .left {
-  left: 30%;
-}
-
-.proclam .right {
-  left: 55%;
-}
-
 .proclam .card {
   position: absolute;
-  display: flex;
-  width: 288px;
-  height: 415px;
-  border-radius: 20px;
-  outline: none;
-  border: 8px solid transparent;
-  background-repeat:  no-repeat;
+  top: 20%;
+  padding-top: 11.5%;
+  padding-left: 13%;
+  padding-bottom: 8%;
+  background-size: 109%;
+  background-repeat: no-repeat;
   background-position-x: -8px;
   background-position-y: -9px;
+  outline: none;
+  border-radius: 20px;
+  border: 8px solid transparent;
+  opacity: 0.8;
+  transition: 0.5s;
 }
 
 .proclam .card:hover {
-  border-image: url('../assets/CardFrame.png') 150 round;
-  border-width: 40px;
-  border-radius: 0px;
-  background-position-x: -40px;
-  background-position-y: -41px;
-  filter: saturate(1.7);
+  opacity: 1;
+  filter: saturate(2.5);
+}
+
+.left {
+  left: 29%;
+}
+
+.right {
+  left: 56%;
 }
 
 .phoenix {
   background-image: url('../assets/ProclamationPhoenix.png');
 }
 
+.phoenix:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(255, 94, 0) 0px 0px 20px, 
+                rgb(255, 94, 0) 0px 0px 30px, 
+                rgb(255, 94, 0) 0px 0px 40px, 
+                rgb(255, 94, 0) 0px 0px 50px, 
+                rgb(255, 94, 0) 0px 0px 75px;
+}
+
 .death {
   background-image: url('../assets/ProclamationDeathEater.png');
+}
+
+.death:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(202, 0, 209) 0px 0px 20px, 
+                rgb(202, 0, 209) 0px 0px 30px, 
+                rgb(202, 0, 209) 0px 0px 40px, 
+                rgb(202, 0, 209) 0px 0px 50px, 
+                rgb(202, 0, 209) 0px 0px 75px;
 }
 
 *.disabled {

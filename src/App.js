@@ -1,5 +1,4 @@
 import React from 'react';
-import Register from './pages/register/register'
 import LobbyPage from './pages/lobby/Lobby'
 import {
     BrowserRouter as Router,

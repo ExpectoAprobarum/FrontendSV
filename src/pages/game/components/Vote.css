@@ -6,7 +6,7 @@
   transform: translate(-50%, -50%);
 }
 
-.card {
+.vote .card {
   background-repeat: no-repeat;
   background-size: 105%;
   background-position-x: -8px;
@@ -18,7 +18,7 @@
   border: 8px solid transparent;
 }
 
-.card:hover {
+.vote .card:hover {
   border-image: url('../assets/CardFrame.png') 150 round;
   border-width: 40px;
   border-radius: 0px;

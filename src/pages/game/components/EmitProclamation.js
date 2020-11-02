@@ -1,20 +1,39 @@
-import React, { useRef } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import './EmitProclamation.css';
 
-const EmitProclamation = ({phase, cards, headmaster, gameId}) => {
-  let card1 = useRef();
-  let card2 = useRef();
-
-  const disableButtons = () => {
-    card1.current.setAttribute("disabled", "disabled");
-    card2.current.setAttribute("disabled", "disabled")
+//props: phase, gameId, userId, headmaster (id)
+class EmitProclamation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      headmaster: false,
+      cards: []
+    }
   }
 
-  const choose = (e) => {
+  getCards = () => {
+    /*axios.get(configData.API_URL + '/games/' + this.props.gameId + '/proclamations')
+      .then(res => {
+        if(res.status === 200) {
+          let newCards = res.data;
+          this.setState({
+            cards: newCards
+          })
+        }
+      })
+      */
+     let newCards = ['phoenix', 'death'];
+     this.setState({
+       cards: newCards
+      })
+  }
+
+  choose = (e) => {
     let choice = e.target.className.split(' ')[0];
-    axios.post(configData.API_URL + '/games/' + gameId + '/proclamations',
+    console.log("choice", choice);
+    axios.post(configData.API_URL + '/games/' + this.props.gameId + '/proclamations',
       { proclamation: choice } )
       .then(res => {
         if (res.status === 200) {
@@ -22,18 +41,29 @@ const EmitProclamation = ({phase, cards, headmaster, gameId}) => {
         }
       }
     );
-
-    disableButtons();
+    document.getElementById("proc1").disabled = true;
+    document.getElementById("proc2").disabled = true;
   }
 
-  return phase === 'EMIT_PROC' /*&& headmaster === current player user_id???*/? (
-    <div className="proclam">
-      <button className={cards[0] + " card left"} ref={card1} onClick={(e) => {choose(e)}}></button>
-      <button className={cards[1] + " card right"} ref={card2} onClick={(e) => {choose(e)}}></button>
-    </div>
-  ) : (
-    <p></p>
-  );
+  componentDidMount() {
+    this.getCards();
+    //let isHeadmaster = this.props.userId === this.props.headmaster;
+    let isHeadmaster = true;
+    this.setState({
+      headmaster: isHeadmaster
+    })
+  }
+
+  render() {
+    return /*this.props.phase === 'headmasterPlay' &&*/ this.state.headmaster ? (
+      <div className="proclam">
+        <button className={this.state.cards[0] + " card left"} id="proc1" onClick={this.choose}></button>
+        <button className={this.state.cards[1] + " card right"} id="proc2" onClick={this.choose}></button>
+      </div>
+    ) : (
+      <p></p>
+    )
+  }
 }
 
 export default EmitProclamation

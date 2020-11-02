@@ -70,22 +70,21 @@ class Game extends Component {
           gameInfo: gameInfo
         })
       });
+    //Get status info data
     this.getGameData();
   }
 
   changeStateProc() {
     let newStatus = this.state.gameStatus;
-    newStatus.phase = 'EMIT_PROC';
+    newStatus.phase = 'headmasterPlay';
     this.setState({
       gameStatus: newStatus
     })
   }  
-  
 
   changeStateVote() {
     let newStatus = this.state.gameStatus;
-    newStatus.phase = 'VOTE';
-
+    newStatus.phase = 'vote';
     this.setState({
       gameStatus: newStatus
     })
