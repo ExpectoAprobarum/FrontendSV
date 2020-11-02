@@ -62,21 +62,22 @@ const Register = () =>{
         } */
         return (
         <div className='Register'>
-            <label className='TitleRegister'>Crea tu Usuario aqui! :</label>
             <form onSubmit={handleOnSubmit} className='formRegister'>
-                <input className=''
-                    id='emailR'
-                    type='text' 
-                    name='email' 
-                    placeholder='Ingrese un Email' 
-                    value={email} 
-                    onChange={handleOnchange} 
-                />
-                <input className=''
+                <input className='UsuarioR'
                     id='usuarioR'
                     type='text' 
                     name='usuario' 
                     placeholder='Ingrese un Usuario' 
+                    value={usuario} 
+                    onChange={handleOnchange} 
+                />
+                <br/>
+                <br/>
+                <input className='EmailR'
+                    id='emailR'
+                    type='text' 
+                    name='email' 
+                    placeholder='Ingrese un Email' 
                     value={email} 
                     onChange={handleOnchange} 
                 />

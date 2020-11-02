@@ -52,7 +52,6 @@ const Login = () =>{
         } 
         return (
         <div className='Login'>
-            <label className='TitleLogin'>Si ya tienes un Usuario podes Ingresar aqui: </label>
             <form onSubmit={handleOnSubmit} className='formLogin'>
                 <input className=''
                     id='emailL'
