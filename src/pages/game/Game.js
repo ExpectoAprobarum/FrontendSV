@@ -41,7 +41,6 @@ class Game extends Component {
 
   getGameData() {
     //Get game status data
-    console.log(this.props.gameId)
     axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status')
       .then(res => {
         let gameStatus = res.data;

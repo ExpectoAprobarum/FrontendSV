@@ -6,17 +6,13 @@ const Players = ({players, selectPlayer, selected}) => {
       return selected !== player.id ? (
           <div className="player" key={player.id}>
             <button className="player-bttn" onClick={() => {selectPlayer(player.id)}}>
-              <div>Name: {player.name}</div>
-              <div>Username: {player.username}</div>
-              <div>ID: {player.id}</div>
+              <div>{player.name}</div>
             </button>
           </div>
       ) : (
-        <div className="selectedPlayer" key={player.id}>
+        <div className="player" key={player.id}>
           <button className="selectedPlayer-bttn" onClick={() => {selectPlayer(player.id)}}>
-            <div>Name: {player.name}</div>
-            <div>Username: {player.username}</div>
-            <div>ID: {player.id}</div>
+            <div>{player.name}</div>
           </button>  
         </div>
       )
