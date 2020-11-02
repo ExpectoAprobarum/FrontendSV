@@ -27,6 +27,7 @@ export default class PersonList extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.joinGame = this.joinGame.bind(this);
     }
 
     showModal(e) {
@@ -43,17 +44,12 @@ export default class PersonList extends React.Component {
         });
     };
 
-    joinGame = event => {
-        // Aca deberia pasar el Usuario y la partida a la que quiere unirse.
-        event.preventDefault();
-    
-        const user = {
-            id: this.state.selected.id
-        };
-    
+    joinGame(){
+        const idPart = parseInt(this.state.selected.id)
         const usertoken = localStorage.getItem('user')
-        console.log(usertoken)
-        axios.post(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/join`,/*,(infotosend), */{
+
+        console.log("token: ", JSON.parse(usertoken).access_token)
+        axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
             headers: {
                 'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
             }
