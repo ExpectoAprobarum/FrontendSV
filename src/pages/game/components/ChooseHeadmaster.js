@@ -21,17 +21,22 @@ class ChooseHeadmaster extends Component {
   getPlayers = () => {
     axios.get(configData.API_URL + '/games/' + this.props.gameId + '/players')
       .then(res => {
-        this.setState({
-          players: res.data
-        });
-        let minister = res.data.filter(player => {
-          return player.current_position === 'minister'
-        });
-        let isMinister = minister.id === this.props.userId;
-        this.setState({
-          minister: isMinister
-        })
-      }) 
+        if(res.status === 200) {
+          this.setState({
+            players: res.data
+          });
+          let minister = res.data.filter(player => {
+            return player.current_position === 'minister'
+          });
+          let isMinister = minister.id === this.props.userId;
+          this.setState({
+            minister: isMinister
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   selectPlayer = (id) => {
@@ -43,9 +48,12 @@ class ChooseHeadmaster extends Component {
 
   sendElection = (id) => {
     axios.post(configData.API_URL + '/turn/' + this.props.gameId + '/choosehm', 
-    this.state.selected
-    ).then(res => {
-        console.log(res.data)
+    this.state.selected) 
+      .then(res => {
+        console.log(res.status)
+      })
+      .catch(error => {
+        console.log(error)
       })
   }
 
