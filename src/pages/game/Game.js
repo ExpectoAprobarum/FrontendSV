@@ -4,7 +4,7 @@ import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import configData from '../../config.json';
-
+import jwt_decode from 'jwt-decode';
 
 class Game extends Component {
   constructor(props) {
@@ -30,7 +30,8 @@ class Game extends Component {
           user_id: 0,
           username: ''
         }
-      }
+      },
+      userId: 0
     }
     
     this.getGameData = this.getGameData.bind(this);
@@ -53,6 +54,14 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    //Get userId from localStore
+    const usertoken = localStorage.getItem('user');
+    if(usertoken) {
+      const id = jwt_decode(usertoken).sub.id;
+      this.setState({
+        userId: id
+      })
+    }
     //Get game info data
     axios.get(configData.API_URL + '/games/' + this.props.gameId)
       .then(res => {
@@ -106,12 +115,14 @@ class Game extends Component {
         </div>     
         <ChooseHeadmaster
           phase={this.state.gameStatus.phase}
+          ministerId={this.state.gameStatus.minister.user_id}
+          userId={this.state.userId}
           gameId={this.props.gameId}
         />
         <EmitProclamation
           phase={this.state.gameStatus.phase}
-          cards={this.state.gameStatus.cards}
-          headmaster={this.state.gameStatus.headmaster.user_id}
+          headmasterId={this.state.gameStatus.headmaster.user_id}
+          userId={this.state.userId}
           gameId={this.props.gameId}
         />
         <Vote
@@ -122,4 +133,4 @@ class Game extends Component {
   }
 }
 
-export default Game;
+export default Game

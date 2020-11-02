@@ -25,10 +25,7 @@ class ChooseHeadmaster extends Component {
           this.setState({
             players: res.data
           });
-          let minister = res.data.filter(player => {
-            return player.current_position === 'minister'
-          });
-          let isMinister = minister.id === this.props.userId;
+          let isMinister = this.props.minister === this.props.userId;
           this.setState({
             minister: isMinister
           })
