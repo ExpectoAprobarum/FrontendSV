@@ -1,7 +1,8 @@
-import EmitProclamation from './components/EmitProclamation';
 import React, { Component } from 'react';
 import axios from 'axios';
 import Vote from './components/Vote';
+import EmitProclamation from './components/EmitProclamation';
+import ChooseHeadmaster from './components/ChooseHeadmaster';
 import configData from '../../config.json';
 
 
@@ -33,7 +34,8 @@ class Game extends Component {
     }
     
     this.getGameData = this.getGameData.bind(this);
-    this.changeStateProc = this.changeStateProc.bind(this)
+    this.changeStatePropose = this.changeStatePropose.bind(this);
+    this.changeStateProc = this.changeStateProc.bind(this);
     this.changeStateVote = this.changeStateVote.bind(this)
   }
 
@@ -81,22 +83,41 @@ class Game extends Component {
     })
   }
 
+  changeStatePropose() {
+    let newStatus = this.state.gameStatus;
+    newStatus.phase = 'propose'
+
+    this.setState({
+      gameStatus: newStatus
+    })
+  }
+
   render() {
     return (
       <div className="Game">
         <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>
-        <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>  
-        <button id="changeStateProc" onClick={this.changeStateProc}>
-            Change to: emit proclamation phase
-        </button>
-
+        <div>
+          <button id="changeStatePropose" onClick={this.changeStatePropose}>Change to: propose phase</button>
+        </div>
+        <div>
+          <button id="changeStateVote" onClick={this.changeStateVote}>Change to: vote phase</button>
+        </div> 
+        <div>
+        <button id="changeStateProc" onClick={this.changeStateProc}>Change to: emit proclamation phase</button>
+        </div>     
+        <ChooseHeadmaster
+          phase={this.state.gameStatus.phase}
+          gameId={this.props.gameId}
+        />
         <EmitProclamation
           phase={this.state.gameStatus.phase}
           cards={this.state.gameStatus.cards}
           headmaster={this.state.gameStatus.headmaster.user_id}
           gameId={this.props.gameId}
         />
-        <Vote phase={this.state.gameStatus.phase}/>
+        <Vote
+          phase={this.state.gameStatus.phase}
+        />
       </div>
     )
   }
