@@ -14,7 +14,7 @@ class EmitProclamation extends Component {
   }
 
   getCards = () => {
-    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/proclamations')
+    /*axios.get(configData.API_URL + '/games/' + this.props.gameId + '/proclamations')
       .then(res => {
         if(res.status === 200) {
           let newCards = res.data;
@@ -22,6 +22,11 @@ class EmitProclamation extends Component {
             cards: newCards
           })
         }
+      })
+      */
+     let newCards = ['phoenix', 'death'];
+     this.setState({
+       cards: newCards
       })
   }
 
@@ -42,14 +47,15 @@ class EmitProclamation extends Component {
 
   componentDidMount() {
     this.getCards();
-    let isHeadmaster = this.props.userId === this.props.headmaster;
+    //let isHeadmaster = this.props.userId === this.props.headmaster;
+    let isHeadmaster = true;
     this.setState({
       headmaster: isHeadmaster
     })
   }
 
   render() {
-    return this.props.phase === 'headmasterPlay' && this.state.headmaster ? (
+    return /*this.props.phase === 'headmasterPlay' &&*/ this.state.headmaster ? (
       <div className="proclam">
         <button className={this.state.cards[0] + " card left"} id="proc1" onClick={this.choose}></button>
         <button className={this.state.cards[1] + " card right"} id="proc2" onClick={this.choose}></button>
