@@ -7,13 +7,12 @@ import {
 } from "react-router-dom";
 import PrincipalPage from './principalpages/createAndjoin';
 import RegisterAndLogin from './principalpages/registerAndlogin'
-import EmitProclamation from './pages/game/components/EmitProclamation';
 
 function App() { 
   return (
         <Router>
             <Switch>
-                <Route exact path="/home" component={EmitProclamation}></Route>
+                <Route exact path="/home" component={PrincipalPage}></Route>
                 <Route path="/Game" component={LobbyPage}></Route>
                 <Route exact path="/" component={RegisterAndLogin}>
                 </Route>
