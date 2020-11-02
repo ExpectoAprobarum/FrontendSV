@@ -17,7 +17,7 @@ const Vote = ({phase, gameId}) => {
       { vote: vote === 'lumos' } );
     disableButtons();
   }
-  return phase === 'VOTE' ? (
+  return phase === 'vote' ? (
     <div className="vote">
       <button className="lumos card center" ref={lumosRef} onClick={(e) => {vote(e)}}></button>
       <button className="nox card center" ref={noxRef} onClick={(e) => {vote(e)}}></button>

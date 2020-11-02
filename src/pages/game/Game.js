@@ -92,7 +92,6 @@ class Game extends Component {
 
         <EmitProclamation
           phase={this.state.gameStatus.phase}
-          cards={this.state.gameStatus.cards}
           headmaster={this.state.gameStatus.headmaster.user_id}
           gameId={this.props.gameId}
         />
