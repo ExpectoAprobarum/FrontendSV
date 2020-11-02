@@ -27,6 +27,7 @@ export default class PersonList extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.joinGame = this.joinGame.bind(this);
     }
 
     showModal(e) {
@@ -43,23 +44,23 @@ export default class PersonList extends React.Component {
         });
     };
 
-    joinGame = event => {
-        // Aca deberia pasar el Usuario y la partida a la que quiere unirse.
-        event.preventDefault();
-    
-        const user = {
-            id: this.state.selected.id
-        };
-    
-        axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-            .then(res => {
-                if (res.status === 201) {
-                    console.log("Res: ", res);
-                    console.log("res.data: ", res.data);
-                }
-            })
-        this.setState({
-            redirect: true,
+    joinGame(){
+        const idPart = parseInt(this.state.selected.id)
+        const usertoken = localStorage.getItem('user')
+
+        console.log("token: ", JSON.parse(usertoken).access_token)
+        axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        }).then(response => { 
+            if(response.status === 200){
+                const response_id = response.data
+                console.log("idCorrecto:", response_id)
+            }
+        })
+        .catch(error => {
+           console.log(error)
         })
     }
 
@@ -85,14 +86,21 @@ export default class PersonList extends React.Component {
     }
 
     componentDidMount() {
-        const URL = `https://jsonplaceholder.typicode.com/users`;
-        axios.get(URL)
-            .then(res => {
-                this.setState({ 
-                    list: res.data, 
-                    listBackup: res.data
+        const usertoken = localStorage.getItem('user')
+        axios.get('http://127.0.0.1:8000/games/', {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        }).then(response => {
+            if(response.status === 200){
+                this.setState({
+                    list: response.data.data,
                 });
-            })
+            }
+        })
+        .catch(error => {
+           console.log(error)
+        })
     };
 
     render() {
@@ -114,7 +122,7 @@ export default class PersonList extends React.Component {
                             inPartida={this.joinGame}
                             gameID={this.state.selected.id}>
                             <h3>{this.state.selected.name}</h3>
-                            <p style={{paddingBottom:"15px"}}>Estado de Sala: {this.state.selected.id}</p>
+                            <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
                         </Modal>
 
                         <div style={{paddingTop: "20px"}}></div>
