@@ -26,9 +26,9 @@ export default class LobbyPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log("Entre")
+        console.log("passing: ", this.props.location.state.gameId)
         const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${this.props.location.aboutProps.gameId}/players`, {
+        axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
             }
@@ -56,12 +56,12 @@ export default class LobbyPage extends React.Component {
                 <h1 className="h1TittleLobby">Lobby</h1>
                 <label>
                     <form>
-                        {/* { this.state.listPlayers.map(
+                        { this.state.listPlayers.map(
                                     player =>
-                                            <li key={player.id} style={liStyle} className="fom-popup-BoxShadow">
-                                                {player.id} <span style={{paddingLeft: '15px'}}> </span>{player.name}
+                                            <li key={player.user.id} style={liStyle} className="fom-popup-BoxShadow">
+                                                {player.user.username}
                                             </li>
-                        )} */}
+                        )}
                     </form>
                 </label>
                 <button className="buttonFound bttmodal bttLobby" onClick={this.LobbyTransition}>Iniciar Partida</button>

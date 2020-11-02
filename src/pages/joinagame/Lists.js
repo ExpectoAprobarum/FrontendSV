@@ -51,15 +51,20 @@ export default class PersonList extends React.Component {
             id: this.state.selected.id
         };
     
-        axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-            .then(res => {
-                if (res.status === 201) {
-                    console.log("Res: ", res);
-                    console.log("res.data: ", res.data);
-                }
-            })
-        this.setState({
-            redirect: true,
+        const usertoken = localStorage.getItem('user')
+        console.log(usertoken)
+        axios.post(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/join`,/*,(infotosend), */{
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        }).then(response => { 
+            if(response.status === 200){
+                const response_id = response.data
+                console.log("idCorrecto:", response_id)
+            }
+        })
+        .catch(error => {
+           console.log(error)
         })
     }
 
