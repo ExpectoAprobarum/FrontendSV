@@ -17,15 +17,17 @@ const PageCreateGame = () => {
         //esto es lo que voy a enviar al back
         const infotosend ={
         name: name,
-        player_amount: player_amount
+        player_amount: parseInt(player_amount)
         };
-        
-        console.log(name)
-        axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend}).then(response => { 
-            if(response.status === 201){
-                //aca deberia hacer algo si esta todo bien(?).
-            console.log(response) 
-            setRedirect(true)
+        const usertoken = localStorage.getItem('user')
+        axios.post('http://127.0.0.1:8000/games/',(infotosend), {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        }).then(response => { 
+            console.log(response)
+            if(response.status === 200){
+                setRedirect(true)
             }
         })
         .catch(error => {
@@ -40,15 +42,14 @@ const PageCreateGame = () => {
         else if(e.target.name === 'player_amount'){
             setPlayer_amount(e.target.value)
         }
-        
     }
+    
     const showmetheElement = () => {
         setShowMe(! showMe)
     }
         
         if(redirect){ 
-            console.log("Entre")
-            return <Redirect to="/Lobby" />
+            return <Redirect to="/Game" />
         }
         return( 
             <div> 

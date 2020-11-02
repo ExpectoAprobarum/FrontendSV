@@ -17,14 +17,12 @@ const Login = () =>{
                 //esto es lo que voy a enviar al back
                 console.log("entro al if")
                 const infotosend ={
-                email: email,
-                contraseña: contraseña
+                username: email,
+                password: contraseña
             }    
-            axios.post('https://jsonplaceholder.typicode.com/todos', {infotosend} ).then(response => { 
-            if(response.status === 201){
-                
-                //aca deberia hacer algo si esta todo bien(?).
-                console.log(response.data) 
+            axios.post('http://127.0.0.1:8000/auth/token', infotosend).then(response => { 
+                if(response.status === 200){
+                console.log(response.data)
                 localStorage.setItem('user', JSON.stringify(response.data))
                 setRedirect(true)  
             }
@@ -46,17 +44,12 @@ const Login = () =>{
             setLoginError(false)
         }else{
             setLoginError(true)
-        }
-        
+        } 
     }
-     
-        //redirect cuando el usuario se loguea.
-        /*
-         const redirect  = this.state.redirect
         
         if(redirect){ 
             return <Redirect to="/Home" />
-        } */
+        } 
         return (
         <div className='Login'>
             <label className='TitleLogin'>Si ya tienes un Usuario podes Ingresar aqui: </label>
