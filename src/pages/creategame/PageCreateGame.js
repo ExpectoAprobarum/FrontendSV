@@ -10,7 +10,8 @@ const PageCreateGame = () => {
     const [player_amount, setPlayer_amount] = useState(5);
     const [showMe, setShowMe] = useState(false);
     const [redirect, setRedirect] = useState(false);
-       
+    const [gameId, setIdgame] = useState("-1") ; 
+    
     //esta funcion se encarga de hacer un post una vez apretado el boton.
     const onSubmit = (e) => {
         e.preventDefault();
@@ -25,8 +26,10 @@ const PageCreateGame = () => {
                 'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
             }
         }).then(response => { 
-            console.log(response)
             if(response.status === 200){
+                const response_id = response.data.id
+                setIdgame(response_id)
+                
                 setRedirect(true)
             }
         })
@@ -48,8 +51,12 @@ const PageCreateGame = () => {
         setShowMe(! showMe)
     }
         
+    //mando la id a /game
         if(redirect){ 
-            return <Redirect to="/Game" />
+            return <Redirect to={{
+                pathname: '/Game',
+                state: {gameId}
+            }} />
         }
         return( 
             <div> 
