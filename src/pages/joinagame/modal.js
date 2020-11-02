@@ -13,7 +13,7 @@ export default function Modal({open, children, handleClose, inPartida, gameID}) 
                     <button  className="buttonFound bttmodal">
                         <Link className="linked" to={{
                             pathname: '/Game',
-                            aboutProps: {
+                            state: {
                                 gameId: gameID
                             }
                         }}>Unirse</Link>

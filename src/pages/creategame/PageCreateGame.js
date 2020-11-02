@@ -29,7 +29,7 @@ const PageCreateGame = () => {
             if(response.status === 200){
                 const response_id = response.data.id
                 setIdgame(response_id)
-                
+                console.log("idCorrecto:", response_id)
                 setRedirect(true)
             }
         })
