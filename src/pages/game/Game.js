@@ -16,9 +16,6 @@ class Game extends Component {
     }
     
     this.getGameData = this.getGameData.bind(this);
-    this.changeStatePropose = this.changeStatePropose.bind(this);
-    this.changeStateProc = this.changeStateProc.bind(this);
-    this.changeStateVote = this.changeStateVote.bind(this)
   }
 
   getGameData() {
@@ -72,31 +69,6 @@ class Game extends Component {
       })
     //Get status info data
     this.getGameData();
-  }
-
-  changeStateProc() {
-    let newStatus = this.state.gameStatus;
-    newStatus.phase = 'headmasterPlay';
-    this.setState({
-      gameStatus: newStatus
-    })
-  }  
-
-  changeStateVote() {
-    let newStatus = this.state.gameStatus;
-    newStatus.phase = 'vote';
-    this.setState({
-      gameStatus: newStatus
-    })
-  }
-
-  changeStatePropose() {
-    let newStatus = this.state.gameStatus;
-    newStatus.phase = 'propose'
-
-    this.setState({
-      gameStatus: newStatus
-    })
   }
 
   render() {
