@@ -85,7 +85,7 @@ const Register = () =>{
                     { registerError ? <label >Email ingresado no valido</label> : <p></p>}
                 </div>
                 <div>
-                    { emailAlert ? <label >Email ingresado no disponible por favor ingrese otro email</label> : <p>aca pongo el redirecto to /home o que ?</p>}
+                    { emailAlert ? <label >Email ingresado no disponible por favor ingrese otro email</label> : <p></p>}
                 </div>
                 <br />
                 <input 
