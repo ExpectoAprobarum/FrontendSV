@@ -91,17 +91,17 @@ class Game extends Component {
           <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1> 
           <Vote
             phase={this.state.gameStatus.phase}
+            gameId={this.props.gameId}
           />
         </div>
       )
     }
-    else if(this.state.gameStatus.phase === 'headmasterPlay') {
+    else if(this.state.gameStatus.phase === 'headmaster play') {
       return(
         <div className="Game">
           <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
           <EmitProclamation
-            phase={this.state.gameStatus.phase}
-            headmasterId={this.state.gameStatus.headmaster}
+            headmaster={this.state.gameStatus.headmaster}
             userId={this.state.userId}
             gameId={this.props.gameId}
           />

@@ -8,9 +8,29 @@ class EmitProclamation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      headmaster: false,
+      player: {},
       cards: []
     }
+  }
+
+  getPlayerInfo = () => {
+    const usertoken = localStorage.getItem('user');
+    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/me', {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          let playerData = res.data
+          this.setState({
+            player: playerData
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   getCards = () => {
@@ -22,7 +42,7 @@ class EmitProclamation extends Component {
       })
       .then(res => {
         if(res.status === 200) {
-          let newCards = res.data;
+          let newCards = res.data.data;
           this.setState({
             cards: newCards
           })
@@ -37,7 +57,7 @@ class EmitProclamation extends Component {
     let choice = e.target.className.split(' ')[0];
     const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/games/' + this.props.gameId + '/proclamations',
-      { proclamation: choice }, {
+      { card: choice }, {
         headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
           }
@@ -56,21 +76,18 @@ class EmitProclamation extends Component {
   }
 
   componentDidMount() {
+    this.getPlayerInfo();
     this.getCards();
-    let isHeadmaster = this.props.userId === this.props.headmaster;
-    this.setState({
-      headmaster: isHeadmaster
-    })
   }
 
   render() {
-    return this.props.phase === 'headmasterPlay' && this.state.headmaster ? (
+    return this.state.player.current_position === "headmaster" ? (
       <div className="proclam">
         <button className={this.state.cards[0] + " card left"} id="proc1" onClick={this.choose}></button>
         <button className={this.state.cards[1] + " card right"} id="proc2" onClick={this.choose}></button>
       </div>
     ) : (
-      <p></p>
+      <p></p> 
     )
   }
 }

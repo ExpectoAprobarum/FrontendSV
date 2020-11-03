@@ -40,7 +40,6 @@ export default class PersonList extends React.Component {
     };
 
     showS() {
-        console.log("Entro ShowS")
         this.setState({
             showSearch: !this.state.showSearch
         })
