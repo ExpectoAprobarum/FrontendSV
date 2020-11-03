@@ -12,10 +12,10 @@ const Vote = ({phase, gameId}) => {
     noxRef.current.setAttribute("disabled", "disabled");
   }
   const vote = (e) => {
-    let vote = e.target.className.split(' ')[0];
+    let voteDef = e.target.className.split(' ')[0];
     const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/games/' + gameId + '/vote', 
-      { vote: vote === 'lumos' }, {
+      { vote: voteDef === 'lumos' }, {
         headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
           }
@@ -32,4 +32,4 @@ const Vote = ({phase, gameId}) => {
   )
 }
 
-export default Vote;
+export default Vote

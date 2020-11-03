@@ -50,9 +50,10 @@ class ChooseHeadmaster extends Component {
     document.getElementById("sendCandidate").disabled = false
   }
 
-  sendElection = (id) => {
+  sendElection = () => {
+    console.log("selected: ", this.state.selected)
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/turn/' + this.props.gameId + '/choosehm', 
+    axios.post(configData.API_URL + '/games/' + this.props.gameId + '/choosehm', 
     {id: this.state.selected}, {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
@@ -79,7 +80,7 @@ class ChooseHeadmaster extends Component {
           players={this.state.players}
           selected={this.state.selected}
         />
-        <button className="sendCandidate" id="sendCandidate" onClick={this.sendElection} disabled>Choose</button>
+        <button className="sendCandidate" id="sendCandidate" onClick={this.sendElection}>Choose</button>
       </div>
     ) : (
       <p></p>

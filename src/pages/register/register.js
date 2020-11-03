@@ -13,7 +13,6 @@ const Register = () =>{
         
         if(!  registerError ){
                 //esto es lo que voy a enviar al back
-                console.log("entro al if")
                 const infotosend ={
                 username: usuario,
                 email: email,

@@ -14,8 +14,8 @@ export default class LobbyPage extends React.Component {
         };
     }
 
-    componentDidMount() {
-        console.log("passing: ", this.props.location.state.gameId)
+    getPlayers = () => {
+      console.log("passing: ", this.props.location.state.gameId)
         const usertoken = localStorage.getItem('user')
         axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
             headers: {
@@ -29,12 +29,36 @@ export default class LobbyPage extends React.Component {
                     listPlayers: response.data.data,
                 });
             }
-            console.log("List: ", this.state.listPlayers)
+
+            setTimeout(this.getPlayers, 2000)
         })
         .catch(error => {
            console.log(error)
         })
+    }
+
+    componentDidMount() {
+        this.getGameInfo();
+        this.getPlayers();
     };
+
+    getGameInfo = () => {
+      const usertoken = localStorage.getItem('user')
+        axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}`, {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            }
+        })
+        .then(res => {
+          if(res.status === 200) {
+            this.setState({
+              initPartida: res.data.started
+            })
+
+            setTimeout(this.getGameInfo, 2000)
+          }
+        })
+    }
 
     gameStart = () => {
         console.log("IDPART: ", parseInt(this.props.location.state.gameId))
@@ -48,9 +72,7 @@ export default class LobbyPage extends React.Component {
             }
         }).then(response => {
             if(response.status === 200){
-                this.setState({
-                    initPartida: true
-                })
+                console.log("Game started")
             }
         })
         .catch(error => {

@@ -15,7 +15,6 @@ const Login = () =>{
         
         if(!  loginError ){
                 //esto es lo que voy a enviar al back
-                console.log("entro al if")
                 const infotosend ={
                 username: email,
                 password: contraseña
