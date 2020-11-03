@@ -29,6 +29,7 @@
     cursor: pointer;
     -webkit-animation: ani2 0.7s steps(22) forwards;
     animation: ani2 0.7s steps(22) forwards;
+    border-radius: 30px;
   }
   .button-container-1 button:hover {
     -webkit-animation: ani 0.7s steps(22) forwards;

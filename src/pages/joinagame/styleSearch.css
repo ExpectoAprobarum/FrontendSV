@@ -8,6 +8,12 @@
     height: 100%;
 }
 
+.linked.custom {
+    padding-left: 35%;
+    text-align: left;
+    justify-content: left;
+}
+
 .linked:focus {
     color: #415582;
 }
@@ -44,6 +50,7 @@
     border-style: solid;
     transition: 0.5s;
     outline: none;
+    margin: 0 auto;
 }
 
 .search-button:focus {
@@ -72,7 +79,7 @@
 
 .buttonFound:hover {
     border-radius: 20px;
-    background-color: #182d5b;
+    background-color: #0e0e0e;
     color: whitesmoke;
     cursor: pointer;
     transition: 0.5s;
@@ -91,7 +98,7 @@
 
 .buttonFound.bttmodal {
     border-radius: 20px;
-    background-color: #182d5b;
+    background-color: #000000;
     color: whitesmoke;
     text-align: center;
     font-size: 16px;
@@ -103,7 +110,25 @@
 }
 
 .buttonFound.bttmodal:hover {
-    background-color: #3a5387;
+    background-color: #464646;
 }
 
+.divCreateJoin {
+    padding-top: 25px;
+    text-align: center;
+}
 
+.divCreateJoin.search{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.divCreateJoin.lobby{
+    padding-top: 0px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.divCreateJoin.lobby-1{
+    padding-top: 0px;
+}

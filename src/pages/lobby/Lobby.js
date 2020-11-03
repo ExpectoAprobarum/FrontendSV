@@ -1,13 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // prueba
 import Game from '../game/Game'
 import './LobbyStyles.css'
 import '../joinagame/styleSearch.css'
-
-const liStyle = {
-    paddingLeft: '45px', 
-    listStyleType: "none", 
-};
 
 export default class LobbyPage extends React.Component {
     constructor(props) {
@@ -68,18 +64,30 @@ export default class LobbyPage extends React.Component {
         }
         return (
             <div>
-                <h1 className="h1TittleLobby">Lobby</h1>
+                <div className="divCreateJoin lobby">
+                    <Link className="liStyle back" to="/home">{`<`}</Link>
+                </div>
+                
+                <h1 className="h1TittleLobby" style={{fontSize:"70px"}}>Lobby</h1>
+                <div className="divCreateJoin lobby-1">
+                    <div className="button-container-1 button lobby">
+                        <span className="mas">Start Game</span>
+                        <button id="work" type="button" name="Hover" onClick={this.gameStart}>
+                            Start Game
+                        </button>
+                    </div> 
+                </div>
                 <label>
-                    <form>
+                <div className="divCreateJoin lobby">
                         { this.state.listPlayers.map(
                                     player =>
-                                            <li key={player.user.id} style={liStyle} className="fom-popup-BoxShadow">
+                                            <li key={player.user.id} className="liStyle fom-popup-BoxShadow custom">
                                                 {player.user.username}
                                             </li>
                         )}
-                    </form>
+                </div>
                 </label>
-                <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button>
+                {/* <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button> */}
             </div>
         );
     }

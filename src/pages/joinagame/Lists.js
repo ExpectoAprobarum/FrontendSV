@@ -3,8 +3,8 @@ import axios from 'axios';
 import Modal from './modal'
 
 const liStyle = {
-    paddingLeft: '45px', 
     listStyleType: "none", 
+    
 };
 
 const divStyle = {
@@ -22,12 +22,14 @@ export default class PersonList extends React.Component {
             modalshow: false,
             selected: [],
             redirect: false,
+            showSearch: false
         };
     
         this.handleChange = this.handleChange.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.joinGame = this.joinGame.bind(this);
+        this.showS = this.showS.bind(this);
     }
 
     showModal(e) {
@@ -36,6 +38,13 @@ export default class PersonList extends React.Component {
             selected: e
         });
     };
+
+    showS() {
+        console.log("Entro ShowS")
+        this.setState({
+            showSearch: !this.state.showSearch
+        })
+    }
     
     hideModal() {
         this.setState({ 
@@ -95,6 +104,7 @@ export default class PersonList extends React.Component {
             if(response.status === 200){
                 this.setState({
                     list: response.data.data,
+                    listBackup: response.data.data,
                 });
             }
         })
@@ -105,38 +115,51 @@ export default class PersonList extends React.Component {
 
     render() {
         return (
-            <div style={{paddingLeft:"20px"}}>
-                <h1 style={divStyle}>Unirse a Partida</h1>
-                <label>
-                    <form onSubmit = {this.handleSubmit}>
-                        <input type="text" 
-                            className = "search-button"
-                            name = "name" 
-                            placeholder = "Buscar.."
-                            value = { this.state.text}
-                            onChange={ (text) => this.filter(text)}
-                        />
+            
+            <div>
+                <div className="button-container-1">
+                <span className="mas">Search Game</span>
+                <button id="work" type="button" name="Hover" onClick={this.showS}>
+                    Search Game
+                </button>
+                </div> 
+                { this.state.showSearch ?
+                    <div className="divCreateJoin">
+                        <label>
+                            <form onSubmit = {this.handleSubmit}>
+                                <input type="text" 
+                                    className = "search-button"
+                                    name = "name" 
+                                    placeholder = "Search.."
+                                    value = { this.state.text}
+                                    onChange={ (text) => this.filter(text)}
+                                />
 
-                        <Modal open={this.state.modalshow} 
-                            handleClose={this.hideModal} 
-                            inPartida={this.joinGame}
-                            gameID={this.state.selected.id}>
-                            <h3>{this.state.selected.name}</h3>
-                            <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
-                        </Modal>
+                                <Modal open={this.state.modalshow} 
+                                    handleClose={this.hideModal} 
+                                    inPartida={this.joinGame}
+                                    gameID={this.state.selected.id}>
+                                    <h3>{this.state.selected.name}</h3>
+                                    <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
+                                </Modal>
 
-                        <div style={{paddingTop: "20px"}}></div>
-
-                        { this.state.list.map(
-                            person => <li style={liStyle} key={person.id}>
-                                        <button type="button" 
-                                            onClick= {() => this.showModal(person)} className= "buttonFound">
-                                            {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
-                                        </button>
-                                    </li>
-                        )}
-                    </form>
-                </label>
+                                <div style={{paddingTop: "20px"}}></div>
+                                
+                                <div className="divCreateJoin search">
+                                    { this.state.list.map(
+                                        person => <li className="linked custom" key={person.id}>
+                                                    <button type="button" 
+                                                        onClick= {() => this.showModal(person)} className= "buttonFound">
+                                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
+                                                    </button>
+                                                </li>
+                                    )}
+                                </div>
+                            </form>
+                        </label>
+                    </div> 
+                    : <p></p> 
+                }
                 <div id="lista"></div>
             </div>
         );
