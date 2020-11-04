@@ -2,16 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Modal from './modal'
 
-const liStyle = {
-    listStyleType: "none", 
-    
-};
-
-const divStyle = {
-    color: '#182d5b',
-    paddingLeft: '100px',
-};
-
 export default class PersonList extends React.Component {
     constructor(props) {
         super(props);
