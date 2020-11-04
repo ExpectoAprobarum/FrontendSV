@@ -1,5 +1,7 @@
 import React from 'react';
 import LobbyPage from './pages/lobby/Lobby'
+import Register from './pages/register/register'
+import Login from './pages/login/login'
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,9 +15,10 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path="/home" component={PrincipalPage}></Route>
-                <Route path="/Game" component={LobbyPage}></Route>
-                <Route exact path="/" component={RegisterAndLogin}>
-                </Route>
+                <Route exact path="/Game" component={LobbyPage}></Route>
+                <Route exact path="/register" component={Register}></Route>
+                <Route exact path="/login" component={Login}></Route>
+                <Route exact path="/" component={RegisterAndLogin}></Route>
             </Switch>
         </Router>
     );

@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // prueba
+
 import "./register.css";
+import '../lobby/LobbyStyles.css'
 
 const Register = () =>{
     const[usuario, setUsuario] = useState('')
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
-    const[registerError, setRegisterError] = useState(true);
+    const[registerError, setRegisterError] = useState(false);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -50,43 +53,60 @@ const Register = () =>{
     }
      
         return (
-        <div className='Register'>
-            <form onSubmit={handleOnSubmit} className='formRegister'>
-                <input className='UsuarioR'
-                    id='usuarioR'
-                    type='text' 
-                    name='usuario' 
-                    placeholder='Ingrese un Usuario' 
-                    value={usuario} 
-                    onChange={handleOnchange} 
-                />
-                <br/>
-                <br/>
-                <input className='EmailR'
-                    id='emailR'
-                    type='text' 
-                    name='email' 
-                    placeholder='Ingrese un Email' 
-                    value={email} 
-                    onChange={handleOnchange} 
-                />
-                <div>
-                    { registerError ? <label >Email ingresado no valido</label> : <p></p>}
+            <div>
+                <div className="divCreateJoin lobby">
+                    <Link className="liStyle back" to="/">{`<`}</Link>
                 </div>
-                <br />
-                <input 
-                    id='contraseñaR'
-                    type='password' 
-                    name='contraseña' 
-                    placeholder='Ingrese su Contraseña' 
-                    value={contraseña} 
-                    onChange={handleOnchange} 
-                    minLength="7"
-                />
-                <button type='submit'>Crear Usuario</button>
-                
-            </form>
-        </div>
+                <div className='fom-popup-BoxShadow register'>
+                    <h1 style={{fontSize:"45px"}} className="h1TittleLobby">Sign in</h1>
+
+                    <form onSubmit={handleOnSubmit} className='formRegister'>
+                        <div className="divTitleInput">User</div>
+                        <input
+                            id='usuarioR'
+                            type='text' 
+                            name='usuario' 
+                            placeholder='Input a username' 
+                            value={usuario} 
+                            onChange={handleOnchange} 
+                        />
+                        <br/>
+                        <br/>
+                        <div className="divTitleInput">Email</div>
+                        <input
+                            id='emailR'
+                            type='text' 
+                            name='email' 
+                            placeholder='Input Email' 
+                            value={email} 
+                            onChange={handleOnchange} 
+                        />
+                        <div>
+                            { registerError ? 
+                                <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> : 
+                                <p></p> }
+                        </div>
+                        <br />
+                        <div className="divTitleInput">Password</div>
+                        <input  className="input2"
+                            id='contraseñaR'
+                            type='password' 
+                            name='contraseña' 
+                            placeholder='Input Password' 
+                            value={contraseña} 
+                            onChange={handleOnchange} 
+                            minLength="7"
+                        />
+                        <div className="boxBtt">
+                            <button type='submit' 
+                                className="buttonFound registerLogin">
+                                    Create User
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
         )
     
 }

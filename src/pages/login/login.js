@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+
 import "./login.css";
+import "../register/register.css";
+import '../lobby/LobbyStyles.css'
 
 const Login = () =>{
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
-    const[loginError, setLoginError] = useState(true);
+    const[loginError, setLoginError] = useState(false);
     
     
     const handleOnSubmit = (e) => {
@@ -50,34 +54,50 @@ const Login = () =>{
             return <Redirect to="/Home" />
         } 
         return (
-        <div className='Login'>
-            <form onSubmit={handleOnSubmit} className='formLogin'>
-                <input className=''
-                    id='emailL'
-                    type='text' 
-                    name='email' 
-                    placeholder='Ingrese su Email' 
-                    value={email} 
-                    onChange={handleOnchange} 
-                />
-                <div>
-                    { loginError ? <label className='lbl-nombre'>Email ingresado no valido</label> : <p></p>}
-                </div>
-                <br />
-                <input 
-                    id='contraseñaL'
-                    type='password' 
-                    name='contraseña' 
-                    placeholder='Ingrese su Contraseña' 
-                    value={contraseña} 
-                    onChange={handleOnchange} 
-                    minLength="7"
-                />
-                <button type='submit'>Ingresar</button>
-                
-            </form>
+        <div>
+            <div className="divCreateJoin lobby">
+                <Link className="liStyle back" to="/">{`<`}</Link>
+            </div>
+            <div className='fom-popup-BoxShadow register'>
+                <h1 style={{fontSize:"45px"}} className="h1TittleLobby">Welcome</h1>
+
+                <form onSubmit={handleOnSubmit} className='formRegister'>
+                    <div className="divTitleInput">Email</div>
+                    <input
+                        id='emailL'
+                        type='text' 
+                        name='email' 
+                        placeholder='Input Email' 
+                        value={email} 
+                        onChange={handleOnchange} 
+                    />
+                    <div>
+                        { loginError ? 
+                            <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> : 
+                            <p></p> }
+                        </div>
+                    <br />
+                    <div className="divTitleInput">Password</div>
+                    <input
+                        id='contraseñaL'
+                        type='password' 
+                        name='contraseña' 
+                        placeholder='Input Password' 
+                        value={contraseña} 
+                        onChange={handleOnchange} 
+                        minLength="7"
+                    />
+                    <div className="boxBtt login">
+                        <button type='submit' 
+                            className="buttonFound registerLogin">
+                                Log in
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
-        )
+    )
     
 }
 
