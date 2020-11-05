@@ -3,19 +3,8 @@ import axios from 'axios';
 import Modal from './modal'
 import jwt_decode from 'jwt-decode';
 
-
-const liStyle = {
-    listStyleType: "none",
-
-};
-
-const divStyle = {
-    color: '#182d5b',
-    paddingLeft: '100px',
-};
-
 export default class PersonList extends React.Component {
-    constructor(props) {
+  constructor(props) {
         super(props);
         this.state = {
             value: '',
@@ -54,6 +43,7 @@ export default class PersonList extends React.Component {
     hideModal() {
         this.setState({
             modalshow: false,
+            error: [false, ""],
             selected: []
         });
     };
@@ -61,40 +51,45 @@ export default class PersonList extends React.Component {
     joinGame(){
         let lengthGame = this.state.countPlayer
         let maxPlayerG = this.state.selected.player_amount
-        console.log("lengthGame: ", lengthGame);
-        console.log("maxPlayerG: ", maxPlayerG);
+        var idPlayer = 0
+        const usertoken = localStorage.getItem('user');
+        if(usertoken) {
+          idPlayer = jwt_decode(usertoken).sub.id;
+        }
 
         if (lengthGame !== maxPlayerG) {
-            // const idPart = parseInt(this.state.selected.id)
-            // const usertoken = localStorage.getItem('user')
-            //
-            // console.log("token: ", JSON.parse(usertoken).access_token)
-            // axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
-            //     headers: {
-            //         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
-            //     }
-            // }).then(response => {
-            //     if(response.status === 200){
-            //         const response_id = response.data
-            //         console.log("idCorrecto:", response_id)
-            //     }
-            // })
-            // .catch(error => {
-            //    console.log(error)
-            // })
+            if (this.state.selected.created_by !== idPlayer) {
+                const idPart = parseInt(this.state.selected.id)
+                const usertoken = localStorage.getItem('user')
+
+                axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
+                    headers: {
+                        'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+                    }
+                }).then(response => {
+                    if(response.status === 200){
+                        const response_id = response.data
+                        console.log("idCorrecto:", response_id)
+                    }
+                })
+                .catch(error => {
+                   console.log(error)
+                })
+            }
         } else {
-            this.setState({
-                error: [!this.state.error[0], "wow"]
-            })
+            if (this.state.selected.created_by !== idPlayer) {
+                this.setState({
+                    error: [true, "wow"]
+                })
+            }
         }
     }
 
     getPlayers(idGame){
-        console.log("idGame: ", idGame);
+        var idPlayer = 0
         const usertoken = localStorage.getItem('user');
         if(usertoken) {
-          const id = jwt_decode(usertoken).sub.id;
-          console.log("ID: ", id);
+          idPlayer = jwt_decode(usertoken).sub.id;
         }
 
         axios.get(`http://127.0.0.1:8000/games/${idGame.id}/players`, {
@@ -102,19 +97,26 @@ export default class PersonList extends React.Component {
                 'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
         }).then(response => {
-            console.log("response:", response)
-            console.log("status:", response.status)
             if(response.status === 200){
                 this.setState({
                     listPlayers: response.data.data,
                     countPlayer: response.data.data.length
                 });
+                let lengthGame = this.state.countPlayer
+                let maxPlayerG = this.state.selected.player_amount
+
+                if (lengthGame === maxPlayerG) {
+                    if (idGame.created_by !== idPlayer) {
+                        this.setState({
+                            error: [true, "Full room"]
+                        })
+                    }
+                }
             }
         })
         .catch(error => {
            console.log(error)
         })
-
     }
 
 
@@ -182,9 +184,10 @@ export default class PersonList extends React.Component {
                                 <Modal open={this.state.modalshow}
                                     handleClose={this.hideModal}
                                     inPartida={this.joinGame}
-                                    gameID={this.state.selected.id}>
+                                    gameID={this.state.selected.id}
+                                    error={this.state.error}>
                                     <h3>{this.state.selected.name}</h3>
-                                    <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
+                                    <p>Sala: {this.state.selected.id}</p>
                                 </Modal>
 
                                 <div style={{paddingTop: "20px"}}></div>

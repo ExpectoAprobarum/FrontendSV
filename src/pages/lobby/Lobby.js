@@ -1,51 +1,52 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // prueba
 import Game from '../game/Game'
 import './LobbyStyles.css'
 import '../joinagame/styleSearch.css'
 
-export default class LobbyPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            listPlayers: [],
-            initPartida: false,
-            countPlayer: 0,
-            message: ''
-        };
+const LobbyPage = () => {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+            const [listPlayers, setListPlayers] = useState([]);
+            const [initPartida, setInitPartida]= useState(false);
+            const [countPlayer, setCountPlayer]= useState(0);
+            const [message, setMessage] = useState('');
+    //     };
+    // }
+
+    const getPlayers = () => {
+      const usertoken = localStorage.getItem('user')
+      axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
+          headers: {
+              'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
+      }).then(response => {
+        if(response.status === 200){
+          setListPlayers(response.data.data)
+          setCountPlayer(response.data.data.length)
+        }
+        setTimeout(getPlayers, 2000)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
 
-    getPlayers = () => {
-      console.log("passing: ", this.props.location.state.gameId)
-        const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
-            }
-        }).then(response => {
-            console.log("response:", response)
-            console.log("status:", response.status)
-            if(response.status === 200){
-                this.setState({
-                    listPlayers: response.data.data,
-                    countPlayer: response.data.data.length
-                });
-            }
-
-            setTimeout(this.getPlayers, 2000)
-        })
-        .catch(error => {
-           console.log(error)
-        })
+    // const run () => {
+    //   getGameInfo
+    //   getPlayers
+    // }
+    var compo = () => {
+      console.log("LALA")
+      getGameInfo
+      getPlayers
     }
 
-    componentDidMount() {
-        this.getGameInfo();
-        this.getPlayers();
-    };
+    compo()
 
-    getGameInfo = () => {
+    const getGameInfo = () => {
       const usertoken = localStorage.getItem('user')
         axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}`, {
             headers: {
@@ -54,17 +55,14 @@ export default class LobbyPage extends React.Component {
         })
         .then(res => {
           if(res.status === 200) {
-            this.setState({
-              initPartida: res.data.started
-            })
-
-            setTimeout(this.getGameInfo, 2000)
+            setInitPartida(res.data.started)
+            setTimeout(getGameInfo, 2000)
           }
         })
     }
 
-    gameStart = () => {
-        if (this.state.countPlayer >= 5) {
+    const gameStart = () => {
+        if (countPlayer >= 5) {
             const idPart = parseInt(this.props.location.state.gameId)
             const usertoken = localStorage.getItem('user')
 
@@ -81,40 +79,36 @@ export default class LobbyPage extends React.Component {
                console.log(error)
             })
         } else {
-            this.setState({
-                message: "Insufficient players, the minimum is 5"
-            })
-            setTimeout(
-              () => this.setState({
-                  message: " "
-              }), 4000
+          setMessage("Insufficient players, the minimum is 5")
+          setTimeout(
+              () => setMessage(" ")
+                , 4000
             );
         }
     }
 
-    render() {
-        if (this.state.initPartida) {
-            return <div><Game gameId={parseInt(this.props.location.state.gameId)}/></div>
-        }
-        return (
-            <div>
+    return (
+      <div>
+        { initPartida ?
+          <div><Game gameId={parseInt(this.props.location.state.gameId)}/></div>
+          : <div>
                 <div className="divCreateJoin lobby">
                     <Link className="liStyle back" to="/home">{`<`}</Link>
                 </div>
 
                 <h1 className="h1TittleLobby" style={{fontSize:"70px"}}>Lobby</h1>
-                <h1 className="h1TittleLobby" style={{fontSize:"20px", color: "red"}}>{this.state.message}</h1>
+                <h4 className="h1TittleLobby" style={{fontSize:"20px", color: "red"}}>{message}</h4>
                 <div className="divCreateJoin lobby-1">
                     <div className="button-container-1 button lobby">
                         <span className="mas">Start Game</span>
-                        <button id="work" type="button" name="Hover" onClick={this.gameStart}>
+                        <button id="work" type="button" name="Hover" onClick={gameStart}>
                             Start Game
                         </button>
                     </div>
                 </div>
                 <label>
                 <div className="divCreateJoin lobby">
-                        { this.state.listPlayers.map(
+                        { listPlayers.map(
                                     player =>
                                             <li key={player.user.id} className="liStyle fom-popup-BoxShadow custom">
                                                 {player.user.username}
@@ -122,8 +116,41 @@ export default class LobbyPage extends React.Component {
                         )}
                 </div>
                 </label>
-                {/* <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button> */}
             </div>
-        );
-    }
+        }
+      </div>
+
+        // if (initPartida) {
+        //     <div><Game gameId={parseInt(this.props.location.state.gameId)}/></div>
+        // } else {
+        //     <div>
+        //         <div className="divCreateJoin lobby">
+        //             <Link className="liStyle back" to="/home">{`<`}</Link>
+        //         </div>
+        //
+        //         <h1 className="h1TittleLobby" style={{fontSize:"70px"}}>Lobby</h1>
+        //         <h4 className="h1TittleLobby" style={{fontSize:"20px", color: "red"}}>{message}</h4>
+        //         <div className="divCreateJoin lobby-1">
+        //             <div className="button-container-1 button lobby">
+        //                 <span className="mas">Start Game</span>
+        //                 <button id="work" type="button" name="Hover" onClick={gameStart}>
+        //                     Start Game
+        //                 </button>
+        //             </div>
+        //         </div>
+        //         <label>
+        //         <div className="divCreateJoin lobby">
+        //                 { listPlayers.map(
+        //                             player =>
+        //                                     <li key={player.user.id} className="liStyle fom-popup-BoxShadow custom">
+        //                                         {player.user.username}
+        //                                     </li>
+        //                 )}
+        //         </div>
+        //         </label>
+        //         {/* <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button> */}
+        //     </div>
+        // }
+    )
 }
+export default LobbyPage;

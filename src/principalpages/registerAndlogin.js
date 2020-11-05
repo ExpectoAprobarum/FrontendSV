@@ -1,21 +1,34 @@
 import React from 'react';
-import Register from '../pages/register/register';
-import Login from '../pages/login/login';
+import { Link } from 'react-router-dom';
+
 import './registerAndlogin.css'
+import '../pages/creategame/buttonStyle.css'
+import '../pages/joinagame/styleSearch.css'
 
 const RegisterAndLogin = () => {
     return(
-        <div className='Background'>
-        <div className='RegisterAndLoginPage'>
-            <Register />
-            <Login />
-        <div className='Background'></div>
+        <div className="divCreateJoin">
+            <h1 style={{paddingBottom: "50px", fontSize:"100px"}}>Secret Voldemort</h1>
+            <div className="button-container-1">
+                <span className="mas">Register</span>
+                <button id="work" type="button" name="Hover">
+                    <Link to={{pathname: '/register'}} type="button"
+                        className="linked">Register
+                    </Link>
+                </button>
+            </div> 
+            <tr></tr>
+            <tr></tr>
+            <div className="button-container-1">
+                <span className="mas">Login</span>
+                <button id="work" type="button" name="Hover">
+                    <Link to={{pathname: '/login'}} type="button"
+                        className="linked">Login
+                    </Link>
+                </button>
+            </div> 
         </div>
-        </div>
-        
     )
-    }
-
-
+}
 
 export default RegisterAndLogin;
