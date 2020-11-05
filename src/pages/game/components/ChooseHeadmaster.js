@@ -9,34 +9,12 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
   const [players, setPlayers] = useState([]);
   const [selected, setSelection] = useState(0);
 
-  const getPlayers = () => {
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/players', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          setPlayers(res.data);
-          let isMinister = ministerId === res.data.data.filter(player => {
-            return player.user.id === userId
-          })[0].id
-          setMinister(isMinister);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
   const selectPlayer = (id) => {
     setSelection(id);
     document.getElementById("sendCandidate").disabled = false
   }
 
   const sendElection = () => {
-    console.log("selected: ", selected)
     const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/games/' + gameId + '/choosehm', 
     {id: selected}, {
@@ -53,8 +31,28 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
   }
 
   useEffect(() => {
+    const getPlayers = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + '/players', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        })
+      .then(res => {
+        if(res.status === 200) {
+          setPlayers(res.data);
+          let isMinister = ministerId === res.data.data.filter(player => {
+            return player.user.id === userId
+          })[0].id
+          setMinister(isMinister);
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
     getPlayers();
-  })
+  }, [ministerId, gameId, userId])
 
   return minister ? (
     <div className="ChooseHeadmaster">
