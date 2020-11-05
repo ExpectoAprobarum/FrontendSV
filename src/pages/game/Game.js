@@ -17,44 +17,34 @@ const Game = ({gameId}) => {
       const id = jwt_decode(usertoken).sub.id;
       setUserId(id);
     }
-    //Get game info data
-    axios.get(configData.API_URL + '/games/' + gameId, {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
+
+    const getGameInfo = () => {
+      console.log("entre a timeout");
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId, {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
       })
       .then(res => {
         if(res.status === 200) {
           setGameInfo(res.data);
+          setGameStatus(gameInfo.status);
         }
       })
       .catch(error => {
         console.log(error)
       })
-
-    //Get status info data
-    const getGameData = () => {
-      const usertoken = localStorage.getItem('user');
-      axios.get(configData.API_URL + '/games/' + gameId + '/status', {
-        headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-          }
-        })
-        .then(res => {
-          if(res.status === 200) {
-            setGameStatus(res.data);
-          }
-  
-          setTimeout(getGameData(), 2000)
-        })
-        .catch(error => {
-          console.log(error)
-        })
     }
-    getGameData();
-  }, [gameId])
 
-  if(gameStatus.phase === 'propose') {
+    const timer = setTimeout(() => {
+      getGameInfo();
+    }, 2000);
+
+    return () => clearTimeout(timer)
+  }, [gameId, gameInfo.status])
+
+  if(gameStatus && gameStatus.phase === 'propose') {
     return(
       <div className="Game">
         <h1 className="center">Game phase: {gameStatus.phase}</h1>    
@@ -66,7 +56,7 @@ const Game = ({gameId}) => {
       </div>
     )
   }
-  else if(gameStatus.phase === 'vote') {
+  else if(gameStatus && gameStatus.phase === 'vote') {
     return(
       <div className="Game">
         <h1 className="center">Game phase: {gameStatus.phase}</h1> 
@@ -76,7 +66,7 @@ const Game = ({gameId}) => {
       </div>
     )
   }
-  else if(gameStatus.phase === 'headmaster play') {
+  else if(gameStatus && gameStatus.phase === 'headmaster play') {
     return(
       <div className="Game">
         <h1 className="center">Game phase: {gameStatus.phase}</h1>    
