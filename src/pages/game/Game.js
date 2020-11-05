@@ -77,7 +77,6 @@ class Game extends Component {
         <div className="Game">
           <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
           <ChooseHeadmaster
-            phase={this.state.gameStatus.phase}
             ministerId={this.state.gameStatus.minister}
             userId={this.state.userId}
             gameId={this.props.gameId}
@@ -90,7 +89,6 @@ class Game extends Component {
         <div className="Game">
           <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1> 
           <Vote
-            phase={this.state.gameStatus.phase}
             gameId={this.props.gameId}
           />
         </div>
@@ -101,8 +99,6 @@ class Game extends Component {
         <div className="Game">
           <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
           <EmitProclamation
-            headmaster={this.state.gameStatus.headmaster}
-            userId={this.state.userId}
             gameId={this.props.gameId}
           />
         </div>
