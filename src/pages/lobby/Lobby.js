@@ -11,6 +11,8 @@ export default class LobbyPage extends React.Component {
         this.state = {
             listPlayers: [],
             initPartida: false,
+            countPlayer: 0,
+            message: ''
         };
     }
 
@@ -19,14 +21,15 @@ export default class LobbyPage extends React.Component {
         const usertoken = localStorage.getItem('user')
         axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
             headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
-        }).then(response => { 
+        }).then(response => {
             console.log("response:", response)
             console.log("status:", response.status)
             if(response.status === 200){
                 this.setState({
                     listPlayers: response.data.data,
+                    countPlayer: response.data.data.length
                 });
             }
 
@@ -46,7 +49,7 @@ export default class LobbyPage extends React.Component {
       const usertoken = localStorage.getItem('user')
         axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}`, {
             headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
         })
         .then(res => {
@@ -61,23 +64,32 @@ export default class LobbyPage extends React.Component {
     }
 
     gameStart = () => {
-        console.log("IDPART: ", parseInt(this.props.location.state.gameId))
-        const idPart = parseInt(this.props.location.state.gameId)
-        const usertoken = localStorage.getItem('user')
+        if (this.state.countPlayer >= 5) {
+            const idPart = parseInt(this.props.location.state.gameId)
+            const usertoken = localStorage.getItem('user')
 
-        console.log("token: ", JSON.parse(usertoken).access_token)
-        axios.post(`http://127.0.0.1:8000/games/${idPart}/start`,({}),{
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
-        }).then(response => {
-            if(response.status === 200){
-                console.log("Game started")
-            }
-        })
-        .catch(error => {
-           console.log(error)
-        })
+            axios.post(`http://127.0.0.1:8000/games/${idPart}/start`,({}),{
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+                }
+            }).then(response => {
+                if(response.status === 200){
+                    console.log("Game started")
+                }
+            })
+            .catch(error => {
+               console.log(error)
+            })
+        } else {
+            this.setState({
+                message: "Insufficient players, the minimum is 5"
+            })
+            setTimeout(
+              () => this.setState({
+                  message: " "
+              }), 4000
+            );
+        }
     }
 
     render() {
@@ -89,15 +101,16 @@ export default class LobbyPage extends React.Component {
                 <div className="divCreateJoin lobby">
                     <Link className="liStyle back" to="/home">{`<`}</Link>
                 </div>
-                
+
                 <h1 className="h1TittleLobby" style={{fontSize:"70px"}}>Lobby</h1>
+                <h1 className="h1TittleLobby" style={{fontSize:"20px", color: "red"}}>{this.state.message}</h1>
                 <div className="divCreateJoin lobby-1">
                     <div className="button-container-1 button lobby">
                         <span className="mas">Start Game</span>
                         <button id="work" type="button" name="Hover" onClick={this.gameStart}>
                             Start Game
                         </button>
-                    </div> 
+                    </div>
                 </div>
                 <label>
                 <div className="divCreateJoin lobby">
