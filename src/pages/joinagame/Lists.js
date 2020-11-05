@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from './modal'
+import jwt_decode from 'jwt-decode';
+
 
 const liStyle = {
-    listStyleType: "none", 
-    
+    listStyleType: "none",
+
 };
 
 const divStyle = {
@@ -22,9 +24,12 @@ export default class PersonList extends React.Component {
             modalshow: false,
             selected: [],
             redirect: false,
-            showSearch: false
+            showSearch: false,
+            listPlayers: [],
+            countPlayer: 0,
+            error: [false, '']
         };
-    
+
         this.handleChange = this.handleChange.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -33,10 +38,11 @@ export default class PersonList extends React.Component {
     }
 
     showModal(e) {
-        this.setState({ 
-            modalshow: true, 
+        this.setState({
+            modalshow: true,
             selected: e
         });
+        this.getPlayers(e);
     };
 
     showS() {
@@ -44,35 +50,74 @@ export default class PersonList extends React.Component {
             showSearch: !this.state.showSearch
         })
     }
-    
+
     hideModal() {
-        this.setState({ 
+        this.setState({
             modalshow: false,
             selected: []
         });
     };
 
     joinGame(){
-        const idPart = parseInt(this.state.selected.id)
-        const usertoken = localStorage.getItem('user')
+        let lengthGame = this.state.countPlayer
+        let maxPlayerG = this.state.selected.player_amount
+        console.log("lengthGame: ", lengthGame);
+        console.log("maxPlayerG: ", maxPlayerG);
 
-        console.log("token: ", JSON.parse(usertoken).access_token)
-        axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
+        if (lengthGame !== maxPlayerG) {
+            // const idPart = parseInt(this.state.selected.id)
+            // const usertoken = localStorage.getItem('user')
+            //
+            // console.log("token: ", JSON.parse(usertoken).access_token)
+            // axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
+            //     headers: {
+            //         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+            //     }
+            // }).then(response => {
+            //     if(response.status === 200){
+            //         const response_id = response.data
+            //         console.log("idCorrecto:", response_id)
+            //     }
+            // })
+            // .catch(error => {
+            //    console.log(error)
+            // })
+        } else {
+            this.setState({
+                error: [!this.state.error[0], "wow"]
+            })
+        }
+    }
+
+    getPlayers(idGame){
+        console.log("idGame: ", idGame);
+        const usertoken = localStorage.getItem('user');
+        if(usertoken) {
+          const id = jwt_decode(usertoken).sub.id;
+          console.log("ID: ", id);
+        }
+
+        axios.get(`http://127.0.0.1:8000/games/${idGame.id}/players`, {
             headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
-        }).then(response => { 
+        }).then(response => {
+            console.log("response:", response)
+            console.log("status:", response.status)
             if(response.status === 200){
-                const response_id = response.data
-                console.log("idCorrecto:", response_id)
+                this.setState({
+                    listPlayers: response.data.data,
+                    countPlayer: response.data.data.length
+                });
             }
         })
         .catch(error => {
            console.log(error)
         })
+
     }
 
-    
+
     handleChange(event) {
         this.setState({value: event.target.value});
     }
@@ -97,7 +142,7 @@ export default class PersonList extends React.Component {
         const usertoken = localStorage.getItem('user')
         axios.get('http://127.0.0.1:8000/games/', {
             headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
         }).then(response => {
             if(response.status === 200){
@@ -114,28 +159,28 @@ export default class PersonList extends React.Component {
 
     render() {
         return (
-            
+
             <div>
                 <div className="button-container-1">
                 <span className="mas">Search Game</span>
                 <button id="work" type="button" name="Hover" onClick={this.showS}>
                     Search Game
                 </button>
-                </div> 
+                </div>
                 { this.state.showSearch ?
                     <div className="divCreateJoin">
                         <label>
                             <form onSubmit = {this.handleSubmit}>
-                                <input type="text" 
+                                <input type="text"
                                     className = "search-button"
-                                    name = "name" 
+                                    name = "name"
                                     placeholder = "Search.."
                                     value = { this.state.text}
                                     onChange={ (text) => this.filter(text)}
                                 />
 
-                                <Modal open={this.state.modalshow} 
-                                    handleClose={this.hideModal} 
+                                <Modal open={this.state.modalshow}
+                                    handleClose={this.hideModal}
                                     inPartida={this.joinGame}
                                     gameID={this.state.selected.id}>
                                     <h3>{this.state.selected.name}</h3>
@@ -143,21 +188,21 @@ export default class PersonList extends React.Component {
                                 </Modal>
 
                                 <div style={{paddingTop: "20px"}}></div>
-                                
+
                                 <div className="divCreateJoin search">
                                     { this.state.list.map(
                                         person => <li className="linked custom" key={person.id}>
-                                                    <button type="button" 
-                                                        onClick= {() => this.showModal(person)} className= "buttonFound">
-                                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
+                                                    <button type="button"
+                                                        onClick= {() => {this.showModal(person)}} className= "buttonFound">
+                                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name}
                                                     </button>
                                                 </li>
                                     )}
                                 </div>
                             </form>
                         </label>
-                    </div> 
-                    : <p></p> 
+                    </div>
+                    : <p></p>
                 }
                 <div id="lista"></div>
             </div>
