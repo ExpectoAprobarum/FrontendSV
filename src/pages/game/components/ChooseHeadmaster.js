@@ -11,7 +11,6 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
 
   const selectPlayer = (id) => {
     setSelection(id);
-    document.getElementById("sendCandidate").disabled = false
   }
 
   const sendElection = () => {
