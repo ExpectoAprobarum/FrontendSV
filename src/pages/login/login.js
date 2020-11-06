@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
-import "./login.css";
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 import "../register/register.css";
 import '../lobby/LobbyStyles.css'
 
 const Login = () =>{
+    toast.configure()
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
@@ -30,11 +31,18 @@ const Login = () =>{
                 setRedirect(true)  
             }
             }).catch(error => {
+                notify_err()
                 console.log(error)
             })
         }
     }
-    
+
+    const notify_err = () => {
+        toast.error('Email or password are invalid', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000})
+    }
+
     const handleOnchange = (e) => {
         if( e.target.name === 'email') {
             setEmail(e.target.value)

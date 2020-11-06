@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // prueba
-
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 import "./register.css";
 import '../lobby/LobbyStyles.css'
 
 const Register = () =>{
+    
+    toast.configure()
     const[usuario, setUsuario] = useState('')
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
@@ -25,14 +28,27 @@ const Register = () =>{
             axios.post('http://127.0.0.1:8000/users/', infotosend ).then(response => { 
             if(response.status === 200){
                 console.log(response.data) 
-                localStorage.setItem('user', JSON.stringify(response.data))
+                notify()
+                
             }
             }).catch(error => {
+                notify_err()
                 console.log(error)
             })
         }
     }
-    
+    const notify_err = () => {
+        toast.error('User or Email was already in use', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000})
+    }
+
+    const notify = () => {
+        toast.success('The user was successfully created', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000})
+    }
+
     const handleOnchange = (e) => {
         if( e.target.name === 'email') {
             setEmail(e.target.value)
