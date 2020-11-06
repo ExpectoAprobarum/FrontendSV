@@ -3,6 +3,15 @@
     margin: 0 auto;
 }
 
+.h1TittleLobby.title {
+  font-size: 70px;
+}
+
+.h1TittleLobby.error {
+  font-size: 20px;
+  color: red;
+}
+
 .form-popup {
     background-color: white;
     display: none;
@@ -12,17 +21,17 @@
     border: 1.5px solid #f1f1f1;
     z-index: 9;
 }
-  
+
 .fom-popup-BoxShadow {
     border: none;
-    padding-top: 10px;
+    padding-top: 5px;
     border-radius: 20px;
     margin: 20px auto;
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     width: 35%;
-    height: 40px;
+    height: 30px;
 }
 
 .fom-popup-BoxShadow.custom{
@@ -61,4 +70,10 @@
 .button-container-1.lobby {
     margin: 25px auto;
     height: 55px;
+}
+
+.divWaiting {
+    text-align: center;
+    padding-top: 15px;
+    margin: 0 auto;
 }
