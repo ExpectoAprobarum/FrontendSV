@@ -44,41 +44,45 @@ const Game = ({gameId}) => {
     return () => clearTimeout(timer)
   }, [gameId, gameInfo.status])
 
-  if(gameStatus && gameStatus.phase === 'propose') {
-    return(
-      <div className="Game">
-        <h1 className="center">Game phase: {gameStatus.phase}</h1>    
-        <ChooseHeadmaster
-          ministerId={gameStatus.minister}
-          userId={userId}
-          gameId={gameId}
-        />
-      </div>
-    )
-  }
-  else if(gameStatus && gameStatus.phase === 'vote') {
-    return(
-      <div className="Game">
-        <h1 className="center">Game phase: {gameStatus.phase}</h1> 
-        <Vote
-          gameId={gameId}
-        />
-      </div>
-    )
-  }
-  else if(gameStatus && gameStatus.phase === 'headmaster play') {
-    return(
-      <div className="Game">
-        <h1 className="center">Game phase: {gameStatus.phase}</h1>    
-        <EmitProclamation
-          gameId={gameId}
-        />
-      </div>
-    )
-  }
-  else {
-    return <p></p>
-  }
+
+  return (
+    <div className="Game">
+      <h1 className="center">Game phase: {gameStatus===undefined ? "" : gameStatus.phase}</h1>
+      {
+        gameStatus ? (
+          gameStatus.phase === 'propose' ? (
+            <div>
+              <ChooseHeadmaster
+                ministerId={gameStatus.minister}
+                userId={userId}
+                gameId={gameId}
+              />
+            </div>
+          ) : (
+            gameStatus.phase === 'vote' ? (
+              <div>
+                <Vote
+                  gameId={gameId}
+                />
+              </div>
+            ) : (
+              gameStatus.phase === 'headmaster play' ? (
+                <div>
+                  <EmitProclamation
+                    gameId={gameId}
+                  />
+                </div>
+              ) : (
+                <p>Awaiting response...</p>
+              )
+            )
+          )
+        ) : (
+          <h1 className="startingGame">Starting Game ...</h1>
+        )
+      }
+    </div>
+  )
 }
 
 export default Game
