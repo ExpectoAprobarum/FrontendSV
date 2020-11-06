@@ -2,21 +2,19 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
-import "./login.css";
+import {notify_email_or_password_err} from '../../commons/alerts/toast';
 import "../register/register.css";
 import '../lobby/LobbyStyles.css'
 
 const Login = () =>{
+   
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
     const[loginError, setLoginError] = useState(false);
-
-
+    
     const handleOnSubmit = (e) => {
         e.preventDefault();
-
         if(!  loginError ){
                 //esto es lo que voy a enviar al back
                 const infotosend ={
@@ -29,6 +27,7 @@ const Login = () =>{
                 setRedirect(true)
             }
             }).catch(error => {
+                notify_email_or_password_err()
                 console.log(error)
             })
         }
