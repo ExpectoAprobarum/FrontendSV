@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // prueba
-
+import {notify_user_created_err, notify_user_created_succ} from '../../commons/alerts/toast'
 import "./register.css";
 import '../lobby/LobbyStyles.css'
 
 const Register = () =>{
+    
     const[usuario, setUsuario] = useState('')
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
@@ -25,9 +26,11 @@ const Register = () =>{
             axios.post('http://127.0.0.1:8000/users/', infotosend ).then(response => { 
             if(response.status === 200){
                 console.log(response.data) 
-                localStorage.setItem('user', JSON.stringify(response.data))
+                notify_user_created_succ()
+                
             }
             }).catch(error => {
+                notify_user_created_err()
                 console.log(error)
             })
         }
