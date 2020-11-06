@@ -61,10 +61,15 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
         players={players}
         selected={selected}
       />
-      <button className="sendCandidate" id="sendCandidate" onClick={() => {sendElection()}}>Choose</button>
+      <button className="sendCandidate" id="sendCandidate" 
+        onClick={() => {
+          sendElection()
+      }}>
+        Choose
+      </button>
     </div>
   ) : (
-    <p></p>
+    <p />
   );
 }
 

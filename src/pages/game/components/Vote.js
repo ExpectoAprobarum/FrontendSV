@@ -29,8 +29,8 @@ const Vote = ({gameId}) => {
 
   return (
     <div className="vote">
-      <button className="card center" id="lumos" onClick={(e) => {vote(e)}}></button>
-      <button className="card center" id="nox" onClick={(e) => {vote(e)}}></button>
+      <button className="card center" id="lumos" onClick={(e) => {vote(e)}} />
+      <button className="card center" id="nox" onClick={(e) => {vote(e)}} />
     </div>
   )
 }

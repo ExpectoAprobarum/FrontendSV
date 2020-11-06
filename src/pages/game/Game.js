@@ -47,7 +47,8 @@ const Game = ({gameId}) => {
 
   return (
     <div className="Game">
-      <h1 className="center">Game phase: {gameStatus===undefined ? "" : gameStatus.phase}</h1>
+      <h1 className="center">Game phase: {gameStatus===undefined ? 
+        "" : gameStatus.phase}</h1>
       {
         gameStatus ? (
           gameStatus.phase === 'propose' ? (
