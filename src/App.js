@@ -7,6 +7,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import ChangeProfile from './pages/changeProfile/changeProfile';
 import PrincipalPage from './principalpages/createAndjoin';
 import RegisterAndLogin from './principalpages/registerAndlogin'
 
@@ -19,6 +20,7 @@ function App() {
                 <Route exact path="/register" component={Register}></Route>
                 <Route exact path="/login" component={Login}></Route>
                 <Route exact path="/" component={RegisterAndLogin}></Route>
+                <Route exact path='/changeProfile' component={ChangeProfile}></Route>
             </Switch>
         </Router>
     );

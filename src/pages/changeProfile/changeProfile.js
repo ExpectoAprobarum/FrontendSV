@@ -1,14 +1,11 @@
 
 import React, {useState} from 'react';
-import axios from 'axios';
-import { Redirect } from 'react-router';
+//import axios from 'axios';
+import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
-//como desisntalo esto ?
-//import { useToasts } from 'react-toast-notifications'
-//import { useAlert } from "react-alert";
+import './changeProfile.css'
 
 const ChangeProfile = () => {
     toast.configure()
@@ -82,7 +79,9 @@ const ChangeProfile = () => {
 
     return (
         <div>
-            <form className='ChangeProfileForm' onSubmit={handleOnSubmit} >
+            <Link className="fromProfiletohome back" to="/">{`<`}</Link>
+            <form className='formChangeProfile' onSubmit={handleOnSubmit} >
+                <div className="divTitleInput">Change UserAlias: </div>
                 <input id='userAliasL'
                         type='text' 
                         name='userAlias' 
@@ -91,7 +90,8 @@ const ChangeProfile = () => {
                         onChange={handleOnchange} >
                     </input>
                 <br />
-                <button type='submit' >Save</button>
+                <br />
+                <button type='submit' className="ButtonChangeProfile" >Save</button>
                 <br />
                 <br />
                 {showMe ? 
@@ -117,10 +117,17 @@ const ChangeProfile = () => {
                             minLength="7"
                         />
                         <br />
-                        <button onClick={ handleOnchange} name='cancel'>cancel</button>
-                        <button type='submit' name='password'>Save</button>
+                        <br />
+                        <button className="ButtonChangeProfile" onClick={ handleOnchange} name='cancel'>cancel</button>
+                        <br />
+                        <br />
+                        <button className="ButtonChangeProfile" type='submit' name='password' >Save</button>
                     </div>
-                    : <button onClick={ handleOnchange} name='showMe'>Change password</button>}
+                    : 
+                    <button 
+                        className="ButtonChangeProfile" 
+                        onClick={ handleOnchange} 
+                        name='showMe' >Change password</button>}
                 {error ? <label>Error: Caracteres ingresados invalidos</label>:<p></p>}
             </form>
         </div>
