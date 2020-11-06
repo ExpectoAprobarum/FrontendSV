@@ -37,11 +37,11 @@ const Game = ({gameId}) => {
       })
     }
 
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       getGameInfo();
     }, 2000);
 
-    return () => clearTimeout(timer)
+    return () => clearInterval(timer)
   }, [gameId, gameInfo.status])
 
 
