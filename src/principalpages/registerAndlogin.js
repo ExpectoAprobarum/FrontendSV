@@ -16,9 +16,7 @@ const RegisterAndLogin = () => {
                         className="linked">Register
                     </Link>
                 </button>
-            </div> 
-            <tr></tr>
-            <tr></tr>
+            </div>
             <div className="button-container-1">
                 <span className="mas">Login</span>
                 <button id="work" type="button" name="Hover">
@@ -26,7 +24,7 @@ const RegisterAndLogin = () => {
                         className="linked">Login
                     </Link>
                 </button>
-            </div> 
+            </div>
         </div>
     )
 }

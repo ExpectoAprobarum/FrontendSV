@@ -12,29 +12,28 @@ const Login = () =>{
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
     const[loginError, setLoginError] = useState(false);
-    
-    
+
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        
+
         if(!  loginError ){
                 //esto es lo que voy a enviar al back
                 const infotosend ={
                 username: email,
                 password: contraseña
-            }    
-            axios.post('http://127.0.0.1:8000/auth/token', infotosend).then(response => { 
+            }
+            axios.post('http://127.0.0.1:8000/auth/token', infotosend).then(response => {
                 if(response.status === 200){
-                console.log(response.data)
                 localStorage.setItem('user', JSON.stringify(response.data))
-                setRedirect(true)  
+                setRedirect(true)
             }
             }).catch(error => {
                 console.log(error)
             })
         }
     }
-    
+
     const handleOnchange = (e) => {
         if( e.target.name === 'email') {
             setEmail(e.target.value)
@@ -42,17 +41,17 @@ const Login = () =>{
         else if(e.target.name === 'contraseña'){
             setContraseña(e.target.value)
         }
-        
+
         if(  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email) ){
             setLoginError(false)
         }else{
             setLoginError(true)
-        } 
+        }
     }
-        
-        if(redirect){ 
+
+        if(redirect){
             return <Redirect to="/Home" />
-        } 
+        }
         return (
         <div>
             <div className="divCreateJoin lobby">
@@ -65,40 +64,40 @@ const Login = () =>{
                     <div className="divTitleInput">Email</div>
                     <input
                         id='emailL'
-                        type='text' 
-                        name='email' 
-                        placeholder='Input Email' 
-                        value={email} 
-                        onChange={handleOnchange} 
+                        type='text'
+                        name='email'
+                        placeholder='Input Email'
+                        value={email}
+                        onChange={handleOnchange}
                     />
                     <div>
-                        { loginError ? 
-                            <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> : 
+                        { loginError ?
+                            <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> :
                             <p></p> }
                         </div>
                     <br />
                     <div className="divTitleInput">Password</div>
                     <input
                         id='contraseñaL'
-                        type='password' 
-                        name='contraseña' 
-                        placeholder='Input Password' 
-                        value={contraseña} 
-                        onChange={handleOnchange} 
+                        type='password'
+                        name='contraseña'
+                        placeholder='Input Password'
+                        value={contraseña}
+                        onChange={handleOnchange}
                         minLength="7"
                     />
                     <div className="boxBtt login">
-                        <button type='submit' 
+                        <button type='submit'
                             className="buttonFound registerLogin">
                                 Log in
                         </button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
     )
-    
+
 }
 
 
