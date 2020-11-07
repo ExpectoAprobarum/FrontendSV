@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Vote from './components/Vote';
-import EmitProclamation from './components/EmitProclamation';
-import ChooseHeadmaster from './components/ChooseHeadmaster';
 import configData from '../../config.json';
 import jwt_decode from 'jwt-decode';
+import { PlayerProvider } from './context/PlayerContext';
+import ChooseHeadmaster from './components/ChooseHeadmaster';
+import Vote from './components/Vote';
+import EmitProclamation from './components/EmitProclamation';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -19,7 +20,6 @@ const Game = ({gameId}) => {
     }
 
     const getGameInfo = () => {
-      console.log("entre a timeout");
       const usertoken = localStorage.getItem('user');
       axios.get(configData.API_URL + '/games/' + gameId, {
         headers: {
@@ -53,11 +53,12 @@ const Game = ({gameId}) => {
         gameStatus ? (
           gameStatus.phase === 'propose' ? (
             <div>
-              <ChooseHeadmaster
-                ministerId={gameStatus.minister}
-                userId={userId}
-                gameId={gameId}
-              />
+              <PlayerProvider gameId={gameId} userId={userId}>
+                <ChooseHeadmaster
+                  ministerId={gameStatus.minister}
+                  gameId={gameId}
+                />
+              </PlayerProvider>
             </div>
           ) : (
             gameStatus.phase === 'vote' ? (

@@ -1,8 +1,8 @@
 import React from 'react';
 import './Players.css'
 
-const Players = ({players, selectPlayer, selected}) => {
-  const playerList = players.data.map(player => {
+const Players = ({selectPlayer, players, selected}) => {
+  const playerList = players.map(player => {
       return selected !== player.id ? (
           <div className="player" key={player.id}>
             <button className="player-bttn" onClick={() => {selectPlayer(player.id)}}>
@@ -13,7 +13,7 @@ const Players = ({players, selectPlayer, selected}) => {
         <div className="player" key={player.id}>
           <button className="selectedPlayer-bttn" onClick={() => {selectPlayer(player.id)}}>
             <div>{player.user.username}</div>
-          </button>  
+          </button>
         </div>
       )
   })
