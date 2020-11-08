@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import configData from '../../config.json';
+import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
-import ChooseHeadmaster from './components/ChooseHeadmaster';
-import configData from '../../config.json';
-import jwt_decode from 'jwt-decode';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
   const [gameStatus, setGameStatus] = useState({});
-  const [userId, setUserId] = useState(0);
 
   useEffect(() => {
-    const usertoken = localStorage.getItem('user');
-    if(usertoken) {
-      const id = jwt_decode(usertoken).sub.id;
-      setUserId(id);
-    }
-
     const getGameInfo = () => {
-      console.log("entre a timeout");
       const usertoken = localStorage.getItem('user');
       axios.get(configData.API_URL + '/games/' + gameId, {
         headers: {
@@ -44,7 +35,6 @@ const Game = ({gameId}) => {
     return () => clearInterval(timer)
   }, [gameId, gameInfo.status])
 
-
   return (
     <div className="Game">
       <h1 className="center">Game phase: {gameStatus===undefined ? 
@@ -54,9 +44,8 @@ const Game = ({gameId}) => {
           gameStatus.phase === 'propose' ? (
             <div>
               <ChooseHeadmaster
-                ministerId={gameStatus.minister}
-                userId={userId}
                 gameId={gameId}
+                ministerId={gameStatus.minister}
               />
             </div>
           ) : (
