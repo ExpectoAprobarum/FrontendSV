@@ -44,7 +44,7 @@ const EmitProclamation = ({gameId}) => {
       })
 
     document.getElementById("proc1").disabled = true;
-    document.getElementById("proc2").disabled = true; document.getElementById("proc1").disabled = true; document.getElementById("proc1").disabled = true;
+    document.getElementById("proc2").disabled = true;
   }
 
   useEffect(() => {
