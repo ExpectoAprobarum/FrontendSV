@@ -43,7 +43,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
 
   return ( myPlayer.id === ministerId ? (
       <div className="ChooseHeadmaster">
-        <h1 className="header">Select new headmaster candidate: {myPlayer.id}</h1>
+        <h1 className="header">Select new headmaster candidate:</h1>
         <PlayerList
           selectPlayer={selectPlayer}
           players={players}
