@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
+import { getMyPlayer } from '../../../commons/players/players';
 import './EmitProclamation.css';
 
 const EmitProclamation = ({gameId}) => {
-  const [player, setPlayer] = useState({});
   const [cards, setCards] = useState([]);
-
-  const getPlayerInfo = () => {
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/me', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          setPlayer(res.data);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  const myPlayer = getMyPlayer(gameId);
 
   const getCards = () => {
     const usertoken = localStorage.getItem('user');
@@ -60,15 +44,14 @@ const EmitProclamation = ({gameId}) => {
       })
 
     document.getElementById("proc1").disabled = true;
-    document.getElementById("proc2").disabled = true;
+    document.getElementById("proc2").disabled = true; document.getElementById("proc1").disabled = true; document.getElementById("proc1").disabled = true;
   }
 
   useEffect(() => {
-    getPlayerInfo();
     getCards();
   })
 
-  return player.current_position === "headmaster" ? (
+  return myPlayer.current_position === "headmaster" ? (
     <div className="proclam">
       <button className={cards[0] + " card left"} id="proc1"
         onClick={(e) => {

@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
-import { usePlayer } from '../context/PlayerContext';
-import Players from './Players';
+import { getMyPlayer, getPlayers } from '../../../commons/players/players';
+import PlayerList from './PlayerList';
 import './ChooseHeadmaster.css';
 
 const ChooseHeadmaster = ({gameId, ministerId}) => {
-  const {myPlayer, players} = usePlayer();
-  const  minister = ministerId === myPlayer.id;
   const [selected, setSelection] = useState(0);
+  const [players, setPlayers] = useState([]);
+  const [myPlayer, setMyPlayer] = useState({});
+  
+  useEffect(() => {
+    getMyPlayer(gameId)
+      .then(res => {
+        setMyPlayer(res)
+      });
+    getPlayers(gameId)
+      .then(res => {
+        setPlayers(res)
+      });
+  }, [gameId]);
 
   const selectPlayer = (id) => {
     setSelection(id);
@@ -21,7 +32,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
         }
-      }) 
+      })
       .then(res => {
         console.log(res.status)
       })
@@ -30,21 +41,24 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
       })
   }
 
-  return (
-    <div className="ChooseHeadmaster">
-      <h1 className="header">Select new headmaster candidate</h1>
-      <Players
-        selectPlayer={selectPlayer}
-        players={players}
-        selected={selected}
-      />
-      <button className="sendCandidate" id="sendCandidate" 
-        onClick={() => {
-          sendElection()
-      }}>
-        Choose
-      </button>
-    </div>
+  return ( myPlayer.id === ministerId ? (
+      <div className="ChooseHeadmaster">
+        <h1 className="header">Select new headmaster candidate: {myPlayer.id}</h1>
+        <PlayerList
+          selectPlayer={selectPlayer}
+          players={players}
+          selected={selected}
+        />
+        <button className="sendCandidate" id="sendCandidate" 
+          onClick={() => {
+            sendElection()
+        }}>
+          Choose
+        </button>
+      </div>
+    ) : (
+      <p />
+    )
   )
 }
 

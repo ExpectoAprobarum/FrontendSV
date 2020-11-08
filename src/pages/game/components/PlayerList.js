@@ -1,7 +1,7 @@
 import React from 'react';
-import './Players.css'
+import './PlayerList.css';
 
-const Players = ({selectPlayer, players, selected}) => {
+const PlayerList = ({selectPlayer, players, selected}) => {
   const playerList = players.map(player => {
       return selected !== player.id ? (
           <div className="player" key={player.id}>
@@ -25,4 +25,4 @@ const Players = ({selectPlayer, players, selected}) => {
   )
 }
 
-export default Players;
+export default PlayerList
