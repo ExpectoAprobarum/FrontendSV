@@ -67,7 +67,7 @@ const LobbyPage = (props) => {
   }, [props.location.state.gameId, initPartida])
 
   const gameStart = () => {
-    if (countPlayer >= 2) {
+    if (countPlayer >= 5) {
       const idPart = parseInt(props.location.state.gameId)
       const usertoken = localStorage.getItem('user')
 
