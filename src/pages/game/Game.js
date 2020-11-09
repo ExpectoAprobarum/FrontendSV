@@ -4,7 +4,8 @@ import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
-import ShowRole from './components/ShowRole'
+import ShowRole from './components/ShowRole';
+import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -38,41 +39,47 @@ const Game = ({gameId}) => {
 
   return (
     <div className="Game">
-      <h1 className="center">Game phase: {gameStatus===undefined ?
-        "" : gameStatus.phase}</h1>
-      <ShowRole gameId={gameId}/>
-      {
-        gameStatus ? (
-          gameStatus.phase === 'propose' ? (
-            <div>
-              <ChooseHeadmaster
-                gameId={gameId}
-                ministerId={gameStatus.minister}
-              />
-            </div>
-          ) : (
-            gameStatus.phase === 'vote' ? (
+      <div className="info">
+        <h1 className="header">
+          Game phase:
+          {gameStatus === undefined ? "\n" : "\n" + gameStatus.phase}
+        </h1>
+        <ShowRole gameId={gameId}/>
+      </div>
+      <div className="phase">
+        {
+          gameStatus ? (
+            gameStatus.phase === 'propose' ? (
               <div>
-                <Vote
+                <ChooseHeadmaster
                   gameId={gameId}
+                  ministerId={gameStatus.minister}
                 />
               </div>
             ) : (
-              gameStatus.phase === 'headmaster play' ? (
+              gameStatus.phase === 'vote' ? (
                 <div>
-                  <EmitProclamation
+                  <Vote
                     gameId={gameId}
                   />
                 </div>
               ) : (
-                <p>Awaiting response...</p>
+                gameStatus.phase === 'headmaster play' ? (
+                  <div>
+                    <EmitProclamation
+                      gameId={gameId}
+                    />
+                  </div>
+                ) : (
+                  <p>Awaiting response...</p>
+                )
               )
             )
+          ) : (
+            <h1 className="startingGame">Starting Game ...</h1>
           )
-        ) : (
-          <h1 className="startingGame">Starting Game ...</h1>
-        )
-      }
+        }
+      </div>
     </div>
   )
 }

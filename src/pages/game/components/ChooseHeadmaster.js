@@ -19,7 +19,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
       .then(res => {
         setPlayers(res)
       });
-  }, [gameId]);
+  }, []);
 
   const selectPlayer = (id) => {
     setSelection(id);
@@ -47,6 +47,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
         <PlayerList
           selectPlayer={selectPlayer}
           players={players}
+          ministerId={ministerId}
           selected={selected}
         />
         <button className="sendCandidate" id="sendCandidate" 

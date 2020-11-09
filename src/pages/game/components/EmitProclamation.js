@@ -49,7 +49,7 @@ const EmitProclamation = ({gameId}) => {
 
   useEffect(() => {
     getCards();
-  })
+  }, [])
 
   return myPlayer.current_position === "headmaster" ? (
     <div className="proclam">

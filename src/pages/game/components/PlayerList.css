@@ -28,3 +28,7 @@
 .selectedPlayer-bttn button{
   opacity: 1;
 }
+
+*.disabled {
+  opacity: 0.1;
+}
