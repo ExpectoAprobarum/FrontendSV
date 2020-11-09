@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
-import Players from './Players';
+import { getMyPlayer, getPlayers } from '../../../commons/players/players';
+import PlayerList from './PlayerList';
 import './ChooseHeadmaster.css';
 
-const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
-  const [minister, setMinister] = useState(false);
-  const [players, setPlayers] = useState([]);
+const ChooseHeadmaster = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
+  const [players, setPlayers] = useState([]);
+  const [myPlayer, setMyPlayer] = useState({});
+  
+  useEffect(() => {
+    getMyPlayer(gameId)
+      .then(res => {
+        setMyPlayer(res)
+      });
+    getPlayers(gameId)
+      .then(res => {
+        setPlayers(res)
+      });
+  }, [gameId]);
 
   const selectPlayer = (id) => {
     setSelection(id);
@@ -20,7 +32,7 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
         }
-      }) 
+      })
       .then(res => {
         console.log(res.status)
       })
@@ -29,48 +41,25 @@ const ChooseHeadmaster = ({gameId, userId, ministerId}) => {
       })
   }
 
-  useEffect(() => {
-    const getPlayers = () => {
-      const usertoken = localStorage.getItem('user');
-      axios.get(configData.API_URL + '/games/' + gameId + '/players', {
-        headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-          }
-        })
-      .then(res => {
-        if(res.status === 200) {
-          setPlayers(res.data);
-          let isMinister = ministerId === res.data.data.filter(player => {
-            return player.user.id === userId
-          })[0].id
-          setMinister(isMinister);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
-    getPlayers();
-  }, [ministerId, gameId, userId])
-
-  return minister ? (
-    <div className="ChooseHeadmaster">
-      <h1 className="header">Select new headmaster candidate</h1>
-      <Players
-        selectPlayer={selectPlayer}
-        players={players}
-        selected={selected}
-      />
-      <button className="sendCandidate" id="sendCandidate" 
-        onClick={() => {
-          sendElection()
-      }}>
-        Choose
-      </button>
-    </div>
-  ) : (
-    <p />
-  );
+  return ( myPlayer.id === ministerId ? (
+      <div className="ChooseHeadmaster">
+        <h1 className="header">Select new headmaster candidate:</h1>
+        <PlayerList
+          selectPlayer={selectPlayer}
+          players={players}
+          selected={selected}
+        />
+        <button className="sendCandidate" id="sendCandidate" 
+          onClick={() => {
+            sendElection()
+        }}>
+          Choose
+        </button>
+      </div>
+    ) : (
+      <p />
+    )
+  )
 }
 
 export default ChooseHeadmaster
