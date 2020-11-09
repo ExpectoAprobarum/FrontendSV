@@ -4,6 +4,7 @@ import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
+import ShowRole from './components/ShowRole'
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -14,7 +15,7 @@ const Game = ({gameId}) => {
       const usertoken = localStorage.getItem('user');
       axios.get(configData.API_URL + '/games/' + gameId, {
         headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
       })
       .then(res => {
@@ -37,8 +38,9 @@ const Game = ({gameId}) => {
 
   return (
     <div className="Game">
-      <h1 className="center">Game phase: {gameStatus===undefined ? 
+      <h1 className="center">Game phase: {gameStatus===undefined ?
         "" : gameStatus.phase}</h1>
+      <ShowRole gameId={gameId}/>
       {
         gameStatus ? (
           gameStatus.phase === 'propose' ? (
