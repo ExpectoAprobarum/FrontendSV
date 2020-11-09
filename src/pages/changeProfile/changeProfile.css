@@ -1,4 +1,9 @@
-
+.fom-popup-BoxShadow.changeProfile{
+    width: 400px;
+    height: 500px;
+    padding-top: 70px;
+    margin: 30px auto;
+}
 
 .formChangeProfile{
     width: 90%;
@@ -7,13 +12,30 @@
 }
 
 .formChangeProfile input{
-    width: 10%;
-    height: 20px;
+    width: 53%;
+    height: 25px;
     padding-left: 20px;
     color: black;
     font-size: small;
     border: 2px solid black;
     border-radius: 30px;
+}
+.formChangeProfile button{
+    padding-top: 25%;
+    border-radius: 30px;
+    background-color: #373737;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 16px;
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+    width: 40%;
+    height: 30px;
+    padding: 0px 0px;
+}
+.formChangeProfile button:hover {
+    background-color: #000000;
 }
 .fromProfiletohome{
     list-style: none;
@@ -33,35 +55,4 @@
     font-size: 22px;
 }
 
-.ButtonChangeProfile{
-    padding-top: 25%;
-    border-radius: 30px;
-    background-color: #373737;
-    color: whitesmoke;
-    text-align: center;
-    font-size: 16px;
-    margin-right: 10px;
-    position: relative;
-    overflow: hidden;
-    width: 50%;
-    height: 50px;
-    padding: 0px 0px;
-}
-.ButtonChangeProfile {
-    padding-top: 25%;
-    border-radius: 30px;
-    background-color: #373737;
-    color: whitesmoke;
-    text-align: center;
-    font-size: 16px;
-    margin-right: 10px;
-    position: relative;
-    overflow: hidden;
-    width: 10%;
-    height: 30px;
-    padding: 0px 0px;
-}
 
-.ButtonChangeProfile:hover {
-    background-color: #000000;
-}

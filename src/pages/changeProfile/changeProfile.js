@@ -78,8 +78,10 @@ const ChangeProfile = () => {
     }
 
     return (
-        <div>
-            <Link className="fromProfiletohome back" to="/">{`<`}</Link>
+        <div >
+            <div className='fom-popup-BoxShadow changeProfile'>
+            <Link className="fromProfiletohome back" to="/Home">{`<`}</Link>
+            
             <form className='formChangeProfile' onSubmit={handleOnSubmit} >
                 <div className="divTitleInput">Change UserAlias: </div>
                 <input id='userAliasL'
@@ -91,11 +93,12 @@ const ChangeProfile = () => {
                     </input>
                 <br />
                 <br />
-                <button type='submit' className="ButtonChangeProfile" >Save</button>
+                <button type='submit'>Save</button>
                 <br />
                 <br />
                 {showMe ? 
-                    <div>
+                    <div >
+                         <div className="divTitleInput">Change Password: </div>
                         <input  
                             id='passwordOld'
                             type='password'
@@ -118,18 +121,19 @@ const ChangeProfile = () => {
                         />
                         <br />
                         <br />
-                        <button className="ButtonChangeProfile" onClick={ handleOnchange} name='cancel'>cancel</button>
+                        <button  onClick={ handleOnchange} name='cancel'>cancel</button>
                         <br />
                         <br />
-                        <button className="ButtonChangeProfile" type='submit' name='password' >Save</button>
+                        <button  type='submit' name='password' >Save</button>
                     </div>
                     : 
                     <button 
-                        className="ButtonChangeProfile" 
+                        
                         onClick={ handleOnchange} 
                         name='showMe' >Change password</button>}
                 {error ? <label>Error: Caracteres ingresados invalidos</label>:<p></p>}
             </form>
+            </div>
         </div>
     )
 }

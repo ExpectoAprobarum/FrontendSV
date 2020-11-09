@@ -8,7 +8,7 @@ import {
     Route,
 } from "react-router-dom";
 import ChangeProfile from './pages/changeProfile/changeProfile';
-import PrincipalPage from './principalpages/createAndjoin';
+import PrincipalPage from './principalpages/createAndjoinAndChang';
 import RegisterAndLogin from './principalpages/registerAndlogin'
 
 function App() { 
