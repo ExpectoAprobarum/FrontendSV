@@ -1,7 +1,6 @@
 .ChooseHeadmaster {
   position: relative;
   text-align: center;
-  top: 35%;
 }
 
 .header {
@@ -16,7 +15,7 @@
   left: 24.54%;
 }
 
-.sendCandidate{
+.sendCandidate {
   position: relative;
   top: 20px;
   background-color: #2f4f4f;

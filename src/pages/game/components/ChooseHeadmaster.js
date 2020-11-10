@@ -41,27 +41,33 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
       })
   }
 
-  return ( myPlayer.id === ministerId ? (
-      <div className="ChooseHeadmaster">
-        <h2 className="header">Select new headmaster candidate:</h2>
-        <div className="player-list">
-          <PlayerList
-            selectPlayer={selectPlayer}
-            players={players}
-            ministerId={ministerId}
-            selected={selected}
-          />
+  return (
+    <div className="ChooseHeadmaster">
+      { myPlayer.id === ministerId ? (
+        <div className="is-minister">
+          <h2 className="header">Select new headmaster candidate:</h2>
+          <div className="player-list">
+            <PlayerList
+              selectPlayer={selectPlayer}
+              players={players}
+              ministerId={ministerId}
+              selected={selected}
+            />
+          </div>
+          <button className="sendCandidate" id="sendCandidate" 
+            onClick={() => {
+              sendElection()
+          }}>
+            Choose
+          </button>
         </div>
-        <button className="sendCandidate" id="sendCandidate" 
-          onClick={() => {
-            sendElection()
-        }}>
-          Choose
-        </button>
-      </div>
-    ) : (
-      <p />
-    )
+      ) : (
+        <div className="not-minister">
+          <h2>Minister is chosing headmaster candidate ...</h2>
+        </div>
+      )  
+    }
+    </div>
   )
 }
 
