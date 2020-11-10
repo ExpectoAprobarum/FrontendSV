@@ -1,8 +1,10 @@
 import React from 'react';
 import './PlayerList.css';
 
-const PlayerList = ({selectPlayer, players, selected}) => {
-  const playerList = players.map(player => {
+const PlayerList = ({selectPlayer, players, ministerId, selected}) => {
+  const choosablePlayers = players.filter(player => {
+    return (player.id !== ministerId) && player.alive
+    }).map(player => {
       return selected !== player.id ? (
           <div className="player" key={player.id}>
             <button className="player-bttn"
@@ -25,8 +27,12 @@ const PlayerList = ({selectPlayer, players, selected}) => {
   })
 
   return (
-    <div className="player-list">
-      { playerList }
+    <div className="playerList">
+      <div className="alive">
+        <div className="aliveList">
+          { choosablePlayers }
+        </div>
+      </div>
     </div>
   )
 }

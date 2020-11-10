@@ -1,0 +1,20 @@
+.info {
+  float: left;
+  display: inline;
+  position: absolute;
+  width: 26%;
+  height: 100%;
+  top: 0;
+  border-right: 6px solid black;
+}
+
+.phase {
+  text-align: center;
+  float: right;
+  display: inline;
+  position: absolute;
+  top: 15%;
+  left: 27%;
+  width: 73%;
+  height: 85%;
+}

@@ -1,7 +1,7 @@
 .vote .center {
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 35%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
@@ -27,7 +27,7 @@
 
 #nox {
   background-image: url('../assets/NoxCard.png');
-  left: 70%;
+  left: 75%;
 }
 
 #nox:hover {
@@ -36,7 +36,7 @@
 
 #lumos {
   background-image: url('../assets/LumosCard.png');
-  left: 30%;
+  left: 25%;
 }
 
 *:disabled {

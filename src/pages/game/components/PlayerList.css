@@ -1,20 +1,24 @@
-.player {
+.playerList {
+  display: inline-block;
   text-align: center;
-  width: 60%;
-  padding-left: 40%;
+  width: 55%;
+}
+
+.aliveList {
+  display: inline-block;
+  width: 75%;
 }
 
 .player button {
-  background-color: #f4511e;
+  font-size: medium;
+  background-color: black;
   color: white;
-  border: none;
   width: 100%;
-  padding: 8px 16px;
-  margin: 2px 2px;
+  border: none;
   transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
   cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 25px;
 }
 
 .player-bttn {
@@ -25,6 +29,7 @@
   opacity: 1;
 }
 
-.selectedPlayer-bttn button{
+.selectedPlayer-bttn {
   opacity: 1;
+  outline: none;
 }

@@ -6,7 +6,7 @@ import './EmitProclamation.css';
 
 const EmitProclamation = ({gameId}) => {
   const [cards, setCards] = useState([]);
-  const myPlayer = getMyPlayer(gameId);
+  const [myPlayer, setMyPlayer] = useState({});
 
   const getCards = () => {
     const usertoken = localStorage.getItem('user');
@@ -48,24 +48,36 @@ const EmitProclamation = ({gameId}) => {
   }
 
   useEffect(() => {
+    getMyPlayer(gameId)
+      .then(res => {
+        setMyPlayer(res)
+      });
     getCards();
-  })
+  }, [])
 
-  return myPlayer.current_position === "headmaster" ? (
+  return (
     <div className="proclam">
-      <button className={cards[0] + " card left"} id="proc1"
-        onClick={(e) => {
-          choose(e)
-        }} 
-      />
-      <button className={cards[1] + " card right"} id="proc2"
-        onClick={(e) => {
-          choose(e)
-        }} 
-      />
+    { myPlayer.current_position === "headmaster" ? (
+        <div className="is-headmaster">
+          <h2>Choose next Proclamation:</h2>
+          <button className={cards[0] + " card left"} id="proc1"
+            onClick={(e) => {
+              choose(e)
+            }} 
+          />
+          <button className={cards[1] + " card right"} id="proc2"
+            onClick={(e) => {
+              choose(e)
+            }} 
+          />
+        </div>
+      ) : (
+        <div className="not-headmaster">
+          <h2>Headmaster is choosing proclamation ...</h2>
+        </div>
+      )
+    }   
     </div>
-  ) : (
-    <p /> 
   )
 }
 
