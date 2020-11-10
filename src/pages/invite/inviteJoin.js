@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // prueba
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-const InvitateJoin = ({gameJoin}) => {
+const InviteJoin = ({gameJoin}) => {
   const [initPartida, setInitPartida] = useState(false);
   const [gameInfo, setGameInfo] = useState([]);
   const [countPlayer, setCountPlayer] = useState(0);
