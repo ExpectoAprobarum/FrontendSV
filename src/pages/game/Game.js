@@ -5,6 +5,7 @@ import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
 import ShowRole from './components/ShowRole';
+import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
