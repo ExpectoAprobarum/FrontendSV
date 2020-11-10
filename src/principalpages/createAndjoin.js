@@ -4,17 +4,28 @@ import PageCreateGame from '../pages/creategame/PageCreateGame';
 import ListPerson from '../pages/joinagame/Lists';
 
 const PrincipalPage = () => {
-    return(
-        <div className="divCreateJoin">
-            <div className="divCreateJoin lobby">
-                <Link className="liStyle home back" to="/">{`Log Out`}</Link>
-            </div>
+  const exitDeleteToken = () => {
+    const usertoken = localStorage.getItem('user');
+    console.log("1: ", usertoken);
+    if(usertoken) {
+      localStorage.removeItem("user")
+      console.log("2: ", usertoken);
+    }
+  }
 
-            <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
-            <PageCreateGame />
-            <ListPerson />
-        </div>
-    )
+  return(
+    <div className="divCreateJoin">
+      <div className="divCreateJoin lobby">
+        <Link className="liStyle home back"
+          onClick={exitDeleteToken}
+          to="/">{`Log Out`}</Link>
+      </div>
+
+      <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
+      <PageCreateGame />
+      <ListPerson />
+    </div>
+  )
 }
 
 export default PrincipalPage;
