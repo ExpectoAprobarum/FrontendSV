@@ -3,20 +3,20 @@ import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import {notify_email_or_password_err} from '../../commons/alerts/toast';
+import InviteJoin from '../invite/inviteJoin'
 import "../register/register.css";
 import '../lobby/LobbyStyles.css'
 
-const Login = () =>{
-   
+const Login = ({invite}) =>{
+
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
     const[redirect, setRedirect] = useState(false);
     const[loginError, setLoginError] = useState(false);
-    
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        if(!  loginError ){
-                //esto es lo que voy a enviar al back
+        if(! loginError ){
                 const infotosend ={
                 username: email,
                 password: contraseña
@@ -49,7 +49,12 @@ const Login = () =>{
     }
 
         if(redirect){
+          if (invite !== undefined) {
+            return <InviteJoin to={`invite?game=${invite}`}
+                        gameJoin={invite}/>
+          } else {
             return <Redirect to="/Home" />
+          }
         }
         return (
         <div>

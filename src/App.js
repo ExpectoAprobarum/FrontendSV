@@ -2,6 +2,7 @@ import React from 'react';
 import LobbyPage from './pages/lobby/Lobby'
 import Register from './pages/register/register'
 import Login from './pages/login/login'
+import Invite from './pages/invite/inviteURL'
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,7 +11,7 @@ import {
 import PrincipalPage from './principalpages/createAndjoin';
 import RegisterAndLogin from './principalpages/registerAndlogin'
 
-function App() { 
+function App() {
   return (
         <Router>
             <Switch>
@@ -19,6 +20,7 @@ function App() {
                 <Route exact path="/register" component={Register}></Route>
                 <Route exact path="/login" component={Login}></Route>
                 <Route exact path="/" component={RegisterAndLogin}></Route>
+                <Route path="/Game/invite" component={Invite}></Route>
             </Switch>
         </Router>
     );
