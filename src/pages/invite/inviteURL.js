@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Login from '../login/login'
-import InvitateJoin from './invitateJoin'
+import InviteJoin from './inviteJoin'
 
-const Invitate = ({gamePass}) => {
+const Invite = ({gamePass}) => {
   const [needLogIn, setNeddLogIn] = useState(false)
 
   var URLsearch = window.location.search;
@@ -21,10 +21,10 @@ const Invitate = ({gamePass}) => {
 
   return(
     <div>
-      { needLogIn ? <Login invitate={game}/>
-        : <InvitateJoin gameJoin={game}/>
+      { needLogIn ? <Login invite={game}/>
+        : <InviteJoin gameJoin={game}/>
       }
     </div>
   );
 }
-export default Invitate;
+export default Invite;
