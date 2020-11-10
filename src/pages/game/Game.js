@@ -5,7 +5,9 @@ import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
 import ShowRole from './components/ShowRole';
+import CastSpell from './components/CastSpell';
 import './Game.css';
+
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -68,10 +70,18 @@ const Game = ({gameId}) => {
                   <div>
                     <EmitProclamation
                       gameId={gameId}
+                      headmasterId={gameStatus.headmaster}
                     />
                   </div>
                 ) : (
-                  <p>Awaiting response...</p>
+                  gameStatus.phase === 'spell' ? (
+                    <CastSpell
+                      gameId={gameId}
+                      ministerId={gameStatus.minister}
+                    />
+                  ) : (
+                    <h5>Awaiting response...</h5>
+                  )
                 )
               )
             )
