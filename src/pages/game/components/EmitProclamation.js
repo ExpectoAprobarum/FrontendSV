@@ -57,7 +57,7 @@ const EmitProclamation = ({gameId}) => {
 
   return (
     <div className="proclam">
-    { myPlayer !== undefined && myPlayer.current_position === "headmaster" ? (
+    { myPlayer.current_position === "headmaster" ? (
         <div className="is-headmaster">
           <h2>Choose next Proclamation:</h2>
           <button className={cards[0] + " card left"} id="proc1"
