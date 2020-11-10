@@ -39,10 +39,13 @@ const LobbyPage = (props) => {
 
     const timer = setInterval(() => {
       getPlayers();
+      if (initPartida) {
+        clearInterval(timer);
+      }
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [props.location.state.gameId], {listPlayers})
+  }, [initPartida])
 
   useEffect(() => {
     const getGameInfo = () => {
@@ -61,10 +64,13 @@ const LobbyPage = (props) => {
     }
     const timer = setInterval(() => {
       getGameInfo();
+      if (initPartida) {
+        clearInterval(timer);
+      }
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [props.location.state.gameId, initPartida])
+  }, [initPartida])
 
   const gameStart = () => {
     if (countPlayer >= 5) {
