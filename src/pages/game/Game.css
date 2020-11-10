@@ -1,0 +1,16 @@
+.info {
+  float: left;
+  display: inline;
+  position: absolute;
+  width: 26%;
+  height: 95%;
+}
+
+.phase {
+  float: right;
+  display: inline;
+  position: absolute;
+  left: 27%;
+  width: 73%;
+  height: 95%;
+}
