@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import {notify_email_or_password_err} from '../../commons/alerts/toast';
-import InvitateJoin from '../invitate/invitateJoin'
+import InviteJoin from '../invite/inviteJoin'
 import "../register/register.css";
 import '../lobby/LobbyStyles.css'
 
-const Login = ({invitate}) =>{
+const Login = ({invite}) =>{
 
     const[email, setEmail] = useState('');
     const[contraseña, setContraseña] = useState('');
@@ -49,9 +49,9 @@ const Login = ({invitate}) =>{
     }
 
         if(redirect){
-          if (invitate !== undefined) {
-            return <InvitateJoin to={`invitate?game=${invitate}`}
-                        gameJoin={invitate}/>
+          if (invite !== undefined) {
+            return <InviteJoin to={`invite?game=${invite}`}
+                        gameJoin={invite}/>
           } else {
             return <Redirect to="/Home" />
           }
