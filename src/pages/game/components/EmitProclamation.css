@@ -2,8 +2,8 @@
   text-align: center;
 }
 
-.proclam .card {
-  position: absolute;
+.proclam .card button {
+  display: inline-block;
   top: 20%;
   padding-top: 11.5%;
   padding-left: 13%;
@@ -19,17 +19,17 @@
   transition: 0.5s;
 }
 
-.proclam .card:hover {
+.proclam .card button:hover {
   opacity: 1;
   filter: saturate(2.5);
 }
 
 .left {
-  left: 29%;
+  margin-right: 3%;
 }
 
 .right {
-  left: 56%;
+  margin-left: 3%;
 }
 
 .phoenix {

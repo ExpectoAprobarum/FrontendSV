@@ -6,6 +6,7 @@ import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
 import ShowRole from './components/ShowRole';
 import './Game.css';
+import DiscardCard from './components/DiscardCard';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -71,7 +72,15 @@ const Game = ({gameId}) => {
                     />
                   </div>
                 ) : (
+                  gameStatus.phase === 'minister play' ? (
+                    <div>
+                      <DiscardCard
+                        gameId={gameId}
+                      />
+                    </div>
+                ) : (
                   <p>Awaiting response...</p>
+                  )
                 )
               )
             )
