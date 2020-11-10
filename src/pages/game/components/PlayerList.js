@@ -1,34 +1,7 @@
 import React from 'react';
 import './PlayerList.css';
 
-const PlayerList = ({selectPlayer,/* players,*/ ministerId, selected}) => {
-  const players = [];
-  players.push(
-    {
-      id: 900,
-      alive: false,
-      user: {
-        username: "Carl",
-        id: 5000
-      }
-    },
-    {
-      id: 243,
-      alive: true,
-      user: {
-        username: "Pepe",
-        id: 1003
-      }
-    },
-    {
-      id: 569,
-      alive: true,
-      user: {
-        username: "Jhon",
-        id: 95959
-      }
-    }
-  );
+const PlayerList = ({selectPlayer, players, ministerId, selected}) => {
   const choosablePlayers = players.filter(player => {
     return (player.id !== ministerId) && player.alive
     }).map(player => {
