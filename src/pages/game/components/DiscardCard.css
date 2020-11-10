@@ -1,0 +1,67 @@
+.discard {
+  text-align: center;
+}
+
+.discard .card {
+  position: absolute;
+  top: 20%;
+  padding-top: 11.5%;
+  padding-left: 13%;
+  padding-bottom: 8%;
+  background-size: 109%;
+  background-repeat: no-repeat;
+  background-position-x: -8px;
+  background-position-y: -9px;
+  outline: none;
+  border-radius: 20px;
+  border: 8px solid transparent;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.discard .card:hover {
+  opacity: 1;
+  filter: saturate(2.5);
+}
+
+.discard .left {
+  left: 20%;
+}
+
+.discard .center {
+  left: 40%;
+}
+
+.discard .right {
+  left: 60%;
+}
+
+.phoenix {
+  background-image: url('../assets/ProclamationPhoenix.png');
+}
+
+.phoenix:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(255, 94, 0) 0px 0px 20px, 
+                rgb(255, 94, 0) 0px 0px 30px, 
+                rgb(255, 94, 0) 0px 0px 40px, 
+                rgb(255, 94, 0) 0px 0px 50px, 
+                rgb(255, 94, 0) 0px 0px 75px;
+}
+
+.death {
+  background-image: url('../assets/ProclamationDeathEater.png');
+}
+
+.death:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(202, 0, 209) 0px 0px 20px, 
+                rgb(202, 0, 209) 0px 0px 30px, 
+                rgb(202, 0, 209) 0px 0px 40px, 
+                rgb(202, 0, 209) 0px 0px 50px, 
+                rgb(202, 0, 209) 0px 0px 75px;
+}
+
+*.disabled {
+  opacity: 0.6;
+}
