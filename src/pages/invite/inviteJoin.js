@@ -146,4 +146,4 @@ const InviteJoin = ({gameJoin}) => {
     </div>
   )
 }
-export default InvitateJoin;
+export default InviteJoin;
