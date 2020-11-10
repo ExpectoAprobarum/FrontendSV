@@ -4,7 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import './EmitProclamation.css';
 
-const EmitProclamation = ({gameId}) => {
+const EmitProclamation = ({gameId, headmasterId}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
@@ -57,7 +57,7 @@ const EmitProclamation = ({gameId}) => {
 
   return (
     <div className="proclam">
-    { myPlayer.current_position === "headmaster" ? (
+    { myPlayer.id === headmasterId ? (
         <div className="is-headmaster">
           <h2>Choose next Proclamation:</h2>
           <button className={cards[0] + " card left"} id="proc1"

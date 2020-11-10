@@ -63,7 +63,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
         </div>
       ) : (
         <div className="not-minister">
-          <h2>Minister is chosing headmaster candidate ...</h2>
+          <h2>Minister is choosing headmaster candidate ...</h2>
         </div>
       )  
     }
