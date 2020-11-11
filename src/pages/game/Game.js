@@ -4,6 +4,7 @@ import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
+import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import './Game.css';
 
@@ -45,6 +46,9 @@ const Game = ({gameId}) => {
           {gameStatus === undefined ? "\n" : "\n" + gameStatus.phase}
         </h1>
         <ShowRole gameId={gameId}/>
+      </div>
+      <div className="board">
+        <Board />
       </div>
       <div className="phase">
         {

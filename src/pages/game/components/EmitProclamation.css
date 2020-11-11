@@ -32,11 +32,11 @@
   left: 56%;
 }
 
-.phoenix {
+.card .phoenix {
   background-image: url('../assets/ProclamationPhoenix.png');
 }
 
-.phoenix:hover {
+.card .phoenix:hover {
   box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
                 rgb(255, 94, 0) 0px 0px 20px, 
                 rgb(255, 94, 0) 0px 0px 30px, 
@@ -45,11 +45,11 @@
                 rgb(255, 94, 0) 0px 0px 75px;
 }
 
-.death {
+.card .death {
   background-image: url('../assets/ProclamationDeathEater.png');
 }
 
-.death:hover {
+.card .death:hover {
   box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
                 rgb(202, 0, 209) 0px 0px 20px, 
                 rgb(202, 0, 209) 0px 0px 30px, 

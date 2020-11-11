@@ -13,8 +13,20 @@
   float: right;
   display: inline;
   position: absolute;
-  top: 15%;
+  top: 57%;
   left: 27%;
   width: 73%;
-  height: 85%;
+  height: 43%;
+}
+
+.board {
+  text-align: center;
+  float: right;
+  display: inline;
+  position: absolute;
+  top: 0%;
+  left: 27%;
+  width: 73%;
+  height: 57%;
+  border-bottom: 6px solid black;
 }
