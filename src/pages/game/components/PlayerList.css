@@ -1,12 +1,25 @@
 .playerList {
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: inline-block;
   text-align: center;
-  width: 55%;
+  width: 100%;
 }
 
-.aliveList {
+.playerList .list-container {
+  width: 100%;
   display: inline-block;
-  width: 75%;
+}
+
+.playerList .list-container ul {
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+}
+
+.player {
+  display: inline-block;
+  margin: 8px;
 }
 
 .player button {
@@ -17,8 +30,12 @@
   border: none;
   transition: 0.3s;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 12px 25px;
   border-radius: 25px;
+  box-shadow: #000000 0px 0px 5px, #000000 0px 0px 10px, #FFF 0px 0px 15px,  
+                rgb(0, 0, 0) 0px 0px 10px, 
+                rgb(0, 0, 0) 0px 0px 20px;
+
 }
 
 .player-bttn {
