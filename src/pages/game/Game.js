@@ -74,11 +74,13 @@ const Game = ({gameId}) => {
                     />
                   </div>
                 ) : (
-                  gameStatus.phase === 'spell' ? (
-                    <CastSpell
-                      gameId={gameId}
-                      ministerId={gameStatus.minister}
-                    />
+                  gameStatus.phase === 'spell play' ? (
+                    <div>
+                      <CastSpell
+                        gameId={gameId}
+                        ministerId={gameStatus.minister}
+                      />
+                    </div>
                   ) : (
                     <h5>Awaiting response...</h5>
                   )
