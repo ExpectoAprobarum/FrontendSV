@@ -8,23 +8,6 @@ const EmitProclamation = ({gameId}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
-  const getCards = () => {
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/proclamations', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          setCards(res.data.data);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
   const choose = (e) => {
     let choice = e.target.className.split(' ')[0];
     const usertoken = localStorage.getItem('user');
@@ -48,12 +31,28 @@ const EmitProclamation = ({gameId}) => {
   }
 
   useEffect(() => {
+    const getCards = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + '/proclamations', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        })
+        .then(res => {
+          if(res.status === 200) {
+            setCards(res.data.data);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
     getMyPlayer(gameId)
       .then(res => {
         setMyPlayer(res)
       });
     getCards();
-  }, [])
+  }, [gameId])
 
   return (
     <div className="proclam">

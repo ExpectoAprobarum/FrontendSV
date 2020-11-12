@@ -29,7 +29,7 @@ const Board = ({gameId}) => {
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [])
+  }, [gameId])
 
   return (
     <div className="Board">
