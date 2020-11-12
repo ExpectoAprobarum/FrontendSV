@@ -8,23 +8,35 @@ const CastSpell = ({gameId, ministerId}) => {
   const [currentSpell, setCurrentSpell] = useState("");
   const [myPlayer, setMyPlayer] = useState({});
 
-  /*const getBoard = (game_id) => {
-    return axios.get(configData.API_URL + '/games/' + game_id + '/board')
-      .then(res => res.data)
-  }*/
-
   useEffect(() => {
+    const getBoardSpell = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + '/board', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          let spellArray = res.data.spell_fields;
+          let boardSize = spellArray.length;
+          let deathProc = res.data.de_proc;
+          if(deathProc < boardSize) {
+            setCurrentSpell(spellArray[deathProc]);
+          }
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+    
     getMyPlayer(gameId)
       .then(res => {
         setMyPlayer(res)
       });
-    /*getBoard(gameId)
-      .then(res => {
-        setCurrentSpell("avada kedavra" something using board data)
-      })
-    */
-    setCurrentSpell("avada kedavra")
-  }, [])
+    getBoardSpell();
+  }, [gameId])
 
   return (
     <div className="CastSpell">
@@ -32,7 +44,7 @@ const CastSpell = ({gameId, ministerId}) => {
         <div className="is-minister">
           { currentSpell !== '' ? (
             <div className="spell">
-              { currentSpell === "avada kedavra" ? (
+              { currentSpell === "avadakedavra" ? (
                 <AvadaKedavra
                   gameId={gameId}
                   ministerId={ministerId}
