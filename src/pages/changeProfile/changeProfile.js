@@ -83,14 +83,15 @@ const ChangeProfile = () => {
             <Link className="fromProfiletohome back" to="/Home">{`<`}</Link>
             
             <form className='formChangeProfile' onSubmit={handleOnSubmit} >
-                <div className="divTitleInput">Change UserAlias: </div>
-                <input id='userAliasL'
-                        type='text' 
-                        name='userAlias' 
-                        placeholder= {userAlias }
-                        value={userAlias} 
-                        onChange={handleOnchange} >
-                    </input>
+              <div className="divTitleInput">Change UserAlias: </div>
+                <input 
+                  id='userAliasL'
+                  type='text' 
+                  name='userAlias' 
+                  placeholder= {userAlias }
+                  value={userAlias} 
+                  onChange={handleOnchange} >
+                </input>
                 <br />
                 <br />
                 <button type='submit'>Save</button>

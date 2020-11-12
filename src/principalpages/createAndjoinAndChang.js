@@ -1,45 +1,42 @@
-import {React , useState}from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import {React }from 'react';
+import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
-import ChangeProfile from '../pages/changeProfile/changeProfile';
 import "../pages/creategame/buttonStyle.css"
-
 import ListPerson from '../pages/joinagame/Lists';
 
+import "./createAndjoinAndChang.css"
+
 const PrincipalPage = () => {
-  const [redirectProfile, setRedirect] = useState(false)
-
+  
   const exitDeleteToken = () => {
-      localStorage.removeItem("user")
+    localStorage.removeItem("user")
   }
 
-  const changeProfileRedirect = () => {
-    setRedirect(true)
-  }
-  if(redirectProfile){
-    return (<Redirect to='/changeProfile'/>)
-  }
   return(
-    <div className="divCreateJoin">
-      <div className="divCreateJoin lobby">
-        <Link className="liStyle home back" onClick={exitDeleteToken}
-                to="/">{`Log Out`}</Link>
+    <div className="DivCreateAndJoin">
+      <div className="DivCreateJoin lobby">
+        <Link 
+          className="LinkStyle back home" 
+          onClick={exitDeleteToken}
+          to="/">
+          Log Out
+        </Link>
       </div>
-
-      <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
+      <div className='DivCreateJoin lobby'>
+        <Link 
+          className="LinkStyle change home"
+          to='/changeProfile'>
+          Profile
+        </Link>
+      </div>
+      
+      <div className='DivCreateJoinChang'>
+        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome</h1>
+        <h1 style={{fontSize:"50px"}}>To</h1>
+        <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
+      </div>
       <PageCreateGame />
       <ListPerson />
-      <div className="button-container-1">
-        <span className="mas">Update your Info</span>
-        <button
-            id="work"
-            type="button"
-            name="Hover"
-            onClick={changeProfileRedirect}
-        >
-        Profile
-        </button>
-      </div>
     </div>
   )
 }
