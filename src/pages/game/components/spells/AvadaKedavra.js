@@ -14,7 +14,7 @@ const AvadaKedavra = ({gameId, ministerId}) => {
       .then(res => {
         setPlayers(res)
       });
-  }, []);
+  }, [gameId]);
 
   const selectPlayer = (id) => {
     setSelection(id);
