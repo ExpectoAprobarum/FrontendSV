@@ -10,12 +10,7 @@ const PrincipalPage = () => {
   const [redirectProfile, setRedirect] = useState(false)
 
   const exitDeleteToken = () => {
-    const usertoken = localStorage.getItem('user');
-    console.log("1: ", usertoken);
-    if(usertoken) {
       localStorage.removeItem("user")
-      console.log("2: ", usertoken);
-    }
   }
 
   const changeProfileRedirect = () => {
