@@ -59,21 +59,27 @@ const EmitProclamation = ({gameId}) => {
     <div className="proclam">
     { myPlayer.current_position === "headmaster" ? (
         <div className="is-headmaster">
-          <h2>Choose next Proclamation:</h2>
-          <button className={cards[0] + " card left"} id="proc1"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
-          <button className={cards[1] + " card right"} id="proc2"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
+          <h2 className="header">
+            Choose next Proclamation:
+          </h2>
+          <div className="cards">
+            <button className={cards[0] + " card left"} id="proc1"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+            <button className={cards[1] + " card right"} id="proc2"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+          </div>
         </div>
       ) : (
         <div className="not-headmaster">
-          <h2>Headmaster is choosing proclamation ...</h2>
+          <h2 className="header">
+            Headmaster is choosing Proclamation ...
+          </h2>
         </div>
       )
     }   

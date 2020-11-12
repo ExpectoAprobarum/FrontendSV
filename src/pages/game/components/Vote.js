@@ -29,7 +29,9 @@ const Vote = ({gameId}) => {
 
   return (
     <div className="Vote">
-      <h2>Vote new Minister and Headmaster:</h2>
+      <h2 className="header">
+        Vote new Minister and Headmaster:
+      </h2>
       <div className="vote">
         <button className="vote-card" id="lumos" onClick={(e) => {vote(e)}} />
         <button className="vote-card" id="nox" onClick={(e) => {vote(e)}} />

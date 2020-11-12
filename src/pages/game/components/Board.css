@@ -1,25 +1,90 @@
-.Board {
+.Board{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(75, 18, 65),  rgb(94, 18, 18));
+}
+
+.Board .proclamations {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin: 50px;
+  margin-top: 20px;
+}
+
+.container .card {
+  background: radial-gradient( rgb(109, 108, 108), #FFF);
   position: relative;
+  min-width: 150px;
+  height: 205px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+                    5px 5px 5px rgba(255, 255, 255, 0.5),
+                    -5px -5px 5px rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.container .card .box {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .card .phoenix-box {
+  background: linear-gradient(45deg, rgb(245, 65, 65), rgb(94, 18, 18));
+}
+
+.container .card .death-box {
+  background: linear-gradient(45deg, rgb(137, 0, 155), rgb(75, 18, 65));
+}
+
+.container .card .box .content {
+  padding: 20px;
   text-align: center;
-  top: 1%;
+
 }
 
-.phoenix-board {
-  margin-bottom: 2px;
-  display: inline-block;
-  width: 60%;
-  background-size: 100%;
-  padding-bottom: 16%;
-  background-repeat: no-repeat;
-  background-image: url('../assets/board_phoenix.png');
+.container .card .box .content h3 {
+  font-size: 1em;
+  color: cornsilk;
+  z-index: 1;
 }
 
-.death-board {
-  margin-top: 2px;
+.container .card .box .content h2 {
+  position: relative;
   display: inline-block;
-  width: 60%;
-  background-size: 100%;
-  padding-bottom: 16%;
-  background-repeat: no-repeat;
-  background-image: url('../assets/board_death_1.png');
+  padding: 8px 20px;
+  margin-top: 10px;
+  border-radius: 20px;
+  font-size: 2.8em;
+  text-decoration: none;
+  z-index: 1;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.container .card .box .phoenix-content h2 {
+  color: rgb(255, 102, 0);
+}
+
+.container .card .box .death-content h2 {
+  color: rgb(212, 0, 255);
 }

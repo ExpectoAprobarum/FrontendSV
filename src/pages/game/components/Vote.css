@@ -1,4 +1,15 @@
+.Vote .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: dimgray;
+}
+
 .vote {
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -38,6 +49,6 @@
   right: 5%;
 }
 
-*:disabled {
+.Vote *:disabled {
   opacity: 0.6;
 }

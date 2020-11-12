@@ -45,7 +45,9 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
     <div className="ChooseHeadmaster">
       { myPlayer.id === ministerId ? (
         <div className="is-minister">
-          <h2 className="header">Select new headmaster candidate:</h2>
+          <h2 className="header">
+            Select new headmaster candidate:
+          </h2>
           <div className="player-list">
             <PlayerList
               selectPlayer={selectPlayer}
@@ -54,7 +56,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
               selected={selected}
             />
           </div>
-          <button className="sendCandidate" id="sendCandidate" 
+          <button className="sendCandidate"
             onClick={() => {
               sendElection()
           }}>
@@ -63,7 +65,9 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
         </div>
       ) : (
         <div className="not-minister">
-          <h2>Minister is chosing headmaster candidate ...</h2>
+          <h2 className="header">
+            Minister is chosing headmaster candidate ...
+          </h2>
         </div>
       )  
     }
