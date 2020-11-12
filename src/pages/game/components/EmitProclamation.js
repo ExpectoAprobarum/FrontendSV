@@ -67,6 +67,7 @@ const EmitProclamation = ({gameId}) => {
                 choose(e)
               }} 
             />
+
             <button className={cards[1] + " card right"} id="proc2"
               onClick={(e) => {
                 choose(e)
