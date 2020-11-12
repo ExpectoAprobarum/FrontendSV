@@ -1,6 +1,7 @@
 .h1TittleLobby {
     text-align: center;
     margin: 0 auto;
+    padding-top: 50px;
 }
 
 .h1TittleLobby.title {
@@ -60,6 +61,7 @@
     height: 50px;
     border-radius: 30px;
     font-size: 22px;
+    float:left;
 }
 
 .liStyle.home {
@@ -76,4 +78,20 @@
     text-align: center;
     padding-top: 15px;
     margin: 0 auto;
+}
+
+.divCreateJoin.tittle{
+    height: 50px;
+    width: 630px;
+}
+
+.divContentTittle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parrafo {
+  float: left;
+  margin-left: 13%;
 }

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // prueba
 import jwt_decode from 'jwt-decode';
+import configData from '../../config.json';
 import Game from '../game/Game'
 import './LobbyStyles.css'
 import '../joinagame/styleSearch.css'
@@ -13,6 +14,8 @@ const LobbyPage = (props) => {
   const [countPlayer, setCountPlayer]= useState(0);
   const [message, setMessage] = useState('');
 
+  let idGame = props.location.state.gameId;
+
   var idPlayer = 0
   const usertoken = localStorage.getItem('user');
   if(usertoken) {
@@ -22,7 +25,7 @@ const LobbyPage = (props) => {
   useEffect(() => {
     const getPlayers = () => {
       const usertoken = localStorage.getItem('user')
-      axios.get(`http://127.0.0.1:8000/games/${props.location.state.gameId}/players`, {
+      axios.get(`${configData.API_URL}/games/${props.location.state.gameId}/players`, {
           headers: {
               'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -50,7 +53,7 @@ const LobbyPage = (props) => {
   useEffect(() => {
     const getGameInfo = () => {
       const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${props.location.state.gameId}`, {
+        axios.get(`${configData.API_URL}/games/${props.location.state.gameId}`, {
           headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -77,7 +80,7 @@ const LobbyPage = (props) => {
       const idPart = parseInt(props.location.state.gameId)
       const usertoken = localStorage.getItem('user')
 
-      axios.post(`http://127.0.0.1:8000/games/${idPart}/start`,({}),{
+      axios.post(`${configData.API_URL}/games/${idPart}/start`,({}),{
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
@@ -101,7 +104,7 @@ const LobbyPage = (props) => {
     const idPart = parseInt(props.location.state.gameId)
     const usertoken = localStorage.getItem('user')
 
-    axios.post(`http://127.0.0.1:8000/games/${idPart}/exit`,({}),{
+    axios.post(`${configData.API_URL}/games/${idPart}/exit`,({}),{
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
       }
@@ -120,12 +123,17 @@ const LobbyPage = (props) => {
       { initPartida ?
         <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
         : <div>
-            <div className="divCreateJoin lobby">
-              <Link className="liStyle back" to="/home"
-                onClick={exitLobby}>{`<`}</Link>
+            <div className="divContentTittle">
+              <div className="divCreateJoin tittle">
+                <Link className="liStyle back" to="/home"
+                  onClick={exitLobby}>{`<`}</Link>
+                <p className="parrafo">
+                  Invite URL:
+                  {` http://localhost:3000/Game/invite?game=${idGame}`}</p>
+              </div>
             </div>
 
-            <h1 className="h1TittleLobby tittle">Lobby</h1>
+            <h1 className="h1TittleLobby">Lobby</h1>
             <h4 className="h1TittleLobby error">{message}</h4>
             <div className="divCreateJoin lobby-1">
               {userCreate === idPlayer ?

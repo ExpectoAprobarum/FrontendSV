@@ -6,39 +6,47 @@ import "../pages/creategame/buttonStyle.css"
 
 import ListPerson from '../pages/joinagame/Lists';
 
-
-
 const PrincipalPage = () => {
-    const [redirectProfile, setRedirect] = useState(false)
-    
-    const changeProfileRedirect = () => {
-        setRedirect(true)
+  const [redirectProfile, setRedirect] = useState(false)
+
+  const exitDeleteToken = () => {
+    const usertoken = localStorage.getItem('user');
+    console.log("1: ", usertoken);
+    if(usertoken) {
+      localStorage.removeItem("user")
+      console.log("2: ", usertoken);
     }
-    if(redirectProfile){
-        return (<Redirect to='/changeProfile'/>)
-    }
-    return(
-        <div className="divCreateJoin">
-            <div className="divCreateJoin lobby">
-                <Link className="liStyle home back" to="/">{`Log Out`}</Link>
-            </div>
-            
-            <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
-            <PageCreateGame />
-            <ListPerson />
-            <div className="button-container-1">
-                <span className="mas">Update your Info</span>
-                <button 
-                    id="work" 
-                    type="button" 
-                    name="Hover" 
-                    onClick={changeProfileRedirect}
-                >
-                Profile
-                </button>
-            </div> 
-        </div>
-    )
+  }
+
+  const changeProfileRedirect = () => {
+    setRedirect(true)
+  }
+  if(redirectProfile){
+    return (<Redirect to='/changeProfile'/>)
+  }
+  return(
+    <div className="divCreateJoin">
+      <div className="divCreateJoin lobby">
+        <Link className="liStyle home back" onClick={exitDeleteToken}
+                to="/">{`Log Out`}</Link>
+      </div>
+
+      <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
+      <PageCreateGame />
+      <ListPerson />
+      <div className="button-container-1">
+        <span className="mas">Update your Info</span>
+        <button
+            id="work"
+            type="button"
+            name="Hover"
+            onClick={changeProfileRedirect}
+        >
+        Profile
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default PrincipalPage;
