@@ -28,9 +28,14 @@ const Vote = ({gameId}) => {
   }
 
   return (
-    <div className="vote">
-      <button className="card center" id="lumos" onClick={(e) => {vote(e)}} />
-      <button className="card center" id="nox" onClick={(e) => {vote(e)}} />
+    <div className="Vote">
+      <h2 className="header">
+        Vote new Minister and Headmaster:
+      </h2>
+      <div className="vote">
+        <button className="vote-card" id="lumos" onClick={(e) => {vote(e)}} />
+        <button className="vote-card" id="nox" onClick={(e) => {vote(e)}} />
+      </div>
     </div>
   )
 }

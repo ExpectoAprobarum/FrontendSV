@@ -2,41 +2,61 @@
   text-align: center;
 }
 
-.proclam .card {
-  position: absolute;
-  top: 20%;
+.is-headmaster .header, .not-headmaster .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: dimgray;
+}
+
+.not-headmaster .header {
+  margin-top: 12%;
+  border-top: 4px solid black;
+}
+
+.is-headmaster .cards {
+  margin-top: 17px;
+  text-align: center;
+}
+
+
+.is-headmaster .cards button {
+  position: relative;
   padding-top: 11.5%;
   padding-left: 13%;
   padding-bottom: 8%;
-  background-size: 109%;
+  background-size: 111%;
   background-repeat: no-repeat;
-  background-position-x: -8px;
-  background-position-y: -9px;
+  background-position-x: -7px;
+  background-position-y: -10px;
   outline: none;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 8px solid transparent;
   opacity: 0.8;
   transition: 0.5s;
 }
 
-.proclam .card:hover {
+.is-headmaster .cards button:hover {
   opacity: 1;
   filter: saturate(2.5);
 }
 
-.left {
-  left: 29%;
+.is-headmaster .cards .left {
+  right: 5%;
 }
 
-.right {
-  left: 56%;
+.is-headmaster .cards .right {
+  left: 5%;
 }
 
-.phoenix {
+.is-headmaster .cards .phoenix {
   background-image: url('../assets/ProclamationPhoenix.png');
 }
 
-.phoenix:hover {
+.is-headmaster .cards .phoenix:hover {
   box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
                 rgb(255, 94, 0) 0px 0px 20px, 
                 rgb(255, 94, 0) 0px 0px 30px, 
@@ -45,11 +65,11 @@
                 rgb(255, 94, 0) 0px 0px 75px;
 }
 
-.death {
+.is-headmaster .cards .death {
   background-image: url('../assets/ProclamationDeathEater.png');
 }
 
-.death:hover {
+.is-headmaster .cards .death:hover {
   box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
                 rgb(202, 0, 209) 0px 0px 20px, 
                 rgb(202, 0, 209) 0px 0px 30px, 
@@ -58,6 +78,6 @@
                 rgb(202, 0, 209) 0px 0px 75px;
 }
 
-*.disabled {
+.is-headmaster .cards *:disabled {
   opacity: 0.6;
 }

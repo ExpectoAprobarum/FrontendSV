@@ -1,44 +1,54 @@
-.vote .center {
+.Vote .header {
   margin: 0;
-  position: absolute;
-  top: 35%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: dimgray;
 }
 
-.vote .card {
+.vote {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.vote-card {
+  margin: 0;
+  position: relative;
+  width: 20% ;
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-size: 105%;
-  background-position-x: -8px;
-  background-position-y: -9px;
-  padding-left: 330px;
-  padding-bottom: 242px;
-  outline: none;
+  padding-bottom: 14.5%;
   border-radius: 20px;
-  border: 8px solid transparent;
+  outline: none;
+  border: none;
+  transition: 0.3s;
 }
 
-.vote .card:hover {
-  border-image: url('../assets/CardFrame.png') 150 round;
-  border-width: 40px;
-  border-radius: 0px;
-  filter: saturate(1.7);
+.vote-card:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                #fff67e 0px 0px 20px, 
+                #fff67e 0px 0px 30px, 
+                #fff67e 0px 0px 40px, 
+                #fff67e 0px 0px 50px, 
+                #fff67e 0px 0px 75px;
 }
 
 #nox {
   background-image: url('../assets/NoxCard.png');
-  left: 75%;
+  left: 5%;
 }
 
 #nox:hover {
-  filter: grayscale(100%);
+  filter: hue-rotate(-80deg);
 }
 
 #lumos {
   background-image: url('../assets/LumosCard.png');
-  left: 25%;
+  right: 5%;
 }
 
-*:disabled {
+.Vote *:disabled {
   opacity: 0.6;
 }
