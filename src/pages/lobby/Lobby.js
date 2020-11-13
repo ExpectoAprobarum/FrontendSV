@@ -1,116 +1,168 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // prueba
+import jwt_decode from 'jwt-decode';
+import configData from '../../config.json';
 import Game from '../game/Game'
 import './LobbyStyles.css'
 import '../joinagame/styleSearch.css'
 
-export default class LobbyPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            listPlayers: [],
-            initPartida: false,
-        };
-    }
+const LobbyPage = (props) => {
+  const [listPlayers, setListPlayers] = useState([]);
+  const [initPartida, setInitPartida]= useState(false);
+  const [userCreate, setUserCreate] = useState(0);
+  const [countPlayer, setCountPlayer]= useState(0);
+  const [message, setMessage] = useState('');
 
-    getPlayers = () => {
-      console.log("passing: ", this.props.location.state.gameId)
-        const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}/players`, {
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
-        }).then(response => { 
-            console.log("response:", response)
-            console.log("status:", response.status)
-            if(response.status === 200){
-                this.setState({
-                    listPlayers: response.data.data,
-                });
-            }
+  let idGame = props.location.state.gameId;
 
-            setTimeout(this.getPlayers, 2000)
-        })
-        .catch(error => {
-           console.log(error)
-        })
-    }
+  var idPlayer = 0
+  const usertoken = localStorage.getItem('user');
+  if(usertoken) {
+    idPlayer = jwt_decode(usertoken).sub.id;
+  }
 
-    componentDidMount() {
-        this.getGameInfo();
-        this.getPlayers();
-    };
-
-    getGameInfo = () => {
+  useEffect(() => {
+    const getPlayers = () => {
       const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${this.props.location.state.gameId}`, {
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
+      axios.get(`${configData.API_URL}/games/${props.location.state.gameId}/players`, {
+          headers: {
+              'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
+      }).then(response => {
+        if(response.status === 200){
+          setListPlayers(response.data.data)
+          setCountPlayer(response.data.data.length)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+
+    const timer = setInterval(() => {
+      getPlayers();
+      if (initPartida) {
+        clearInterval(timer);
+      }
+    }, 2000);
+
+    return () => clearInterval(timer)
+  }, [initPartida])
+
+  useEffect(() => {
+    const getGameInfo = () => {
+      const usertoken = localStorage.getItem('user')
+        axios.get(`${configData.API_URL}/games/${props.location.state.gameId}`, {
+          headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
         })
         .then(res => {
           if(res.status === 200) {
-            this.setState({
-              initPartida: res.data.started
-            })
-
-            setTimeout(this.getGameInfo, 2000)
+            setInitPartida(res.data.started)
+            setUserCreate(res.data.created_by)
           }
         })
     }
+    const timer = setInterval(() => {
+      getGameInfo();
+      if (initPartida) {
+        clearInterval(timer);
+      }
+    }, 2000);
 
-    gameStart = () => {
-        console.log("IDPART: ", parseInt(this.props.location.state.gameId))
-        const idPart = parseInt(this.props.location.state.gameId)
-        const usertoken = localStorage.getItem('user')
+    return () => clearInterval(timer)
+  }, [initPartida])
 
-        console.log("token: ", JSON.parse(usertoken).access_token)
-        axios.post(`http://127.0.0.1:8000/games/${idPart}/start`,({}),{
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
-        }).then(response => {
-            if(response.status === 200){
-                console.log("Game started")
-            }
-        })
-        .catch(error => {
-           console.log(error)
-        })
-    }
+  const gameStart = () => {
+    if (countPlayer >= 5) {
+      const idPart = parseInt(props.location.state.gameId)
+      const usertoken = localStorage.getItem('user')
 
-    render() {
-        if (this.state.initPartida) {
-            return <div><Game gameId={parseInt(this.props.location.state.gameId)}/></div>
+      axios.post(`${configData.API_URL}/games/${idPart}/start`,({}),{
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
-        return (
-            <div>
-                <div className="divCreateJoin lobby">
-                    <Link className="liStyle back" to="/home">{`<`}</Link>
-                </div>
-                
-                <h1 className="h1TittleLobby" style={{fontSize:"70px"}}>Lobby</h1>
-                <div className="divCreateJoin lobby-1">
-                    <div className="button-container-1 button lobby">
-                        <span className="mas">Start Game</span>
-                        <button id="work" type="button" name="Hover" onClick={this.gameStart}>
-                            Start Game
-                        </button>
-                    </div> 
-                </div>
-                <label>
-                <div className="divCreateJoin lobby">
-                        { this.state.listPlayers.map(
-                                    player =>
-                                            <li key={player.user.id} className="liStyle fom-popup-BoxShadow custom">
-                                                {player.user.username}
-                                            </li>
-                        )}
-                </div>
-                </label>
-                {/* <button className="buttonFound bttmodal bttLobby" onClick={this.gameStart}>Iniciar Partida</button> */}
-            </div>
-        );
+      }).then(response => {
+        if(response.status === 200){
+          console.log("Game started")
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    } else {
+      setMessage("Insufficient players, the minimum is 5")
+      setTimeout(
+        () => setMessage(" "), 4500
+      );
     }
+  }
+
+  const exitLobby = () => {
+    const idPart = parseInt(props.location.state.gameId)
+    const usertoken = localStorage.getItem('user')
+
+    axios.post(`${configData.API_URL}/games/${idPart}/exit`,({}),{
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+      }
+    }).then(response => {
+      if(response.status === 200){
+        console.log("Game Exit")
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  return (
+    <div>
+      { initPartida ?
+        <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
+        : <div>
+            <div className="divContentTittle">
+              <div className="divCreateJoin tittle">
+                <Link className="liStyle back" to="/home"
+                  onClick={exitLobby}>{`<`}</Link>
+                <p className="parrafo">
+                  Invite URL:
+                  {` http://localhost:3000/Game/invite?game=${idGame}`}</p>
+              </div>
+            </div>
+
+            <h1 className="h1TittleLobby">Lobby</h1>
+            <h4 className="h1TittleLobby error">{message}</h4>
+            <div className="divCreateJoin lobby-1">
+              {userCreate === idPlayer ?
+                <div className="button-container-1 button lobby">
+                  <span className="mas">Start Game</span>
+                  <button id="work" type="button"
+                    name="Hover" onClick={gameStart}>
+                      Start Game
+                  </button>
+                </div> : <h3 className = "divWaiting">Waiting to start</h3>
+               }
+            </div>
+            <label>
+            <div className="divCreateJoin lobby">
+              {listPlayers.sort(
+                function(a,b){
+                  var x = a.id < b.id? -1:1;
+                  return x
+                }).map( player =>
+                  <li key={player.user.id}
+                    className="liStyle fom-popup-BoxShadow custom">
+                      {player.user.username}
+                  </li>
+              )}
+            </div>
+            </label>
+        </div>
+      }
+    </div>
+  )
 }
+export default LobbyPage;

@@ -1,64 +1,38 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
-import Players from './Players';
+import { getMyPlayer, getPlayers } from '../../../commons/players/players';
+import PlayerList from './PlayerList';
 import './ChooseHeadmaster.css';
 
-class ChooseHeadmaster extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      minister: false,
-      players: [],
-      selected: 0
-    }
-
-    this.selectPlayer = this.selectPlayer.bind(this);
-    this.getPlayers = this.getPlayers.bind(this);
-    this.sendElection = this.sendElection.bind(this);
-  }
-
-  getPlayers = () => {
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/players', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
+const ChooseHeadmaster = ({gameId, ministerId}) => {
+  const [selected, setSelection] = useState(0);
+  const [players, setPlayers] = useState([]);
+  const [myPlayer, setMyPlayer] = useState({});
+  
+  useEffect(() => {
+    getMyPlayer(gameId)
       .then(res => {
-        if(res.status === 200) {
-          this.setState({
-            players: res.data
-          });
-          let isMinister = this.props.ministerId === res.data.data.filter(player => {
-            return player.user.id === this.props.userId
-          })[0].id
-          this.setState({
-            minister: isMinister
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        setMyPlayer(res)
+      });
+    getPlayers(gameId)
+      .then(res => {
+        setPlayers(res)
+      });
+  }, [gameId]);
+
+  const selectPlayer = (id) => {
+    setSelection(id);
   }
 
-  selectPlayer = (id) => {
-    this.setState({
-      selected: id
-    });
-    document.getElementById("sendCandidate").disabled = false
-  }
-
-  sendElection = () => {
-    console.log("selected: ", this.state.selected)
+  const sendElection = () => {
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + this.props.gameId + '/choosehm', 
-    {id: this.state.selected}, {
+    axios.post(configData.API_URL + '/games/' + gameId + '/choosehm', 
+    {id: selected}, {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
         }
-      }) 
+      })
       .then(res => {
         console.log(res.status)
       })
@@ -67,25 +41,38 @@ class ChooseHeadmaster extends Component {
       })
   }
 
-  componentDidMount() {
-    this.getPlayers();
-  }
-
-  render() {
-    return this.props.phase === 'propose' && this.state.minister ? (
-      <div className="ChooseHeadmaster">
-        <h1 className="header">Select new headmaster candidate</h1>
-        <Players
-          selectPlayer={this.selectPlayer}
-          players={this.state.players}
-          selected={this.state.selected}
-        />
-        <button className="sendCandidate" id="sendCandidate" onClick={this.sendElection}>Choose</button>
-      </div>
-    ) : (
-      <p></p>
-    );
-  }
+  return (
+    <div className="ChooseHeadmaster">
+      { myPlayer.id === ministerId ? (
+        <div className="is-minister">
+          <h2 className="header">
+            Select new headmaster candidate:
+          </h2>
+          <div className="player-list">
+            <PlayerList
+              selectPlayer={selectPlayer}
+              players={players}
+              ministerId={ministerId}
+              selected={selected}
+            />
+          </div>
+          <button className="sendCandidate"
+            onClick={() => {
+              sendElection()
+          }}>
+            Choose
+          </button>
+        </div>
+      ) : (
+        <div className="not-minister">
+          <h2 className="header">
+            Minister is chosing headmaster candidate ...
+          </h2>
+        </div>
+      )  
+    }
+    </div>
+  )
 }
 
 export default ChooseHeadmaster

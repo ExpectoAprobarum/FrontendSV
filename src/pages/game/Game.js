@@ -1,117 +1,109 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import configData from '../../config.json';
+import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
-import ChooseHeadmaster from './components/ChooseHeadmaster';
-import configData from '../../config.json';
-import jwt_decode from 'jwt-decode';
+import Board from './components/Board';
+import ShowRole from './components/ShowRole';
+import './Game.css';
+import DiscardCard from './components/DiscardCard';
 
-class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      gameInfo: {},
-      gameStatus: {},
-      userId: 0
-    }
-    
-    this.getGameData = this.getGameData.bind(this);
-  }
+const Game = ({gameId}) => {
+  const [gameInfo, setGameInfo] = useState({});
+  const [gameStatus, setGameStatus] = useState({});
 
-  getGameData() {
-    //Get game status data
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + this.props.gameId + '/status', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
+  useEffect(() => {
+    const getGameInfo = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId, {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
       })
       .then(res => {
         if(res.status === 200) {
-          let gameStatus = res.data;
-          this.setState({
-            gameStatus: gameStatus
-          })
-        }
-
-        setTimeout(this.getGameData, 2000)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
-  componentDidMount() {
-    //Get userId from localStore
-    const usertoken = localStorage.getItem('user');
-    if(usertoken) {
-      const id = jwt_decode(usertoken).sub.id;
-      this.setState({
-        userId: id
-      })
-    }
-    //Get game info data
-    axios.get(configData.API_URL + '/games/' + this.props.gameId, {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          let gameInfo = res.data;
-          this.setState({
-            gameInfo: gameInfo
-          })
+          setGameInfo(res.data);
+          setGameStatus(gameInfo.status);
         }
       })
       .catch(error => {
         console.log(error)
       })
-    //Get status info data
-    this.getGameData();
-  }
+    }
 
-  render() {
-    if(this.state.gameStatus.phase === 'propose') {
-      return(
-        <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
-          <ChooseHeadmaster
-            phase={this.state.gameStatus.phase}
-            ministerId={this.state.gameStatus.minister}
-            userId={this.state.userId}
-            gameId={this.props.gameId}
-          />
+    const timer = setInterval(() => {
+      getGameInfo();
+    }, 2000);
+
+    return () => clearInterval(timer)
+  }, [gameId, gameInfo.status])
+
+  return (
+    <div className="Game">
+      <div className="info">
+        <div className="game-phase">
+          <h2>Game phase:</h2>
+          <h3>{gameStatus === undefined ? " " : gameStatus.phase}</h3>
         </div>
-      )
-    }
-    else if(this.state.gameStatus.phase === 'vote') {
-      return(
-        <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1> 
-          <Vote
-            phase={this.state.gameStatus.phase}
-            gameId={this.props.gameId}
-          />
+        <div className="role">
+          <div className="role-container">
+            <div className="role-header">
+              <h3>My role:</h3>
+            </div>
+            <ShowRole gameId={gameId}/>
+          </div>
         </div>
-      )
-    }
-    else if(this.state.gameStatus.phase === 'headmaster play') {
-      return(
-        <div className="Game">
-          <h1 className="center">Game phase: {this.state.gameStatus.phase}</h1>    
-          <EmitProclamation
-            headmaster={this.state.gameStatus.headmaster}
-            userId={this.state.userId}
-            gameId={this.props.gameId}
-          />
-        </div>
-      )
-    }
-    else {
-      return <p></p>
-    }
-  }
+      </div>
+      <div className="board">
+        <Board 
+          gameId={gameId}
+        />
+      </div>
+      <div className="phase">
+        {
+          gameStatus ? (
+            gameStatus.phase === 'propose' ? (
+              <div>
+                <ChooseHeadmaster
+                  gameId={gameId}
+                  ministerId={gameStatus.minister}
+                />
+              </div>
+            ) : (
+              gameStatus.phase === 'vote' ? (
+                <div>
+                  <Vote
+                    gameId={gameId}
+                  />
+                </div>
+              ) : (
+                gameStatus.phase === 'headmaster play' ? (
+                  <div>
+                    <EmitProclamation
+                      gameId={gameId}
+                    />
+                  </div>
+                ) : (
+                  gameStatus.phase === 'minister play' ? (
+                    <div>
+                      <DiscardCard
+                        gameId={gameId}
+                      />
+                    </div>
+                ) : (
+                  <p>Awaiting response...</p>
+                  )
+                )
+              )
+            )
+          ) : (
+            <h1 className="startingGame">Starting Game ...</h1>
+          )
+        }
+      </div>
+    </div>
+  )
 }
 
 export default Game

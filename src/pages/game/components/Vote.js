@@ -1,34 +1,42 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import './Vote.css';
 
-const Vote = ({phase, gameId}) => {
-  let lumosRef = useRef();
-  let noxRef = useRef();
+const Vote = ({gameId}) => {
 
-  const disableButtons = () => {
-    lumosRef.current.setAttribute("disabled", "disabled");
-    noxRef.current.setAttribute("disabled", "disabled");
-  }
   const vote = (e) => {
-    let voteDef = e.target.className.split(' ')[0];
+    let selection = e.target.id;
     const usertoken = localStorage.getItem('user');
     axios.post(configData.API_URL + '/games/' + gameId + '/vote', 
-      { vote: voteDef === 'lumos' }, {
+      { vote: selection === 'lumos' }, {
         headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
           }
-        } );
-    disableButtons();
+    })
+    .then(res => {
+      if(res.status === 200) {
+        console.log(res.status)
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+    document.getElementById("lumos").disabled = true;
+    document.getElementById("nox").disabled = true;
   }
-  return phase === 'vote' ? (
-    <div className="vote">
-      <button className="lumos card center" ref={lumosRef} onClick={(e) => {vote(e)}}></button>
-      <button className="nox card center" ref={noxRef} onClick={(e) => {vote(e)}}></button>
+
+  return (
+    <div className="Vote">
+      <h2 className="header">
+        Vote new Minister and Headmaster:
+      </h2>
+      <div className="vote">
+        <button className="vote-card" id="lumos" onClick={(e) => {vote(e)}} />
+        <button className="vote-card" id="nox" onClick={(e) => {vote(e)}} />
+      </div>
     </div>
-  ) : (
-    <div className="vote"></div>
   )
 }
 

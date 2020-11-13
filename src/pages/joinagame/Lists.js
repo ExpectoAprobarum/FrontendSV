@@ -1,156 +1,184 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import Modal from './modal'
+import jwt_decode from 'jwt-decode';
+// import configData from '../../config.json';
 
-export default class PersonList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: '',
-            list: [],
-            listBackup: [],
-            modalshow: false,
-            selected: [],
-            redirect: false,
-            showSearch: false
-        };
-    
-        this.handleChange = this.handleChange.bind(this);
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
-        this.joinGame = this.joinGame.bind(this);
-        this.showS = this.showS.bind(this);
-    }
+const ListPerson = () => {
+  const [value, setValue] = useState('');
+  const [list, setList] = useState([]);
+  const [listBackup, setListBackup] = useState([]);
+  const [modalshow, setModalshow] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [listPlayers, setListPlayers] = useState([]);
+  const [countPlayer, setCountPlayer] = useState(0);
+  const [error, setError] = useState([false, ''])
 
-    showModal(e) {
-        this.setState({ 
-            modalshow: true, 
-            selected: e
-        });
-    };
+  var idPlayer = 0
+  const usertoken = localStorage.getItem('user');
+  if(usertoken) {
+    idPlayer = jwt_decode(usertoken).sub.id;
+  }
 
-    showS() {
-        this.setState({
-            showSearch: !this.state.showSearch
-        })
-    }
-    
-    hideModal() {
-        this.setState({ 
-            modalshow: false,
-            selected: []
-        });
-    };
+  const showModal = (e) => {
+    setModalshow(true)
+    setSelected(e)
 
-    joinGame(){
-        const idPart = parseInt(this.state.selected.id)
+    getPlayers(e);
+  };
+
+  const showS = () => {
+    setShowSearch(!showSearch)
+    componentDidMount()
+  }
+
+  const hideModal = () => {
+    setModalshow(false)
+    setError([false, ""])
+    setSelected([])
+  };
+
+  const joinGame = () => {
+    let lengthGame = countPlayer
+    let maxPlayerG = selected.player_amount
+    let doIExist = [listPlayers.find(
+                      player => player.user.id === idPlayer)]
+                   .includes(undefined)
+
+    if (lengthGame !== maxPlayerG) {
+      if (selected.created_by !== idPlayer && doIExist) {
+        const idPart = parseInt(selected.id)
         const usertoken = localStorage.getItem('user')
 
-        console.log("token: ", JSON.parse(usertoken).access_token)
         axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
-        }).then(response => { 
-            if(response.status === 200){
-                const response_id = response.data
-                console.log("idCorrecto:", response_id)
-            }
-        })
-        .catch(error => {
-           console.log(error)
-        })
-    }
-
-    
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    filter (event) {
-        var text = event.target.value
-        const data = this.state.listBackup
-
-        const newData = data.filter(function (item) {
-            const itemData = item.name.toUpperCase()
-            const textData = text.toUpperCase()
-            return itemData.indexOf(textData) > -1
-        })
-
-        this.setState({
-            list: newData,
-            value: text,
-        })
-    }
-
-    componentDidMount() {
-        const usertoken = localStorage.getItem('user')
-        axios.get('http://127.0.0.1:8000/games/', {
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-            }
+          headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
         }).then(response => {
-            if(response.status === 200){
-                this.setState({
-                    list: response.data.data,
-                    listBackup: response.data.data,
-                });
-            }
+          if (response.status === 200) {
+            const response_id = response.data
+            console.log("join:", response_id.message)
+          }
         })
         .catch(error => {
-           console.log(error)
+          console.log(error)
         })
-    };
-
-    render() {
-        return (
-            
-            <div>
-                <div className="button-container-1">
-                <span className="mas">Search Game</span>
-                <button id="work" type="button" name="Hover" onClick={this.showS}>
-                    Search Game
-                </button>
-                </div> 
-                { this.state.showSearch ?
-                    <div className="divCreateJoin">
-                        <label>
-                            <form onSubmit = {this.handleSubmit}>
-                                <input type="text" 
-                                    className = "search-button"
-                                    name = "name" 
-                                    placeholder = "Search.."
-                                    value = { this.state.text}
-                                    onChange={ (text) => this.filter(text)}
-                                />
-
-                                <Modal open={this.state.modalshow} 
-                                    handleClose={this.hideModal} 
-                                    inPartida={this.joinGame}
-                                    gameID={this.state.selected.id}>
-                                    <h3>{this.state.selected.name}</h3>
-                                    <p style={{paddingBottom:"15px"}}>Sala: {this.state.selected.id}</p>
-                                </Modal>
-
-                                <div style={{paddingTop: "20px"}}></div>
-                                
-                                <div className="divCreateJoin search">
-                                    { this.state.list.map(
-                                        person => <li className="linked custom" key={person.id}>
-                                                    <button type="button" 
-                                                        onClick= {() => this.showModal(person)} className= "buttonFound">
-                                                        {person.id} <span style={{paddingLeft: '30px'}}> </span>{person.name} 
-                                                    </button>
-                                                </li>
-                                    )}
-                                </div>
-                            </form>
-                        </label>
-                    </div> 
-                    : <p></p> 
-                }
-                <div id="lista"></div>
-            </div>
-        );
+      }
     }
+  }
+
+  const getPlayers = (idGame) => {
+    axios.get(`http://127.0.0.1:8000/games/${idGame.id}/players`, {
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+      }
+    }).then(response => {
+      if(response.status === 200){
+        setListPlayers(response.data.data)
+        setCountPlayer(response.data.data.length)
+        let lengthGame = response.data.data.length
+        let maxPlayerG = idGame.player_amount
+
+        let doIExist = [response.data.data.find(
+                          player => player.user.id === idPlayer)]
+                       .includes(undefined)
+        if (lengthGame === maxPlayerG) {
+          if (idGame.created_by !== idPlayer && doIExist) {
+            setError([true, "Full room"])
+          }
+        }
+      }
+    })
+    .catch(error => {
+       console.log(error)
+    })
+  }
+
+  const filter = (event) => {
+    var text = event.target.value
+    const data = listBackup
+
+    const newData = data.filter(function (item) {
+      const itemData = item.name.toUpperCase()
+      const textData = text.toUpperCase()
+      return itemData.indexOf(textData) > -1
+    })
+
+    setList(newData)
+    setValue(text)
+
+  }
+
+  const componentDidMount = () => {
+    axios.get('http://127.0.0.1:8000/games/', {
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+      }
+    }).then(response => {
+      if(response.status === 200){
+        setList(response.data.data)
+        setListBackup(response.data.data)
+      }
+    })
+    .catch(error => {
+       console.log(error)
+    })
+  };
+
+
+  return (
+    <div>
+      <div className="button-container-1">
+      <span className="mas">Search Game</span>
+      <button id="work" type="button" name="Hover" onClick={showS}>
+        Search Game
+      </button>
+      </div>
+      { showSearch ?
+        <div className="divCreateJoin">
+          <label>
+            <form>
+              <input type="text"
+                className = "search-button"
+                name = "name"
+                placeholder = "Search.."
+                value = {value}
+                onChange={ (text) => filter(text)}
+              />
+
+              <Modal open={modalshow}
+                handleClose={hideModal}
+                inPartida={joinGame}
+                gameID={selected.id}
+                error={error}>
+                <h3>{selected.name}</h3>
+                <p>Sala: {selected.id}</p>
+              </Modal>
+
+              <div style={{paddingTop: "20px"}}></div>
+
+              <div className="divCreateJoin search">
+                { list.map(
+                  person =>
+                    <li className="linked custom" key={person.id}>
+                      <button type="button"
+                        onClick= {() =>
+                          {showModal(person)}} className= "buttonFound">
+                        {person.id} <span style={{paddingLeft: '30px'}}>
+                        </span>
+                        {person.name}
+                      </button>
+                    </li>
+                )}
+              </div>
+            </form>
+          </label>
+        </div>
+          : <p></p>
+      }
+      <div id="lista"></div>
+    </div>
+  )
 }
+export default ListPerson;
