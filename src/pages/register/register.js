@@ -25,10 +25,10 @@ const Register = () =>{
         console.log(infotosend)       
         axios.post('http://127.0.0.1:8000/users/', infotosend ).then(response => { 
           if(response.status === 200){
-            console.log(response.data) 
-            localStorage.setItem('user', JSON.stringify(response.data))
+            //alerta satisfactoria
           }
           }).catch(error => {
+            //alerta error
             console.log(error)
           })
       }
