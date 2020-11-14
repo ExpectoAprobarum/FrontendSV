@@ -22,8 +22,8 @@ const AvadaKedavra = ({gameId, ministerId}) => {
 
   const sendElection = () => {
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + gameId + '/avadakedavra/' + selected, 
-    {}, {
+    axios.post(configData.API_URL + '/games/' + gameId + '/avadakedavra', 
+      { "id": selected }, {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
         }
