@@ -8,27 +8,24 @@ import axios from 'axios'
 import "./createAndjoinAndChang.css"
 
 const PrincipalPage = () => {
-  /* prueba
   useEffect(() => {
     const testfeedback = () => {
       const usertoken = localStorage.getItem('user')
-      axios.get('http://127.0.0.1:8000/users/', {} ,{
-          headers: {
-              'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-          }
+      axios.get('http://127.0.0.1:8000/users/me',{
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
       }).then(response => { 
-          if(response.status === 200){
-              console.log(response)
-          }
+        if(response.status === 200){
+          const userAlias = response.data.useralias  
+        }
       })
       .catch(error => {
-         console.log(error)
+        console.log(error)
       })
     }
     testfeedback()
-  }, [])*/
-
-
+  }, [])
   
   const exitDeleteToken = () => {
     localStorage.removeItem("user")
@@ -53,7 +50,7 @@ const PrincipalPage = () => {
       </div>
       
       <div className='DivCreateJoinChang'>
-        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome</h1>
+        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome userAlias</h1>
         <h1 style={{fontSize:"50px"}}>To</h1>
         <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
       </div>
