@@ -1,12 +1,34 @@
-import {React }from 'react';
+import {React, useEffect }from 'react';
 import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
 import "../pages/creategame/buttonStyle.css"
 import ListPerson from '../pages/joinagame/Lists';
+import axios from 'axios'
 
 import "./createAndjoinAndChang.css"
 
 const PrincipalPage = () => {
+  /* prueba
+  useEffect(() => {
+    const testfeedback = () => {
+      const usertoken = localStorage.getItem('user')
+      axios.get('http://127.0.0.1:8000/users/', {} ,{
+          headers: {
+              'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+      }).then(response => { 
+          if(response.status === 200){
+              console.log(response)
+          }
+      })
+      .catch(error => {
+         console.log(error)
+      })
+    }
+    testfeedback()
+  }, [])*/
+
+
   
   const exitDeleteToken = () => {
     localStorage.removeItem("user")

@@ -57,10 +57,10 @@ const Register = () =>{
      
         return (
             <div>
-                <div className="divCreateJoin lobby">
-                    <Link className="liStyle back" to="/">{`<`}</Link>
-                </div>
+                
+               
                 <div className='fom-popup-BoxShadow register'>
+                <Link className="liStyle back" to="/">{`<`}</Link>
                     <h1 style={{fontSize:"45px"}} className="h1TittleLobby">Sign in</h1>
 
                     <form onSubmit={handleOnSubmit} className='formRegister'>
