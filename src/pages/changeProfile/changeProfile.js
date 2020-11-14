@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import {notify_user_update_invalidPass,  
   notify_user_update_succ} 
   from '../../commons/alerts/toast'
-import 'react-toastify/dist/ReactToastify.css'
 import './changeProfile.css'
 
 const ChangeProfile = () => {
