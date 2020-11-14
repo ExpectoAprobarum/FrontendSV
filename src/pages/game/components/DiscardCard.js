@@ -4,7 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import './DiscardCard.css';
 
-const DiscardCard = ({gameId}) => {
+const DiscardCard = ({gameId, ministerId}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
@@ -58,28 +58,34 @@ const DiscardCard = ({gameId}) => {
 
   return (
     <div className="discard">
-    { myPlayer.current_position === "minister" ? (
+    { myPlayer.id === ministerId ? (
         <div className="is-minister">
-          <h2>Discard proclamation:</h2>
-          <button className={cards[0] + " card left"} id="proc1"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
-          <button className={cards[1] + " card center"} id="proc2"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
-          <button className={cards[2] + " card right"} id="proc3"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
+          <h2 className="header">
+            Discard proclamation:
+          </h2>
+          <div className="cards">
+            <button className={cards[0] + " card left"} id="proc1"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+            <button className={cards[1] + " card center"} id="proc2"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+            <button className={cards[2] + " card right"} id="proc3"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+          </div>
         </div>
       ) : (
         <div className="not-minister">
-          <h2>Minister is discarding proclamation ...</h2>
+          <h2 className="header">
+            Minister is discarding proclamation ...
+          </h2>
         </div>
       )
     }   
