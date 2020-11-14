@@ -1,4 +1,4 @@
-import {React, useEffect }from 'react';
+import {React, useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
 import "../pages/creategame/buttonStyle.css"
@@ -8,6 +8,8 @@ import axios from 'axios'
 import "./createAndjoinAndChang.css"
 
 const PrincipalPage = () => {
+  const [userAlias, setUserAlias] = useState('')
+
   useEffect(() => {
     const testfeedback = () => {
       const usertoken = localStorage.getItem('user')
@@ -18,6 +20,7 @@ const PrincipalPage = () => {
       }).then(response => { 
         if(response.status === 200){
           const userAlias = response.data.useralias  
+          setUserAlias(userAlias)
         }
       })
       .catch(error => {
@@ -45,7 +48,7 @@ const PrincipalPage = () => {
           Profile
         </Link>
       <div className='DivCreateJoinChang'>
-        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome userAlias</h1>
+        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome {userAlias}</h1>
         <h1 style={{fontSize:"50px"}}>To</h1>
         <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
       </div>
