@@ -62,7 +62,12 @@ const CastSpell = ({gameId, ministerId}) => {
           }
         </div>
       ) : (
-        <h2>Minister is casting Spell: {currentSpell.toUpperCase()}</h2>
+        <div className="not-minister">
+          <h2 className="header">
+            Minister is casting Spell: {currentSpell.toUpperCase()}
+          </h2>
+        </div>
+        
         )
       }
     </div>
