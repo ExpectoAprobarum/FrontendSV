@@ -9,11 +9,14 @@
   border-bottom: 4px solid black;
   text-align: center;
   font-family: sans-serif;
-  background: dimgray;
+  background: rgb(50, 13, 51);
+  color: blueviolet;
 }
 
 .divination .divination-cards {
-  margin-top: 17px;
+  background: radial-gradient(indigo, rgb(133, 69, 179));
+  padding-top: 17px;
+  padding-bottom: 1.1%;
   text-align: center;
 }
 
