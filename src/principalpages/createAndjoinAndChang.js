@@ -33,22 +33,17 @@ const PrincipalPage = () => {
 
   return(
     <div className="DivCreateAndJoin">
-      <div className="DivCreateJoin lobby">
         <Link 
           className="LinkStyle back home" 
           onClick={exitDeleteToken}
           to="/">
           Log Out
         </Link>
-      </div>
-      <div className='DivCreateJoin lobby'>
         <Link 
           className="LinkStyle change home"
           to='/changeProfile'>
           Profile
         </Link>
-      </div>
-      
       <div className='DivCreateJoinChang'>
         <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome userAlias</h1>
         <h1 style={{fontSize:"50px"}}>To</h1>

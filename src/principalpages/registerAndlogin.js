@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import './registerAndlogin.css';
 import '../pages/creategame/buttonStyle.css'
-//import '../pages/joinagame/styleSearch.css'
 
 const RegisterAndLogin = () => {
     return(
