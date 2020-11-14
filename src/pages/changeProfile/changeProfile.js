@@ -3,13 +3,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import { toast} from 'react-toastify';
+import {notify_user_update_invalidPass, 
+  notify_user_update_err, 
+  notify_user_update_succ} 
+  from '../../commons/alerts/toast'
 import 'react-toastify/dist/ReactToastify.css'
 import './changeProfile.css'
 
 const ChangeProfile = () => {
-  toast.configure()
-  
+
   const[passwordOld, setPasswordOld] = useState('')
   const[passwordNew, setpasswordNew] = useState('')
   const[userAlias, setUserAlias] = useState('')
@@ -39,43 +41,35 @@ const ChangeProfile = () => {
     }).then(response => { 
       if(response.status === 200){
         //avisar del success
-        notify()
+        notify_user_update_succ()
         console.log(response)
       }
     })
     .catch(error => {
+      notify_user_update_invalidPass()
       setError(true)
-      //notificar error
-      console.log(error)
     })
   }
-    
-    const notify = () => {
-      toast.success('Your changes have been updated', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000})
+  const handleOnchange = (e) => {
+    if(e.target.name === 'userAlias'){
+      setUserAlias(e.target.value)
     }
-    
-    const handleOnchange = (e) => {
-      if(e.target.name === 'userAlias'){
-        setUserAlias(e.target.value)
-      }
-      else if(e.target.name === 'passwordNew'){
-        setpasswordNew(e.target.value)
-      }
-      else if( e.target.name === 'passwordOld') {
-        setPasswordOld(e.target.value)
-      }
-      else if(e.target.name === 'showMe'){
-        setShowMe(true)
-      }
-      else if(e.target.name === 'cancel') {
-        setShowMe(false)
-        setError(false)
-        setpasswordNew('')
-        setPasswordOld('')
-      }
+    else if(e.target.name === 'passwordNew'){
+      setpasswordNew(e.target.value)
     }
+    else if( e.target.name === 'passwordOld') {
+      setPasswordOld(e.target.value)
+    }
+    else if(e.target.name === 'showMe'){
+      setShowMe(true)
+    }
+    else if(e.target.name === 'cancel') {
+      setShowMe(false)
+      setError(false)
+      setpasswordNew('')
+      setPasswordOld('')
+    }
+  }
 
     return (
         <div >
@@ -89,7 +83,11 @@ const ChangeProfile = () => {
                 name='userAlias' 
                 placeholder= {userAlias }
                 value={userAlias} 
-                onChange={handleOnchange} >
+                onChange={handleOnchange} 
+                minLength="3"
+                required
+              >
+                  
               </input>
               <br />
               <br />
@@ -107,6 +105,7 @@ const ChangeProfile = () => {
                         value={passwordOld}
                         onChange= {handleOnchange}
                         minLength="7"
+                        required
                       />
                       <br />
                       <br />
@@ -118,6 +117,7 @@ const ChangeProfile = () => {
                         onChange= {handleOnchange}
                         value={passwordNew}
                         minLength="7"
+                        required
                       />
                       <br />
                       <br />
