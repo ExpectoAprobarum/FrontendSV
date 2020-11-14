@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import "./buttonStyle.css";
+import "./pageCreateGame.css"
+import {notify_gameName_invalid} 
+  from '../../commons/alerts/toast'
 import { Redirect } from 'react-router-dom';
 
  
@@ -33,7 +36,7 @@ const PageCreateGame = () => {
         }
       })
       .catch(error => {
-        console.log(error)
+        notify_gameName_invalid()
       })
     }
     
@@ -90,7 +93,7 @@ const PageCreateGame = () => {
                     </select>
                     <br />
                     <br />
-                    <button tpye ='submit' value={redirect} name="redirect">Save config</button>
+                    <button tpye ='submit' value={redirect} name="redirect" className='SaveConfig'>Save config</button>
                 </form>
               </div>
             </div>   
