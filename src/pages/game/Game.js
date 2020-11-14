@@ -3,11 +3,12 @@ import axios from 'axios';
 import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
+import DiscardCard from './components/DiscardCard';
 import EmitProclamation from './components/EmitProclamation';
+import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import './Game.css';
-import DiscardCard from './components/DiscardCard';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -92,7 +93,14 @@ const Game = ({gameId}) => {
                       />
                     </div>
                 ) : (
-                  <p>Awaiting response...</p>
+                  gameStatus.phase === 'spell play' ? (
+                    <CastSpell 
+                      gameId={gameId}
+                      ministerId={gameStatus.minister}
+                    />
+                  ) : (
+                      <p>Awaiting response...</p>
+                    )
                   )
                 )
               )

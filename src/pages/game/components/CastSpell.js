@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
-import AvadaKedavra from './spells/AvadaKedavra';
+import Divination from './spells/Divination';
 
 const CastSpell = ({gameId, ministerId}) => {
   const [currentSpell, setCurrentSpell] = useState("");
@@ -44,13 +44,12 @@ const CastSpell = ({gameId, ministerId}) => {
         <div className="is-minister">
           { currentSpell !== '' ? (
             <div className="spell">
-              { currentSpell === "avadakedavra" ? (
-                <AvadaKedavra
-                  gameId={gameId}
-                  ministerId={ministerId}
-                />
-              ) : (
-                <p>No matching Spell</p>
+              { currentSpell === "divination" ? (
+                  <Divination
+                    gameId={gameId}
+                  />
+                ) : (
+                  <p>No matching Spell</p>
                 )
               }
             </div>
