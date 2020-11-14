@@ -6,7 +6,6 @@ import morti from '../assets/Wiborita.png';
 import phoenix from '../assets/Fenix.png';
 
 const ShowRole = ({gameId}) => {
-  const [listPlayers, setListPlayers] = useState([])
   const [rolePlayer, setRolePlayer] = useState([])
 
   var idPlayer = 0
@@ -23,11 +22,9 @@ const ShowRole = ({gameId}) => {
           }
       }).then(response => {
         if(response.status === 200){
-          setListPlayers(response.data.data)
           setRolePlayer(response.data.data.find(
             player => player.user.id === idPlayer
           ))
-          console.log(rolePlayer)
         }
       })
       .catch(error => {

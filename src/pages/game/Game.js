@@ -4,9 +4,11 @@ import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
+import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import CastSpell from './components/CastSpell';
 import './Game.css';
+import DiscardCard from './components/DiscardCard';
 
 
 const Game = ({gameId}) => {
@@ -42,11 +44,23 @@ const Game = ({gameId}) => {
   return (
     <div className="Game">
       <div className="info">
-        <h1 className="header">
-          Game phase:
-          {gameStatus === undefined ? "\n" : "\n" + gameStatus.phase}
-        </h1>
-        <ShowRole gameId={gameId}/>
+        <div className="game-phase">
+          <h2>Game phase:</h2>
+          <h3>{gameStatus === undefined ? " " : gameStatus.phase}</h3>
+        </div>
+        <div className="role">
+          <div className="role-container">
+            <div className="role-header">
+              <h3>My role:</h3>
+            </div>
+            <ShowRole gameId={gameId}/>
+          </div>
+        </div>
+      </div>
+      <div className="board">
+        <Board 
+          gameId={gameId}
+        />
       </div>
       <div className="phase">
         {
@@ -82,7 +96,15 @@ const Game = ({gameId}) => {
                       />
                     </div>
                   ) : (
-                    <h5>Awaiting response...</h5>
+                    gameStatus.phase === 'minister play' ? (
+                      <div>
+                        <DiscardCard
+                          gameId={gameId}
+                        />
+                      </div>
+                    ) : (
+                      <p>Awaiting response...</p>
+                    )
                   )
                 )
               )

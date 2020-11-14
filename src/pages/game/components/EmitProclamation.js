@@ -8,23 +8,6 @@ const EmitProclamation = ({gameId, headmasterId}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
-  const getCards = () => {
-    const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/proclamations', {
-      headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          setCards(res.data.data);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
   const choose = (e) => {
     let choice = e.target.className.split(' ')[0];
     const usertoken = localStorage.getItem('user');
@@ -48,32 +31,55 @@ const EmitProclamation = ({gameId, headmasterId}) => {
   }
 
   useEffect(() => {
+    const getCards = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + '/proclamations', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        })
+        .then(res => {
+          if(res.status === 200) {
+            setCards(res.data.data);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
     getMyPlayer(gameId)
       .then(res => {
         setMyPlayer(res)
       });
     getCards();
-  }, [])
+  }, [gameId])
 
   return (
     <div className="proclam">
     { myPlayer.id === headmasterId ? (
         <div className="is-headmaster">
-          <h2>Choose next Proclamation:</h2>
-          <button className={cards[0] + " card left"} id="proc1"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
-          <button className={cards[1] + " card right"} id="proc2"
-            onClick={(e) => {
-              choose(e)
-            }} 
-          />
+          <h2 className="header">
+            Choose next Proclamation:
+          </h2>
+          <div className="cards">
+            <button className={cards[0] + " card left"} id="proc1"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+
+            <button className={cards[1] + " card right"} id="proc2"
+              onClick={(e) => {
+                choose(e)
+              }} 
+            />
+          </div>
         </div>
       ) : (
         <div className="not-headmaster">
-          <h2>Headmaster is choosing proclamation ...</h2>
+          <h2 className="header">
+            Headmaster is choosing Proclamation ...
+          </h2>
         </div>
       )
     }   

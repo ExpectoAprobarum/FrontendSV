@@ -2,10 +2,54 @@
   float: left;
   display: inline;
   position: absolute;
-  width: 26%;
+  text-align: center;
+  width: 27%;
   height: 100%;
-  top: 0;
-  border-right: 6px solid black;
+  left: -0.005%;
+  top: -0.2%;
+  border-right: 6px solid rgb(224, 205, 98);
+  border-left: 6px solid rgb(224, 205, 98);
+  font-family: sans-serif;
+}
+
+.info .game-phase {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: black;
+  color: white;
+  width: 100%;
+}
+
+.info .game-phase h2 {
+  margin: 0;
+}
+
+.info .game-phase h3 {
+  margin: 0;
+  margin-top: 5px;
+}
+
+.info .role {
+  display: inline-block;
+  margin: 0px;
+  width: 100%;
+  background: black;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top: 4px solid rgb(224, 205, 98);
+  border-bottom: 4px solid rgb(224, 205, 98);
+}
+
+.info .role .role-container {
+  display: flex;
+  margin: 7px;
+}
+
+.info .role .role-container h3 {
+  display: flex;
+  color: white;
+  font-size: 1.5em;
 }
 
 .phase {
@@ -13,8 +57,21 @@
   float: right;
   display: inline;
   position: absolute;
-  top: 15%;
-  left: 27%;
-  width: 73%;
-  height: 85%;
+  top: 58%;
+  left: 27.9%;
+  width: 72%;
+  height: 42%;
+  background-color: darkgrey;
+}
+
+.board {
+  text-align: center;
+  float: right;
+  display: inline;
+  position: absolute;
+  top: 0%;
+  left: 27.9%;
+  width: 72%;
+  height: 57%;
+  border-bottom: 6px solid rgb(224, 205, 98);
 }
