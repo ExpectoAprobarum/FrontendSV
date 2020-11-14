@@ -78,22 +78,20 @@ const ChangeProfile = () => {
             
             <form className='formChangeProfile' onSubmit={handleOnSubmit} >
               <div className="divTitleInput">Change UserAlias: </div>
-              <input id='userAliasL'
-                type='text' 
-                name='userAlias' 
-                placeholder= {userAlias }
-                value={userAlias} 
-                onChange={handleOnchange} 
-                minLength="3"
-                required
-              >
-                  
-              </input>
-              <br />
-              <br />
-              <button type='submit'>Save</button>
-              <br />
-              <br />
+                <input 
+                  id='userAliasL'
+                  type='text' 
+                  name='userAlias' 
+                  placeholder= {userAlias }
+                  value={userAlias} 
+                  onChange={handleOnchange} >
+                </input>
+                <br />
+                <br />
+                <button type='submit'>Save</button>
+                <br />
+                <br />
+
                 {showMe ? 
                     <div >
                       <div className="divTitleInput">Change Password: </div>

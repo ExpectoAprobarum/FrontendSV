@@ -1,45 +1,56 @@
-import {React , useState}from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import {React, useEffect }from 'react';
+import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
-import ChangeProfile from '../pages/changeProfile/changeProfile';
 import "../pages/creategame/buttonStyle.css"
-
 import ListPerson from '../pages/joinagame/Lists';
+import axios from 'axios'
+
+import "./createAndjoinAndChang.css"
 
 const PrincipalPage = () => {
-  const [redirectProfile, setRedirect] = useState(false)
-
+  useEffect(() => {
+    const testfeedback = () => {
+      const usertoken = localStorage.getItem('user')
+      axios.get('http://127.0.0.1:8000/users/me',{
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      }).then(response => { 
+        if(response.status === 200){
+          const userAlias = response.data.useralias  
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+    testfeedback()
+  }, [])
+  
   const exitDeleteToken = () => {
-      localStorage.removeItem("user")
+    localStorage.removeItem("user")
   }
 
-  const changeProfileRedirect = () => {
-    setRedirect(true)
-  }
-  if(redirectProfile){
-    return (<Redirect to='/changeProfile'/>)
-  }
   return(
-    <div className="divCreateJoin">
-      <div className="divCreateJoin lobby">
-        <Link className="liStyle home back" onClick={exitDeleteToken}
-                to="/">{`Log Out`}</Link>
+    <div className="DivCreateAndJoin">
+        <Link 
+          className="LinkStyle back home" 
+          onClick={exitDeleteToken}
+          to="/">
+          Log Out
+        </Link>
+        <Link 
+          className="LinkStyle change home"
+          to='/changeProfile'>
+          Profile
+        </Link>
+      <div className='DivCreateJoinChang'>
+        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome userAlias</h1>
+        <h1 style={{fontSize:"50px"}}>To</h1>
+        <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
       </div>
-
-      <h1 style={{paddingBottom: "50px", fontSize:"80px"}}>Secret Voldemort</h1>
       <PageCreateGame />
       <ListPerson />
-      <div className="button-container-1">
-        <span className="mas">Update your Info</span>
-        <button
-            id="work"
-            type="button"
-            name="Hover"
-            onClick={changeProfileRedirect}
-        >
-        Profile
-        </button>
-      </div>
     </div>
   )
 }
