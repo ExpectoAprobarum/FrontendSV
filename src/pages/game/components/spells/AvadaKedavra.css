@@ -9,10 +9,9 @@
 }
 
 .player-list {
-  position: relative;
-  margin: 4px;
-  width: 50%;
-  left: 24.54%;
+  display: inline-block;
+  width: 100%;
+  min-height: 120px;
 }
 
 .sendKilled {
