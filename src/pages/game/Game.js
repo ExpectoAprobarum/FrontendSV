@@ -10,6 +10,7 @@ import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import './Game.css';
 
+
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
   const [gameStatus, setGameStatus] = useState({});
@@ -106,20 +107,22 @@ const Game = ({gameId}) => {
                     />
                   </div>
                 ) : (
-                  gameStatus.phase === 'minister play' ? (
+                  gameStatus.phase === 'spell play' ? (
                     <div>
-                      <DiscardCard
+                      <CastSpell
                         gameId={gameId}
                         ministerId={gameStatus.minister}
                       />
                     </div>
-                ) : (
-                  gameStatus.phase === 'spell play' ? (
-                    <CastSpell 
-                      gameId={gameId}
-                      ministerId={gameStatus.minister}
-                    />
                   ) : (
+                    gameStatus.phase === 'minister play' ? (
+                      <div>
+                        <DiscardCard
+                          gameId={gameId}
+                          ministerId={gameStatus.minister}
+                        />
+                      </div>
+                    ) : (
                       <p>Awaiting response...</p>
                     )
                   )
