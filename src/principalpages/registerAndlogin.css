@@ -1,9 +1,13 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(./components/HARRYP__.TTF)
+}
 
+.DivCreateRegisterandL {
+  font-family: 'Harry P';
+}
 
-
-
-.RegisterAndLoginPage {
-    background-image: url('./voldemort\ secreto.png');
-    background-repeat: no-repeat;
-    background-position: 115px -35px;
+.DivRegisterandLogin {
+  padding-top: 0px;
+  text-align: center;
 }

@@ -2,9 +2,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import {notify_user_update_invalidPass, 
-  notify_user_update_err, 
+import {notify_user_update_invalidPass,  
   notify_user_update_succ} 
   from '../../commons/alerts/toast'
 import 'react-toastify/dist/ReactToastify.css'
@@ -22,18 +20,12 @@ const ChangeProfile = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const usertoken = localStorage.getItem('user')
-    const quees = jwt_decode(usertoken).sub.password;
-   
-    console.log("Password nueva:", passwordNew)
-    console.log("Password vieja:", passwordOld)
-    console.log("alias del usuario:", userAlias)
-   
+  
     const infotosend= {
       useralias:userAlias ,
       oldpassword:passwordOld,
       newpassword:passwordNew
     }
-    
     axios.put('http://127.0.0.1:8000/users',infotosend, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
@@ -78,22 +70,20 @@ const ChangeProfile = () => {
             
             <form className='formChangeProfile' onSubmit={handleOnSubmit} >
               <div className="divTitleInput">Change UserAlias: </div>
-              <input id='userAliasL'
-                type='text' 
-                name='userAlias' 
-                placeholder= {userAlias }
-                value={userAlias} 
-                onChange={handleOnchange} 
-                minLength="3"
-                required
-              >
-                  
-              </input>
-              <br />
-              <br />
-              <button type='submit'>Save</button>
-              <br />
-              <br />
+                <input 
+                  id='userAliasL'
+                  type='text' 
+                  name='userAlias' 
+                  placeholder= {userAlias }
+                  value={userAlias} 
+                  onChange={handleOnchange} >
+                </input>
+                <br />
+                <br />
+                <button type='submit'>Save</button>
+                <br />
+                <br />
+
                 {showMe ? 
                     <div >
                       <div className="divTitleInput">Change Password: </div>

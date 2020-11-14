@@ -1,14 +1,16 @@
 .fom-popup-BoxShadow.changeProfile{
     width: 400px;
-    height: 500px;
-    padding-top: 70px;
+    height: 400px;
+    padding-top: 20px;
     margin: 30px auto;
+    opacity: 0.8;
 }
 
 .formChangeProfile{
     width: 90%;
     margin: 10px auto;
     padding-top: 0%;
+    
 }
 
 .formChangeProfile input{
