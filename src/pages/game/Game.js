@@ -3,12 +3,13 @@ import axios from 'axios';
 import configData from '../../config.json';
 import ChooseHeadmaster from './components/ChooseHeadmaster';
 import Vote from './components/Vote';
+import DiscardCard from './components/DiscardCard';
 import EmitProclamation from './components/EmitProclamation';
+import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
 import './Game.css';
-import DiscardCard from './components/DiscardCard';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -33,12 +34,31 @@ const Game = ({gameId}) => {
       })
     }
 
+    const getGameStatus = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + "/status", {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          setGameStatus(res.data);
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+
+    getGameInfo();
+
     const timer = setInterval(() => {
-      getGameInfo();
+      getGameStatus();  
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [gameId, gameInfo.status])
+  }, [gameId])
 
   return (
     <div className="Game">
@@ -87,6 +107,7 @@ const Game = ({gameId}) => {
                   <div>
                     <EmitProclamation
                       gameId={gameId}
+                      headmasterId={gameStatus.headmaster}
                     />
                   </div>
                 ) : (
@@ -94,10 +115,18 @@ const Game = ({gameId}) => {
                     <div>
                       <DiscardCard
                         gameId={gameId}
+                        ministerId={gameStatus.minister}
                       />
                     </div>
                 ) : (
-                  <p>Awaiting response...</p>
+                  gameStatus.phase === 'spell play' ? (
+                    <CastSpell 
+                      gameId={gameId}
+                      ministerId={gameStatus.minister}
+                    />
+                  ) : (
+                      <p>Awaiting response...</p>
+                    )
                   )
                 )
               )
