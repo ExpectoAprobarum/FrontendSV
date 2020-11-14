@@ -1,6 +1,8 @@
 .AvadaKedavra {
   position: relative;
   text-align: center;
+  background: radial-gradient(indigo, rgb(133, 69, 179));
+  padding-bottom: 5.55%;
 }
 
 .header {
@@ -17,7 +19,7 @@
 .sendKilled {
   position: relative;
   top: 20px;
-  background-color: #2f4f4f;
+  background-color: #5a1010;
   border-radius: 20px;
   width: 20%;
   padding: 8px 16px;
@@ -29,21 +31,21 @@
   font-size: large;
   color: #FFFFFF;
   border: none;
-  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
-                #2f4f4f 0px 0px 20px, 
-                #2f4f4f 0px 0px 30px, 
-                #2f4f4f 0px 0px 40px, 
-                #2f4f4f 0px 0px 50px, 
-                #2f4f4f 0px 0px 75px;
+  text-shadow: #f14040 0px 0px 5px, #f14040 0px 0px 10px, #f14040 0px 0px 15px, 
+                #b80a0a 0px 0px 20px, 
+                #b80a0a 0px 0px 30px, 
+                #b80a0a 0px 0px 40px, 
+                #b80a0a 0px 0px 50px, 
+                #b80a0a 0px 0px 75px;
 }
 
 .sendKilled:hover {
-  box-shadow: #FFF 0px 0px 1px, #FFF 0px 0px 3px, #FFF 0px 0px 6px, 
-                #2f4f4f 0px 0px 4px, 
-                #2f4f4f 0px 0px 8px, 
-                #2f4f4f 0px 0px 10px, 
-                #2f4f4f 0px 0px 13px, 
-                #2f4f4f 0px 0px 16px;
+  box-shadow: #f14040 0px 0px 1px, #f14040 0px 0px 3px, #f14040 0px 0px 6px, 
+                #b80a0a 0px 0px 4px, 
+                #b80a0a 0px 0px 8px, 
+                #b80a0a 0px 0px 10px, 
+                #b80a0a 0px 0px 13px, 
+                #b80a0a 0px 0px 16px;
 }
 
 *:disabled {
