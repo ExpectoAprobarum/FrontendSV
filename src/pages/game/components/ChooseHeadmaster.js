@@ -3,8 +3,8 @@ import axios from 'axios';
 import configData from '../../../config.json';
 import { getMyPlayer, getPlayers } from '../../../commons/players/players';
 import PlayerList from './PlayerList';
+import { notify_player_choose_err } from '../../../commons/alerts/toast';
 import './ChooseHeadmaster.css';
-import { notify_player_choosehm_err } from '../../../commons/alerts/toast';
 
 const ChooseHeadmaster = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
@@ -38,7 +38,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
         console.log(res.status)
       })
       .catch(error => {
-        notify_player_choosehm_err();
+        notify_player_choose_err();
       })
   }
 
