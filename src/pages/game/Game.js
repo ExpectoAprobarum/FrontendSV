@@ -33,12 +33,31 @@ const Game = ({gameId}) => {
       })
     }
 
+    const getGameStatus = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + "/status", {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+          }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          setGameStatus(res.data);
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+
+    getGameInfo();
+
     const timer = setInterval(() => {
-      getGameInfo();
+      getGameStatus();  
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [gameId, gameInfo.status])
+  }, [gameId])
 
   return (
     <div className="Game">
@@ -83,6 +102,7 @@ const Game = ({gameId}) => {
                   <div>
                     <EmitProclamation
                       gameId={gameId}
+                      headmasterId={gameStatus.headmaster}
                     />
                   </div>
                 ) : (
@@ -90,6 +110,7 @@ const Game = ({gameId}) => {
                     <div>
                       <DiscardCard
                         gameId={gameId}
+                        ministerId={gameStatus.minister}
                       />
                     </div>
                 ) : (
