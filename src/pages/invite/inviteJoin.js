@@ -128,7 +128,7 @@ const InviteJoin = ({gameJoin}) => {
                             state: {
                                 gameId: gameJoin
                             }
-                        }}>Unirse</Link>
+                        }}>Join</Link>
                       </button>)
                 }
                 <button className="buttonFound bttmodal">

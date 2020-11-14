@@ -54,7 +54,7 @@ const Game = ({gameId}) => {
     getGameInfo();
 
     const timer = setInterval(() => {
-      getGameStatus();  
+      getGameStatus();
     }, 2000);
 
     return () => clearInterval(timer)
@@ -77,7 +77,7 @@ const Game = ({gameId}) => {
         </div>
         <ShowResultVote
           gameId={gameId}
-          gameInfo={gameInfo}
+          gameInfo={gameStatus}
         />
       </div>
       <div className="board">
@@ -120,7 +120,7 @@ const Game = ({gameId}) => {
                     </div>
                 ) : (
                   gameStatus.phase === 'spell play' ? (
-                    <CastSpell 
+                    <CastSpell
                       gameId={gameId}
                       ministerId={gameStatus.minister}
                     />

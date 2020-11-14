@@ -23,7 +23,6 @@ const ShowResultVote = ({gameId, gameInfo}) => {
       let h = resultVote.find(
         playerR => playerR.player === e
       )
-      // console.log(h)
       let result = h != null ? h.vote : " "
       return(result)
     }
@@ -31,25 +30,26 @@ const ShowResultVote = ({gameId, gameInfo}) => {
 
   useEffect(() => {
     getP();
-  }, [gameInfo.status.headmaster]);
+  }, []);
 
   useEffect(() => {
-    if (Object.keys(gameInfo).length !== 0 && gameInfo.phase !== "propose") {
-      if (gameInfo.status.phase === 'vote' || gameInfo.status.phase === 'minister play') {
-        if (gameInfo.status.votes !== undefined) {
-          setResultVote(gameInfo.status.votes)
+    if (gameInfo !== undefined && gameInfo.phase !== "propose") {
+      if (gameInfo.phase === 'vote' || gameInfo.phase === 'minister play' ||
+          gameInfo.phase === 'spell play') {
+        if (gameInfo.votes !== undefined) {
+          setResultVote(gameInfo.votes)
 
-          if (gameInfo.status.votes.length !== countVotes) {
+          if (gameInfo.votes.length !== countVotes) {
             const alivePlayers = players.filter((item) => item.alive)
-            setCountVotes([gameInfo.status.votes.length, alivePlayers.length])
+            setCountVotes([gameInfo.votes.length, alivePlayers.length])
 
-            if(countVotes[0] === countVotes[1] && showResult[1] == 0) {
+            if(countVotes[0] === countVotes[1] && showResult[1] === 0) {
               setShowResult([true, 1])
               let head = players.find(
-                  playerR => playerR.id === parseInt(gameInfo.status.headmaster)
+                  playerR => playerR.id === parseInt(gameInfo.headmaster)
               )
               setHeadM(head)
-              //
+              getP()
               setTimeout(
                 () => setShowResult([false, 1]), 4500
               );
@@ -58,14 +58,8 @@ const ShowResultVote = ({gameId, gameInfo}) => {
         }
       } else {
           setShowResult([false, 0])
-          // setPlayers([])
-          setResultVote("")
           setCountVotes([0, -1])
           setHeadM([])
-          console.log("resultVote: ", resultVote)
-          console.log("countVotes: ", countVotes)
-          console.log("ShowResult: ", showResult)
-          console.log("HeadM: ", headM)
       }
     }
   }, [gameInfo]);
@@ -87,9 +81,26 @@ const ShowResultVote = ({gameId, gameInfo}) => {
             <div className="hDivPlayers cust">
               <div className="hDivPlayers votes">
                 <li style={{fontWeight: 'bold'}}>
-                  {(player.current_position) !== "" ?
-                    (player.current_position).toUpperCase() :
-                    <p> </p>}
+                  {
+                    (() => {
+                      if (gameInfo !== undefined) {
+                        if (gameInfo.phase === 'vote') {
+                          if (parseInt(gameInfo.headmaster) === player.id) {
+                            return "CANDIDATE"
+                          }
+                          if (player.current_position === 'minister') {
+                            return "MINISTER"
+                          }
+                        } else {
+                            return (
+                              (player.current_position) !== "" ?
+                                (player.current_position).toUpperCase() :
+                                <p> </p>
+                            )
+                        }
+                      }
+                  })()
+                  }
                 </li>
                 <li>{player.user.useralias}</li>
               </div>
@@ -98,7 +109,7 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                   (() => {
                     if (resultVote !== "") {
                       let result = searchCurrent2(player.id)
-                      if (result == true) {
+                      if (result === true) {
                         return (
                           <img className="imgDivVote" src={lumos} alt="lumos"/>
                         )
@@ -106,7 +117,7 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                         return (
                           <p> </p>
                         )
-                      } else if (result == false) {
+                      } else if (result === false) {
                         return (
                           <img className="imgDivVote" src={nox} alt="nox"/>
                         )
