@@ -3,6 +3,8 @@ import axios from 'axios';
 import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import AvadaKedavra from './spells/AvadaKedavra';
+import Divination from './spells/Divination';
+import './CastSpell.css';
 
 const CastSpell = ({gameId, ministerId}) => {
   const [currentSpell, setCurrentSpell] = useState("");
@@ -22,7 +24,7 @@ const CastSpell = ({gameId, ministerId}) => {
           let boardSize = spellArray.length;
           let deathProc = res.data.de_proc;
           if(deathProc < boardSize) {
-            setCurrentSpell(spellArray[deathProc]);
+            setCurrentSpell(spellArray[deathProc-1]);
           }
         }
       })
@@ -50,13 +52,19 @@ const CastSpell = ({gameId, ministerId}) => {
                   ministerId={ministerId}
                 />
               ) : (
-                <p>No matching Spell</p>
+                currentSpell === "divination" ? (
+                  <Divination
+                    gameId={gameId}
+                  />
+                ) : (
+                  <p>No matching Spell</p>
+                  )
                 )
               }
             </div>
           ) : (
             <div>
-              <h2>No spell available</h2>
+              <h2 className="header">No spell available</h2>
             </div>
             )
           }
@@ -67,7 +75,6 @@ const CastSpell = ({gameId, ministerId}) => {
             Minister is casting Spell: {currentSpell.toUpperCase()}
           </h2>
         </div>
-        
         )
       }
     </div>

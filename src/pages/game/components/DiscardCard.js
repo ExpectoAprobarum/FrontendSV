@@ -4,7 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import './DiscardCard.css';
 
-const DiscardCard = ({gameId}) => {
+const DiscardCard = ({gameId, ministerId}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
@@ -58,7 +58,7 @@ const DiscardCard = ({gameId}) => {
 
   return (
     <div className="discard">
-    { myPlayer.current_position === "minister" ? (
+    { myPlayer.id === ministerId ? (
         <div className="is-minister">
           <h2 className="header">
             Discard proclamation:
