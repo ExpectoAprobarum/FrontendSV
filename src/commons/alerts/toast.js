@@ -37,3 +37,9 @@ export const notify_user_update_invalidPass= () => {
     position: toast.POSITION.TOP_CENTER,
     autoClose: 2000})
 }
+
+export const notify_player_choosehm_err= () => {
+  toast.error('Please choose a valid player ', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000})
+}
