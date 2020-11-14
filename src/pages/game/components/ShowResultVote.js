@@ -1,0 +1,124 @@
+import React, { useEffect, useState } from 'react';
+import { getPlayers } from '../../../commons/players/players';
+import PopupVote from './popupVote';
+import lumos from '../assets/lumos.png';
+import nox from '../assets/nox.png';
+
+const ShowResultVote = ({gameId, gameInfo}) => {
+  const [players, setPlayers] = useState([]);
+  const [resultVote, setResultVote] = useState("");
+  const [countVotes, setCountVotes] = useState([0, -1]);
+  const [showResult, setShowResult] = useState([false, 0]);
+  const [headM, setHeadM] = useState([])
+
+  const getP = () => {
+    getPlayers(gameId)
+      .then(res => {
+        setPlayers(res)
+      });
+  }
+
+  const searchCurrent2 = (e) => {
+    if (resultVote !== undefined) {
+      let h = resultVote.find(
+        playerR => playerR.player === e
+      )
+      // console.log(h)
+      let result = h != null ? h.vote : " "
+      return(result)
+    }
+  }
+
+  useEffect(() => {
+    getP();
+  }, [gameInfo.status.headmaster]);
+
+  useEffect(() => {
+    if (Object.keys(gameInfo).length !== 0 && gameInfo.phase !== "propose") {
+      if (gameInfo.status.phase === 'vote' || gameInfo.status.phase === 'minister play') {
+        if (gameInfo.status.votes !== undefined) {
+          setResultVote(gameInfo.status.votes)
+
+          if (gameInfo.status.votes.length !== countVotes) {
+            const alivePlayers = players.filter((item) => item.alive)
+            setCountVotes([gameInfo.status.votes.length, alivePlayers.length])
+
+            if(countVotes[0] === countVotes[1] && showResult[1] == 0) {
+              setShowResult([true, 1])
+              let head = players.find(
+                  playerR => playerR.id === parseInt(gameInfo.status.headmaster)
+              )
+              setHeadM(head)
+              //
+              setTimeout(
+                () => setShowResult([false, 1]), 4500
+              );
+            }
+          }
+        }
+      } else {
+          setShowResult([false, 0])
+          // setPlayers([])
+          setResultVote("")
+          setCountVotes([0, -1])
+          setHeadM([])
+          console.log("resultVote: ", resultVote)
+          console.log("countVotes: ", countVotes)
+          console.log("ShowResult: ", showResult)
+          console.log("HeadM: ", headM)
+      }
+    }
+  }, [gameInfo]);
+
+
+  return (
+    <div>
+      { showResult[0] ?
+        <PopupVote open={true} headM={headM}>
+        </PopupVote> : " "
+      }
+      {players.sort(
+        function(a,b){
+          var x = a.id < b.id? -1:1;
+          return x
+        }).map( player =>
+          <div className="fom-popup-BoxShadow custom game"
+            key={player.id}>
+            <div className="hDivPlayers cust">
+              <div className="hDivPlayers votes">
+                <li style={{fontWeight: 'bold'}}>
+                  {(player.current_position) !== "" ?
+                    (player.current_position).toUpperCase() :
+                    <p> </p>}
+                </li>
+                <li>{player.user.useralias}</li>
+              </div>
+              <div style={{}}>
+                {
+                  (() => {
+                    if (resultVote !== "") {
+                      let result = searchCurrent2(player.id)
+                      if (result == true) {
+                        return (
+                          <img className="imgDivVote" src={lumos} alt="lumos"/>
+                        )
+                      } else if (result === " ") {
+                        return (
+                          <p> </p>
+                        )
+                      } else if (result == false) {
+                        return (
+                          <img className="imgDivVote" src={nox} alt="nox"/>
+                        )
+                      }
+                    }
+                })()
+              }
+              </div>
+            </div>
+          </div>
+      )}
+    </div>
+  )
+}
+export default ShowResultVote

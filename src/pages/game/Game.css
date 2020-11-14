@@ -10,6 +10,7 @@
   border-right: 6px solid rgb(224, 205, 98);
   border-left: 6px solid rgb(224, 205, 98);
   font-family: sans-serif;
+  background-color: black;
 }
 
 .info .game-phase {

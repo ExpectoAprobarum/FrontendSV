@@ -6,6 +6,7 @@ import Vote from './components/Vote';
 import EmitProclamation from './components/EmitProclamation';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
+import ShowResultVote from './components/ShowResultVote';
 import './Game.css';
 import DiscardCard from './components/DiscardCard';
 
@@ -54,9 +55,13 @@ const Game = ({gameId}) => {
             <ShowRole gameId={gameId}/>
           </div>
         </div>
+        <ShowResultVote
+          gameId={gameId}
+          gameInfo={gameInfo}
+        />
       </div>
       <div className="board">
-        <Board 
+        <Board
           gameId={gameId}
         />
       </div>
