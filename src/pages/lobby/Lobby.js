@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import { Redirect } from 'react-router';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // prueba
+import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import configData from '../../config.json';
 import Game from '../game/Game'
@@ -10,11 +11,12 @@ import '../joinagame/styleSearch.css'
 const LobbyPage = (props) => {
   const [listPlayers, setListPlayers] = useState([]);
   const [initPartida, setInitPartida]= useState(false);
+  const [endGame, setEndGame]= useState(false);
   const [userCreate, setUserCreate] = useState(0);
   const [countPlayer, setCountPlayer]= useState(0);
   const [message, setMessage] = useState('');
 
-  let idGame = props.location.state.gameId;
+  let idGame = parseInt(props.location.state.gameId);
 
   var idPlayer = 0
   const usertoken = localStorage.getItem('user');
@@ -24,8 +26,7 @@ const LobbyPage = (props) => {
 
   useEffect(() => {
     const getPlayers = () => {
-      const usertoken = localStorage.getItem('user')
-      axios.get(`${configData.API_URL}/games/${props.location.state.gameId}/players`, {
+      axios.get(`${configData.API_URL}/games/${idGame}/players`, {
           headers: {
               'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -36,7 +37,7 @@ const LobbyPage = (props) => {
         }
       })
       .catch(error => {
-        console.log(error)
+        setEndGame(true)
       })
     }
 
@@ -52,8 +53,7 @@ const LobbyPage = (props) => {
 
   useEffect(() => {
     const getGameInfo = () => {
-      const usertoken = localStorage.getItem('user')
-        axios.get(`${configData.API_URL}/games/${props.location.state.gameId}`, {
+        axios.get(`${configData.API_URL}/games/${idGame}`, {
           headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -63,6 +63,8 @@ const LobbyPage = (props) => {
             setInitPartida(res.data.started)
             setUserCreate(res.data.created_by)
           }
+        }).catch( error => {
+          setEndGame(true)
         })
     }
     const timer = setInterval(() => {
@@ -77,19 +79,11 @@ const LobbyPage = (props) => {
 
   const gameStart = () => {
     if (countPlayer >= 5) {
-      const idPart = parseInt(props.location.state.gameId)
-      const usertoken = localStorage.getItem('user')
-
-      axios.post(`${configData.API_URL}/games/${idPart}/start`,({}),{
+      axios.post(`${configData.API_URL}/games/${idGame}/start`,({}),{
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
-      }).then(response => {
-        if(response.status === 200){
-          console.log("Game started")
-        }
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log(error)
       })
     } else {
@@ -101,16 +95,27 @@ const LobbyPage = (props) => {
   }
 
   const exitLobby = () => {
-    const idPart = parseInt(props.location.state.gameId)
-    const usertoken = localStorage.getItem('user')
+    if (idPlayer === userCreate) {
+      endUserCreate()
+    } else {
+      axios.post(`${configData.API_URL}/games/${idGame}/exit`,({}),{
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  }
 
-    axios.post(`${configData.API_URL}/games/${idPart}/exit`,({}),{
+  const endUserCreate = () => {
+    axios.delete(`${configData.API_URL}/games/${idGame}/delete`, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
       }
     }).then(response => {
       if(response.status === 200){
-        console.log("Game Exit")
+        setEndGame(true)
       }
     })
     .catch(error => {
@@ -120,49 +125,51 @@ const LobbyPage = (props) => {
 
   return (
     <div>
-      { initPartida ?
-        <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
-        : <div>
-            <div className="divContentTittle">
-              <div className="divCreateJoin tittle">
-                <Link className="liStyle back" to="/home"
-                  onClick={exitLobby}>{`<`}</Link>
-                <p className="parrafo">
-                  Invite URL:
-                  {` http://localhost:3000/Game/invite?game=${idGame}`}</p>
+      { endGame ? <Redirect to="/Home" /> :
+        ( initPartida ?
+          <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
+          : <div>
+              <div className="divContentTittle">
+                <div className="divCreateJoin tittle">
+                  <Link className="liStyle back" to="/home"
+                    onClick={exitLobby}>{`<`}</Link>
+                  <p className="parrafo">
+                    Invite URL:
+                    {` http://localhost:3000/Game/invite?game=${idGame}`}</p>
+                </div>
               </div>
-            </div>
 
-            <h1 className="h1TittleLobby">Lobby</h1>
-            <h4 className="h1TittleLobby error">{message}</h4>
-            <div className="divCreateJoin lobby-1">
-              {userCreate === idPlayer ?
-                <div className="button-container-1 button lobby">
-                  <span className="mas">Start Game</span>
-                  <button id="work" type="button"
-                    name="Hover" onClick={gameStart}>
-                      Start Game
-                  </button>
-                </div> : <h3 className = "divWaiting">Waiting to start</h3>
-               }
-            </div>
-            <label>
-            <div className="divCreateJoin lobby">
-              {listPlayers.sort(
-                function(a,b){
-                  var x = a.id < b.id? -1:1;
-                  return x
-                }).map( player =>
-                  <li key={player.user.id}
-                    className="liStyle fom-popup-BoxShadow custom">
-                      {player.user.username}
-                  </li>
-              )}
-            </div>
-            </label>
-        </div>
+              <h1 className="h1TittleLobby">Lobby</h1>
+              <h4 className="h1TittleLobby error">{message}</h4>
+              <div className="divCreateJoin lobby-1">
+                {userCreate === idPlayer ?
+                  <div className="button-container-1 button lobby">
+                    <span className="mas">Start Game</span>
+                    <button id="work" type="button"
+                      name="Hover" onClick={gameStart}>
+                        Start Game
+                    </button>
+                  </div> : <h3 className = "divWaiting">Waiting to start</h3>
+                 }
+              </div>
+              <label>
+              <div className="divCreateJoin lobby">
+                {listPlayers.sort(
+                  function(a,b){
+                    var x = a.id < b.id? -1:1;
+                    return x
+                  }).map( player =>
+                    <li key={player.user.id}
+                      className="liStyle fom-popup-BoxShadow custom">
+                        {player.user.username}
+                    </li>
+                )}
+              </div>
+              </label>
+          </div>
+        )
       }
-    </div>
+      </div>
   )
 }
 export default LobbyPage;

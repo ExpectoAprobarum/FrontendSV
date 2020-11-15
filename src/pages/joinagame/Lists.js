@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Modal from './modal'
 import jwt_decode from 'jwt-decode';
-// import configData from '../../config.json';
+import configData from '../../config.json';
 
-const ListPerson = () => {
+const ListGames = () => {
   const [value, setValue] = useState('');
   const [list, setList] = useState([]);
   const [listBackup, setListBackup] = useState([]);
@@ -51,17 +51,11 @@ const ListPerson = () => {
         const idPart = parseInt(selected.id)
         const usertoken = localStorage.getItem('user')
 
-        axios.post(`http://127.0.0.1:8000/games/${idPart}/join`,({}),{
+        axios.post(`${configData.API_URL}/games/${idPart}/join`,({}),{
           headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
-        }).then(response => {
-          if (response.status === 200) {
-            const response_id = response.data
-            console.log("join:", response_id.message)
-          }
-        })
-        .catch(error => {
+        }).catch(error => {
           console.log(error)
         })
       }
@@ -69,7 +63,7 @@ const ListPerson = () => {
   }
 
   const getPlayers = (idGame) => {
-    axios.get(`http://127.0.0.1:8000/games/${idGame.id}/players`, {
+    axios.get(`${configData.API_URL}/games/${idGame.id}/players`, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
       }
@@ -111,7 +105,7 @@ const ListPerson = () => {
   }
 
   const componentDidMount = () => {
-    axios.get('http://127.0.0.1:8000/games/', {
+    axios.get(`${configData.API_URL}/games/`, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
       }
@@ -124,8 +118,7 @@ const ListPerson = () => {
     .catch(error => {
        console.log(error)
     })
-  };
-
+  }
 
   return (
     <div>
@@ -152,8 +145,9 @@ const ListPerson = () => {
                 inPartida={joinGame}
                 gameID={selected.id}
                 error={error}>
-                <h3>{selected.name}</h3>
-                <p>Sala: {selected.id}</p>
+                <h3>{`Game: ${selected.name}`}</h3>
+                <p>{`Players: ${listPlayers.length}/
+                  ${selected.player_amount}`}</p>
               </Modal>
 
               <div style={{paddingTop: "20px"}}></div>
@@ -181,4 +175,4 @@ const ListPerson = () => {
     </div>
   )
 }
-export default ListPerson;
+export default ListGames;

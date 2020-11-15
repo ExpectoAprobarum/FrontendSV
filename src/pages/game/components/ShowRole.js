@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import configData from '../../../config.json';
 import './ShowRole.css'
 import morti from '../assets/Wiborita.png';
 import phoenix from '../assets/Fenix.png';
 
-const ShowRole = ({gameId}) => {
+const ShowRole = ({gameId, gameInfo}) => {
   const [rolePlayer, setRolePlayer] = useState([])
 
   var idPlayer = 0
@@ -16,7 +17,7 @@ const ShowRole = ({gameId}) => {
   useEffect(() => {
     const getPlayers = () => {
       const usertoken = localStorage.getItem('user')
-      axios.get(`http://127.0.0.1:8000/games/${gameId}/players`, {
+      axios.get(`${configData.API_URL}/games/${gameId}/players`, {
           headers: {
               'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -36,11 +37,13 @@ const ShowRole = ({gameId}) => {
   }, [])
 
   return(
-    <div className="BoxShadow">
+    <div className="BoxShadow myRole cust">
       <div className="hDivRole">
         <li className="hDivRole">{`${rolePlayer.role}`.toUpperCase()}</li>
-        <li className="hDivRole">{rolePlayer.is_voldemort ?
-          `Voldemort` : ""}</li>
+      <li style={{fontWeight: 'bold'}} className="hDivRole" >
+        {rolePlayer.is_voldemort ?
+          `Voldemort` : ""}
+      </li>
       </div>
       <div>
         { (`${rolePlayer.role}`.toUpperCase() === "PHOENIX ORDER") ?

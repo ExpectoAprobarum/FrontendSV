@@ -1,14 +1,24 @@
 .BoxShadow {
-    background: white;
+    /* background: white; */
     border: none;
     border-radius: 20px;
-    padding: 15px 0 0 20px;
+    /* padding: 15px 0 0 20px; */
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
-    width: 300px;
+    width: 258px;
     height: 100px;
-    float: left;
+    /* float: left; */
+}
+
+.BoxShadow.myRole {
+  background-color: #343842;
+  color: white
+}
+
+.BoxShadow.voteBox {
+  padding: 0 0 0 0;
+  margin-right: 20%
 }
 
 .hDivRole {
@@ -18,8 +28,61 @@
   margin-top: 5px;
 }
 
+.hDivRole.cust {
+  margin-top: 9%;
+  margin-left: 5%;
+}
+
+.hDivPlayers {
+  width: 100%;
+  list-style: none;
+  float: left;
+}
+
+.hDivPlayers.votes{
+  width: 70%;
+  list-style: none;
+}
+
 .imgDivRole {
   float: right;
   height: 85px;
   margin-right: 15%;
+  margin-top: 3%;
+}
+
+.fom-popup-BoxShadow.game{
+    width: 75%;
+    height: 50px;
+    background-color: #343842;
+    color: white;
+}
+
+.imgDivVote {
+  height: 30px;
+  margin-top: 2%;
+  margin-right: 5%;
+}
+
+.modalRole {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.modal-mainRole {
+    position:fixed;
+    background: white;
+    width: 50%;
+    height: 180px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    /* padding-left: 40px;
+    padding-bottom: 20px; */
 }

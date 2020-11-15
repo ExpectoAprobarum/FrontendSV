@@ -12,10 +12,7 @@ import './App.css'
 function App() {
   return (
     <div className='Principalpagestyle'>
-      
-    
       <Router>
-      
         <Switch>
           <Route exact path="/home" component={PrincipalPage}></Route>
           <Route exact path="/Game" component={LobbyPage}></Route>
@@ -26,7 +23,6 @@ function App() {
           <Route exact path='/changeProfile' component={ChangeProfile}></Route>
         </Switch>
       </Router>
-      
     </div>
   );
 }

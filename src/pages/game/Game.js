@@ -8,10 +8,10 @@ import EmitProclamation from './components/EmitProclamation';
 import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
+import ShowResultVote from './components/ShowResultVote';
 import ShowDivination from './components/ShowDivination';
-import './Game.css';
 import GameOver from './components/GameOver';
-
+import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
@@ -57,7 +57,7 @@ const Game = ({gameId}) => {
     getGameInfo();
 
     const timer = setInterval(() => {
-      getGameStatus();  
+      getGameStatus();
     }, 2000);
 
     return () => clearInterval(timer)
@@ -92,6 +92,10 @@ const Game = ({gameId}) => {
             <ShowRole gameId={gameId}/>
           </div>
         </div>
+        <ShowResultVote
+          gameId={gameId}
+          gameInfo={gameStatus}
+        />
         <div className="show-divination">
           {
             gameStatus ? (
@@ -106,7 +110,7 @@ const Game = ({gameId}) => {
         </div>
       </div>
       <div className="board">
-        <Board 
+        <Board
           gameId={gameId}
         />
       </div>
@@ -137,6 +141,12 @@ const Game = ({gameId}) => {
                         setDivinationInfo={showDivinationInfo}
                       />
                     </div>
+                ) : (
+                  gameStatus.phase === 'spell play' ? (
+                    <CastSpell
+                      gameId={gameId}
+                      ministerId={gameStatus.minister}
+                    />
                   ) : (
                     gameStatus.phase === 'spell play' ? (
                       <div>
