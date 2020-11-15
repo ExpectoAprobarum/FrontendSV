@@ -38,6 +38,24 @@ export const notify_user_update_invalidPass= () => {
     autoClose: 2000})
 }
 
+export const notify_player_choose_err= () => {
+  toast.error('Please choose a valid player ', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000})
+}
+
+export const notify_player_vote_success= () => {
+  toast.success('Your vote has been sent', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000})
+}
+
+export const notify_player_vote_err= () => {
+  toast.error('You already voted! ', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000})
+}
+
 export const notify_gameName_invalid = () => {
   toast.error('The GameName is invalid', {
     position: toast.POSITION.TOP_CENTER,

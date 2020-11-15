@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import './Vote.css';
+import { notify_player_vote_success, notify_player_vote_err } 
+    from '../../../commons/alerts/toast';
 
 const Vote = ({gameId}) => {
 
@@ -16,11 +18,11 @@ const Vote = ({gameId}) => {
     })
     .then(res => {
       if(res.status === 200) {
-        console.log(res.status)
+        notify_player_vote_success();
       }
     })
     .catch(error => {
-      console.log(error)
+      notify_player_vote_err();
     })
 
     document.getElementById("lumos").disabled = true;
