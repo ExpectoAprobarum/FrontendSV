@@ -1,14 +1,12 @@
 .BoxShadow {
-    /* background: white; */
+    margin: 20px auto;
     border: none;
     border-radius: 20px;
-    /* padding: 15px 0 0 20px; */
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
-    width: 258px;
-    height: 100px;
-    /* float: left; */
+    width: 76%;
+    height: 130px;
 }
 
 .BoxShadow.myRole {
@@ -46,9 +44,9 @@
 
 .imgDivRole {
   float: right;
-  height: 85px;
+  height: 100px;
   margin-right: 15%;
-  margin-top: 3%;
+  margin-top: 5%;
 }
 
 .fom-popup-BoxShadow.game{
@@ -78,8 +76,8 @@
     position:fixed;
     background: white;
     width: 50%;
-    height: 180px;
-    top:50%;
+    height: 300px;
+    top: 55%;
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 20px;

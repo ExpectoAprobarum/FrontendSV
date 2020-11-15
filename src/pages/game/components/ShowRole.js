@@ -8,12 +8,14 @@ import phoenix from '../assets/Fenix.png';
 
 const ShowRole = ({gameId, gameInfo}) => {
   const [rolePlayer, setRolePlayer] = useState([])
+  const [meAlias, setMeAlias] = useState("")
 
   var idPlayer = 0
   const usertoken = localStorage.getItem('user');
   if(usertoken) {
     idPlayer = jwt_decode(usertoken).sub.id;
   }
+
   useEffect(() => {
     const getPlayers = () => {
       const usertoken = localStorage.getItem('user')
@@ -26,6 +28,9 @@ const ShowRole = ({gameId, gameInfo}) => {
           setRolePlayer(response.data.data.find(
             player => player.user.id === idPlayer
           ))
+          setMeAlias(response.data.data.find(
+            player => player.user.id === idPlayer
+          ).user.useralias)
         }
       })
       .catch(error => {
@@ -39,11 +44,17 @@ const ShowRole = ({gameId, gameInfo}) => {
   return(
     <div className="BoxShadow myRole cust">
       <div className="hDivRole">
-        <li className="hDivRole">{`${rolePlayer.role}`.toUpperCase()}</li>
-      <li style={{fontWeight: 'bold'}} className="hDivRole" >
-        {rolePlayer.is_voldemort ?
-          `Voldemort` : ""}
-      </li>
+        <li className="hDivRole" 
+          style={{fontWeight: 'bold', fontSize: '20px', paddingTop: '8%'}}>
+          {`${meAlias}`}
+        </li>
+        <li className="hDivRole" style={{paddingTop: '10%'}}>
+          {`${rolePlayer.role}`.toUpperCase()}
+        </li>
+        <li style={{fontWeight: 'bold'}} className="hDivRole" >
+          {rolePlayer.is_voldemort ?
+            `Voldemort` : ""}
+        </li>
       </div>
       <div>
         { (`${rolePlayer.role}`.toUpperCase() === "PHOENIX ORDER") ?

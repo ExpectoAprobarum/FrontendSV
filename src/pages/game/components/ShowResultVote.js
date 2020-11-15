@@ -48,7 +48,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
               let head = players.find(
                   playerR => playerR.id === parseInt(gameInfo.headmaster)
               )
-              setHeadM(head)
+              let minister = players.find(
+                  playerR => playerR.id === parseInt(gameInfo.minister)
+              )
+              setHeadM([head, minister])
               getP()
               setTimeout(
                 () => setShowResult([false, 1]), 4500
@@ -86,10 +89,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                       if (gameInfo !== undefined) {
                         if (gameInfo.phase === 'vote') {
                           if (parseInt(gameInfo.headmaster) === player.id) {
-                            return "CANDIDATE"
+                            return "CAND. HEADMASTER"
                           }
                           if (player.current_position === 'minister') {
-                            return "MINISTER"
+                            return "CAND. MINISTER"
                           }
                         } else {
                             return (
@@ -102,7 +105,11 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                   })()
                   }
                 </li>
-                <li>{player.user.useralias}</li>
+                <li style={player.alive ?
+                    {color: 'white'} :
+                    {color: 'red', fontWeight: 'bold', fontSize: '20px'}}>
+                    {player.user.useralias}
+                </li>
               </div>
               <div style={{}}>
                 {
