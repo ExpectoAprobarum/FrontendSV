@@ -31,6 +31,29 @@ const Board = ({gameId}) => {
     return () => clearInterval(timer)
   }, [gameId])
 
+  const spellsInfo = boardInfo === undefined || 
+                     boardInfo.spell_fields === undefined ? (
+    "Loading spells"
+  ) : (
+    boardInfo.spell_fields.map((spell, index) => {
+      return (
+        <li className="spell-container">
+          { spell === "" || index === boardInfo.spell_fields.length - 1 ? (
+              null
+            ) : (
+              <div>
+                <h2 className="death-ammount">{index + 1} : </h2>
+                <h2 className="header">
+                  {spell.toUpperCase()}
+                </h2>
+              </div>
+            )
+          }
+        </li>
+      )
+    })
+  )
+
   return (
     <div className="Board">
     <div className="proclamations">
@@ -55,8 +78,19 @@ const Board = ({gameId}) => {
           </div>
         </div>
       </div>
-      <div className="boards">
-
+      <div className="spells-info">
+        <ul>
+          <h2 className="spell-info-header">
+            SPELLS
+          </h2>
+          { spellsInfo }
+          <h3 className="next-spell">
+            Next: { 
+              boardInfo === undefined || boardInfo.spell_fields === undefined ? 
+              " "
+              : boardInfo.spell_fields[boardInfo.de_proc].toUpperCase() }
+          </h3>
+        </ul>
       </div>
     </div>
   )
