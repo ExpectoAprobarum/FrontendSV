@@ -1,30 +1,28 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import "./buttonStyle.css";
-import "./pageCreateGame.css"
 import {notify_gameName_invalid} 
-  from '../../commons/alerts/toast'
+  from '../../commons/alerts/toast';
 import { Redirect } from 'react-router-dom';
+import configData from '../../config.json';
+import "./buttonStyle.css";
+import "./pageCreateGame.css";
 
  
 const PageCreateGame = () => {
-    //necesito un atributo showme en el estado para poder mostrar todo este componente cdo se toca un boton.
     const [name, setName] = useState('');
     const [player_amount, setPlayer_amount] = useState(5);
     const [showMe, setShowMe] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [gameId, setIdgame] = useState("-1") ; 
     
-    //esta funcion se encarga de hacer un post una vez apretado el boton.
     const onSubmit = (e) => {
       e.preventDefault();
-      //esto es lo que voy a enviar al back
       const infotosend ={
       name: name,
       player_amount: parseInt(player_amount)
       };
       const usertoken = localStorage.getItem('user')
-      axios.post('http://127.0.0.1:8000/games/',(infotosend), {
+      axios.post(configData.API_URL + '/games/', (infotosend), {
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
         }
@@ -52,10 +50,9 @@ const PageCreateGame = () => {
     const showmetheElement = () => {
         setShowMe(! showMe)
     }
-    //mando la id a /game
       if(redirect){ 
         return <Redirect to={{
-          pathname: '/Game',
+          pathname: '/game',
           state: {gameId}
         }} />
       }
@@ -63,7 +60,8 @@ const PageCreateGame = () => {
             <div> 
               <div className="button-container-1">
               <span className="mas">Are you ready ?</span>
-              <button id="work" type="button" name="Hover" onClick={showmetheElement}>
+              <button id="work" type="button" name="Hover"
+                      onClick={showmetheElement}>
                 Create a Game
               </button>
               </div> 
@@ -93,7 +91,10 @@ const PageCreateGame = () => {
                     </select>
                     <br />
                     <br />
-                    <button tpye ='submit' value={redirect} name="redirect" className='SaveConfig'>Save config</button>
+                    <button tpye='submit' value={redirect} name="redirect" 
+                            className='SaveConfig'>
+                      Save config
+                    </button>
                 </form>
               </div>
             </div>   

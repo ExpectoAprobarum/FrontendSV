@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import Modal from './modal'
 import jwt_decode from 'jwt-decode';

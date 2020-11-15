@@ -7,7 +7,7 @@ const GameOver = ({winner}) => {
   const history = useHistory();
   
   const leaveGame = () => {
-    let path = "/Home";
+    let path = "/home";
     history.push(path);
   }
 

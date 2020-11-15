@@ -20,7 +20,7 @@ export default function Modal({open, children, handleClose,
                 ""
                 : (<button className="buttonFound bttmodal" onClick={inPartida}>
                       <Link className="linked" to={{
-                          pathname: '/Game',
+                          pathname: '/game',
                           state: {
                               gameId: gameID
                           }

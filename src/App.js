@@ -15,12 +15,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/home" component={PrincipalPage}></Route>
-          <Route exact path="/Game" component={LobbyPage}></Route>
+          <Route exact path="/game" component={LobbyPage}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/" component={RegisterAndLogin}></Route>
-          <Route path="/Game/invite" component={Invite}></Route>
-          <Route exact path='/changeProfile' component={ChangeProfile}></Route>
+          <Route path="/game/invite" component={Invite}></Route>
+          <Route exact path='/changeprofile' component={ChangeProfile}></Route>
         </Switch>
       </Router>
     </div>

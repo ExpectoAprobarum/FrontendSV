@@ -14,29 +14,11 @@ import GameOver from './components/GameOver';
 import './Game.css';
 
 const Game = ({gameId}) => {
-  const [gameInfo, setGameInfo] = useState({});
   const [gameStatus, setGameStatus] = useState({});
   const [divination, setDivination] = useState([]);
   const [showDivination, setShowDivination] = useState(false);
 
   useEffect(() => {
-    const getGameInfo = () => {
-      const usertoken = localStorage.getItem('user');
-      axios.get(configData.API_URL + '/games/' + gameId, {
-        headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
-          }
-      })
-      .then(res => {
-        if(res.status === 200) {
-          setGameInfo(res.data);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
-
     const getGameStatus = () => {
       const usertoken = localStorage.getItem('user');
       axios.get(configData.API_URL + '/games/' + gameId + "/status", {
@@ -53,8 +35,6 @@ const Game = ({gameId}) => {
         console.log(error)
       })
     }
-
-    getGameInfo();
 
     const timer = setInterval(() => {
       getGameStatus();
@@ -79,9 +59,13 @@ const Game = ({gameId}) => {
           <h3>
             { gameStatus !== undefined ? (
                 gameStatus.winner === undefined ? (
-                  " "
+                  gameStatus.phase !== undefined ? (
+                    gameStatus.phase.toUpperCase()
+                  ) : (
+                    " "
+                  )
                 ) : "GAME OVER"
-              ) : gameStatus.phase.toUpperCase() }
+              ) : " " }
           </h3>
         </div>
         <div className="role">
@@ -143,31 +127,24 @@ const Game = ({gameId}) => {
                     </div>
                 ) : (
                   gameStatus.phase === 'spell play' ? (
-                    <CastSpell
-                      gameId={gameId}
-                      ministerId={gameStatus.minister}
-                    />
+                    <div>
+                      <CastSpell
+                        gameId={gameId}
+                        ministerId={gameStatus.minister}
+                        passDivination={passDivination}
+                        setDivinationInfo={showDivinationInfo}
+                      />
+                    </div>
                   ) : (
-                    gameStatus.phase === 'spell play' ? (
+                    gameStatus.phase === 'minister play' ? (
                       <div>
-                        <CastSpell
+                        <DiscardCard
                           gameId={gameId}
                           ministerId={gameStatus.minister}
-                          passDivination={passDivination}
-                          setDivinationInfo={showDivinationInfo}
                         />
                       </div>
                     ) : (
-                      gameStatus.phase === 'minister play' ? (
-                        <div>
-                          <DiscardCard
-                            gameId={gameId}
-                            ministerId={gameStatus.minister}
-                          />
-                        </div>
-                      ) : (
-                        <p>Awaiting response...</p>
-                        )
+                      <p>Awaiting response...</p>
                       )
                     )
                   )

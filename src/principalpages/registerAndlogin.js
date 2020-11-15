@@ -8,7 +8,9 @@ const RegisterAndLogin = () => {
     return(
       <div className="DivRegisterandLogin">
         <div className='DivCreateRegisterandL'>
-          <h1 style={{paddingBottom: "50px", fontSize:"100px"}}>Secret Voldemort</h1>
+          <h1 style={{paddingBottom: "50px", fontSize:"100px"}}>
+            Secret Voldemort
+          </h1>
         </div>
         <div className="button-container-1">
           <span className="mas">Register</span>

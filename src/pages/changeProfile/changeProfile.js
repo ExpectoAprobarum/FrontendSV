@@ -4,17 +4,16 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {notify_user_update_invalidPass,  
   notify_user_update_succ} 
-  from '../../commons/alerts/toast'
-import './changeProfile.css'
+  from '../../commons/alerts/toast';
+import configData from '../../config.json';
+import './changeProfile.css';
 
 const ChangeProfile = () => {
-
-  const[passwordOld, setPasswordOld] = useState('')
-  const[passwordNew, setpasswordNew] = useState('')
-  const[userAlias, setUserAlias] = useState('')
-  //mostrar cambiar password
-  const[showMe, setShowMe] = useState(false)
-  const[error, setError] = useState(false)
+  const[passwordOld, setPasswordOld] = useState('');
+  const[passwordNew, setpasswordNew] = useState('');
+  const[userAlias, setUserAlias] = useState('');
+  const[showMe, setShowMe] = useState(false);
+  const[error, setError] = useState(false);
   
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -25,13 +24,12 @@ const ChangeProfile = () => {
       oldpassword:passwordOld,
       newpassword:passwordNew
     }
-    axios.put('http://127.0.0.1:8000/users',infotosend, {
+    axios.put(configData.API_URL + '/users', infotosend, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
       }
     }).then(response => { 
       if(response.status === 200){
-        //avisar del success
         notify_user_update_succ()
         console.log(response)
       }
@@ -65,7 +63,7 @@ const ChangeProfile = () => {
     return (
         <div >
           <div className='fom-popup-BoxShadow changeProfile'>
-            <Link className="fromProfiletohome back" to="/Home">{`<`}</Link>
+            <Link className="fromProfiletohome back" to="/home">{`<`}</Link>
             
             <form className='formChangeProfile' onSubmit={handleOnSubmit} >
               <div className="divTitleInput">Change UserAlias: </div>
@@ -110,17 +108,22 @@ const ChangeProfile = () => {
                       />
                       <br />
                       <br />
-                      <button  onClick={ handleOnchange} name='cancel'>cancel</button>
+                      <button 
+                        onClick={handleOnchange}
+                        name='cancel'> cancel </button>
                       <br />
                       <br />
                       <button  type='submit' name='password' >Save</button>
                     </div>
                     : 
                     <button 
-                      onClick={ handleOnchange} 
+                      onClick={handleOnchange} 
                       name='showMe' >Change password</button>
                 }
-                {error ? <label>Error: Caracteres ingresados invalidos</label>:<p></p>}
+                {error ? <label>
+                  Error: Caracteres ingresados invalidos
+                </label> 
+                : <p></p>}
             </form>
           </div>
         </div>
