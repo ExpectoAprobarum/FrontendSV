@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
+import AvadaKedavra from './spells/AvadaKedavra';
 import Divination from './spells/Divination';
 import './CastSpell.css';
 
-const CastSpell = ({gameId, ministerId}) => {
+const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
   const [currentSpell, setCurrentSpell] = useState("");
   const [myPlayer, setMyPlayer] = useState({});
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     const getBoardSpell = () => {
@@ -39,18 +41,39 @@ const CastSpell = ({gameId, ministerId}) => {
     getBoardSpell();
   }, [gameId])
 
+  const passCards = (newCards) => {
+    setCards(newCards)
+  }
+
+  const showDivination = (show) => {
+    setDivinationInfo(show)
+  }
+
+  useEffect(() => {
+    passDivination(cards);
+  }, [cards])
+
   return (
     <div className="CastSpell">
       { myPlayer.id === ministerId ? (
         <div className="is-minister">
           { currentSpell !== '' ? (
             <div className="spell">
-              { currentSpell === "divination" ? (
+              { currentSpell === "avadakedavra" ? (
+                <AvadaKedavra
+                  gameId={gameId}
+                  ministerId={ministerId}
+                />
+              ) : (
+                currentSpell === "divination" ? (
                   <Divination
                     gameId={gameId}
+                    passDivination={passCards}
+                    setDivinationInfo={showDivination}
                   />
                 ) : (
                   <p>No matching Spell</p>
+                  )
                 )
               }
             </div>

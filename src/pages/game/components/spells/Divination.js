@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import configData from '../../../../config.json';
-import './Divination.css'
+import './Divination.css';
 
-const Divination = ({gameId}) => {
-  const [showCards, setShowCards] = useState(false);
-  const [cards, setCards] = useState([]);
+const Divination = ({gameId, passDivination, setDivinationInfo}) => {
 
   useEffect(() => {
     const getCards = () => {
@@ -17,7 +15,7 @@ const Divination = ({gameId}) => {
         })
         .then(res => {
           if(res.status === 200) {
-            setCards(res.data.data);
+            passDivination(res.data.data);
           }
         })
         .catch(error => {
@@ -26,27 +24,14 @@ const Divination = ({gameId}) => {
     }
 
     getCards();
-
-    setShowCards(true);
-    setTimeout(() => {
-      setShowCards(false)
-    }, 8000);
+    setDivinationInfo(true);
   }, [gameId])
 
   return (
     <div className="Divination">
-      { showCards ? (
-        <div className="divination">
-          <h2 className="header">
-            Divination cards:
-          </h2>
-          <div className="divination-cards">
-            <button className={cards[0] + " left"} id="proc1" disabled/>
-            <button className={cards[1] + " center"} id="proc2" disabled/>
-            <button className={cards[2] + " right"} id="proc3" disabled/>
-          </div>
-        </div>
-      ) : null}
+      <h2 className="header">
+        Getting Divination cards ...
+      </h2>
     </div>  
   )
 }

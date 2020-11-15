@@ -65,6 +65,14 @@
   background-color: darkgrey;
 }
 
+.phase .game-over {
+  position: absolute;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, red, indigo);
+}
+
 .board {
   text-align: center;
   float: right;

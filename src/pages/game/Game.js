@@ -9,11 +9,15 @@ import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
+import ShowDivination from './components/ShowDivination';
+import GameOver from './components/GameOver';
 import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameInfo, setGameInfo] = useState({});
   const [gameStatus, setGameStatus] = useState({});
+  const [divination, setDivination] = useState([]);
+  const [showDivination, setShowDivination] = useState(false);
 
   useEffect(() => {
     const getGameInfo = () => {
@@ -26,7 +30,6 @@ const Game = ({gameId}) => {
       .then(res => {
         if(res.status === 200) {
           setGameInfo(res.data);
-          setGameStatus(gameInfo.status);
         }
       })
       .catch(error => {
@@ -60,12 +63,26 @@ const Game = ({gameId}) => {
     return () => clearInterval(timer)
   }, [gameId])
 
+  const passDivination = (cards) => {
+    setDivination(cards);
+  }
+
+  const showDivinationInfo = (show) => {
+    setShowDivination(show)
+  }
+
   return (
     <div className="Game">
       <div className="info">
         <div className="game-phase">
           <h2>Game phase:</h2>
-          <h3>{gameStatus === undefined ? " " : gameStatus.phase}</h3>
+          <h3>
+            { gameStatus !== undefined ? (
+                gameStatus.winner === undefined ? (
+                  " "
+                ) : "GAME OVER"
+              ) : gameStatus.phase.toUpperCase() }
+          </h3>
         </div>
         <div className="role">
           <div className="role-container">
@@ -79,6 +96,18 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
+        <div className="show-divination">
+          {
+            gameStatus ? (
+              <ShowDivination
+                divination={divination}
+                showCards={showDivination}
+              />
+            ) : (
+              <p />
+            )
+          }
+        </div>
       </div>
       <div className="board">
         <Board
@@ -88,34 +117,28 @@ const Game = ({gameId}) => {
       <div className="phase">
         {
           gameStatus ? (
-            gameStatus.phase === 'propose' ? (
-              <div>
-                <ChooseHeadmaster
-                  gameId={gameId}
-                  ministerId={gameStatus.minister}
-                />
-              </div>
-            ) : (
-              gameStatus.phase === 'vote' ? (
+            gameStatus.winner === undefined ? (
+              gameStatus.phase === 'propose' ? (
                 <div>
-                  <Vote
+                  <ChooseHeadmaster
                     gameId={gameId}
+                    ministerId={gameStatus.minister}
                   />
                 </div>
               ) : (
-                gameStatus.phase === 'headmaster play' ? (
+                gameStatus.phase === 'vote' ? (
                   <div>
-                    <EmitProclamation
+                    <Vote
                       gameId={gameId}
-                      headmasterId={gameStatus.headmaster}
                     />
                   </div>
                 ) : (
-                  gameStatus.phase === 'minister play' ? (
+                  gameStatus.phase === 'headmaster play' ? (
                     <div>
-                      <DiscardCard
+                      <EmitProclamation
                         gameId={gameId}
-                        ministerId={gameStatus.minister}
+                        headmasterId={gameStatus.headmaster}
+                        setDivinationInfo={showDivinationInfo}
                       />
                     </div>
                 ) : (
@@ -125,11 +148,36 @@ const Game = ({gameId}) => {
                       ministerId={gameStatus.minister}
                     />
                   ) : (
-                      <p>Awaiting response...</p>
+                    gameStatus.phase === 'spell play' ? (
+                      <div>
+                        <CastSpell
+                          gameId={gameId}
+                          ministerId={gameStatus.minister}
+                          passDivination={passDivination}
+                          setDivinationInfo={showDivinationInfo}
+                        />
+                      </div>
+                    ) : (
+                      gameStatus.phase === 'minister play' ? (
+                        <div>
+                          <DiscardCard
+                            gameId={gameId}
+                            ministerId={gameStatus.minister}
+                          />
+                        </div>
+                      ) : (
+                        <p>Awaiting response...</p>
+                      )
                     )
                   )
                 )
               )
+            ) : (
+              <div className="game-over">
+                <GameOver 
+                  winner={gameStatus.winner}
+                />
+              </div>
             )
           ) : (
             <h1 className="startingGame">Starting Game ...</h1>

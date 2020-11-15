@@ -4,7 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import './EmitProclamation.css';
 
-const EmitProclamation = ({gameId, headmasterId}) => {
+const EmitProclamation = ({gameId, headmasterId, setDivinationInfo}) => {
   const [cards, setCards] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
 
@@ -28,6 +28,8 @@ const EmitProclamation = ({gameId, headmasterId}) => {
 
     document.getElementById("proc1").disabled = true;
     document.getElementById("proc2").disabled = true;
+
+    setDivinationInfo(false);
   }
 
   useEffect(() => {

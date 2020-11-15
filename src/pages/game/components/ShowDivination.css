@@ -1,0 +1,64 @@
+.ShowDivination {
+  text-align: center; 
+}
+
+.divination, .not-divination {
+  text-align: center;
+}
+
+.divination .header, .not-divination .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: rgb(50, 13, 51);
+  color: blueviolet;
+}
+
+.divination .divination-cards, .not-divination .no-cards {
+  background: radial-gradient(indigo, rgb(133, 69, 179));
+  padding-top: 3%;
+  padding-bottom: 3%;
+  text-align: center;
+  border-bottom: 4px solid black;
+}
+
+.divination .divination-cards button {
+  position: relative;
+  padding-top: 11%;
+  padding-left: 12%;
+  padding-bottom: 7%;
+  background-size: 194%;
+  background-repeat: no-repeat;
+  background-position-x: 48%;
+  background-position-y: 15%;
+  outline: none;
+  border-radius: 10px;
+  border: 8px solid transparent;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.divination .divination-cards .left {
+  right: 5%;
+}
+
+.divination .divination-cards .right {
+  left: 5%;
+}
+
+.divination .divination-cards .phoenix {
+  background-image: url('../assets/ProclamationPhoenix.png');
+  border: 3px solid rgb(218, 22, 15);
+}
+
+.divination .divination-cards .death {
+  background-image: url('../assets/ProclamationDeathEater.png');
+  border: 3px solid blueviolet;
+}
+
+.not-divination .no-cards {
+  padding-top: 22.95%;
+}
