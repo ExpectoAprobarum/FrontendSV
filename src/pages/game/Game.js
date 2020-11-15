@@ -167,6 +167,7 @@ const Game = ({gameId}) => {
                         </div>
                       ) : (
                         <p>Awaiting response...</p>
+                        )
                       )
                     )
                   )
