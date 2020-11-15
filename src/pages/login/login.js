@@ -73,6 +73,7 @@ const Login = ({invite}) =>{
                         placeholder='Input Email'
                         value={email}
                         onChange={handleOnchange}
+                        required
                     />
                     <div>
                         { loginError ?
@@ -89,6 +90,7 @@ const Login = ({invite}) =>{
                         value={contraseña}
                         onChange={handleOnchange}
                         minLength="7"
+                        required
                     />
                     <div className="boxBtt login">
                         <button type='submit'

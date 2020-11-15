@@ -59,7 +59,11 @@ const Game = ({gameId}) => {
           <h3>
             { gameStatus !== undefined ? (
                 gameStatus.winner === undefined ? (
-                  gameStatus.phase.toUpperCase()
+                  gameStatus.phase !== undefined ? (
+                    gameStatus.phase.toUpperCase()
+                  ) : (
+                    " "
+                  )
                 ) : "GAME OVER"
               ) : " " }
           </h3>
@@ -123,31 +127,24 @@ const Game = ({gameId}) => {
                     </div>
                 ) : (
                   gameStatus.phase === 'spell play' ? (
-                    <CastSpell
-                      gameId={gameId}
-                      ministerId={gameStatus.minister}
-                    />
+                    <div>
+                      <CastSpell
+                        gameId={gameId}
+                        ministerId={gameStatus.minister}
+                        passDivination={passDivination}
+                        setDivinationInfo={showDivinationInfo}
+                      />
+                    </div>
                   ) : (
-                    gameStatus.phase === 'spell play' ? (
+                    gameStatus.phase === 'minister play' ? (
                       <div>
-                        <CastSpell
+                        <DiscardCard
                           gameId={gameId}
                           ministerId={gameStatus.minister}
-                          passDivination={passDivination}
-                          setDivinationInfo={showDivinationInfo}
                         />
                       </div>
                     ) : (
-                      gameStatus.phase === 'minister play' ? (
-                        <div>
-                          <DiscardCard
-                            gameId={gameId}
-                            ministerId={gameStatus.minister}
-                          />
-                        </div>
-                      ) : (
-                        <p>Awaiting response...</p>
-                        )
+                      <p>Awaiting response...</p>
                       )
                     )
                   )

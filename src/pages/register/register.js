@@ -72,7 +72,8 @@ const Register = () =>{
             name='usuario' 
             placeholder='Input a username' 
             value={usuario} 
-            onChange={handleOnchange} 
+            onChange={handleOnchange}
+            required 
           />
           <div className="divTitleInput">UserAlias</div>
           <input
@@ -81,7 +82,8 @@ const Register = () =>{
             name='userAlias' 
             placeholder='Input UserAlias' 
             value={userAlias} 
-            onChange={handleOnchange} 
+            onChange={handleOnchange}
+            required
           />
           <div></div>
           <div className="divTitleInput">Email</div>
@@ -91,7 +93,8 @@ const Register = () =>{
             name='email' 
             placeholder='Input Email' 
             value={email} 
-            onChange={handleOnchange} 
+            onChange={handleOnchange}
+            required
           />
           <div>    
             { registerError ? 
@@ -107,6 +110,7 @@ const Register = () =>{
             value={contraseña} 
             onChange={handleOnchange} 
             minLength="7"
+            required
           />
           <div className="boxBtt">
             <button type='submit' 
