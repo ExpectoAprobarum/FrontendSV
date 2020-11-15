@@ -21,15 +21,17 @@ const Login = ({invite}) =>{
                 username: email,
                 password: contraseña
             }
-            axios.post('http://127.0.0.1:8000/auth/token', infotosend).then(response => {
+            axios.post('http://127.0.0.1:8000/auth/token', infotosend)
+              .then(response => {
                 if(response.status === 200){
-                localStorage.setItem('user', JSON.stringify(response.data))
-                setRedirect(true)
-            }
-            }).catch(error => {
+                  localStorage.setItem('user', JSON.stringify(response.data))
+                  setRedirect(true)
+                }
+              })
+              .catch(error => {
                 notify_email_or_password_err()
                 console.log(error)
-            })
+              })
         }
     }
 
@@ -53,7 +55,7 @@ const Login = ({invite}) =>{
             return <InviteJoin to={`invite?game=${invite}`}
                         gameJoin={invite}/>
           } else {
-            return <Redirect to="/Home" />
+            return <Redirect to="/home" />
           }
         }
         return (
@@ -62,7 +64,9 @@ const Login = ({invite}) =>{
                 <Link className="liStyle back" to="/">{`<`}</Link>
             </div>
             <div className='fom-popup-BoxShadow register'>
-                <h1 style={{fontSize:"45px"}} className="h1TittleLobby">Welcome</h1>
+                <h1 style={{fontSize:"45px"}} className="h1TittleLobby">
+                  Welcome
+                </h1>
 
                 <form onSubmit={handleOnSubmit} className='formRegister'>
                     <div className="divTitleInput">Email</div>
@@ -77,7 +81,9 @@ const Login = ({invite}) =>{
                     />
                     <div>
                         { loginError ?
-                            <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> :
+                            <label style={{paddingLeft:"20px"}}>
+                              Email ingresado no valido
+                            </label> :
                             <p></p> }
                         </div>
                     <br />

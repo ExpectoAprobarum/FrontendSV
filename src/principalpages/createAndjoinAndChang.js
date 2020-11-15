@@ -1,12 +1,11 @@
 import {React, useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
-import "../pages/creategame/buttonStyle.css"
 import ListGames from '../pages/joinagame/Lists';
-import axios from 'axios'
-import {notify_gameName_invalid} 
-  from '../commons/alerts/toast'
-import "./createAndjoinAndChang.css"
+import axios from 'axios';
+import configData from '../config.json';
+import "../pages/creategame/buttonStyle.css";
+import "./createAndjoinAndChang.css";
 
 const PrincipalPage = () => {
   const [userAlias, setUserAlias] = useState('')
@@ -14,7 +13,7 @@ const PrincipalPage = () => {
   useEffect(() => {
     const testfeedback = () => {
       const usertoken = localStorage.getItem('user')
-      axios.get('http://127.0.0.1:8000/users/me',{
+      axios.get(configData.API_URL + '/users/me', {
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
@@ -45,11 +44,13 @@ const PrincipalPage = () => {
         </Link>
         <Link
           className="LinkStyle change home"
-          to='/changeProfile'>
+          to='/changeprofile'>
           Profile
         </Link>
       <div className='DivCreateJoinChang'>
-        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>Welcome {userAlias}</h1>
+        <h1 style={{paddingTop: "20px", fontSize:"80px"}}>
+          Welcome {userAlias}
+        </h1>
         <h1 style={{fontSize:"50px"}}>To</h1>
         <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
       </div>

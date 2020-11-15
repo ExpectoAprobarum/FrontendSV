@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // prueba
-import {notify_user_created_err, notify_user_created_succ} from '../../commons/alerts/toast'
+import { Link } from 'react-router-dom';
+import {notify_user_created_err, notify_user_created_succ}
+    from '../../commons/alerts/toast';
+import configData from '../../config.json';
 import "./register.css";
-import '../lobby/LobbyStyles.css'
+import '../lobby/LobbyStyles.css';
 
 const Register = () =>{
   const[usuario, setUsuario] = useState('');
@@ -15,7 +17,6 @@ const Register = () =>{
   const handleOnSubmit = (e) => {
     e.preventDefault();  
       if(!  registerError ){
-        //esto es lo que voy a enviar al back
         const infotosend ={
           username: usuario,
           useralias: userAlias,
@@ -23,13 +24,13 @@ const Register = () =>{
           password: contraseña,
         } 
         console.log(infotosend)       
-        axios.post('http://127.0.0.1:8000/users/', infotosend ).then(response => { 
-          if(response.status === 200){
-            //alerta satisfactoria
-            notify_user_created_succ()
-          }
-          }).catch(error => {
-            //alerta error
+        axios.post(configData.API_URL + '/users/', infotosend )
+          .then(response => { 
+            if(response.status === 200){
+              notify_user_created_succ()
+            }
+          })
+          .catch(error => {
             notify_user_created_err()
             console.log(error)
           })
@@ -63,7 +64,9 @@ const Register = () =>{
         <Link className="liStyle back" to="/">{`<`}</Link>
       </div>
       <div className='fom-popup-BoxShadow register'>
-        <h1 style={{fontSize:"45px"}} className="h1TittleLobby">Sign in</h1>
+        <h1 style={{fontSize:"45px"}} className="h1TittleLobby">
+          Sign in
+        </h1>
         <form onSubmit={handleOnSubmit} className='formRegister'>
           <div className="divTitleInput">User</div>
           <input
@@ -98,8 +101,10 @@ const Register = () =>{
           />
           <div>    
             { registerError ? 
-              <label style={{paddingLeft:"20px"}}>Email ingresado no valido</label> : 
-              <p></p> }
+              <label style={{paddingLeft:"20px"}}>
+                Email ingresado no valido
+              </label> 
+              : <p></p> }
           </div>
           <div className="divTitleInput">Password</div>
           <input  className="input2"

@@ -125,7 +125,7 @@ const InviteJoin = ({gameJoin}) => {
                   ""
                   : (<button className="buttonFound bttmodal" onClick={jGame}>
                         <Link className="linked" to={{
-                            pathname: '/Game',
+                            pathname: '/game',
                             state: {
                                 gameId: gameJoin
                             }

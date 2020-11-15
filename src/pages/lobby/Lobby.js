@@ -125,7 +125,7 @@ const LobbyPage = (props) => {
 
   return (
     <div>
-      { endGame ? <Redirect to="/Home" /> :
+      { endGame ? <Redirect to="/home" /> :
         ( initPartida ?
           <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
           : <div>
@@ -135,7 +135,7 @@ const LobbyPage = (props) => {
                     onClick={exitLobby}>{`<`}</Link>
                   <p className="parrafo">
                     Invite URL:
-                    {` http://localhost:3000/Game/invite?game=${idGame}`}</p>
+                    {` http://localhost:3000/game/invite?game=${idGame}`}</p>
                 </div>
               </div>
 
