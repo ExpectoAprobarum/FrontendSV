@@ -4,6 +4,7 @@ import configData from '../../../../config.json';
 import { getPlayers } from '../../../../commons/players/players';
 import PlayerList from '../PlayerList';
 import './AvadaKedavra.css';
+import { notify_player_choose_err } from '../../../../commons/alerts/toast';
 
 const AvadaKedavra = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
@@ -32,7 +33,7 @@ const AvadaKedavra = ({gameId, ministerId}) => {
         console.log(res.status)
       })
       .catch(error => {
-        console.log(error)
+        notify_player_choose_err();
       })
   }
 

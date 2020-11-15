@@ -3,6 +3,7 @@ import axios from 'axios';
 import configData from '../../../config.json';
 import { getMyPlayer, getPlayers } from '../../../commons/players/players';
 import PlayerList from './PlayerList';
+import { notify_player_choose_err } from '../../../commons/alerts/toast';
 import './ChooseHeadmaster.css';
 
 const ChooseHeadmaster = ({gameId, ministerId}) => {
@@ -37,7 +38,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
         console.log(res.status)
       })
       .catch(error => {
-        console.log(error)
+        notify_player_choose_err();
       })
   }
 

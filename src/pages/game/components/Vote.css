@@ -26,7 +26,7 @@
   transition: 0.3s;
 }
 
-.vote-card:hover {
+.vote-card:hover, .vote-card:focus {
   box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
                 #fff67e 0px 0px 20px, 
                 #fff67e 0px 0px 30px, 
@@ -40,7 +40,7 @@
   left: 5%;
 }
 
-#nox:hover {
+#nox:hover, #nox:focus {
   filter: hue-rotate(-80deg);
 }
 
@@ -51,4 +51,5 @@
 
 .Vote *:disabled {
   opacity: 0.6;
+  pointer-events: none;
 }

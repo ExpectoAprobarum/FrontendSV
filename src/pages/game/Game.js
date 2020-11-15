@@ -10,6 +10,7 @@ import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowDivination from './components/ShowDivination';
 import './Game.css';
+import GameOver from './components/GameOver';
 
 
 const Game = ({gameId}) => {
@@ -29,7 +30,6 @@ const Game = ({gameId}) => {
       .then(res => {
         if(res.status === 200) {
           setGameInfo(res.data);
-          setGameStatus(gameInfo.status);
         }
       })
       .catch(error => {
@@ -76,7 +76,13 @@ const Game = ({gameId}) => {
       <div className="info">
         <div className="game-phase">
           <h2>Game phase:</h2>
-          <h3>{gameStatus === undefined ? " " : gameStatus.phase}</h3>
+          <h3>
+            { gameStatus !== undefined ? (
+                gameStatus.winner === undefined ? (
+                  " "
+                ) : "GAME OVER"
+              ) : gameStatus.phase.toUpperCase() }
+          </h3>
         </div>
         <div className="role">
           <div className="role-container">
@@ -107,53 +113,61 @@ const Game = ({gameId}) => {
       <div className="phase">
         {
           gameStatus ? (
-            gameStatus.phase === 'propose' ? (
-              <div>
-                <ChooseHeadmaster
-                  gameId={gameId}
-                  ministerId={gameStatus.minister}
-                />
-              </div>
-            ) : (
-              gameStatus.phase === 'vote' ? (
+            gameStatus.winner === undefined ? (
+              gameStatus.phase === 'propose' ? (
                 <div>
-                  <Vote
+                  <ChooseHeadmaster
                     gameId={gameId}
+                    ministerId={gameStatus.minister}
                   />
                 </div>
               ) : (
-                gameStatus.phase === 'headmaster play' ? (
+                gameStatus.phase === 'vote' ? (
                   <div>
-                    <EmitProclamation
+                    <Vote
                       gameId={gameId}
-                      headmasterId={gameStatus.headmaster}
-                      setDivinationInfo={showDivinationInfo}
                     />
                   </div>
                 ) : (
-                  gameStatus.phase === 'spell play' ? (
+                  gameStatus.phase === 'headmaster play' ? (
                     <div>
-                      <CastSpell
+                      <EmitProclamation
                         gameId={gameId}
-                        ministerId={gameStatus.minister}
-                        passDivination={passDivination}
+                        headmasterId={gameStatus.headmaster}
                         setDivinationInfo={showDivinationInfo}
                       />
                     </div>
                   ) : (
-                    gameStatus.phase === 'minister play' ? (
+                    gameStatus.phase === 'spell play' ? (
                       <div>
-                        <DiscardCard
+                        <CastSpell
                           gameId={gameId}
                           ministerId={gameStatus.minister}
+                          passDivination={passDivination}
+                          setDivinationInfo={showDivinationInfo}
                         />
                       </div>
                     ) : (
-                      <p>Awaiting response...</p>
+                      gameStatus.phase === 'minister play' ? (
+                        <div>
+                          <DiscardCard
+                            gameId={gameId}
+                            ministerId={gameStatus.minister}
+                          />
+                        </div>
+                      ) : (
+                        <p>Awaiting response...</p>
+                      )
                     )
                   )
                 )
               )
+            ) : (
+              <div className="game-over">
+                <GameOver 
+                  winner={gameStatus.winner}
+                />
+              </div>
             )
           ) : (
             <h1 className="startingGame">Starting Game ...</h1>
