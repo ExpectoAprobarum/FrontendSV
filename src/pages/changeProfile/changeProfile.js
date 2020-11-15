@@ -73,7 +73,8 @@ const ChangeProfile = () => {
                   name='userAlias' 
                   placeholder= {userAlias }
                   value={userAlias} 
-                  onChange={handleOnchange} >
+                  onChange={handleOnchange} 
+                  required>
                 </input>
                 <br />
                 <br />
