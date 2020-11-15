@@ -2,7 +2,7 @@ import {React, useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
 import PageCreateGame from '../pages/creategame/PageCreateGame';
 import "../pages/creategame/buttonStyle.css"
-import ListPerson from '../pages/joinagame/Lists';
+import ListGames from '../pages/joinagame/Lists';
 import axios from 'axios'
 
 import "./createAndjoinAndChang.css"
@@ -15,11 +15,11 @@ const PrincipalPage = () => {
       const usertoken = localStorage.getItem('user')
       axios.get('http://127.0.0.1:8000/users/me',{
         headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
-      }).then(response => { 
+      }).then(response => {
         if(response.status === 200){
-          const userAlias = response.data.useralias  
+          const userAlias = response.data.useralias
           setUserAlias(userAlias)
         }
       })
@@ -29,20 +29,20 @@ const PrincipalPage = () => {
     }
     testfeedback()
   }, [])
-  
+
   const exitDeleteToken = () => {
     localStorage.removeItem("user")
   }
 
   return(
     <div className="DivCreateAndJoin">
-        <Link 
-          className="LinkStyle back home" 
+        <Link
+          className="LinkStyle back home"
           onClick={exitDeleteToken}
           to="/">
           Log Out
         </Link>
-        <Link 
+        <Link
           className="LinkStyle change home"
           to='/changeProfile'>
           Profile
@@ -53,7 +53,7 @@ const PrincipalPage = () => {
         <h1 style={{ fontSize:"80px"}}>Secret Voldemort</h1>
       </div>
       <PageCreateGame />
-      <ListPerson />
+      <ListGames />
     </div>
   )
 }

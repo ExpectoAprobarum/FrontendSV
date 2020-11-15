@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import configData from '../../../config.json';
 import './ShowRole.css'
 import morti from '../assets/Wiborita.png';
 import phoenix from '../assets/Fenix.png';
@@ -16,7 +17,7 @@ const ShowRole = ({gameId, gameInfo}) => {
   useEffect(() => {
     const getPlayers = () => {
       const usertoken = localStorage.getItem('user')
-      axios.get(`http://127.0.0.1:8000/games/${gameId}/players`, {
+      axios.get(`${configData.API_URL}/games/${gameId}/players`, {
           headers: {
               'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }

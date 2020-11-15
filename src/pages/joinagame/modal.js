@@ -24,7 +24,7 @@ export default function Modal({open, children, handleClose,
                           state: {
                               gameId: gameID
                           }
-                      }}>Unirse</Link>
+                      }}>Join</Link>
                     </button>)
               }
               <button onClick={handleClose} className="buttonFound bttmodal">

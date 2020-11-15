@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'; // prueba
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import configData from '../../config.json';
 
 const InviteJoin = ({gameJoin}) => {
   const [initPartida, setInitPartida] = useState(false);
@@ -17,7 +18,7 @@ const InviteJoin = ({gameJoin}) => {
   }
 
   const getPlayers = (e) => {
-      axios.get(`http://127.0.0.1:8000/games/${gameJoin}/players`, {
+      axios.get(`${configData.API_URL}/games/${gameJoin}/players`, {
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
@@ -51,7 +52,7 @@ const InviteJoin = ({gameJoin}) => {
     if (join) {
       const getGameInfo = () => {
         const usertoken = localStorage.getItem('user')
-        axios.get(`http://127.0.0.1:8000/games/${gameJoin}`, {
+        axios.get(`${configData.API_URL}/games/${gameJoin}`, {
           headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
@@ -91,7 +92,7 @@ const InviteJoin = ({gameJoin}) => {
         if (gameInfo.created_by !== idPlayer && doIExist) {
           const usertoken = localStorage.getItem('user')
 
-          axios.post(`http://127.0.0.1:8000/games/${gameJoin}/join`,({}),{
+          axios.post(`${configData.API_URL}/games/${gameJoin}/join`,({}),{
             headers: {
               'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
             }
