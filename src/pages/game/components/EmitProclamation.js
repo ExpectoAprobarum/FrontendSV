@@ -58,7 +58,7 @@ const EmitProclamation = ({gameId, headmasterId, setDivinationInfo}) => {
 
   return (
     <div className="proclam">
-    { myPlayer.id == headmasterId ? (
+    { myPlayer.id === headmasterId ? (
         <div className="is-headmaster">
           <h2 className="header">
             Choose next Proclamation:
