@@ -55,3 +55,9 @@ export const notify_player_vote_err= () => {
     position: toast.POSITION.TOP_CENTER,
     autoClose: 2000})
 }
+
+export const notify_gameName_invalid = () => {
+  toast.error('The GameName is invalid', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000})
+}

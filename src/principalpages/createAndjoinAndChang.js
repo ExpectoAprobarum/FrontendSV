@@ -4,7 +4,8 @@ import PageCreateGame from '../pages/creategame/PageCreateGame';
 import "../pages/creategame/buttonStyle.css"
 import ListPerson from '../pages/joinagame/Lists';
 import axios from 'axios'
-
+import {notify_gameName_invalid} 
+  from '../commons/alerts/toast'
 import "./createAndjoinAndChang.css"
 
 const PrincipalPage = () => {
