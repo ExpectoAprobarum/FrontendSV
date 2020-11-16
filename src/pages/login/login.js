@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import {notify_email_or_password_err} from '../../commons/alerts/toast';
+import {notify_email_or_password_err, notify_verify_your_email} from '../../commons/alerts/toast';
 import InviteJoin from '../invite/inviteJoin'
 import "../register/register.css";
 import '../lobby/LobbyStyles.css'
+import configData from '../../config.json';
 
 const Login = ({invite}) =>{
 
@@ -17,21 +18,24 @@ const Login = ({invite}) =>{
     const handleOnSubmit = (e) => {
         e.preventDefault();
         if(! loginError ){
-                const infotosend ={
-                username: email,
-                password: contraseña
-            }
-            axios.post('http://127.0.0.1:8000/auth/token', infotosend)
-              .then(response => {
-                if(response.status === 200){
-                  localStorage.setItem('user', JSON.stringify(response.data))
-                  setRedirect(true)
-                }
-              })
-              .catch(error => {
+          const infotosend ={
+            username: email,
+            password: contraseña
+          }
+          axios.post(configData.API_URL + '/auth/token', infotosend)
+            .then(response => {
+              if(response.status === 200){
+                localStorage.setItem('user', JSON.stringify(response.data))
+                setRedirect(true)
+              }
+            })
+            .catch(error => {
+              if(error.response.status === 400){
+                notify_verify_your_email()
+              }else{
                 notify_email_or_password_err()
-                console.log(error)
-              })
+              }
+            })
         }
     }
 
