@@ -80,6 +80,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
           return x
         }).map( player =>
           <div className="fom-popup-BoxShadow custom game"
+            style={ player.alive ?
+                {color: 'white'} :
+                {background: '#672A24', fontWeight: 'bold',
+                  fontSize: '20px', opacity: '0.4'}}
             key={player.id}>
             <div className="hDivPlayers cust">
               <div className="hDivPlayers votes">
@@ -107,7 +111,7 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                 </li>
                 <li style={player.alive ?
                     {color: 'white'} :
-                    {color: 'red', fontWeight: 'bold', fontSize: '20px'}}>
+                    {fontWeight: 'bold', fontSize: '20px'}}>
                     {player.user.useralias}
                 </li>
               </div>
