@@ -88,7 +88,9 @@ const Board = ({gameId}) => {
             Next: { 
               boardInfo === undefined || boardInfo.spell_fields === undefined ? 
               " "
-              : boardInfo.spell_fields[boardInfo.de_proc].toUpperCase() }
+              : (boardInfo.spell_fields[boardInfo.de_proc]) ? (
+                boardInfo.spell_fields[boardInfo.de_proc].toUpperCase()
+              ) : " " }
           </h3>
         </ul>
       </div>
