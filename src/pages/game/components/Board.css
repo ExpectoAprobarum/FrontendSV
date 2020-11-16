@@ -1,3 +1,8 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+
 .Board{
   margin: 0;
   padding: 0;
@@ -87,4 +92,54 @@
 
 .container .card .box .death-content h2 {
   color: rgb(212, 0, 255);
+}
+
+.spells-info {
+  margin-left: 30px;
+  margin-right: 30px;
+  height: 65%;
+  width: 30%;
+  background-color: darkmagenta;
+  border-radius: 40px;
+  padding-left: 1%;
+  padding-right: 1%;
+  border: 7px solid rgb(206, 159, 192);
+}
+
+.spells-info .spell-container .death-ammount, 
+.spells-info .spell-container .header {
+  display: inline;
+  font-size: 1.2em;
+}
+
+.spells-info .spell-info-header {
+  margin-bottom: 8%;
+  margin-top: 4%;
+  font-family: 'Harry P';
+  font-size: 2em;
+  color: #410841;
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                #ad14ad 0px 0px 20px, 
+                #ad14ad 0px 0px 30px, 
+                #ad14ad 0px 0px 40px, 
+                #ad14ad 0px 0px 50px, 
+                #ad14ad 0px 0px 75px;
+}
+
+.spells-info ul {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+}
+
+.spells-info ul .next-spell {
+  margin-top: 10%;
+  bottom: 0;
+}
+
+.spells-info li {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
