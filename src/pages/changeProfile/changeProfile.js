@@ -1,9 +1,9 @@
-
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {notify_user_update_invalidPass,  
-  notify_user_update_succ} 
+  notify_user_update_succ,
+  notify_missing_fields} 
   from '../../commons/alerts/toast';
 import configData from '../../config.json';
 import './changeProfile.css';
@@ -24,20 +24,23 @@ const ChangeProfile = () => {
       oldpassword:passwordOld,
       newpassword:passwordNew
     }
-    axios.put(configData.API_URL + '/users', infotosend, {
-      headers: {
-        'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-      }
-    }).then(response => { 
-      if(response.status === 200){
-        notify_user_update_succ()
-        console.log(response)
-      }
-    })
-    .catch(error => {
-      notify_user_update_invalidPass()
-      setError(true)
-    })
+    if(userAlias !== '' || passwordOld !== ''){
+      axios.put(configData.API_URL + '/users', infotosend, {
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      }).then(response => { 
+        if(response.status === 200){
+          notify_user_update_succ()
+        }
+      })
+      .catch(error => {
+        notify_user_update_invalidPass()
+        setError(true)
+      })
+    }else{
+      notify_missing_fields()
+    }
   }
   const handleOnchange = (e) => {
     if(e.target.name === 'userAlias'){
@@ -74,7 +77,7 @@ const ChangeProfile = () => {
                   placeholder= {userAlias }
                   value={userAlias} 
                   onChange={handleOnchange} 
-                  required>
+                >
                 </input>
                 <br />
                 <br />
@@ -84,12 +87,12 @@ const ChangeProfile = () => {
 
                 {showMe ? 
                     <div >
-                      <div className="divTitleInput">Change Password: </div>
+                      <div className="divTitleInput">Old password: </div>
                       <input  
                         id='passwordOld'
                         type='password'
                         name='passwordOld'
-                        placeholder='Input your password'
+                        placeholder='Input your old password'
                         value={passwordOld}
                         onChange= {handleOnchange}
                         minLength="7"
@@ -97,6 +100,7 @@ const ChangeProfile = () => {
                       />
                       <br />
                       <br />
+                      <div className="divTitleInput">New password: </div>
                       <input  
                         id='passwordnew'
                         type='password'
@@ -107,14 +111,12 @@ const ChangeProfile = () => {
                         minLength="7"
                         required
                       />
+                      <button  type='submit' name='password' >Save</button>
                       <br />
                       <br />
                       <button 
                         onClick={handleOnchange}
                         name='cancel'> cancel </button>
-                      <br />
-                      <br />
-                      <button  type='submit' name='password' >Save</button>
                     </div>
                     : 
                     <button 
