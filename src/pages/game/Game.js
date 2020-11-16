@@ -70,7 +70,7 @@ const Game = ({gameId}) => {
         </div>
         <div className="role">
           <div className="role-container">
-            <ShowRole gameId={gameId}/>
+            <ShowRole gameId={gameId} gameInfo={gameStatus}/>
           </div>
         </div>
         <ShowResultVote

@@ -40,7 +40,7 @@ const ShowRole = ({gameId, gameInfo}) => {
     }
 
     getPlayers()
-  }, [])
+  }, [gameInfo.phase])
 
   return(
     <div className={rolePlayer.alive ? `BoxShadow myRole cust` :

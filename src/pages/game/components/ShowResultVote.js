@@ -19,31 +19,33 @@ const ShowResultVote = ({gameId, gameInfo}) => {
   }
 
   const searchCurrent2 = (e) => {
+    let resultVotePlayer
     if (resultVote !== undefined) {
-      let h = resultVote.find(
-        playerR => playerR.player === e
-      )
-      let result = h != null ? h.vote : " "
-      return(result)
+      if (gameInfo.phase === 'propose') {
+        resultVotePlayer = " "
+      } else {
+        let h = resultVote.find(
+          playerR => playerR.player === e
+        )
+        resultVotePlayer = h != null ? h.vote : " "
+      }
     }
+    return(resultVotePlayer)
   }
 
   useEffect(() => {
     getP();
-  }, []);
+  }, [gameInfo.phase]);
 
   useEffect(() => {
-    if (gameInfo !== undefined && gameInfo.phase !== "propose") {
-      if (gameInfo.phase === 'vote' || gameInfo.phase === 'minister play' ||
-          gameInfo.phase === 'spell play') {
+    if (gameInfo !== undefined && gameInfo.phase !== 'propose') {
+      if (gameInfo.phase !== 'propose') {
         if (gameInfo.votes !== undefined) {
           setResultVote(gameInfo.votes)
-
-          if (gameInfo.votes.length !== countVotes) {
+          if (countVotes[0] < gameInfo.votes.length) {
             const alivePlayers = players.filter((item) => item.alive)
             setCountVotes([gameInfo.votes.length, alivePlayers.length])
-
-            if(countVotes[0] === countVotes[1] && showResult[1] === 0) {
+          } else if(countVotes[0] === countVotes[1] && showResult[1] === 0) {
               setShowResult([true, 1])
               let head = players.find(
                   playerR => playerR.id === parseInt(gameInfo.headmaster)
@@ -57,13 +59,12 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                 () => setShowResult([false, 1]), 4500
               );
             }
-          }
         }
-      } else {
+      }
+    } else if (gameInfo.phase === 'propose') {
           setShowResult([false, 0])
           setCountVotes([0, -1])
           setHeadM([])
-      }
     }
   }, [gameInfo]);
 
@@ -91,7 +92,11 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                   {
                     (() => {
                       if (gameInfo !== undefined) {
-                        if (gameInfo.phase === 'vote') {
+                        if (gameInfo.phase === 'propose') {
+                          if (player.current_position === 'minister') {
+                            return "CAND. MINISTER"
+                          }
+                        } else if (gameInfo.phase === 'vote') {
                           if (parseInt(gameInfo.headmaster) === player.id) {
                             return "CAND. HEADMASTER"
                           }
