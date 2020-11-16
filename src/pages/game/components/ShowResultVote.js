@@ -48,7 +48,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
               let head = players.find(
                   playerR => playerR.id === parseInt(gameInfo.headmaster)
               )
-              setHeadM(head)
+              let minister = players.find(
+                  playerR => playerR.id === parseInt(gameInfo.minister)
+              )
+              setHeadM([head, minister])
               getP()
               setTimeout(
                 () => setShowResult([false, 1]), 4500
@@ -77,6 +80,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
           return x
         }).map( player =>
           <div className="fom-popup-BoxShadow custom game"
+            style={ player.alive ?
+                {color: 'white'} :
+                {background: '#672A24', fontWeight: 'bold',
+                  fontSize: '20px', opacity: '0.4'}}
             key={player.id}>
             <div className="hDivPlayers cust">
               <div className="hDivPlayers votes">
@@ -86,10 +93,10 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                       if (gameInfo !== undefined) {
                         if (gameInfo.phase === 'vote') {
                           if (parseInt(gameInfo.headmaster) === player.id) {
-                            return "CANDIDATE"
+                            return "CAND. HEADMASTER"
                           }
                           if (player.current_position === 'minister') {
-                            return "MINISTER"
+                            return "CAND. MINISTER"
                           }
                         } else {
                             return (
@@ -102,7 +109,11 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                   })()
                   }
                 </li>
-                <li>{player.user.useralias}</li>
+                <li style={player.alive ?
+                    {color: 'white'} :
+                    {fontWeight: 'bold', fontSize: '20px'}}>
+                    {player.user.useralias}
+                </li>
               </div>
               <div style={{}}>
                 {

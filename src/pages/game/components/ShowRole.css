@@ -1,19 +1,41 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+
 .BoxShadow {
-    /* background: white; */
+    margin: 20px auto;
     border: none;
     border-radius: 20px;
-    /* padding: 15px 0 0 20px; */
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
-    width: 258px;
-    height: 100px;
-    /* float: left; */
+    width: 76%;
+    height: 130px;
+}
+
+.BoxShadowDead {
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    height: 100%;
+    width: 100%;
+    text-align: center
 }
 
 .BoxShadow.myRole {
   background-color: #343842;
   color: white
+}
+
+.BoxShadowDead.dead {
+  background-color: #941100;
+  opacity: 0.6;
+  color: white;
+  position: relative;
+  font-family: 'Harry P';
 }
 
 .BoxShadow.voteBox {
@@ -26,6 +48,23 @@
   list-style: none;
   float: left;
   margin-top: 5px;
+}
+
+.hDivRoleDead {
+  list-style: none;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 58%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
+.hDivRole.my {
+  margin-top: 2%;
+  margin-left: 18%;
 }
 
 .hDivRole.cust {
@@ -46,9 +85,18 @@
 
 .imgDivRole {
   float: right;
-  height: 85px;
+  height: 100px;
   margin-right: 15%;
-  margin-top: 3%;
+  margin-top: 5%;
+}
+
+.imgDivRole.volde {
+  position: absolute;
+  height: 120px;
+  top: 50%;
+  left: 0%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%);
 }
 
 .fom-popup-BoxShadow.game{
@@ -78,11 +126,9 @@
     position:fixed;
     background: white;
     width: 50%;
-    height: 180px;
-    top:50%;
+    height: 300px;
+    top: 55%;
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 20px;
-    /* padding-left: 40px;
-    padding-bottom: 20px; */
 }

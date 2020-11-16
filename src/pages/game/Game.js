@@ -70,9 +70,6 @@ const Game = ({gameId}) => {
         </div>
         <div className="role">
           <div className="role-container">
-            <div className="role-header">
-              <h3>My role:</h3>
-            </div>
             <ShowRole gameId={gameId}/>
           </div>
         </div>
@@ -152,7 +149,7 @@ const Game = ({gameId}) => {
               )
             ) : (
               <div className="game-over">
-                <GameOver 
+                <GameOver
                   winner={gameStatus.winner}
                 />
               </div>

@@ -123,10 +123,10 @@ const ListGames = () => {
   return (
     <div>
       <div className="button-container-1">
-      <span className="mas">Search Game</span>
-      <button id="work" type="button" name="Hover" onClick={showS}>
-        Search Game
-      </button>
+        <span className="mas">Search Game</span>
+        <button id="work" type="button" name="Hover" onClick={showS}>
+          Search Game
+        </button>
       </div>
       { showSearch ?
         <div className="divCreateJoin">
