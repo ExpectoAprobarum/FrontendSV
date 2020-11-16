@@ -22,6 +22,7 @@ const Register = () =>{
           useralias: userAlias,
           email: email,
           password: contraseña,
+          frontURL: 'http://localhost:3000/verification?',
         } 
         console.log(infotosend)       
         axios.post(configData.API_URL + '/users/', infotosend )

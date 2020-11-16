@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ChangeProfile from './pages/changeProfile/changeProfile';
 import PrincipalPage from './principalpages/createAndjoinAndChang';
 import RegisterAndLogin from './principalpages/registerAndlogin'
+import Verification from './pages/verification/verification'
 import './App.css'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/" component={RegisterAndLogin}></Route>
           <Route path="/game/invite" component={Invite}></Route>
           <Route exact path='/changeprofile' component={ChangeProfile}></Route>
+          <Route exact path='/verification' component={Verification}></Route>
         </Switch>
       </Router>
     </div>
