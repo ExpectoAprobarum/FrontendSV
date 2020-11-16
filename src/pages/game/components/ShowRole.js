@@ -32,7 +32,6 @@ const ShowRole = ({gameId, gameInfo}) => {
           setMeAlias(response.data.data.find(
             player => player.user.id === idPlayer
           ).user.useralias)
-          console.log(rolePlayer);
         }
       })
       .catch(error => {
