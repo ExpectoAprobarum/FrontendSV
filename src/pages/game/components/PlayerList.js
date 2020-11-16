@@ -11,7 +11,7 @@ const PlayerList = ({selectPlayer, players, ministerId, selected}) => {
               onClick={() => {
                 selectPlayer(player.id)
               }}>
-              <div>{player.user.username}</div>
+              <div>{player.user.useralias}</div>
             </button>
           </li>
       ) : (
@@ -20,7 +20,7 @@ const PlayerList = ({selectPlayer, players, ministerId, selected}) => {
             onClick={() => {
               selectPlayer(player.id)
             }}>
-            <div>{player.user.username}</div>
+            <div>{player.user.useralias}</div>
           </button>
         </li>
       )
