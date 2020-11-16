@@ -5,7 +5,7 @@
   border-bottom: 4px solid black;
   text-align: center;
   font-family: sans-serif;
-  background: dimgray;
+  background: radial-gradient(indigo, rgb(133, 69, 179));
   margin-top: 12%;
   border-top: 4px solid black;
 }
