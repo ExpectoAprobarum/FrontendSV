@@ -18,7 +18,7 @@ axios.post(configData.API_URL + '/users/confirm', {code })
   console.log("Errorrrr", error)
 })
 if(redirect){
-  return <Redirect to="/login" />
+  return <Redirect to="/home" />
 }  
   return(
     <div>

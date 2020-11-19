@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {notify_user_created_err, notify_user_created_succ}
     from '../../commons/alerts/toast';
 import configData from '../../config.json';
 import "./register.css";
 import '../lobby/LobbyStyles.css';
+
 
 const Register = () =>{
   const[usuario, setUsuario] = useState('');
@@ -13,6 +14,7 @@ const Register = () =>{
   const[contraseña, setContraseña] = useState('');
   const[registerError, setRegisterError] = useState(false);
   const[userAlias, setUserAlias] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();  
@@ -29,6 +31,7 @@ const Register = () =>{
           .then(response => { 
             if(response.status === 200){
               notify_user_created_succ()
+              setRedirect(true)
             }
           })
           .catch(error => {
@@ -58,7 +61,11 @@ const Register = () =>{
       setRegisterError(true)
     }    
   }
-     
+  
+  if(redirect){
+    return <Redirect to='/' />
+  }
+
   return (
     <div>
       <div className="divCreateJoin lobby">
