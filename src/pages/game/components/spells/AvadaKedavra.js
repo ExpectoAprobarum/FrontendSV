@@ -9,7 +9,7 @@ import { notify_player_choose_err } from '../../../../commons/alerts/toast';
 const AvadaKedavra = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
   const [players, setPlayers] = useState([]);
-  
+
   useEffect(() => {
     getPlayers(gameId)
       .then(res => {
@@ -23,10 +23,10 @@ const AvadaKedavra = ({gameId, ministerId}) => {
 
   const sendElection = () => {
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + gameId + '/avadakedavra', 
+    axios.post(configData.API_URL + '/games/' + gameId + '/avadakedavra',
       { "id": selected }, {
       headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
       })
       .then(res => {
@@ -43,12 +43,14 @@ const AvadaKedavra = ({gameId, ministerId}) => {
       <div className="player-list">
         <PlayerList
           selectPlayer={selectPlayer}
-          players={players}
-          ministerId={ministerId}
           selected={selected}
+          players={players}
+          showCond={["alive", true]}
+          chooseCond={["alive", true]}
+          minister={[ministerId, false]}
         />
       </div>
-      <button className="sendKilled" id="sendKilled" 
+      <button className="sendKilled" id="sendKilled"
         onClick={() => {
           sendElection()
       }}>
