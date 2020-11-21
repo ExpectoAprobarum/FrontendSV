@@ -10,7 +10,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
   const [players, setPlayers] = useState([]);
   const [myPlayer, setMyPlayer] = useState({});
-  
+
   useEffect(() => {
     getMyPlayer(gameId)
       .then(res => {
@@ -28,10 +28,10 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
 
   const sendElection = () => {
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + gameId + '/choosehm', 
+    axios.post(configData.API_URL + '/games/' + gameId + '/choosehm',
     {id: selected}, {
       headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
       })
       .then(res => {
@@ -52,9 +52,11 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
           <div className="player-list">
             <PlayerList
               selectPlayer={selectPlayer}
-              players={players}
-              ministerId={ministerId}
               selected={selected}
+              players={players}
+              showCond={["alive", true]}
+              chooseCond={["choosable", true]}
+              minister={[ministerId, false]}
             />
           </div>
           <button className="sendCandidate"
@@ -70,7 +72,7 @@ const ChooseHeadmaster = ({gameId, ministerId}) => {
             Minister is chosing headmaster candidate ...
           </h2>
         </div>
-      )  
+      )
     }
     </div>
   )
