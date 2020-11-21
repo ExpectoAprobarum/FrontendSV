@@ -3,8 +3,8 @@ import axios from 'axios';
 import configData from '../../../../config.json';
 import { getPlayers } from '../../../../commons/players/players';
 import PlayerList from '../PlayerList';
-import './AvadaKedavra.css';
 import { notify_player_choose_err } from '../../../../commons/alerts/toast';
+import './SpellObjective.css';
 
 const AvadaKedavra = ({gameId, ministerId}) => {
   const [selected, setSelection] = useState(0);
@@ -38,8 +38,8 @@ const AvadaKedavra = ({gameId, ministerId}) => {
   }
 
   return (
-    <div className="AvadaKedavra">
-      <h2 className="header">Select player to cast: Avada Kedavra</h2>
+    <div className="Spell">
+      <h2 className="spell-header">Select player to cast: Avada Kedavra</h2>
       <div className="player-list">
         <PlayerList
           selectPlayer={selectPlayer}
@@ -50,10 +50,10 @@ const AvadaKedavra = ({gameId, ministerId}) => {
           minister={[ministerId, false]}
         />
       </div>
-      <button className="sendKilled" id="sendKilled"
+      <button className="sendSpellElection" id="sendSpellElection"
         onClick={() => {
           sendElection()
-      }}>
+        }}>
         Choose
       </button>
     </div>

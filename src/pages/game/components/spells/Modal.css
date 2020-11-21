@@ -1,0 +1,52 @@
+@font-face {
+  font-family:'Harry P';
+  src: url(../../../../principalpages/components/HARRYP__.TTF)
+}
+
+.modal-dialog {
+  background: white;
+  position: relative;
+  width: auto;
+  text-align: center;
+  width: 50%;
+  left: 39%;
+  height: auto;
+  top: 58%;
+  border-radius: 50px;
+}
+
+.modal-dialog hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.modal-header {
+  margin: 0;
+  padding-top: 10px;
+  font-family:'Harry P';
+  font-size: 4em;
+}
+
+.modal-body .investigate, .modal-body .investigate-alias {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body .crucio-body, .modal-body .reveal {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body .loyalty {
+  padding-bottom: 13%;
+}
+
+.modal-body .reveal {
+  position: absolute;
+  margin: 10px;
+  left: 75%;
+  top: 65%;
+}

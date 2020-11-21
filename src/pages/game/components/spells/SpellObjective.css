@@ -1,23 +1,23 @@
-.AvadaKedavra {
+.AvadaKedavra, .Crucio {
   position: relative;
   text-align: center;
   padding-bottom: 5.55%;
 }
 
-.AvadaKedavra .header {
+.Spell .spell-header {
   text-align: center;
   font-family: sans-serif;
   color: blueviolet;
   background: rgb(50, 13, 51);
 }
 
-.AvadaKedavra .player-list {
+.Spell .player-list {
   display: inline-block;
   width: 100%;
   min-height: 120px;
 }
 
-.AvadaKedavra .sendKilled {
+.Spell .sendSpellElection {
   position: relative;
   top: 20px;
   background-color: #5a1010;
@@ -32,16 +32,16 @@
   font-size: large;
   color: #FFFFFF;
   border: none;
-  text-shadow: #f14040 0px 0px 5px, #f14040 0px 0px 10px, #f14040 0px 0px 15px, 
-                #b80a0a 0px 0px 20px, 
-                #b80a0a 0px 0px 30px, 
-                #b80a0a 0px 0px 40px, 
-                #b80a0a 0px 0px 50px, 
+  text-shadow: #f14040 0px 0px 5px, #f14040 0px 0px 10px, #f14040 0px 0px 15px,
+                #b80a0a 0px 0px 20px,
+                #b80a0a 0px 0px 30px,
+                #b80a0a 0px 0px 40px,
+                #b80a0a 0px 0px 50px,
                 #b80a0a 0px 0px 75px;
 }
 
-.AvadaKedavra .sendKilled:hover {
-  box-shadow: #f14040 0px 0px 1px, #f14040 0px 0px 3px, #f14040 0px 0px 6px, 
+.Spell .sendSpellElection:hover {
+  box-shadow: #f14040 0px 0px 1px, #f14040 0px 0px 3px, #f14040 0px 0px 6px,
                 #b80a0a 0px 0px 4px,
                 #b80a0a 0px 0px 8px,
                 #b80a0a 0px 0px 10px,
@@ -49,6 +49,6 @@
                 #b80a0a 0px 0px 16px;
 }
 
-.AvadaKedavra *:disabled {
+.Spell *:disabled {
   opacity: 0;
 }

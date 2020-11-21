@@ -4,6 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import AvadaKedavra from './spells/AvadaKedavra';
 import Divination from './spells/Divination';
+import Crucio from './spells/Crucio';
 import './CastSpell.css';
 
 const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
@@ -33,7 +34,7 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
         console.log(error)
       })
     }
-    
+
     getMyPlayer(gameId)
       .then(res => {
         setMyPlayer(res)
@@ -73,15 +74,22 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                   />
                 ) : (
                   <p>No matching Spell</p>
-                  )
                 )
+              )
               }
             </div>
           ) : (
-            <div>
-              <h2 className="header">No spell available</h2>
-            </div>
+            currentSpell === "crucio" ? (
+              <Crucio
+                gameId={gameId}
+                ministerId={ministerId}
+              />
+            ) : (
+              <div>
+                <h2 className="header">No spell available</h2>
+              </div>
             )
+          )
           }
         </div>
       ) : (
