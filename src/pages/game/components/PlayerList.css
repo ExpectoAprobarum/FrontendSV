@@ -38,12 +38,17 @@
 
 }
 
-.player-bttn {
+.ischoosable {
   opacity: 0.6;
 }
 
-.player-bttn:hover {
+.ischoosable:hover {
   opacity: 1;
+}
+
+.nonchoosable {
+  pointer-events: none;
+  opacity: 0.2;
 }
 
 .selectedPlayer-bttn {
