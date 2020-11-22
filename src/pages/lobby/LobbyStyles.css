@@ -91,7 +91,43 @@
   align-items: center;
 }
 
-.parrafo {
-  float: left;
-  margin-left: 13%;
+.divContentTittle.url{
+  margin-top: 7px;
+  margin-left: 15%;
+  width: 80%;
+  height: 30px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 30px;
+  font-size: 18px;
+  position: relative;
+}
+
+.divContentTittle.copied {
+  border-color: #b6eb7a;
+}
+
+
+.pUrl {
+  margin: 5px 0 5px 0;
+  left: 25px;
+  position: absolute;
+}
+
+.buttonInvi{
+  outline: none;
+  height: 36px;
+  width: 100px;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  border-style: none;
+  right: -5px;
+  position: absolute;
+  transition-duration: 1s;
+}
+
+.buttonInvi:hover{
+  transition-duration: 1s;
+  background-color: #464646;
 }
