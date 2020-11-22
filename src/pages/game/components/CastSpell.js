@@ -4,6 +4,7 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import AvadaKedavra from './spells/AvadaKedavra';
 import Divination from './spells/Divination';
+import Imperius from './spells/Imperius';
 import './CastSpell.css';
 
 const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
@@ -33,7 +34,7 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
         console.log(error)
       })
     }
-    
+
     getMyPlayer(gameId)
       .then(res => {
         setMyPlayer(res)
@@ -72,9 +73,16 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                     setDivinationInfo={showDivination}
                   />
                 ) : (
-                  <p>No matching Spell</p>
+                  currentSpell === "imperius" ? (
+                    <Imperius
+                      gameId={gameId}
+                      ministerId={ministerId}
+                    />
+                  ) : (
+                    <p>No matching Spell</p>
                   )
                 )
+              )
               }
             </div>
           ) : (
