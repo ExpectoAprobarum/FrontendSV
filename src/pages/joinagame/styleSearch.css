@@ -9,7 +9,7 @@
 }
 
 .linked.custom {
-    padding-left: 35%;
+    padding-left: 25%;
     text-align: left;
     justify-content: left;
 }
@@ -75,6 +75,16 @@
     border: none;
     height: 37px;
     cursor: pointer;
+}
+
+.buttonFound.listGames {
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 50%;
+  background-color: #5E5E5E;
+  color: whitesmoke;
+  transition: 0.5s;
+  position: relative;
 }
 
 .buttonFound:hover {

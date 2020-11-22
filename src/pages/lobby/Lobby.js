@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import configData from '../../config.json';
 import Game from '../game/Game'
 import './LobbyStyles.css'
@@ -15,6 +16,8 @@ const LobbyPage = (props) => {
   const [userCreate, setUserCreate] = useState(0);
   const [countPlayer, setCountPlayer]= useState(0);
   const [message, setMessage] = useState('');
+  const [copySuccess, setCopySuccess] = useState('');
+  const [copyState, setCopyState] = useState(false);
 
   let idGame = parseInt(props.location.state.gameId);
 
@@ -123,6 +126,18 @@ const LobbyPage = (props) => {
     })
   }
 
+  useEffect(() => {
+    setCopySuccess(`http://localhost:3000/game/invite?game=${idGame}`)
+  }, [idPlayer])
+
+  const copyToClipboard = () => {
+    console.log(copyState);
+    setCopyState(!copyState)
+    setTimeout(
+      () => setCopyState(false), 1500
+    );
+  };
+
   return (
     <div>
       { endGame ? <Redirect to="/home" /> :
@@ -133,9 +148,18 @@ const LobbyPage = (props) => {
                 <div className="divCreateJoin tittle">
                   <Link className="liStyle back" to="/home"
                     onClick={exitLobby}>{`<`}</Link>
-                  <p className="parrafo">
-                    Invite URL:
-                    {` http://localhost:3000/game/invite?game=${idGame}`}</p>
+                  <div className={"divContentTittle url" +
+                    (copyState ? ' copied' : '')}
+                    style={{resize: "none"}}>
+                    <p className="pUrl">Invite: {copySuccess}</p>
+                    <CopyToClipboard text={copySuccess}>
+                      <button onClick={copyToClipboard}
+                        className="buttonInvi">
+                        { copyState ? "Copied" : "Copy" }
+                      </button>
+                    </CopyToClipboard>
+                  </div>
+
                 </div>
               </div>
 
