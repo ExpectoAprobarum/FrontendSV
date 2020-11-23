@@ -73,23 +73,23 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                     setDivinationInfo={showDivination}
                   />
                 ) : (
-                  <p>No matching Spell</p>
+                  currentSpell === "crucio" ? (
+                    <Crucio
+                      gameId={gameId}
+                      ministerId={ministerId}
+                    />
+                  ) : (
+                    <p>No matching Spell</p>
+                  )
                 )
               )
               }
             </div>
           ) : (
-            currentSpell === "crucio" ? (
-              <Crucio
-                gameId={gameId}
-                ministerId={ministerId}
-              />
-            ) : (
               <div>
                 <h2 className="header">No spell available</h2>
               </div>
             )
-          )
           }
         </div>
       ) : (
