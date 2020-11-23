@@ -24,7 +24,6 @@ const ListGames = () => {
   const showModal = (e) => {
     setModalshow(true)
     setSelected(e)
-
     getPlayers(e);
   };
 
@@ -145,7 +144,9 @@ const ListGames = () => {
                 inPartida={joinGame}
                 gameID={selected.id}
                 error={error}>
-                <h3>{`Game: ${selected.name}`}</h3>
+                <h3 style={{fontSize: '25px', margin: '18px auto'}}>
+                  {`Game: ${selected.name}`}
+                </h3>
                 <p>{`Players: ${listPlayers.length}/
                   ${selected.player_amount}`}</p>
               </Modal>
@@ -158,10 +159,14 @@ const ListGames = () => {
                     <li className="linked custom" key={person.id}>
                       <button type="button"
                         onClick= {() =>
-                          {showModal(person)}} className= "buttonFound">
-                        {person.id} <span style={{paddingLeft: '30px'}}>
-                        </span>
-                        {person.name}
+                          {showModal(person)}}
+                          className= "buttonFound listGames">
+                        <div style={{width: '60%', float: 'left'}}>
+                          {person.name}
+                        </div>
+                        <div style={{width: '30%', float: 'right'}}>
+                          {person.joined_players} / {person.player_amount}
+                        </div>
                       </button>
                     </li>
                 )}
