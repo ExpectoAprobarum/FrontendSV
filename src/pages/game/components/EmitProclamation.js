@@ -28,8 +28,6 @@ const EmitProclamation = ({gameId, headmasterId, setDivinationInfo}) => {
 
     document.getElementById("proc1").disabled = true;
     document.getElementById("proc2").disabled = true;
-
-    setDivinationInfo(false);
   }
 
   useEffect(() => {
