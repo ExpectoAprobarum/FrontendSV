@@ -61,7 +61,11 @@ export const notify_gameName_invalid = () => {
     position: toast.POSITION.TOP_CENTER,
     autoClose: false})
 }
-
+export const notify_player_amount_invalid = () => {
+  toast.error('The Player amount is invalid', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: false})
+}
 export const notify_email_verify = () => {
   toast.success('Your account has been verify', {
     position: toast.POSITION.TOP_CENTER,
@@ -79,3 +83,4 @@ export const notify_missing_fields = () => {
     position: toast.POSITION.TOP_CENTER,
     autoClose: false})
 }
+
