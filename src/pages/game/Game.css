@@ -73,6 +73,69 @@
   background: linear-gradient(90deg, red, indigo);
 }
 
+.sendMsessageChat{
+  bottom: 1%;
+  left: 0%;
+  position: absolute;
+}
+.sendMsessageChat input{
+  height: 100%;
+  width: 236%;
+  position: relative;
+}
+.sendMsessageChat button{
+    padding-top: 25%;
+    border-radius: 30px;
+    background-color: #791786;
+    color: whitesmoke;
+    font-size: 15px;
+    left: 50%;
+    position: relative;
+    overflow: hidden;
+    width: 40%;
+    height: 20px;
+    padding: 0px 0px;
+
+  }
+  .sendMsessageChat button:hover {
+    background-color: #3b0550;
+  }
+.showmeMessageChat {
+  
+  background-color: rgb(126, 18, 136);
+  position: absolute;
+  bottom: 10%;
+  height: 30%;
+  width: 100%;
+  left:0%;
+  border-radius: 30px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.showmeMessageChat {
+  left: 0%;
+  width: 100%;
+  position: absolute;
+  color:rgb(5, 5, 5);
+  font-size: 17 px;
+}
+
 .board {
   text-align: center;
   float: right;
