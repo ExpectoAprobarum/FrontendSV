@@ -9,67 +9,39 @@ import './Modal.css';
 import './SpellObjective.css';
 
 const Crucio = ({gameId, ministerId}) => {
-  const [selected, setSelection] = useState(22);
+  const [selected, setSelection] = useState(0);
   const [players, setPlayers] = useState([]);
   const [loyalty, setLoyalty] = useState("");
   const [showLoyalty, setShowLoyalty] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const getCards = () => {
-      const usertoken = localStorage.getItem('user');
-      axios.get(configData.API_URL + '/games/' + gameId + '/crucio', {
-        headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-          }
-        })
-        .then(res => {
-          if(res.status === 200) {
-            setLoyalty(res.data);
-          }
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
-
-    getCards();
-
     getPlayers(gameId)
       .then(res => {
         setPlayers(res)
       });
   }, [gameId]);
 
-  const selectPlayer = (id) => {
-    setSelection(id);
-  }
+  const selectPlayer = (id) => setSelection(id);
 
-  const sendElection = () => {
+  const getLoyalty = () => {
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + gameId + '/crucio',
-      { "id": selected }, {
+    axios.get(configData.API_URL + '/games/' + gameId + '/crucio',
+      { id: selected }, {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
       })
       .then(res => {
         if(res.status === 200) {
-          console.log(res.status);
+          setLoyalty(res.data);
         }
       })
       .catch(error => {
         notify_player_choose_err();
       })
-  }
 
-  const modalShow = () => {
-    if(selected !== 0) {
       setShowModal(true);
-    }
-    else {
-      notify_player_choose_err();
-    }
   }
 
   const modalHide = () => setShowModal(false);
@@ -80,7 +52,6 @@ const Crucio = ({gameId, ministerId}) => {
     setTimeout(() => {
       setShowLoyalty(false);
       setShowModal(false);
-      sendElection();
     }, 6000)
   }
 
@@ -103,7 +74,8 @@ const Crucio = ({gameId, ministerId}) => {
             <button
               className="sendSpellElection"
               id="sendSpellElection"
-              onClick={modalShow}>
+              onClick={getLoyalty}
+            >
               Choose
             </button>
           </div>

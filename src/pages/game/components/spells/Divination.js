@@ -8,6 +8,7 @@ import './Divination.css';
 const Divination = ({gameId}) => {
   const [divination, setDivination] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showDivination, setShowDivination] = useState(false);
 
   useEffect(() => {
     const getCards = () => {
@@ -50,6 +51,14 @@ const Divination = ({gameId}) => {
   
   const modalHide = () => setShowModal(false);
 
+  const showCards = () => {
+    setShowDivination(true);
+    setTimeout(() => {
+      setShowModal(false);
+      endTurn();
+    }, 6000);
+  }
+
   return (
     <div className="Divination">
       <h2 className="header">
@@ -61,29 +70,37 @@ const Divination = ({gameId}) => {
               backdrop="static"
               keyboard={false}
             >
-              <div className="divination">
-                <h2 className="header">
-                  Divination cards:
-                </h2>
-                <div className="divination-cards">
-                  <button
-                    className={divination[0] + " left"}
-                    id="proc1"
-                    disabled
-                  />
-                  <button 
-                    className={divination[1] + " center"}
-                    id="proc2"
-                    disabled
-                  />
-                  <button
-                    className={divination[2] + " right"} 
-                    id="proc3" 
-                    disabled
-                  />
-                </div>
-                <button onClick={endTurn}>End Turn</button>
-              </div>
+              {
+                showDivination ? (
+                  <div className="divination">
+                    <h2 className="header">
+                      Divination cards:
+                    </h2>
+                    <div className="divination-cards">
+                      <button
+                        className={divination[0] + " left"}
+                        id="proc1"
+                        disabled
+                      />
+                      <button 
+                        className={divination[1] + " center"}
+                        id="proc2"
+                        disabled
+                      />
+                      <button
+                        className={divination[2] + " right"} 
+                        id="proc3" 
+                        disabled
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <button className="showDivination" onClick={showCards}>
+                    Cast Divination !
+                  </button>
+                )
+              }
+              
             </Modal>
           ) : (
             <h2>
