@@ -9,14 +9,11 @@ import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
-import ShowDivination from './components/ShowDivination';
 import GameOver from './components/GameOver';
 import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
-  const [divination, setDivination] = useState([]);
-  const [showDivination, setShowDivination] = useState(false);
 
   useEffect(() => {
     const getGameStatus = () => {
@@ -42,14 +39,6 @@ const Game = ({gameId}) => {
 
     return () => clearInterval(timer)
   }, [gameId])
-
-  const passDivination = (cards) => {
-    setDivination(cards);
-  }
-
-  const showDivinationInfo = (show) => {
-    setShowDivination(show)
-  }
 
   return (
     <div className="Game">
@@ -77,18 +66,6 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-        <div className="show-divination">
-          {
-            gameStatus ? (
-              <ShowDivination
-                divination={divination}
-                showCards={showDivination}
-              />
-            ) : (
-              <p />
-            )
-          }
-        </div>
       </div>
       <div className="board">
         <Board
@@ -119,7 +96,6 @@ const Game = ({gameId}) => {
                       <EmitProclamation
                         gameId={gameId}
                         headmasterId={gameStatus.headmaster}
-                        setDivinationInfo={showDivinationInfo}
                       />
                     </div>
                 ) : (
@@ -128,8 +104,6 @@ const Game = ({gameId}) => {
                       <CastSpell
                         gameId={gameId}
                         ministerId={gameStatus.minister}
-                        passDivination={passDivination}
-                        setDivinationInfo={showDivinationInfo}
                       />
                     </div>
                   ) : (

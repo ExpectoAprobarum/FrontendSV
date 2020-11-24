@@ -16,6 +16,25 @@ const Crucio = ({gameId, ministerId}) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    const getCards = () => {
+      const usertoken = localStorage.getItem('user');
+      axios.get(configData.API_URL + '/games/' + gameId + '/crucio', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        })
+        .then(res => {
+          if(res.status === 200) {
+            setLoyalty(res.data);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+
+    getCards();
+
     getPlayers(gameId)
       .then(res => {
         setPlayers(res)
@@ -36,7 +55,7 @@ const Crucio = ({gameId, ministerId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          setLoyalty(res.data);
+          console.log(res.status);
         }
       })
       .catch(error => {
@@ -46,8 +65,6 @@ const Crucio = ({gameId, ministerId}) => {
 
   const modalShow = () => {
     if(selected !== 0) {
-      /*get loyalty*/
-      setLoyalty("phoenix");
       setShowModal(true);
     }
     else {
@@ -63,7 +80,7 @@ const Crucio = ({gameId, ministerId}) => {
     setTimeout(() => {
       setShowLoyalty(false);
       setShowModal(false);
-      /*send post*/
+      sendElection();
     }, 6000)
   }
 
