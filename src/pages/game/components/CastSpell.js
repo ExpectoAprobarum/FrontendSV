@@ -73,7 +73,7 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                     setDivinationInfo={showDivination}
                   />
                 ) : (
-                  currentSpell === "imperio" ? (
+                  currentSpell === "imperius" ? (
                     <Imperius
                       gameId={gameId}
                       ministerId={ministerId}
