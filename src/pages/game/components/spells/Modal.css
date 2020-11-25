@@ -3,7 +3,7 @@
   src: url(../../../../principalpages/components/HARRYP__.TTF)
 }
 
-.modal-dialog {
+.modal-crucio .modal-dialog {
   background: white;
   position: relative;
   width: auto;
@@ -11,7 +11,7 @@
   width: 50%;
   left: 39%;
   height: auto;
-  top: 58%;
+  top: 61%;
   border-radius: 50px;
 }
 

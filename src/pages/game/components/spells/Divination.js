@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../../config.json';
 import { Modal } from 'react-bootstrap';
-import './Modal.css';
 import './Divination.css';
 
 const Divination = ({gameId}) => {
@@ -61,10 +60,10 @@ const Divination = ({gameId}) => {
 
   return (
     <div className="Divination">
-      <h2 className="header">
         {
           divination.length > 0 ? (
             <Modal
+              className="modal-divination"
               show={showModal}
               onHide={modalHide}
               backdrop="static"
@@ -96,7 +95,7 @@ const Divination = ({gameId}) => {
                   </div>
                 ) : (
                   <button className="showDivination" onClick={showCards}>
-                    Cast Divination !
+                    DIVINATION
                   </button>
                 )
               }
@@ -108,7 +107,6 @@ const Divination = ({gameId}) => {
             </h2>
           )
         }
-      </h2>
     </div>  
   )
 }

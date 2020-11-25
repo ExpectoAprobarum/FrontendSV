@@ -1,28 +1,31 @@
-.Divination .header {
-  margin: 0;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  border-bottom: 4px solid black;
-  text-align: center;
-  font-family: sans-serif;
-  background: dimgray;
-  margin-top: 12%;
-  border-top: 4px solid black;
+@font-face {
+  font-family:'Harry P';
+  src: url(../../../../principalpages/components/HARRYP__.TTF)
 }
 
 .divination {
   text-align: center;
+  border: 5px solid black;
+  border-radius: 30px;
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(118, 0, 122) 0px 0px 20px, 
+                rgb(202, 0, 209) 0px 0px 30px, 
+                rgb(134, 40, 138) 0px 0px 40px, 
+                rgb(202, 0, 209) 0px 0px 100px, 
+                rgb(178, 39, 233) 0px 0px 100px;
 }
 
 .divination .header {
   margin: 0;
   padding-bottom: 5px;
   padding-top: 5px;
-  border-bottom: 4px solid black;
+  border-bottom: 5px solid black;
   text-align: center;
   font-family: sans-serif;
   background: rgb(50, 13, 51);
   color: blueviolet;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
 }
 
 .divination .divination-cards {
@@ -30,18 +33,19 @@
   padding-top: 3%;
   padding-bottom: 3%;
   text-align: center;
-  border-bottom: 4px solid black;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .divination .divination-cards button {
   position: relative;
   padding-top: 11%;
   padding-left: 12%;
-  padding-bottom: 7%;
-  background-size: 194%;
+  padding-bottom: 10%;
+  background-size: 230%;
   background-repeat: no-repeat;
   background-position-x: 48%;
-  background-position-y: 15%;
+  background-position-y: 12%;
   outline: none;
   border-radius: 10px;
   border: 8px solid transparent;
@@ -60,9 +64,55 @@
 .divination .divination-cards .phoenix {
   background-image: url('../../assets/ProclamationPhoenix.png');
   border: 3px solid rgb(218, 22, 15);
+  background-size: 239%;
+
 }
 
 .divination .divination-cards .death {
   background-image: url('../../assets/ProclamationDeathEater.png');
   border: 3px solid blueviolet;
+}
+
+.showDivination {
+  margin-top: 11.5%;
+  margin-bottom: 11.5%;
+  background-color: #430a52;
+  border-radius: 30px;
+  width: 60%;
+  padding: 4% 8%;
+  transition: 0.3s;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  font-family:'Harry P';
+  font-size: 2.5em;
+  color: #FFFFFF;
+  border: none;
+  text-shadow: #5e008a 0px 0px 5px, #5e008a 0px 0px 10px, #5e008a 0px 0px 15px,
+                #870ab8 0px 0px 20px,
+                #870ab8 0px 0px 30px,
+                #870ab8 0px 0px 40px,
+                #870ab8 0px 0px 50px,
+                #870ab8 0px 0px 75px;
+}
+
+.showDivination:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(118, 0, 122) 40px 50px 20px, 
+                rgb(202, 0, 209) 40px 50px 30px, 
+                rgb(134, 40, 138) 40px 50px 40px, 
+                rgb(202, 0, 209) 40px 50px 100px, 
+                rgb(178, 39, 233) 40px 50px 100px;
+  margin-top: 9%;
+}
+
+.modal-divination .modal-dialog {
+  position: relative;
+  width: auto;
+  text-align: center;
+  width: 50%;
+  left: 39%;
+  height: auto;
+  top: 61%;
+  border-radius: 50px;
 }

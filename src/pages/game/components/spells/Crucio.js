@@ -82,6 +82,7 @@ const Crucio = ({gameId, ministerId}) => {
         ) : (
           <div>
             <Modal
+              className="modal-crucio"
               show={showModal}
               onHide={modalHide}
               backdrop="static"
