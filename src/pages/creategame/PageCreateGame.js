@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {notify_gameName_invalid}
+import {notify_gameName_invalid, notify_player_amount_invalid} 
   from '../../commons/alerts/toast';
 import { Redirect } from 'react-router-dom';
 import configData from '../../config.json';
@@ -10,7 +10,7 @@ import "./pageCreateGame.css";
 
 const PageCreateGame = () => {
     const [name, setName] = useState('');
-    const [player_amount, setPlayer_amount] = useState();
+    const [player_amount, setPlayer_amount] = useState('');
     const [showMe, setShowMe] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [gameId, setIdgame] = useState("-1") ;
@@ -34,7 +34,12 @@ const PageCreateGame = () => {
         }
       })
       .catch(error => {
-        notify_gameName_invalid()
+        if(error.response.status === 422){
+          notify_player_amount_invalid()
+        }
+        else if(error.response.status === 500){
+          notify_gameName_invalid()
+        }
       })
     }
 
@@ -85,6 +90,7 @@ const PageCreateGame = () => {
                       value={player_amount}
                       onChange={onChange}
                     >
+                      <option value="">-</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
                       <option value="7">7</option>
