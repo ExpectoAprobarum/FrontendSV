@@ -80,11 +80,6 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-        <div className='sendMsessageChat'>
-          <SendMessage
-            gameId={gameId}
-          />
-        </div>
         
         <div className='showmeMessageChat'>
         < WindowChat  
