@@ -123,7 +123,9 @@ const ListGames = () => {
     <div>
       <div className="button-container-1">
         <span className="mas">Search Game</span>
-        <button id="work" type="button" name="Hover" onClick={showS}>
+        <button
+          id="work" type="button"
+          name="Hover" onClick={showS}>
           Search Game
         </button>
       </div>
@@ -131,7 +133,8 @@ const ListGames = () => {
         <div className="divCreateJoin">
           <label>
             <form>
-              <input type="text"
+              <input
+                type="text"
                 className = "search-button"
                 name = "name"
                 placeholder = "Search.."
@@ -139,7 +142,8 @@ const ListGames = () => {
                 onChange={ (text) => filter(text)}
               />
 
-              <Modal open={modalshow}
+              <Modal
+                open={modalshow}
                 handleClose={hideModal}
                 inPartida={joinGame}
                 gameID={selected.id}
@@ -156,17 +160,21 @@ const ListGames = () => {
               <div className="divCreateJoin search">
                 { list.map(
                   person =>
-                    <li className="linked custom" key={person.id}>
-                      <button type="button"
-                        onClick= {() =>
-                          {showModal(person)}}
-                          className= "buttonFound listGames">
+                    <li
+                      className="linked custom"
+                      key={person.id}>
+                      <button
+                        type="button"
+                        onClick= {() => {showModal(person)}}
+                        className= "buttonFound listGames">
+
                         <div style={{width: '60%', float: 'left'}}>
                           {person.name}
                         </div>
                         <div style={{width: '30%', float: 'right'}}>
                           {person.joined_players} / {person.player_amount}
                         </div>
+                        
                       </button>
                     </li>
                 )}

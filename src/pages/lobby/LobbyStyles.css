@@ -82,7 +82,7 @@
 
 .divCreateJoin.tittle{
     height: 50px;
-    width: 630px;
+    width: 700px;
 }
 
 .divContentTittle {
@@ -130,4 +130,101 @@
 .buttonInvi:hover{
   transition-duration: 1s;
   background-color: #464646;
+}
+
+.topBar {
+  float: left;
+  height: 55px;
+  margin-top: 5px;
+}
+
+.divCreateJoin.prim{
+  width: 80px;
+  border-radius: 30px;
+}
+
+.navbar div {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: black;
+  border-radius: 30px;
+  height: 45px;
+  width: 110px;
+}
+
+.navbar div:hover, .dropdown:hover .dropbtn {
+  background-color: #464646;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 110px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.dropdown-content div {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+.dropdown-content div:hover {
+  background-color: #464646;
+  border-radius: 15px;
+  transition:0.8s;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  border-radius: 15px;
+}
+
+.liStyle.hom{
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.buttonFound.principa {
+  width: 100%;
+  height: 100%
+}
+
+.divPrim {
+  padding: 0 0 0 0;
 }

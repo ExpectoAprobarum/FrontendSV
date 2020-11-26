@@ -81,7 +81,7 @@ const LobbyPage = (props) => {
   }, [initPartida])
 
   const gameStart = () => {
-    if (countPlayer >= 5) {
+    if (countPlayer >= 2) {
       axios.post(`${configData.API_URL}/games/${idGame}/start`,({}),{
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
@@ -142,18 +142,54 @@ const LobbyPage = (props) => {
     <div>
       { endGame ? <Redirect to="/home" /> :
         ( initPartida ?
-          <div><Game gameId={parseInt(props.location.state.gameId)}/></div>
+          <div>
+            <Game gameId={parseInt(props.location.state.gameId)}/>
+          </div>
           : <div>
               <div className="divContentTittle">
                 <div className="divCreateJoin tittle">
-                  <Link className="liStyle back" to="/home"
-                    onClick={exitLobby}>{`<`}</Link>
-                  <div className={"divContentTittle url" +
-                    (copyState ? ' copied' : '')}
+                  {/* <Link
+                    className="liStyle back"
+                    to="/home"
+                    onClick={exitLobby}>
+                    {`<`}
+                  </Link> */}
+                  <div className="topBar">
+                    <div className="dropdown prim home back">
+                      <button className="dropbtn">Menu
+                        <i className="fa fa-caret-down"></i>
+                      </button>
+                      <div className="dropdown-content">
+                        <div>
+                          <Link
+                            className="liStyle hom"
+                            onClick={exitLobby}
+                            to="/home">
+                            Exit Game
+                          </Link>
+                        </div>
+                        <div>
+                          <Link
+                            className="liStyle hom"
+                            to="/home">
+                            {'Home'}
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={
+                      "divContentTittle url" + (copyState ? ' copied' : '')
+                    }
                     style={{resize: "none"}}>
-                    <p className="pUrl">Invite: {copySuccess}</p>
+                    <p className="pUrl">
+                      Invite: {copySuccess}
+                    </p>
                     <CopyToClipboard text={copySuccess}>
-                      <button onClick={copyToClipboard}
+                      <button
+                        onClick={copyToClipboard}
                         className="buttonInvi">
                         { copyState ? "Copied" : "Copy" }
                       </button>
@@ -166,28 +202,33 @@ const LobbyPage = (props) => {
               <h1 className="h1TittleLobby">Lobby</h1>
               <h4 className="h1TittleLobby error">{message}</h4>
               <div className="divCreateJoin lobby-1">
-                {userCreate === idPlayer ?
-                  <div className="button-container-1 button lobby">
-                    <span className="mas">Start Game</span>
-                    <button id="work" type="button"
-                      name="Hover" onClick={gameStart}>
-                        Start Game
-                    </button>
-                  </div> : <h3 className = "divWaiting">Waiting to start</h3>
+                {userCreate === idPlayer
+                  ? <div className="button-container-1 button lobby">
+                      <span className="mas">Start Game</span>
+                      <button
+                        id="work"
+                        type="button"
+                        name="Hover"
+                        onClick={gameStart}>
+                          Start Game
+                      </button>
+                    </div>
+                  : <h3 className = "divWaiting">Waiting to start</h3>
                  }
               </div>
               <label>
               <div className="divCreateJoin lobby">
-                {listPlayers.sort(
-                  function(a,b){
-                    var x = a.id < b.id? -1:1;
-                    return x
-                  }).map( player =>
-                    <li key={player.user.id}
-                      className="liStyle fom-popup-BoxShadow custom">
-                        {player.user.username}
-                    </li>
-                )}
+                { listPlayers.sort(
+                    function (a,b) {
+                      var x = a.id < b.id? -1:1;
+                      return x
+                    }).map( player =>
+                      <li
+                        key={player.user.id}
+                        className="liStyle fom-popup-BoxShadow custom">
+                          {player.user.username}
+                      </li>
+                  )}
               </div>
               </label>
           </div>

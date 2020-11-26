@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {notify_gameName_invalid} 
+import {notify_gameName_invalid}
   from '../../commons/alerts/toast';
 import { Redirect } from 'react-router-dom';
 import configData from '../../config.json';
 import "./buttonStyle.css";
 import "./pageCreateGame.css";
 
- 
+
 const PageCreateGame = () => {
     const [name, setName] = useState('');
     const [player_amount, setPlayer_amount] = useState();
     const [showMe, setShowMe] = useState(false);
     const [redirect, setRedirect] = useState(false);
-    const [gameId, setIdgame] = useState("-1") ; 
-    
+    const [gameId, setIdgame] = useState("-1") ;
+
     const onSubmit = (e) => {
       e.preventDefault();
       const infotosend ={
@@ -24,9 +24,9 @@ const PageCreateGame = () => {
       const usertoken = localStorage.getItem('user')
       axios.post(configData.API_URL + '/games/', (infotosend), {
         headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
-      }).then(response => { 
+      }).then(response => {
         if(response.status === 200){
           const response_id = response.data.id
           setIdgame(response_id)
@@ -37,7 +37,7 @@ const PageCreateGame = () => {
         notify_gameName_invalid()
       })
     }
-    
+
     const onChange = (e) => {
       if(e.target.name === 'name'){
         setName(e.target.value)
@@ -46,36 +46,36 @@ const PageCreateGame = () => {
         setPlayer_amount(e.target.value)
       }
     }
-    
+
     const showmetheElement = () => {
         setShowMe(! showMe)
     }
-      if(redirect){ 
+      if(redirect){
         return <Redirect to={{
           pathname: '/game',
           state: {gameId}
         }} />
       }
-        return( 
-            <div> 
+        return(
+            <div>
               <div className="button-container-1">
               <span className="mas">Are you ready ?</span>
               <button id="work" type="button" name="Hover"
                       onClick={showmetheElement}>
                 Create a Game
               </button>
-              </div> 
-           {showMe ? 
+              </div>
+           {showMe ?
             <div className='Example'>
               <div>
                 <form onSubmit={onSubmit}>
                   <br />
                   <br />
                   <label>Game Name: </label>
-                  <input 
-                  type='text' 
+                  <input
+                  type='text'
                   name="name"
-                  onChange={onChange} 
+                  onChange={onChange}
                   value ={name}/>
                     <br/>
                     <br/>
@@ -94,13 +94,13 @@ const PageCreateGame = () => {
                     </select>
                     <br />
                     <br />
-                    <button tpye='submit' value={redirect} name="redirect" 
+                    <button tpye='submit' value={redirect} name="redirect"
                             className='SaveConfig'>
                       Save config
                     </button>
                 </form>
               </div>
-            </div>   
+            </div>
             :
             <p></p>
             }
