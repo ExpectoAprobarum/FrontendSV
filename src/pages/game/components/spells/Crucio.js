@@ -5,7 +5,7 @@ import { getPlayers } from '../../../../commons/players/players';
 import PlayerList from '../PlayerList';
 import { notify_player_choose_err } from '../../../../commons/alerts/toast';
 import { Modal } from 'react-bootstrap';
-import './Modal.css';
+import './Crucio.css';
 import './SpellObjective.css';
 
 const Crucio = ({gameId, ministerId}) => {
