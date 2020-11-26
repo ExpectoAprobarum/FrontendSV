@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom';
 import './GameOver.css';
 import '../../creategame/buttonStyle.css';
 
-const GameOver = ({winner}) => {
+const GameOver = ({winner, reason}) => {
   const history = useHistory();
-  
+
   const leaveGame = () => {
     let path = "/home";
     history.push(path);
@@ -18,6 +18,7 @@ const GameOver = ({winner}) => {
         <div className="winner">
           <h3>The winner is:</h3>
           <h2>{winner}</h2>
+          <h3>Reason: {reason}</h3>
         </div>
         <div className="button-container-1">
           <span className="mas">Are you sure ?</span>

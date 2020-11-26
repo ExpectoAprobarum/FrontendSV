@@ -25,7 +25,7 @@
 }
 
 .GameOver .winner h3 {
-  color: black;
+  color: rgb(228, 228, 228);
 }
 
 .GameOver .phoenix-win .winner {
@@ -47,21 +47,24 @@
 
 .GameOver .phoenix-win .winner h2{
   color: #850a0a;
-  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
-                #f8300d 0px 0px 20px, 
-                #f8300d 0px 0px 30px, 
-                #f8300d 0px 0px 40px, 
-                #f8300d 0px 0px 50px, 
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                #f8300d 0px 0px 20px,
+                #f8300d 0px 0px 30px,
+                #f8300d 0px 0px 40px,
+                #f8300d 0px 0px 50px,
                 #f8300d 0px 0px 75px;
 }
 
 .GameOver .death-win .winner h2{
   color: #410841;
-  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
-                #ad14ad 0px 0px 20px, 
-                #ad14ad 0px 0px 30px, 
-                #ad14ad 0px 0px 40px, 
-                #ad14ad 0px 0px 50px, 
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                #ad14ad 0px 0px 20px,
+                #ad14ad 0px 0px 30px,
+                #ad14ad 0px 0px 40px,
+                #ad14ad 0px 0px 50px,
                 #ad14ad 0px 0px 75px;
 }
 
+.GameOver .button-container-1 {
+  margin-top: 1%;
+}
