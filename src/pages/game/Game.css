@@ -101,14 +101,15 @@
     background-color: #3b0550;
   }
 .showmeMessageChat {
-  
+  background-image: url('./chat/300300p2250EDNmainImage.png');
+  background-repeat: no-repeat;
+  background-position: right;
   background-color: rgb(126, 18, 136);
   position: absolute;
   bottom: 10%;
   height: 30%;
   width: 100%;
   left:0%;
-  border-radius: 30px;
   overflow: scroll;
   overflow-x: hidden;
 }

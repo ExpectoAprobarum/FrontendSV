@@ -8,7 +8,8 @@ const SendMessage = ({gameId}) => {
   const [error, setError] = useState('')
 
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if(!error){
       const usertoken = localStorage.getItem('user')
       const infotosend = {
@@ -29,28 +30,26 @@ const SendMessage = ({gameId}) => {
     }
   } 
 
-
   const handleOnchange = (e) => {
     if(e.target.name === "message"){
       setMsg(e.target.value)
     }
   }
 
-
-
   return( 
     <div>
-      <input  
-        id='messageC'
-        type='text'
-        name='message'
-        placeholder='Write something'
-        value={msg}
-        onChange= {handleOnchange}
-        minLength="7"
-        required
-      />
-      <button onClick={onSubmit}>Send</button>
+      <form onSubmit={onSubmit}>
+        <input  
+          id='messageC'
+          type='text'
+          name='message'
+          placeholder='Write something'
+          value={msg}
+          onChange= {handleOnchange}
+          required
+        />
+        <button type='submit' >Send</button>
+      </form>
     </div>
   )
 
