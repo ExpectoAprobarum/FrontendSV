@@ -12,7 +12,7 @@ import ShowResultVote from './components/ShowResultVote';
 import ShowDivination from './components/ShowDivination';
 import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
-import WindowChat from './chat/windowchat'
+//import WindowChat from './chat/windowchat'
 import { MessageList } from 'react-chat-elements'
 import './Game.css';
 
@@ -80,13 +80,11 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-        
-        <div className='showmeMessageChat'>
-        < WindowChat  
-            gameId={gameId} 
+        <div className='sendMsessageChat'>
+          <SendMessage
+            gameId={gameId}
           />
         </div>
-
 
         <div className="show-divination">
           {
