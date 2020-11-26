@@ -81,7 +81,7 @@ const LobbyPage = (props) => {
   }, [initPartida])
 
   const gameStart = () => {
-    if (countPlayer >= 2) {
+    if (countPlayer >= 5) {
       axios.post(`${configData.API_URL}/games/${idGame}/start`,({}),{
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
@@ -148,12 +148,6 @@ const LobbyPage = (props) => {
           : <div>
               <div className="divContentTittle">
                 <div className="divCreateJoin tittle">
-                  {/* <Link
-                    className="liStyle back"
-                    to="/home"
-                    onClick={exitLobby}>
-                    {`<`}
-                  </Link> */}
                   <div className="topBar">
                     <div className="dropdown prim home back">
                       <button className="dropbtn">Menu

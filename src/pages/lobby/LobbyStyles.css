@@ -109,12 +109,14 @@
 
 
 .pUrl {
+  font-size: 19px;
   margin: 5px 0 5px 0;
   left: 25px;
   position: absolute;
 }
 
 .buttonInvi{
+  font-size: 16px;
   outline: none;
   height: 36px;
   width: 100px;
@@ -163,10 +165,9 @@
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
   background-color: black;
   border-radius: 30px;
-  height: 45px;
+  height: 36px;
   width: 110px;
 }
 
