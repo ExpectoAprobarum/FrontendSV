@@ -11,6 +11,9 @@ import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
 import ShowDivination from './components/ShowDivination';
 import GameOver from './components/GameOver';
+import SendMessage from './chat/sendmessage'
+//import WindowChat from './chat/windowchat'
+import { MessageList } from 'react-chat-elements'
 import './Game.css';
 
 const Game = ({gameId}) => {
@@ -77,6 +80,12 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
+        <div className='sendMsessageChat'>
+          <SendMessage
+            gameId={gameId}
+          />
+        </div>
+
         <div className="show-divination">
           {
             gameStatus ? (
