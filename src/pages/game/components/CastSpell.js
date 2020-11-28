@@ -5,6 +5,7 @@ import { getMyPlayer } from '../../../commons/players/players';
 import AvadaKedavra from './spells/AvadaKedavra';
 import Divination from './spells/Divination';
 import Crucio from './spells/Crucio';
+import Imperius from './spells/Imperius';
 import './CastSpell.css';
 
 const CastSpell = ({gameId, ministerId}) => {
@@ -58,13 +59,20 @@ const CastSpell = ({gameId, ministerId}) => {
                     gameId={gameId}
                   />
                 ) : (
-                  currentSpell === "crucio" ? (
-                    <Crucio
+                  currentSpell === "imperius" ? (
+                    <Imperius
                       gameId={gameId}
                       ministerId={ministerId}
                     />
                   ) : (
-                    <p>No matching Spell</p>
+                    currentSpell === "crucio" ? (
+                      <Crucio
+                        gameId={gameId}
+                        ministerId={ministerId}
+                      />
+                    ) : (
+                      <p>No matching Spell</p>
+                    )
                   )
                 )
               )

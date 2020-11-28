@@ -47,14 +47,14 @@ const Game = ({gameId}) => {
           <h2>Game phase:</h2>
           <h3>
             { gameStatus !== undefined ? (
-                gameStatus.winner === undefined ? (
-                  gameStatus.phase !== undefined ? (
-                    gameStatus.phase.toUpperCase()
-                  ) : (
+              gameStatus.winner === undefined ? (
+                gameStatus.phase !== undefined ? (
+                  gameStatus.phase.toUpperCase()
+                ) : (
                     " "
-                  )
-                ) : "GAME OVER"
-              ) : " " }
+                )
+              ) : "GAME OVER"
+            ) : " " }
           </h3>
         </div>
         <div className="role">
@@ -98,24 +98,24 @@ const Game = ({gameId}) => {
                         headmasterId={gameStatus.headmaster}
                       />
                     </div>
-                ) : (
-                  gameStatus.phase === 'spell play' ? (
-                    <div>
-                      <CastSpell
-                        gameId={gameId}
-                        ministerId={gameStatus.minister}
-                      />
-                    </div>
                   ) : (
-                    gameStatus.phase === 'minister play' ? (
+                    gameStatus.phase === 'spell play' ? (
                       <div>
-                        <DiscardCard
+                        <CastSpell
                           gameId={gameId}
                           ministerId={gameStatus.minister}
                         />
                       </div>
                     ) : (
-                      <p>Awaiting response...</p>
+                      gameStatus.phase === 'minister play' ? (
+                        <div>
+                          <DiscardCard
+                            gameId={gameId}
+                            ministerId={gameStatus.minister}
+                          />
+                        </div>
+                      ) : (
+                        <p>Awaiting response...</p>
                       )
                     )
                   )
@@ -125,6 +125,7 @@ const Game = ({gameId}) => {
               <div className="game-over">
                 <GameOver
                   winner={gameStatus.winner}
+                  reason={gameStatus.detail}
                 />
               </div>
             )
