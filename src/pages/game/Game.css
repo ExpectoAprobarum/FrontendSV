@@ -136,15 +136,16 @@
     color:rgb(5, 5, 5);
     font-size: 17 px;
   }
+  
 .showChat  {
   background-image: url('./chat/com.random.chat.app_icon.png');
-  background-size: 100%;
+  background-size: 120%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   border-radius: 30px;
-  height: 5%;
-  width: 10%;
+  height: 6%;
+  width: 11%;
   bottom: 40%;
   right: 0%;
 
