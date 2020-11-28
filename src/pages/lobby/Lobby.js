@@ -12,6 +12,7 @@ import '../joinagame/styleSearch.css'
 const LobbyPage = (props) => {
   const [listPlayers, setListPlayers] = useState([]);
   const [initPartida, setInitPartida]= useState(false);
+  const [nameGame, setNameGame] = useState('')
   const [endGame, setEndGame]= useState(false);
   const [userCreate, setUserCreate] = useState(0);
   const [countPlayer, setCountPlayer]= useState(0);
@@ -65,6 +66,7 @@ const LobbyPage = (props) => {
           if(res.status === 200) {
             setInitPartida(res.data.started)
             setUserCreate(res.data.created_by)
+            setNameGame(res.data.name)
           }
         }).catch( error => {
           setEndGame(true)
@@ -157,16 +159,16 @@ const LobbyPage = (props) => {
                         <div>
                           <Link
                             className="liStyle hom"
-                            onClick={exitLobby}
                             to="/home">
-                            Exit Game
+                            {'Home'}
                           </Link>
                         </div>
                         <div>
                           <Link
                             className="liStyle hom"
+                            onClick={exitLobby}
                             to="/home">
-                            {'Home'}
+                            Exit Game
                           </Link>
                         </div>
                       </div>
@@ -193,7 +195,7 @@ const LobbyPage = (props) => {
                 </div>
               </div>
 
-              <h1 className="h1TittleLobby">Lobby</h1>
+              <h1 className="h1TittleLobby title">Lobby {nameGame}</h1>
               <h4 className="h1TittleLobby error">{message}</h4>
               <div className="divCreateJoin lobby-1">
                 {userCreate === idPlayer

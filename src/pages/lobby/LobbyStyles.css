@@ -1,3 +1,8 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../principalpages/components/HARRYP__.TTF)
+}
+
 .h1TittleLobby {
     text-align: center;
     margin: 0 auto;
@@ -6,6 +11,7 @@
 
 .h1TittleLobby.title {
   font-size: 70px;
+  font-family: 'Harry P';
 }
 
 .h1TittleLobby.error {
@@ -25,18 +31,20 @@
 
 .fom-popup-BoxShadow {
     border: none;
-    padding-top: 5px;
+    padding-top: 6px;
     border-radius: 20px;
     margin: 20px auto;
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
-    width: 35%;
+    width: 32%;
     height: 30px;
 }
 
 .fom-popup-BoxShadow.custom{
     font-size: 18px;
+    color: white;
+    background-color: #222831;
 }
 
 .buttonFound.bttLobby {
@@ -137,7 +145,7 @@
 .topBar {
   float: left;
   height: 55px;
-  margin-top: 5px;
+  margin-top: 7px;
 }
 
 .divCreateJoin.prim{
@@ -183,7 +191,6 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   border-radius: 15px;
-  transition: 0.4s;
 }
 
 .dropdown-content div {
@@ -198,9 +205,9 @@
 }
 
 .dropdown-content div:hover {
-  background-color: #464646;
+  background-color: #393e46;
   border-radius: 15px;
-  transition:0.8s;
+  transition: 0.8s;
 }
 
 .dropdown:hover .dropdown-content {

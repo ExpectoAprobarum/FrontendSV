@@ -30,7 +30,7 @@
 .modal-main {
     position:fixed;
     background: white;
-    width: 50%;
+    width: 45%;
     height: 180px;
     top:50%;
     left:50%;
@@ -81,7 +81,7 @@
   border-radius: 20px;
   margin-top: 5px;
   width: 50%;
-  background-color: #5E5E5E;
+  background-color: #393e46;
   color: whitesmoke;
   transition: 0.5s;
   position: relative;
@@ -107,19 +107,20 @@
 
 .buttonFound.bttmodal {
     border-radius: 20px;
-    background-color: #000000;
+    background-color: #464646;
     color: whitesmoke;
     text-align: center;
-    font-size: 16px;
+    font-size: 17px;
     margin-right: 10px;
     position: relative;
     overflow: hidden;
     width: 25%;
     padding: 0px 0px;
+    transition: 1s;
 }
 
 .buttonFound.bttmodal:hover {
-    background-color: #464646;
+    background-color: #000000;
 }
 
 .divCreateJoin {
@@ -146,4 +147,16 @@
     padding: 0px 0px 0px 0px;
     margin-block-end: 0;
     margin-block-start: 0
+}
+
+.nameGame {
+  width: 60%;
+  float: left;
+  font-size: 17px;
+}
+
+.playersInGame {
+  width: 30%;
+  float: right;
+  font-size: 17px;
 }
