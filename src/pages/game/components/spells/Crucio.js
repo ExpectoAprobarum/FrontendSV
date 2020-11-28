@@ -26,15 +26,15 @@ const Crucio = ({gameId, ministerId}) => {
 
   const getLoyalty = () => {
     const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/crucio',
-      { id: selected }, {
+    axios.get(configData.API_URL + '/games/' + gameId + '/crucio/' + selected,
+      {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
         }
       })
       .then(res => {
         if(res.status === 200) {
-          setLoyalty(res.data);
+          setLoyalty(res.data.role);
         }
       })
       .catch(error => {
@@ -46,12 +46,30 @@ const Crucio = ({gameId, ministerId}) => {
 
   const modalHide = () => setShowModal(false);
 
+  const endTurn = () => {
+    const usertoken = localStorage.getItem('user');
+    axios.post(configData.API_URL + '/games/' + gameId + '/endturn', {}, {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          console.log(res.status);
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   const revealCard = () => {
     setShowLoyalty(true);
     document.getElementById("reveal").disabled = true;
     setTimeout(() => {
       setShowLoyalty(false);
       setShowModal(false);
+      endTurn();
     }, 6000)
   }
 
@@ -98,7 +116,7 @@ const Crucio = ({gameId, ministerId}) => {
                     selected ? (
                       <div>
                         <h3 className="investigate">
-                          Investigate: {
+                          VICTIM : {
                             players.filter(player => {
                               return player.id === selected
                             }).map(player => {
@@ -111,14 +129,17 @@ const Crucio = ({gameId, ministerId}) => {
                           }
                         </h3>
                         <hr />
-                        <div className="loyalty">
+                        <div className={"loyalty " + loyalty.split(" ")[0]}>
                           {
                             showLoyalty ? (
-                              <h3>{loyalty}</h3>
+                              <h3> { loyalty.toUpperCase() } </h3>
                             ) : (
-                              <div className="loyalty-container">
-                                <h3>Waiting for you to reveal</h3>
-                              </div>
+                              <button
+                                className="reveal"
+                                id="reveal"
+                                onClick={revealCard}>
+                                Reveal Loyalty !
+                              </button>
                             )
                           }
                         </div>
@@ -128,12 +149,6 @@ const Crucio = ({gameId, ministerId}) => {
                     )
                   }
                 </div>
-                <button
-                  className="reveal"
-                  id="reveal"
-                  onClick={revealCard}>
-                  Reveal Loyalty !
-                </button>
               </Modal.Body>
             </Modal>
           </div>
