@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
+import PopupChaos from './popupChaos';
 import './Board.css';
 
-const Board = ({gameId}) => {
+const Board = ({gameId, showChaos, chaosProclam}) => {
   const [boardInfo, setBoardInfo] = useState({});
+  const [chaosPopupShow, setChaosPopupShow] = useState(false);
 
   useEffect(() => {
     const getBoardInfo = () => {
@@ -24,12 +26,21 @@ const Board = ({gameId}) => {
       })
     }
 
+    console.log("Board, showChaos: ", showChaos);
+    console.log("Board, chaosPopupShos: ", chaosPopupShow);
+    if(showChaos !== chaosPopupShow) {
+      setChaosPopupShow(true);
+      setTimeout(() => {
+        setChaosPopupShow(false);
+      }, 5000);
+    }
+
     const timer = setInterval(() => {
       getBoardInfo();
     }, 2000);
 
     return () => clearInterval(timer)
-  }, [gameId])
+  }, [])
 
   const spellsInfo = boardInfo === undefined || 
                      boardInfo.spell_fields === undefined ? (
@@ -37,7 +48,7 @@ const Board = ({gameId}) => {
   ) : (
     boardInfo.spell_fields.map((spell, index) => {
       return (
-        <li className="spell-container">
+        <li className="spell-container" key={index}>
           { spell === "" || index === boardInfo.spell_fields.length - 1 ? (
               null
             ) : (
@@ -71,30 +82,52 @@ const Board = ({gameId}) => {
         <div className="card">
           <div className="box death-box">
             <div className="content death-content">
-                <h3>Death Eater</h3>
-                <h2>{ boardInfo ? boardInfo.de_proc : "0"}</h2>
-              </div>
+              <h3>Death Eater</h3>
+              <h2>{ boardInfo ? boardInfo.de_proc : "0"}</h2>
             </div>
           </div>
         </div>
       </div>
-      <div className="spells-info">
-        <ul>
-          <h2 className="spell-info-header">
-            SPELLS
-          </h2>
-          { spellsInfo }
-          <h3 className="next-spell">
-            Next: { 
-              boardInfo === undefined || boardInfo.spell_fields === undefined ? 
-              " "
-              : (boardInfo.spell_fields[boardInfo.de_proc]) ? (
-                boardInfo.spell_fields[boardInfo.de_proc].toUpperCase()
-              ) : " " }
-          </h3>
-        </ul>
+      <div className="container">
+        <div className="card">
+          <div className="box chaos-box">
+            <div className="content chaos-content">
+              <h3>Chaos Counter</h3>
+              <h2>{ boardInfo ? boardInfo.caos : "0"}</h2>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div className="spells-info">
+      <ul>
+        <h2 className="spell-info-header">
+          SPELLS
+        </h2>
+        { spellsInfo }
+        <h3 className="next-spell">
+          Next: { 
+            boardInfo === undefined || boardInfo.spell_fields === undefined ? 
+            " "
+            : (boardInfo.spell_fields[boardInfo.de_proc]) ? (
+              boardInfo.spell_fields[boardInfo.de_proc].toUpperCase()
+            ) : " " }
+        </h3>
+      </ul>
+    </div>
+    <div className="chaos-popup">
+    {
+      chaosPopupShow ? (
+        <PopupChaos 
+          open={true}
+          proclam={chaosProclam}
+        />
+      ) : (
+        null
+      )
+    }
+    </div>
+  </div>
   )
 }
 

@@ -18,7 +18,7 @@ import './Game.css';
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [showChat, setShowChat] = useState(false)
-
+  const [showChaos, setShowChaos] = useState(false);
 
   const showtheChat = () =>{
     setShowChat(!showChat)
@@ -34,7 +34,22 @@ const Game = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
+          if(res.data.caos !== undefined) {
+            console.log("first operand: ", res.data.caos !== undefined && gameStatus.caos === undefined)
+            //console.log("second operand: ", res.data.caos.length !== gameStatus.caos.length);
+            if(!res.data.caos && gameStatus.caos) {
+              console.log("showChaos changed to true");
+              setShowChaos(true);
+            } else if(res.data.caos.length !== gameStatus.caos.length) {
+              console.log("showChaos changed to true");
+              setShowChaos(true);
+            }
+          } else {
+            setShowChaos(false);
+          }
+          
           setGameStatus(res.data);
+          console.log("game status: ", gameStatus);
         }
       })
       .catch(error => {
@@ -102,6 +117,8 @@ const Game = ({gameId}) => {
       <div className="board">
         <Board
           gameId={gameId}
+          showChaos={showChaos}
+          chaosProclam={gameStatus.caos !== undefined ? gameStatus.caos[gameStatus.caos.length - 1] : " "}
         />
       </div>
       <div className="phase">
