@@ -21,7 +21,11 @@ const Game = ({gameId}) => {
 
 
   const showtheChat = () =>{
-    setShowChat(!showChat)
+    setShowChat(true)
+  }
+
+  const closetheChat= () => {
+    setShowChat(false)
   }
 
   useEffect(() => {
@@ -88,11 +92,11 @@ const Game = ({gameId}) => {
                 gameId={gameId}
               />
             </div>
+            <button  onClick={closetheChat} className='closeChat'></button> 
           </div>
         : 
-          <p />
+        <button  onClick={showtheChat} className='showChat'></button>  
         }
-        <button  onClick={showtheChat} className='showChat'></button>
       
       </div>
       <div className="board">
