@@ -1,20 +1,65 @@
 .modal-chaos {
   position: fixed;
-    top: 0;
-    left: 0;
-    width:100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    text-align: center;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(133, 51, 51, 0.6);
+  text-align: center;
 }
 
 .modal-chaos-container {
   position:fixed;
-    background: white;
-    width: 50%;
-    height: 300px;
-    top: 55%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    border-radius: 20px;
+  background: linear-gradient(45deg, rgb(19, 18, 18), rgb(153, 153, 153));
+  width: 50%;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 20px;
+  border: 6px solid black;
+}
+
+.modal-chaos .modal-chaos-container .modal-chaos-header {
+  color: red;
+  font-size: 2.5em;
+  text-shadow: rgb(0, 0, 0) 0px 0px 5px, rgb(134, 134, 134) 0px 0px 10px, rgb(230, 0, 0) 0px 0px 15px, 
+                #831515 0px 0px 20px, 
+                #000000 0px 0px 30px, 
+                #ff0000 0px 0px 40px, 
+                #000000 0px 0px 50px, 
+                #942626 0px 0px 75px;
+}
+
+.modal-chaos .modal-chaos-container .modal-chaos-detail {
+  color: #000000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 2em;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+}
+
+.modal-chaos .modal-chaos-container .modal-chaos-proclamation {
+  font-size: 3em;
+}
+
+.modal-chaos .modal-chaos-container .phoenix {
+  color: red;
+  text-shadow: #460c0c 0px 0px 5px, #460c0c 0px 0px 10px, #460c0c 0px 0px 15px,
+                #851c0a 0px 0px 20px,
+                #851c0a 0px 0px 30px,
+                #851c0a 0px 0px 40px,
+                #851c0a 0px 0px 50px,
+                #851c0a 0px 0px 75px;
+}
+
+.modal-chaos .modal-chaos-container .death {
+  color: #ad14ad;
+  text-shadow: #0a090a 0px 0px 5px, #5e008a 0px 0px 10px, #09080a 0px 0px 15px,
+                #d000fa 0px 0px 20px,
+                #ff00ff 0px 0px 30px,
+                #3f234b 0px 0px 40px,
+                #d300fd 0px 0px 50px,
+                #870ab8 0px 0px 75px;
 }

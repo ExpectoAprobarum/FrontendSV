@@ -19,6 +19,7 @@ const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [showChat, setShowChat] = useState(false)
   const [showChaos, setShowChaos] = useState(false);
+  const [chaos, setChaos] = useState(0);
 
   const showtheChat = () =>{
     setShowChat(!showChat)
@@ -34,22 +35,21 @@ const Game = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          if(res.data.caos !== undefined) {
-            console.log("first operand: ", res.data.caos !== undefined && gameStatus.caos === undefined)
-            //console.log("second operand: ", res.data.caos.length !== gameStatus.caos.length);
-            if(!res.data.caos && gameStatus.caos) {
-              console.log("showChaos changed to true");
-              setShowChaos(true);
-            } else if(res.data.caos.length !== gameStatus.caos.length) {
-              console.log("showChaos changed to true");
-              setShowChaos(true);
-            }
-          } else {
-            setShowChaos(false);
-          }
           
-          setGameStatus(res.data);
-          console.log("game status: ", gameStatus);
+          let newStatus = res.data;
+          setGameStatus(newStatus);
+
+          if(newStatus.caos !== undefined) {
+            let oldChaos = chaos;
+            let newChaos = newStatus.caos.length;
+            if(oldChaos !== newChaos) {
+              setChaos(newChaos);
+            }
+            else {
+              setShowChaos(false);
+            }
+          }
+
         }
       })
       .catch(error => {
@@ -63,6 +63,16 @@ const Game = ({gameId}) => {
 
     return () => clearInterval(timer)
   }, [gameId])
+
+  useEffect(() => {
+    let status = gameStatus;
+    if(status.caos !== undefined) {
+      setShowChaos(true);
+      setTimeout(() => {
+        setShowChaos(false);
+      }, 5000);
+    }
+  }, [chaos])
 
   return (
     <div className="Game">

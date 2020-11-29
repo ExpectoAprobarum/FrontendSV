@@ -6,7 +6,6 @@ import './Board.css';
 
 const Board = ({gameId, showChaos, chaosProclam}) => {
   const [boardInfo, setBoardInfo] = useState({});
-  const [chaosPopupShow, setChaosPopupShow] = useState(false);
 
   useEffect(() => {
     const getBoardInfo = () => {
@@ -24,15 +23,6 @@ const Board = ({gameId, showChaos, chaosProclam}) => {
       .catch(error => {
         console.log(error)
       })
-    }
-
-    console.log("Board, showChaos: ", showChaos);
-    console.log("Board, chaosPopupShos: ", chaosPopupShow);
-    if(showChaos !== chaosPopupShow) {
-      setChaosPopupShow(true);
-      setTimeout(() => {
-        setChaosPopupShow(false);
-      }, 5000);
     }
 
     const timer = setInterval(() => {
@@ -116,16 +106,10 @@ const Board = ({gameId, showChaos, chaosProclam}) => {
       </ul>
     </div>
     <div className="chaos-popup">
-    {
-      chaosPopupShow ? (
-        <PopupChaos 
-          open={true}
-          proclam={chaosProclam}
-        />
-      ) : (
-        null
-      )
-    }
+      <PopupChaos 
+        open={showChaos}
+        proclam={chaosProclam}
+      />
     </div>
   </div>
   )

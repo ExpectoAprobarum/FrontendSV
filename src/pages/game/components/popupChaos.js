@@ -7,13 +7,19 @@ export default function PopupChaos({open, proclam}) {
     return ReactDom.createPortal(
       <div className="modal-chaos">
         <div className="modal-chaos-container">
-          <h1 style={{fontSize: '50px'}}>
+          <h1 className="modal-chaos-header">
             The government has fallen into CHAOS !!
           </h1>
-          <h2 style={{fontSize: '35px'}}>
-            This proclamation will be played immediately: { 
-                proclam.toUpperCase()
-              }
+          <h2 className="modal-chaos-detail">
+            This proclamation will be played immediately: 
+          </h2>
+          <h2 className={"modal-chaos-proclamation " + proclam}>
+            { proclam === "phoenix" ? (
+              proclam.toUpperCase() + " "
+            ) : (
+              proclam.toUpperCase() + " EATER "
+            )}
+            PROCLAMATION
           </h2>
         </div>
       </div>,
