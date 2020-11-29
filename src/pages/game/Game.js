@@ -75,36 +75,32 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-        <div className='sendMsessageChat'>
-          <SendMessage
-            gameId={gameId}
-          />
-        
-          { showChat ?  
-            <div> 
-             <div className='showmeMessageChat'>
-                <WindowChat  
-                  gameId={gameId} 
-                />
-              </div>  
-              <div className='sendMsessageChat'>
-                <SendMessage
-                  gameId={gameId}
-                />
-              </div>
+  
+        { showChat ?  
+          <div> 
+            <div className='showmeMessageChat'>
+              <WindowChat  
+                gameId={gameId} 
+              />
+            </div>  
+            <div className='sendMsessageChat'>
+              <SendMessage
+                gameId={gameId}
+              />
             </div>
-          : 
-            <p />
-          }
-          <button  onClick={showtheChat} className='showChat'></button>
-        </div>
+          </div>
+        : 
+          <p />
+        }
+        <button  onClick={showtheChat} className='showChat'></button>
+      
       </div>
       <div className="board">
         <Board
           gameId={gameId}
         />
       </div>
-      <div className="phase">
+      <div className="phase"> 
         {
           gameStatus ? (
             gameStatus.winner === undefined ? (

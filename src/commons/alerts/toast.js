@@ -84,3 +84,8 @@ export const notify_missing_fields = () => {
     autoClose: false})
 }
 
+export const notify_you_dead = () => {
+  toast.error('The dead people cant talk', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: false})
+}

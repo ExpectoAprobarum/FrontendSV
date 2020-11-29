@@ -40,8 +40,9 @@ const WindowChat = ({gameId}) => {
   return(
       messages.map(
         entry =>
-          <div key={entry.id}>
+          <div >
             <MessageBox 
+              title='useralias'
               type='text'
               text={entry}
               avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW4H2aNRj447pJrUzxZ1fjETKrr9_cGu7egqAaA5LHs6a0JeT79ysKjDwow0ldlmD8Dgqia6PZeERLAWC0jKwACERtiObB5Wo&usqp=CAU&ec=45730948"
