@@ -18,10 +18,10 @@ const WindowChat = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          //estaria bueno que me diera en la respuesta el nombre, me trae el player pero sin nombre ni nada.
-          const response = res.data.data.map( messageAndPlayer => messageAndPlayer.content)
-          setMessages(...messages, response)
+          console.log("ESTO TRAE EL BACK", res)
           
+          const response = res.data.data.map( messageAndPlayer => [messageAndPlayer.send_by.useralias, messageAndPlayer.content])
+          setMessages(...messages, response)
         }
       })
       .catch(error => {
@@ -42,10 +42,11 @@ const WindowChat = ({gameId}) => {
         entry =>
           <div >
             <MessageBox 
-              title='useralias'
+              title={entry[0]}
+              titleColor='red'
               type='text'
-              text={entry}
-              avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW4H2aNRj447pJrUzxZ1fjETKrr9_cGu7egqAaA5LHs6a0JeT79ysKjDwow0ldlmD8Dgqia6PZeERLAWC0jKwACERtiObB5Wo&usqp=CAU&ec=45730948"
+              text={entry[1]}
+              avatar = "https://static.vecteezy.com/system/resources/previews/000/566/937/non_2x/vector-person-icon.jpg"
             />
           </div>)
   )

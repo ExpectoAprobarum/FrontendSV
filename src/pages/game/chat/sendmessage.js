@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
 import {notify_you_dead } from '../../../commons/alerts/toast'
@@ -8,33 +8,16 @@ import { getMyPlayer } from '../../../commons/players/players';
 
 const SendMessage = ({gameId}) => {
   const [msg, setMsg] = useState('')
-  //contemplar los playrs deads
-  const [error, setError] = useState('')
-  const [isAlive, setisAlive] = useState(true)
-
   
-  useEffect(() => {
-    const checkIfImDead = () => {
-      getMyPlayer(gameId).then( response => {
-        setisAlive(response.alive)
-      })
-    }
-    
-    const timer = setInterval(() => {
-      checkIfImDead();
-    }, 4000);
-
-    return () => clearInterval(timer)
-    }, []);
-
   const onSubmit = (e) => {
     e.preventDefault();
-    if(!error){
-      const usertoken = localStorage.getItem('user')
-      const infotosend = {
-        "content" : msg    
-      }
-      if (isAlive) {
+    getMyPlayer(gameId).then( response => {
+      const isAlaives = response.alive
+      if(isAlaives){
+        const usertoken = localStorage.getItem('user')
+        const infotosend = {
+          "content" : msg    
+        }
         axios.post(configData.API_URL + '/games/' + gameId + '/messages', infotosend, {
           headers: {
             'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
@@ -48,10 +31,7 @@ const SendMessage = ({gameId}) => {
           console.log(error)
         })
       }
-      else{
-        notify_you_dead()
-      }
-    }
+    })
   } 
 
   const handleOnchange = (e) => {
@@ -63,7 +43,7 @@ const SendMessage = ({gameId}) => {
   return( 
     <div>
       <form onSubmit={onSubmit}>
-        <input  
+        <textarea  
           type='text'
           name='message'
           placeholder='Write something'
