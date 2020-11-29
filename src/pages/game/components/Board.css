@@ -3,7 +3,7 @@
   src: url(../../../principalpages/components/HARRYP__.TTF)
 }
 
-.Board{
+.Board {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -62,6 +62,10 @@
   background: linear-gradient(45deg, rgb(137, 0, 155), rgb(75, 18, 65));
 }
 
+.container .card .chaos-box {
+  background: linear-gradient(45deg, rgb(38, 21, 41), rgb(88, 75, 86));
+}
+
 .container .card .box .content {
   padding: 20px;
   text-align: center;
@@ -92,6 +96,10 @@
 
 .container .card .box .death-content h2 {
   color: rgb(212, 0, 255);
+}
+
+.container .card .box .chaos-content h2 {
+  color: rgb(255, 0, 0);
 }
 
 .spells-info {

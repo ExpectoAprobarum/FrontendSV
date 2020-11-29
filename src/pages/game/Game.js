@@ -18,7 +18,8 @@ import './Game.css';
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [showChat, setShowChat] = useState(false)
-
+  const [showChaos, setShowChaos] = useState(false);
+  const [chaos, setChaos] = useState(0);
 
   const showtheChat = () =>{
     setShowChat(true)
@@ -38,7 +39,21 @@ const Game = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          setGameStatus(res.data);
+          
+          let newStatus = res.data;
+          setGameStatus(newStatus);
+
+          if(newStatus.caos !== undefined) {
+            let oldChaos = chaos;
+            let newChaos = newStatus.caos.length;
+            if(oldChaos !== newChaos) {
+              setChaos(newChaos);
+            }
+            else {
+              setShowChaos(false);
+            }
+          }
+
         }
       })
       .catch(error => {
@@ -52,6 +67,16 @@ const Game = ({gameId}) => {
 
     return () => clearInterval(timer)
   }, [gameId])
+
+  useEffect(() => {
+    let status = gameStatus;
+    if(status.caos !== undefined) {
+      setShowChaos(true);
+      setTimeout(() => {
+        setShowChaos(false);
+      }, 5000);
+    }
+  }, [chaos])
 
   return (
     <div className="Game">
@@ -102,6 +127,8 @@ const Game = ({gameId}) => {
       <div className="board">
         <Board
           gameId={gameId}
+          showChaos={showChaos}
+          chaosProclam={gameStatus.caos !== undefined ? gameStatus.caos[gameStatus.caos.length - 1] : " "}
         />
       </div>
       <div className="phase"> 
