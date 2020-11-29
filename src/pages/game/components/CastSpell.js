@@ -4,13 +4,13 @@ import configData from '../../../config.json';
 import { getMyPlayer } from '../../../commons/players/players';
 import AvadaKedavra from './spells/AvadaKedavra';
 import Divination from './spells/Divination';
+import Crucio from './spells/Crucio';
 import Imperius from './spells/Imperius';
 import './CastSpell.css';
 
-const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
+const CastSpell = ({gameId, ministerId}) => {
   const [currentSpell, setCurrentSpell] = useState("");
   const [myPlayer, setMyPlayer] = useState({});
-  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     const getBoardSpell = () => {
@@ -42,18 +42,6 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
     getBoardSpell();
   }, [gameId])
 
-  const passCards = (newCards) => {
-    setCards(newCards)
-  }
-
-  const showDivination = (show) => {
-    setDivinationInfo(show)
-  }
-
-  useEffect(() => {
-    passDivination(cards);
-  }, [cards])
-
   return (
     <div className="CastSpell">
       { myPlayer.id === ministerId ? (
@@ -69,8 +57,6 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                 currentSpell === "divination" ? (
                   <Divination
                     gameId={gameId}
-                    passDivination={passCards}
-                    setDivinationInfo={showDivination}
                   />
                 ) : (
                   currentSpell === "imperius" ? (
@@ -79,16 +65,23 @@ const CastSpell = ({gameId, ministerId, passDivination, setDivinationInfo}) => {
                       ministerId={ministerId}
                     />
                   ) : (
-                    <p>No matching Spell</p>
+                    currentSpell === "crucio" ? (
+                      <Crucio
+                        gameId={gameId}
+                        ministerId={ministerId}
+                      />
+                    ) : (
+                      <p>No matching Spell</p>
+                    )
                   )
                 )
               )
               }
             </div>
           ) : (
-            <div>
-              <h2 className="header">No spell available</h2>
-            </div>
+              <div>
+                <h2 className="header">No spell available</h2>
+              </div>
             )
           }
         </div>

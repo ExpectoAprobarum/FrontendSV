@@ -1,0 +1,161 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import configData from '../../../../config.json';
+import { getPlayers } from '../../../../commons/players/players';
+import PlayerList from '../PlayerList';
+import { notify_player_choose_err } from '../../../../commons/alerts/toast';
+import { Modal } from 'react-bootstrap';
+import './Crucio.css';
+import './SpellObjective.css';
+
+const Crucio = ({gameId, ministerId}) => {
+  const [selected, setSelection] = useState(0);
+  const [players, setPlayers] = useState([]);
+  const [loyalty, setLoyalty] = useState("");
+  const [showLoyalty, setShowLoyalty] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    getPlayers(gameId)
+      .then(res => {
+        setPlayers(res)
+      });
+  }, [gameId]);
+
+  const selectPlayer = (id) => setSelection(id);
+
+  const getLoyalty = () => {
+    const usertoken = localStorage.getItem('user');
+    axios.get(configData.API_URL + '/games/' + gameId + '/crucio/' + selected,
+      {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
+        }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          setLoyalty(res.data.role);
+        }
+      })
+      .catch(error => {
+        notify_player_choose_err();
+      })
+
+      setShowModal(true);
+  }
+
+  const modalHide = () => setShowModal(false);
+
+  const endTurn = () => {
+    const usertoken = localStorage.getItem('user');
+    axios.post(configData.API_URL + '/games/' + gameId + '/endturn', {}, {
+      headers: {
+          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+        }
+      })
+      .then(res => {
+        if(res.status === 200) {
+          console.log(res.status);
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  const revealCard = () => {
+    setShowLoyalty(true);
+    document.getElementById("reveal").disabled = true;
+    setTimeout(() => {
+      setShowLoyalty(false);
+      setShowModal(false);
+      endTurn();
+    }, 6000)
+  }
+
+  return (
+    <div className="Spell">
+      {
+        loyalty === "" ? (
+          <div>
+            <h2 className="spell-header">Select player to cast: Crucio</h2>
+            <div className="player-list">
+              <PlayerList
+                selectPlayer={selectPlayer}
+                selected={selected}
+                players={players}
+                showCond={["alive", true]}
+                chooseCond={["alive", true]}
+                minister={[ministerId, false]}
+              />
+            </div>
+            <button
+              className="sendSpellElection"
+              id="sendSpellElection"
+              onClick={getLoyalty}
+            >
+              Choose
+            </button>
+          </div>
+        ) : (
+          <div>
+            <Modal
+              className="modal-crucio"
+              show={showModal}
+              onHide={modalHide}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header>
+                <Modal.Title>Crucio</Modal.Title>
+                <hr />
+              </Modal.Header>
+              <Modal.Body>
+                <div className="crucio-body">
+                  {
+                    selected ? (
+                      <div>
+                        <h3 className="investigate">
+                          VICTIM : {
+                            players.filter(player => {
+                              return player.id === selected
+                            }).map(player => {
+                              return (
+                                <h3 className="investigate-alias">
+                                  {player.user.useralias}
+                                </h3>
+                              )
+                            })
+                          }
+                        </h3>
+                        <hr />
+                        <div className={"loyalty " + loyalty.split(" ")[0]}>
+                          {
+                            showLoyalty ? (
+                              <h3> { loyalty.toUpperCase() } </h3>
+                            ) : (
+                              <button
+                                className="reveal"
+                                id="reveal"
+                                onClick={revealCard}>
+                                Reveal Loyalty !
+                              </button>
+                            )
+                          }
+                        </div>
+                      </div>
+                    ) : (
+                      <h3>No player selected</h3>
+                    )
+                  }
+                </div>
+              </Modal.Body>
+            </Modal>
+          </div>
+        )
+      }
+    </div>
+  )
+}
+
+export default Crucio

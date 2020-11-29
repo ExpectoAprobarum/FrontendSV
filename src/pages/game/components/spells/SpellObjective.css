@@ -9,6 +9,10 @@
   font-family: sans-serif;
   color: blueviolet;
   background: rgb(50, 13, 51);
+  padding-top: 0.6%;
+  padding-bottom: 0.6%;
+  border-bottom: 4px solid black;
+  border-top: 4px solid black;
 }
 
 .Spell .player-list {

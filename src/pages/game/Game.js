@@ -9,7 +9,6 @@ import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
-import ShowDivination from './components/ShowDivination';
 import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
 import WindowChat from './chat/windowChat'
@@ -18,8 +17,6 @@ import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
-  const [divination, setDivination] = useState([]);
-  const [showDivination, setShowDivination] = useState(false);
   const [showChat, setShowChat] = useState(false)
 
 
@@ -52,14 +49,6 @@ const Game = ({gameId}) => {
     return () => clearInterval(timer)
   }, [gameId])
 
-  const passDivination = (cards) => {
-    setDivination(cards);
-  }
-
-  const showDivinationInfo = (show) => {
-    setShowDivination(show)
-  }
-
   return (
     <div className="Game">
       <div className="info">
@@ -86,37 +75,28 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
+        <div className='sendMsessageChat'>
+          <SendMessage
+            gameId={gameId}
+          />
         
-        {showChat ?  
-          <div> 
-          <div className='showmeMessageChat'>
-            < WindowChat  
-              gameId={gameId} 
-            />
-          </div>  
-          <div className='sendMsessageChat'>
-            <SendMessage
-              gameId={gameId}
-            />
-          </div>
-          </div>
+          { showChat ?  
+            <div> 
+             <div className='showmeMessageChat'>
+                <WindowChat  
+                  gameId={gameId} 
+                />
+              </div>  
+              <div className='sendMsessageChat'>
+                <SendMessage
+                  gameId={gameId}
+                />
+              </div>
+            </div>
           : 
-          <p></p>
-        }
-        <button  onClick={showtheChat} className='showChat'></button>
-                
-        
-        <div className="show-divination">
-          {
-            gameStatus ? (
-              <ShowDivination
-                divination={divination}
-                showCards={showDivination}
-              />
-            ) : (
-              <p />
-            )
+            <p />
           }
+          <button  onClick={showtheChat} className='showChat'></button>
         </div>
       </div>
       <div className="board">
@@ -148,7 +128,6 @@ const Game = ({gameId}) => {
                       <EmitProclamation
                         gameId={gameId}
                         headmasterId={gameStatus.headmaster}
-                        setDivinationInfo={showDivinationInfo}
                       />
                     </div>
                   ) : (
@@ -157,8 +136,6 @@ const Game = ({gameId}) => {
                         <CastSpell
                           gameId={gameId}
                           ministerId={gameStatus.minister}
-                          passDivination={passDivination}
-                          setDivinationInfo={showDivinationInfo}
                         />
                       </div>
                     ) : (
