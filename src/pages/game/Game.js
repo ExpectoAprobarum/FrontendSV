@@ -9,6 +9,7 @@ import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
+import Expelliarmus from './components/Expelliarmus';
 import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
 import WindowChat from './chat/windowChat'
@@ -75,25 +76,35 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
+        { gameStatus.phase === 'headmaster play'
+          ? <Expelliarmus
+            gameId={gameId}
+            gameInfo={gameStatus}
+            ministerId={gameStatus.minister}
+            headmasterId={gameStatus.headmaster}
+          />
+          : ''
+        }
+
         <div className='sendMsessageChat'>
           <SendMessage
             gameId={gameId}
           />
-        
-          { showChat ?  
-            <div> 
+
+          { showChat ?
+            <div>
              <div className='showmeMessageChat'>
-                <WindowChat  
-                  gameId={gameId} 
+                <WindowChat
+                  gameId={gameId}
                 />
-              </div>  
+              </div>
               <div className='sendMsessageChat'>
                 <SendMessage
                   gameId={gameId}
                 />
               </div>
             </div>
-          : 
+          :
             <p />
           }
           <button  onClick={showtheChat} className='showChat'></button>
