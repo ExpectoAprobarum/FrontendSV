@@ -40,7 +40,7 @@ const ShowResultVote = ({gameId, gameInfo}) => {
   useEffect(() => {
     if (gameInfo !== undefined && gameInfo.phase !== 'propose') {
       if (gameInfo.phase !== 'propose') {
-        if (gameInfo.votes !== undefined) {
+        if (gameInfo.votes !== undefined && showResult[1] === 0) {
           setResultVote(gameInfo.votes)
           if (countVotes[0] < gameInfo.votes.length) {
             const alivePlayers = players.filter((item) => item.alive)
@@ -55,9 +55,12 @@ const ShowResultVote = ({gameId, gameInfo}) => {
               )
               setHeadM([head, minister])
               getP()
-              setTimeout(
-                () => setShowResult([false, 1]), 4500
-              );
+              setTimeout(() => (
+                  setShowResult([false, 1])), 4000
+              )
+              setTimeout(() => (
+                  setCountVotes([0, -1])), 10000
+              )
             }
         }
       }
@@ -71,20 +74,22 @@ const ShowResultVote = ({gameId, gameInfo}) => {
 
   return (
     <div>
-      { showResult[0] ?
-        <PopupVote open={true} headM={headM}>
-        </PopupVote> : " "
+      { showResult[0]
+        ? <PopupVote open={true} headM={headM}></PopupVote>
+        : " "
       }
       {players.sort(
         function(a,b){
           var x = a.id < b.id? -1:1;
           return x
         }).map( player =>
-          <div className="fom-popup-BoxShadow custom game"
-            style={ player.alive ?
-                {color: 'white'} :
-                {background: '#672A24', fontWeight: 'bold',
-                  fontSize: '20px', opacity: '0.4'}}
+          <div
+            className="fom-popup-BoxShadow custom game"
+            style={ player.alive
+              ? {color: 'white'}
+              : {background: '#672A24', fontWeight: 'bold',
+                fontSize: '20px', opacity: '0.4'}
+            }
             key={player.id}>
             <div className="hDivPlayers cust">
               <div className="hDivPlayers votes">
@@ -114,32 +119,37 @@ const ShowResultVote = ({gameId, gameInfo}) => {
                   })()
                   }
                 </li>
-                <li style={player.alive ?
-                    {color: 'white'} :
-                    {fontWeight: 'bold', fontSize: '20px'}}>
+                <li style={player.alive
+                    ? {color: 'white'}
+                    : {fontWeight: 'bold', fontSize: '20px'}}>
                     {player.user.useralias}
                 </li>
               </div>
               <div style={{}}>
-                {
-                  (() => {
-                    if (resultVote !== "") {
-                      let result = searchCurrent2(player.id)
-                      if (result === true) {
-                        return (
-                          <img className="imgDivVote" src={lumos} alt="lumos"/>
-                        )
-                      } else if (result === " ") {
-                        return (
-                          <p> </p>
-                        )
-                      } else if (result === false) {
-                        return (
-                          <img className="imgDivVote" src={nox} alt="nox"/>
-                        )
+                { countVotes[0] === countVotes[1] ?
+                    (() => {
+                      if (resultVote !== "") {
+                        let result = searchCurrent2(player.id)
+                        if (result === true) {
+                          return (
+                            <img className="imgDivVote"
+                              src={lumos}
+                              alt="lumos"/>
+                          )
+                        } else if (result === " ") {
+                          return (
+                            <p> </p>
+                          )
+                        } else if (result === false) {
+                          return (
+                            <img className="imgDivVote"
+                              src={nox}
+                              alt="nox"/>
+                          )
+                        }
                       }
-                    }
-                })()
+                  })()
+                  : ""
               }
               </div>
             </div>

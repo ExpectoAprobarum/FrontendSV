@@ -1,3 +1,8 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../principalpages/components/HARRYP__.TTF)
+}
+
 .h1TittleLobby {
     text-align: center;
     margin: 0 auto;
@@ -6,6 +11,7 @@
 
 .h1TittleLobby.title {
   font-size: 70px;
+  font-family: 'Harry P';
 }
 
 .h1TittleLobby.error {
@@ -25,18 +31,20 @@
 
 .fom-popup-BoxShadow {
     border: none;
-    padding-top: 5px;
+    padding-top: 6px;
     border-radius: 20px;
     margin: 20px auto;
     -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
     box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
-    width: 35%;
+    width: 32%;
     height: 30px;
 }
 
 .fom-popup-BoxShadow.custom{
     font-size: 18px;
+    color: white;
+    background-color: #222831;
 }
 
 .buttonFound.bttLobby {
@@ -82,7 +90,7 @@
 
 .divCreateJoin.tittle{
     height: 50px;
-    width: 630px;
+    width: 700px;
 }
 
 .divContentTittle {
@@ -109,12 +117,14 @@
 
 
 .pUrl {
+  font-size: 19px;
   margin: 5px 0 5px 0;
   left: 25px;
   position: absolute;
 }
 
 .buttonInvi{
+  font-size: 16px;
   outline: none;
   height: 36px;
   width: 100px;
@@ -130,4 +140,99 @@
 .buttonInvi:hover{
   transition-duration: 1s;
   background-color: #464646;
+}
+
+.topBar {
+  float: left;
+  height: 55px;
+  margin-top: 7px;
+}
+
+.divCreateJoin.prim{
+  width: 80px;
+  border-radius: 30px;
+}
+
+.navbar div {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: black;
+  border-radius: 30px;
+  height: 36px;
+  width: 110px;
+}
+
+.navbar div:hover, .dropdown:hover .dropbtn {
+  background-color: #464646;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 110px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 15px;
+}
+
+.dropdown-content div {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+.dropdown-content div:hover {
+  background-color: #393e46;
+  border-radius: 15px;
+  transition: 0.8s;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  border-radius: 15px;
+}
+
+.liStyle.hom{
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.buttonFound.principa {
+  width: 100%;
+  height: 100%
+}
+
+.divPrim {
+  padding: 0 0 0 0;
 }

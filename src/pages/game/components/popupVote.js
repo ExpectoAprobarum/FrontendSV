@@ -9,7 +9,7 @@ export default function PopupVote({open, headM}) {
       <div className='modalRole'>
         <div className="modal-mainRole">
           <h1 style={{fontSize: '50px'}}>New Government!!</h1>
-        <h2 style={{fontSize: '35px'}}>
+          <h2 style={{fontSize: '35px'}}>
             Headmaster: {headM[0].user.useralias}
           </h2>
           <h2 style={{fontSize: '35px'}}>

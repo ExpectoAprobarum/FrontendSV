@@ -43,41 +43,52 @@ const ShowRole = ({gameId, gameInfo}) => {
   }, [gameInfo.phase])
 
   return(
-    <div className={rolePlayer.alive ? `BoxShadow myRole cust` :
-        `BoxShadow myRole cust dead`
+    <div className={rolePlayer.alive
+        ? `BoxShadow myRole cust`
+        : `BoxShadow myRole cust dead`
       }>
-      { rolePlayer.is_voldemort ?
-        <div style={{position: 'relative'}}>
-          <img className="imgDivRole volde" src={volde} alt="volde" />
-        </div> : null
+      { rolePlayer.is_voldemort
+        ? <div style={{position: 'relative'}}>
+            <img className="imgDivRole volde" src={volde} alt="volde" />
+          </div>
+        : null
       }
 
       <div className="hDivRole my">
-        <li className="hDivRole"
+        <li
+          className="hDivRole"
           style={{fontWeight: 'bold', fontSize: '20px', paddingTop: '8%'}}>
           {`${meAlias}`}
         </li>
-        <li className="hDivRole" style={{paddingTop: '10%'}}>
+        <li
+          className="hDivRole"
+          style={{paddingTop: '10%'}}>
           {`${rolePlayer.role}`.toUpperCase()}
         </li>
-        <li style={{fontWeight: 'bold'}} className="hDivRole" >
-          {rolePlayer.is_voldemort ?
-            `Voldemort` : ""}
+        <li
+          style={{fontWeight: 'bold'}}
+          className="hDivRole" >
+          { rolePlayer.is_voldemort
+            ? `Voldemort`
+            : ""
+          }
         </li>
       </div>
       <div>
-        { (`${rolePlayer.role}`.toUpperCase() === "PHOENIX ORDER") ?
-          <img className="imgDivRole" src={phoenix} alt="phoenix" />
+        { (`${rolePlayer.role}`.toUpperCase() === "PHOENIX ORDER")
+          ? <img className="imgDivRole" src={phoenix} alt="phoenix" />
           : <img className="imgDivRole" src={morti} alt="morti" />
         }
       </div>
-      { !rolePlayer.alive ?
-        <div className="BoxShadowDead dead">
-          <li className="hDivRoleDead"
-            style={{fontWeight: 'bold', fontSize: '30px'}}>
-            DEAD
-          </li>
-        </div> : null
+      { !rolePlayer.alive
+        ? <div className="BoxShadowDead dead">
+            <li
+              className="hDivRoleDead"
+              style={{fontWeight: 'bold', fontSize: '30px'}}>
+              DEAD
+            </li>
+          </div>
+        : null
       }
     </div>
   )
