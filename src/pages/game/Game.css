@@ -100,6 +100,56 @@
   .sendMsessageChat button:hover {
     background-color: #3b0550;
   }
+  .showmeMessageChat {
+    background-image: url('./chat/300300p2250EDNmainImage.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgb(126, 18, 136);
+    position: absolute;
+    bottom: 10%;
+    height: 30%;
+    width: 100%;
+    left:0%;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .showmeMessageChat {
+    left: 0%;
+    width: 100%;
+    position: absolute;
+    color:rgb(5, 5, 5);
+    font-size: 17 px;
+  }
+  
+.showChat  {
+  background-image: url('./chat/com.random.chat.app_icon.png');
+  background-size: 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  border-radius: 30px;
+  height: 6%;
+  width: 11%;
+  bottom: 40%;
+  right: 0%;
+
+}
 
 .board {
   text-align: center;

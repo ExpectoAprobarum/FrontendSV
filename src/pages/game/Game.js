@@ -12,7 +12,7 @@ import ShowResultVote from './components/ShowResultVote';
 import ShowDivination from './components/ShowDivination';
 import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
-//import WindowChat from './chat/windowchat'
+import WindowChat from './chat/windowChat'
 import { MessageList } from 'react-chat-elements'
 import './Game.css';
 
@@ -20,6 +20,12 @@ const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [divination, setDivination] = useState([]);
   const [showDivination, setShowDivination] = useState(false);
+  const [showChat, setShowChat] = useState(false)
+
+
+  const showtheChat = () =>{
+    setShowChat(!showChat)
+  }
 
   useEffect(() => {
     const getGameStatus = () => {
@@ -80,12 +86,26 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-        <div className='sendMsessageChat'>
-          <SendMessage
-            gameId={gameId}
-          />
-        </div>
-
+        
+        {showChat ?  
+          <div> 
+          <div className='showmeMessageChat'>
+            < WindowChat  
+              gameId={gameId} 
+            />
+          </div>  
+          <div className='sendMsessageChat'>
+            <SendMessage
+              gameId={gameId}
+            />
+          </div>
+          </div>
+          : 
+          <p></p>
+        }
+        <button  onClick={showtheChat} className='showChat'></button>
+                
+        
         <div className="show-divination">
           {
             gameStatus ? (
