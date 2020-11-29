@@ -1,33 +1,37 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import configData from '../../../config.json';
+import {notify_you_dead } from '../../../commons/alerts/toast'
+import { getMyPlayer } from '../../../commons/players/players';
+
+
 
 const SendMessage = ({gameId}) => {
   const [msg, setMsg] = useState('')
-  //contemplar los playrs deads
-  const [error, setError] = useState('')
-
-
+  
   const onSubmit = (e) => {
     e.preventDefault();
-    if(!error){
-      const usertoken = localStorage.getItem('user')
-      const infotosend = {
-        "content" : msg    
+    getMyPlayer(gameId).then( response => {
+      const isAlaives = response.alive
+      if(isAlaives){
+        const usertoken = localStorage.getItem('user')
+        const infotosend = {
+          "content" : msg    
+        }
+        axios.post(configData.API_URL + '/games/' + gameId + '/messages', infotosend, {
+          headers: {
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+          }
+        }).then(response => { 
+          if(response.status === 200){
+          setMsg('')
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
-      axios.post(configData.API_URL + '/games/' + gameId + '/messages', infotosend, {
-        headers: {
-          'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
-        }
-      }).then(response => { 
-        if(response.status === 200){
-        setMsg('')
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
+    })
   } 
 
   const handleOnchange = (e) => {
@@ -39,8 +43,7 @@ const SendMessage = ({gameId}) => {
   return( 
     <div>
       <form onSubmit={onSubmit}>
-        <input  
-          id='messageC'
+        <textarea  
           type='text'
           name='message'
           placeholder='Write something'
