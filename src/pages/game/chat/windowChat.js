@@ -18,8 +18,6 @@ const WindowChat = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          console.log("ESTO TRAE EL BACK", res)
-          
           const response = res.data.data.map( messageAndPlayer => [messageAndPlayer.send_by.useralias, messageAndPlayer.content])
           setMessages(...messages, response)
         }

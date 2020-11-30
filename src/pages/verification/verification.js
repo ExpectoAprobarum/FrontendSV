@@ -15,7 +15,7 @@ axios.post(configData.API_URL + '/users/confirm', {code })
   }
 })
 .catch(error => {
-  console.log("Errorrrr", error)
+  console.log( error)
 })
 if(redirect){
   return <Redirect to="/" />

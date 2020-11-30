@@ -43,7 +43,6 @@ const Expelliarmus = ({gameId, gameInfo, ministerId, headmasterId}) => {
     if (boardInfo.de_proc >= 5 && gameInfo.phase === 'headmaster play') {
       const idPart = parseInt(gameId)
       const usertoken = localStorage.getItem('user')
-      console.log('approved', approved);
       axios.post(`${configData.API_URL}/games/${idPart}/expelliarmus`,
         {vote: e}, {
           headers: {
