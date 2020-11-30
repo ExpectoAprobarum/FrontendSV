@@ -168,10 +168,10 @@ const ListGames = () => {
                         onClick= {() => {showModal(person)}}
                         className= "buttonFound listGames">
 
-                        <div class='nameGame'>
+                        <div className='nameGame'>
                           {person.name}
                         </div>
-                        <div class='playersInGame'>
+                        <div className='playersInGame'>
                           {person.joined_players} / {person.player_amount}
                         </div>
 

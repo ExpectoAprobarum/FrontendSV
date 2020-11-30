@@ -44,8 +44,10 @@ const ShowRole = ({gameId, gameInfo}) => {
 
   return(
     <div className={rolePlayer.alive
-        ? `BoxShadow myRole cust`
-        : `BoxShadow myRole cust dead`
+        ? `BoxShadow myRole cust ${rolePlayer.role === 'phoenix order'
+          ? ' phoenix' : ' death'}`
+        : `BoxShadow myRole cust dead ${rolePlayer.role === 'phoenix order'
+          ? ' phoenix' : ' death'}`
       }>
       { rolePlayer.is_voldemort
         ? <div style={{position: 'relative'}}>
@@ -54,14 +56,14 @@ const ShowRole = ({gameId, gameInfo}) => {
         : null
       }
 
-      <div className="hDivRole my">
+      <div className= "hDivRole my">
         <li
           className="hDivRole"
           style={{fontWeight: 'bold', fontSize: '20px', paddingTop: '8%'}}>
           {`${meAlias}`}
         </li>
         <li
-          className="hDivRole"
+          className="hDivRole rol"
           style={{paddingTop: '10%'}}>
           {`${rolePlayer.role}`.toUpperCase()}
         </li>
@@ -74,10 +76,10 @@ const ShowRole = ({gameId, gameInfo}) => {
           }
         </li>
       </div>
-      <div>
+      <div style={{position: 'relative'}}>
         { (`${rolePlayer.role}`.toUpperCase() === "PHOENIX ORDER")
-          ? <img className="imgDivRole" src={phoenix} alt="phoenix" />
-          : <img className="imgDivRole" src={morti} alt="morti" />
+          ? <img className="imgDivRole rol" src={phoenix} alt="phoenix" />
+          : <img className="imgDivRole rol" src={morti} alt="morti" />
         }
       </div>
       { !rolePlayer.alive

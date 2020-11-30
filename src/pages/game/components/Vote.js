@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { notify_player_vote_success, notify_player_vote_err } 
+import { notify_player_vote_success, notify_player_vote_err }
     from '../../../commons/alerts/toast';
 import configData from '../../../config.json';
 import './Vote.css';
@@ -15,14 +15,14 @@ const Vote = ({gameId}) => {
         setMyPlayer(res)
       })
   }, [gameId])
-  
+
   const vote = (e) => {
     let selection = e.target.id;
     const usertoken = localStorage.getItem('user');
-    axios.post(configData.API_URL + '/games/' + gameId + '/vote', 
+    axios.post(configData.API_URL + '/games/' + gameId + '/vote',
       { vote: selection === 'lumos' }, {
         headers: {
-            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}` 
+            'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
           }
     })
     .then(res => {
@@ -46,7 +46,7 @@ const Vote = ({gameId}) => {
             Vote new Minister and Headmaster:
           </h2>
           <div className="vote">
-            <button className="vote-card" id="lumos" 
+            <button className="vote-card" id="lumos"
               onClick={(e) => {vote(e)}} />
             <button className="vote-card" id="nox"
               onClick={(e) => {vote(e)}} />

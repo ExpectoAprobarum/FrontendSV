@@ -9,6 +9,7 @@ import CastSpell from './components/CastSpell';
 import Board from './components/Board';
 import ShowRole from './components/ShowRole';
 import ShowResultVote from './components/ShowResultVote';
+import Expelliarmus from './components/Expelliarmus';
 import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
 import WindowChat from './chat/windowChat'
@@ -19,6 +20,8 @@ import './Game.css';
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [showChat, setShowChat] = useState(false)
+  const [showChaos, setShowChaos] = useState(false);
+  const [chaos, setChaos] = useState(0);
 
   const showtheChat = () =>{
     setShowChat(true)
@@ -38,7 +41,21 @@ const Game = ({gameId}) => {
       })
       .then(res => {
         if(res.status === 200) {
-          setGameStatus(res.data);
+          
+          let newStatus = res.data;
+          setGameStatus(newStatus);
+
+          if(newStatus.caos !== undefined) {
+            let oldChaos = chaos;
+            let newChaos = newStatus.caos.length;
+            if(oldChaos !== newChaos) {
+              setChaos(newChaos);
+            }
+            else {
+              setShowChaos(false);
+            }
+          }
+
         }
       })
       .catch(error => {
@@ -52,6 +69,16 @@ const Game = ({gameId}) => {
 
     return () => clearInterval(timer)
   }, [gameId])
+
+  useEffect(() => {
+    let status = gameStatus;
+    if(status.caos !== undefined) {
+      setShowChaos(true);
+      setTimeout(() => {
+        setShowChaos(false);
+      }, 5000);
+    }
+  }, [chaos])
 
   return (
     <div className="Game">
@@ -79,23 +106,31 @@ const Game = ({gameId}) => {
           gameId={gameId}
           gameInfo={gameStatus}
         />
-  
-        { showChat ?  
-          <div> 
+        { gameStatus.phase === 'headmaster play'
+          ? <Expelliarmus
+            gameId={gameId}
+            gameInfo={gameStatus}
+            ministerId={gameStatus.minister}
+            headmasterId={gameStatus.headmaster}
+          />
+          : ''
+        }
+        { showChat ?
+          <div>
             <div className='showmeMessageChat'>
-              <WindowChat  
-                gameId={gameId} 
+              <WindowChat
+                gameId={gameId}
               />
-            </div>  
+            </div>
             <div className='sendMsessageChat'>
               <SendMessage
                 gameId={gameId}
               />
             </div>
-            <button  onClick={closetheChat} className='closeChat'></button> 
+            <button onClick={closetheChat} className='closeChat'></button>
           </div>
-        : 
-        <button  onClick={showtheChat} className='showChat'></button>  
+        :
+          <button onClick={showtheChat} className='showChat'></button>
         }
         <div >
           <RolesCommonMort
@@ -105,6 +140,8 @@ const Game = ({gameId}) => {
       <div className="board">
         <Board
           gameId={gameId}
+          showChaos={showChaos}
+          chaosProclam={gameStatus.caos !== undefined ? gameStatus.caos[gameStatus.caos.length - 1] : " "}
         />
       </div>
       <div className="phase"> 
