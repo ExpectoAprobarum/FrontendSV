@@ -14,29 +14,30 @@ const RolesCommonMort = ({gameId}) => {
   const [rolePlayer, setRolePlayer] = useState('')
   const [numberOfPlayerMort, setNumberofPlayer] = useState()
   const [playerMort, setPlayerMortf] = useState([])
-  
 
 
-  const alliesList = playerMort.map((mort) => {
-    (
-    <div className={'containerAliados mortifago' }>
-      <div className='username'>
-          <h1>{mort}</h1>
+
+  const alliesList = playerMort.map(
+    (mort) => {(
+      <div className={'containerAliados mortifago' }>
+        <div className='username'>
+            <h1>{mort}</h1>
+        </div>
       </div>
-    </div>
-    )
-})
+    )}
+  )
+
   useEffect ( () => {
     const getMortis = () => {
       getPlayers(gameId).then(
         res=>{
           console.log("AAAA", res.length)
-          const listofPlayerUsername = res.filter(player => 
-             player.role === 'death eater' 
-             ).map(player => player.user.useralias)
-          setPlayerMortf(...playerMort, listofPlayerUsername)
-          setNumberofPlayer(listofPlayerUsername.length)
+          const listofPlayerUsername = res.filter(
+            player => player.role === 'death eater')
+            .map(player => player.user.useralias)
 
+          setPlayerMortf(listofPlayerUsername)
+          setNumberofPlayer(listofPlayerUsername.length)
         }
       )
     }
@@ -45,7 +46,18 @@ const RolesCommonMort = ({gameId}) => {
 
   return (
   <div>
-    {alliesList}
+    { playerMort.map(
+      (mort, index) =>
+          <div className={`containerAliados mortifago${index}`}>
+            <img className='mortifago'
+              src={imageArray[index + 1]}
+            />
+            <div className='username'>
+                <h1 style={{color: 'white'}}>{mort}</h1>
+            </div>
+          </div>
+        )
+    }
   </div>
   )
 
