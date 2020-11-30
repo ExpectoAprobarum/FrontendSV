@@ -14,6 +14,7 @@ import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
 import WindowChat from './chat/windowChat'
 import { MessageList } from 'react-chat-elements'
+import RolesCommonMort from './components/RolesCommonM'
 import './Game.css';
 
 const Game = ({gameId}) => {
@@ -131,6 +132,10 @@ const Game = ({gameId}) => {
         :
           <button onClick={showtheChat} className='showChat'></button>
         }
+        <div >
+          <RolesCommonMort
+            gameId={gameId} /> 
+        </div>
       </div>
       <div className="board">
         <Board
