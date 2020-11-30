@@ -169,6 +169,34 @@
 }
 
 
+.showLoyalty {
+  position: absolute;
+  background-image: url(./assets/mortifagoLogos/fondo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: 30px;
+  height: 40%;
+  width: 50%;
+  bottom: 0%;
+  border-radius: 10px;
+}
+
+.showLoyaltybutton {
+  background-image: url('./assets/mortifagoLogos/pergamino.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 130%;
+  height: 5%;
+  width: 8%;
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  border-radius: 10px;
+}
+
+
+
 .board {
   text-align: center;
   float: right;

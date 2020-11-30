@@ -83,7 +83,7 @@ const LobbyPage = (props) => {
   }, [initPartida])
 
   const gameStart = () => {
-    if (countPlayer >= 5) {
+    if (countPlayer >= 1) {
       axios.post(`${configData.API_URL}/games/${idGame}/start`,({}),{
         headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`

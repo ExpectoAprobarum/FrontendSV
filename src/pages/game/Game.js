@@ -13,12 +13,17 @@ import GameOver from './components/GameOver';
 import SendMessage from './chat/sendmessage'
 import WindowChat from './chat/windowChat'
 import { MessageList } from 'react-chat-elements'
+import RolesCommonMort from './components/RolesCommonM'
 import './Game.css';
 
 const Game = ({gameId}) => {
   const [gameStatus, setGameStatus] = useState({});
   const [showChat, setShowChat] = useState(false)
+  const [showLoyalty, setShowLoyalty] = useState(false)
 
+  const showloyalty = () => {
+    setShowLoyalty(true)
+  }
 
   const showtheChat = () =>{
     setShowChat(true)
@@ -97,7 +102,16 @@ const Game = ({gameId}) => {
         : 
         <button  onClick={showtheChat} className='showChat'></button>  
         }
-      
+        { showLoyalty ? 
+          <div className='showLoyalty'>
+          <RolesCommonMort
+            gameId={gameId} /> 
+          </div>
+          :
+          <p></p>
+        } 
+        
+        <button className='showLoyaltybutton' onClick={showloyalty}></button>
       </div>
       <div className="board">
         <Board
