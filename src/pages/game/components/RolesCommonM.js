@@ -10,7 +10,7 @@ import { getPlayers,  getMyPlayer } from '../../../commons/players/players';
 const imageArray = [mortifago0, mortifago1, mortifago2 ]
 
 const RolesCommonMort = ({gameId}) => {
-  const [numberOfPlayerMort, setNumberofPlayer] = useState()
+  const [numberOfPlayer, setNumberofPlayers] = useState()
   const [playerMort, setPlayerMortf] = useState([])
   const [showLoyalty, setShowLoyalty] = useState(false)
   const [myid, setMyid] = useState('')
@@ -29,13 +29,12 @@ const RolesCommonMort = ({gameId}) => {
       getPlayers(gameId).then(
         res=>{
           const listofPlayeruseralias = res.filter(
-            player => ( player.id !== myid && player.role === 'death eater' && ! player.is_voldemort ))
+            player => ( player.role === 'death eater' && ! player.is_voldemort ))
             .map(player => player.user.useralias)
           const voldemort = res.filter(player => (player.is_voldemort))[0]
           setVoldemort(voldemort)
-          console.log("ESTO TRAIGO", voldemort)
           setPlayerMortf(listofPlayeruseralias)
-          setNumberofPlayer(listofPlayeruseralias.length)
+          setNumberofPlayers(res.length)
         }
       )
     }
@@ -43,7 +42,7 @@ const RolesCommonMort = ({gameId}) => {
       getMyPlayer(gameId).then(
         res =>{
           setMyrole(res.role)
-          setMyid(res.id)
+          setMyid(res.user)
         }
       )
     }
@@ -51,46 +50,51 @@ const RolesCommonMort = ({gameId}) => {
     whoim()
     getMortis()
   }, [])
+  
+  if( numberOfPlayer > 6 && myid === voldemort.user.id){
+    return(
+      <div>
 
+      </div>)
+  }
   return (
   <div>
     {(myrole === 'death eater') ?
-      <div>
-        {showLoyalty  ? 
-        <div className='showLoyalty'>
-          <div className='title'><h1>Team Mortifagos</h1></div>
-          <div className={"containerAliados voldemort"}>
-                  <img className='mortifago'
-                    src={voldemortimg}
-                  />
-                  <div className='useralias'>
-                      <h1 >
-                        {voldemort.user.useralias}
-                      </h1>
+        <div>
+          {showLoyalty  ? 
+          <div className='showLoyalty'>
+            <div className='title'><h1>Team Mortifagos</h1></div>
+            <div className={"containerAliados voldemort"}>
+                    <img className='mortifago'
+                      src={voldemortimg}
+                    />
+                    <div className='useralias'>
+                        <h1 >
+                          {voldemort.user.useralias}
+                        </h1>
+                    </div>
                   </div>
-                </div>
-          { playerMort.map(
-            (mort, index) =>
-                <div className={`containerAliados mortifagus${index}`}>
-                  <img className='mortifago'
-                    src={imageArray[index]}
-                  />
-                  <div className='useralias'>
-                      <h1 >
-                        {mort}
-                      </h1>
+            { playerMort.map(
+              (mort, index) =>
+                  <div className={`containerAliados mortifago${index}`}>
+                    <img className='mortifago'
+                      src={imageArray[index]}
+                    />
+                    <div className='useralias'>
+                        <h1 >
+                          {mort}
+                        </h1>
+                    </div>
                   </div>
-                </div>
-              )
-          }
-        <button className='closeLoyaltybutton' onClick={closeloyalty}></button>  
-      </div>
+                )
+            }
+          <button className='closeLoyaltybutton' onClick={closeloyalty}></button>  
+        </div>
+     
       : <button className='showLoyaltybutton' onClick={showloyalty}></button>
       }
     </div> 
     : <p></p>}
-    
-    
   </div>
   )
 
