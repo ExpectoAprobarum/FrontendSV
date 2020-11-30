@@ -13,27 +13,27 @@
   font: 'Harry P';
 }
 
-.containerAliados.mortifago1{
+.containerAliados.mortifago0{
   position: absolute;
   width: 38%;
   bottom: 50%;
   left: 6%;
 }
-.containerAliados.mortifago2{
+.containerAliados.mortifago1{
   position: absolute;
   width: 38%;
   bottom: 50%;
   left: 56%;
 }
 
-.containerAliados.mortifago4{
+.containerAliados.mortifago3{
   position: absolute;
   width: 38%;
   bottom: 10%;
   left: 56%;
 }
 
-.containerAliados.mortifago3{
+.containerAliados.mortifago2{
   position: absolute;
   width: 38%;
   bottom: 10%;
@@ -71,7 +71,3 @@
 .containerAliados:hover .username {
   opacity: 1;
 }
-
-
-
-
