@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-.is-minister .header, .not-minister .header {
+.ChooseHeadmaster .is-minister .header, .not-minister .header {
   margin: 0;
   padding-bottom: 5px;
   padding-top: 5px;
@@ -13,18 +13,18 @@
   background: dimgray;
 }
 
-.not-minister .header {
+.ChooseHeadmaster .not-minister .header {
   margin-top: 12%;
   border-top: 4px solid black;
 }
 
-.player-list {
+.ChooseHeadmaster .player-list {
   display: inline-block;
   width: 100%;
   min-height: 120px;
 }
 
-.sendCandidate {
+.ChooseHeadmaster .sendCandidate {
   display: inline-block;
   top: 20px;
   background-color: #2f4f4f;
@@ -48,7 +48,7 @@
                 #2f4f4f 0px 0px 75px;
 }
 
-.sendCandidate:hover {
+.ChooseHeadmaster .sendCandidate:hover {
   box-shadow: #3d6b6b 0px 0px 1px, #3d6b6b 0px 0px 3px, #FFF 0px 0px 6px, 
                 #2f4f4f 0px 0px 4px, 
                 #2f4f4f 0px 0px 8px, 
@@ -57,6 +57,6 @@
                 #2f4f4f 0px 0px 16px;
 }
 
-*:disabled {
+.ChooseHeadmaster *:disabled {
   opacity: 0;
 }
