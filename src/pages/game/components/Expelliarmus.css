@@ -15,16 +15,20 @@
 
 .hExpell {
   font-family: 'Harry P';
-  font-size: 85px;
+  font-size: 95px;
+  margin-block-start: 50px;
+  margin-block-end: 20px;
 }
 
 .buttExpell {
-  font-size: 18px;
+  font-size: 23px;
   margin-right: 20px;
+  margin-top: 30px;
   border: none;
   border-radius: 30px;
-  height: 40px;
-  width: 25%;
+  height: 50px;
+  width: 28%;
+  outline: none;
 }
 
 .buttExpell:hover{
@@ -42,6 +46,7 @@
   height: 60px;
   width: 75%;
   border: none;
+  outline: none;
   border-radius: 30px;
   -webkit-box-shadow: 0px 0px 14px 1px #34CEEC;
   -moz-box-shadow: 0px 0px 14px 1px #34CEEC;
