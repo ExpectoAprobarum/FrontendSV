@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import configData from '../../../../config.json';
 import { getPlayers } from '../../../../commons/players/players';
-import PlayerList from '../PlayerList';
 import { notify_player_choose_err } from '../../../../commons/alerts/toast';
 import { Modal } from 'react-bootstrap';
+import SelectPlayer from '../SelectPlayer';
 import './Crucio.css';
 import './SpellObjective.css';
 
 const Crucio = ({gameId, ministerId}) => {
-  const [selected, setSelection] = useState(0);
+  const [selected, setSelected] = useState(0);
   const [players, setPlayers] = useState([]);
   const [loyalty, setLoyalty] = useState("");
   const [showLoyalty, setShowLoyalty] = useState(false);
@@ -20,13 +20,11 @@ const Crucio = ({gameId, ministerId}) => {
       .then(res => {
         setPlayers(res)
       });
-  }, [gameId]);
+  }, []);
 
-  const selectPlayer = (id) => setSelection(id);
-
-  const getLoyalty = () => {
+  const getLoyalty = (playerId) => {
     const usertoken = localStorage.getItem('user');
-    axios.get(configData.API_URL + '/games/' + gameId + '/crucio/' + selected,
+    axios.get(configData.API_URL + '/games/' + gameId + '/crucio/' + playerId,
       {
       headers: {
           'Authorization': `Bearer ${JSON.parse(usertoken).access_token}`
@@ -35,6 +33,7 @@ const Crucio = ({gameId, ministerId}) => {
       .then(res => {
         if(res.status === 200) {
           setLoyalty(res.data.role);
+          setSelected(playerId);
         }
       })
       .catch(error => {
@@ -78,24 +77,12 @@ const Crucio = ({gameId, ministerId}) => {
       {
         loyalty === "" ? (
           <div>
-            <h2 className="spell-header">Select player to cast: Crucio</h2>
-            <div className="player-list">
-              <PlayerList
-                selectPlayer={selectPlayer}
-                selected={selected}
-                players={players}
-                showCond={["alive", true]}
-                chooseCond={["alive", true]}
-                minister={[ministerId, false]}
-              />
-            </div>
-            <button
-              className="sendSpellElection"
-              id="sendSpellElection"
-              onClick={getLoyalty}
-            >
-              Choose
-            </button>
+            <SelectPlayer 
+              gameId={gameId}
+              ministerId={ministerId}
+              phase={'crucio'}
+              funChoose={getLoyalty}
+            />
           </div>
         ) : (
           <div>
@@ -112,42 +99,36 @@ const Crucio = ({gameId, ministerId}) => {
               </Modal.Header>
               <Modal.Body>
                 <div className="crucio-body">
-                  {
-                    selected ? (
-                      <div>
-                        <h3 className="investigate">
-                          VICTIM : {
-                            players.filter(player => {
-                              return player.id === selected
-                            }).map(player => {
-                              return (
-                                <h3 className="investigate-alias">
-                                  {player.user.useralias}
-                                </h3>
-                              )
-                            })
-                          }
-                        </h3>
-                        <hr />
-                        <div className={"loyalty " + loyalty.split(" ")[0]}>
-                          {
-                            showLoyalty ? (
-                              <h3> { loyalty.toUpperCase() } </h3>
-                            ) : (
-                              <button
-                                className="reveal"
-                                id="reveal"
-                                onClick={revealCard}>
-                                Reveal Loyalty !
-                              </button>
-                            )
-                          }
-                        </div>
-                      </div>
-                    ) : (
-                      <h3>No player selected</h3>
-                    )
-                  }
+                  <div>
+                    <h3 className="investigate">
+                      VICTIM : {
+                        players.filter(player => {
+                          return player.id === selected
+                        }).map(player => {
+                          return (
+                            <h3 className="investigate-alias">
+                              {player.user.useralias}
+                            </h3>
+                          )
+                        })
+                      }
+                    </h3>
+                    <hr />
+                    <div className={"loyalty " + loyalty.split(" ")[0]}>
+                      {
+                        showLoyalty ? (
+                          <h3> { loyalty.toUpperCase() } </h3>
+                        ) : (
+                          <button
+                            className="reveal"
+                            id="reveal"
+                            onClick={revealCard}>
+                            Reveal Loyalty !
+                          </button>
+                        )
+                      }
+                    </div>
+                  </div>
                 </div>
               </Modal.Body>
             </Modal>

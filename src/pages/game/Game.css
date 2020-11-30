@@ -74,14 +74,18 @@
 }
 
 .sendMsessageChat{
-  bottom: 1%;
+  bottom: 2%;
   left: 0%;
   position: absolute;
+  
 }
-.sendMsessageChat input{
+.sendMsessageChat textarea{
+  background-color:rgb(111, 188, 190);
   height: 100%;
-  width: 236%;
+  width: 210%;
   position: relative;
+  border-radius: 30px;
+  border: 1px solid #ffffff;
 }
 .sendMsessageChat button{
     padding-top: 25%;
@@ -95,6 +99,7 @@
     width: 40%;
     height: 20px;
     padding: 0px 0px;
+    border: 1px solid #ffffff;
 
   }
   .sendMsessageChat button:hover {
@@ -112,6 +117,7 @@
     left:0%;
     overflow: scroll;
     overflow-x: hidden;
+    border: 1px solid #ffffff;
   }
   /* width */
   ::-webkit-scrollbar {
@@ -144,12 +150,24 @@
   background-repeat: no-repeat;
   position: absolute;
   border-radius: 30px;
-  height: 6%;
-  width: 11%;
-  bottom: 40%;
+  height: 5%;
+  width: 9%;
+  bottom: 00%;
   right: 0%;
-
 }
+.closeChat {
+  background-image: url('./chat/unnamed.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 150%;
+  position: absolute;
+  border: 1px solid #ffffff;
+  height: 3%;
+  width: 6%;
+  bottom: 40.10%;
+  right: 0%;
+}
+
 
 .board {
   text-align: center;
