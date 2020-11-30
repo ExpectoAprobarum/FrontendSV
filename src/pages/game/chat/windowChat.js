@@ -53,7 +53,7 @@ const WindowChat = ({gameId}) => {
               messageAndPlayer.send_by.useralias,
               messageAndPlayer.content
             ])
-          setMessages(response.reverse())
+          setMessages(response)
         }
       })
       .catch(error => {
@@ -69,19 +69,20 @@ const WindowChat = ({gameId}) => {
 
   return(
       messages.map(
-        entry =>
-          <div >
+        (entry, index) =>
+          <div key={`message-str-${index}`}>
             <MessageBox
               title={entry[0]}
               titleColor='red'
+              lockable={true}
               type='text'
               position= {entry[0] === myAlias ? 'right' : 'left'}
               text={entry[1]}
               avatar = "https://static.vecteezy.com/system/resources/previews/000/566/937/non_2x/vector-person-icon.jpg"
             />
-          </div>)
-  )
-
+          </div>
+      )
+    )
 }
 
 export default WindowChat;
