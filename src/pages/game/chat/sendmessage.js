@@ -30,6 +30,8 @@ const SendMessage = ({gameId}) => {
         .catch(error => {
           console.log(error)
         })
+      } else {
+        notify_you_dead();
       }
     })
   } 

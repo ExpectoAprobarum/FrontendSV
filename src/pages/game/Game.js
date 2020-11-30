@@ -114,46 +114,22 @@ const Game = ({gameId}) => {
           />
           : ''
         }
-
-        <div className='sendMsessageChat'>
-          <SendMessage
-            gameId={gameId}
-          />
-
-          { showChat ?
-            <div>
-             <div className='showmeMessageChat'>
-                <WindowChat
-                  gameId={gameId}
-                />
-              </div>
-              <div className='sendMsessageChat'>
-                <SendMessage
-                  gameId={gameId}
-                />
-              </div>
-            </div>
-          :
-            <p />
-          }
-          <button  onClick={showtheChat} className='showChat'></button>
-        </div>
-        { showChat ?  
-          <div> 
+        { showChat ?
+          <div>
             <div className='showmeMessageChat'>
-              <WindowChat  
-                gameId={gameId} 
+              <WindowChat
+                gameId={gameId}
               />
-            </div>  
+            </div>
             <div className='sendMsessageChat'>
               <SendMessage
                 gameId={gameId}
               />
             </div>
-            <button  onClick={closetheChat} className='closeChat'></button> 
+            <button onClick={closetheChat} className='closeChat'></button>
           </div>
-        : 
-        <button  onClick={showtheChat} className='showChat'></button>  
+        :
+          <button onClick={showtheChat} className='showChat'></button>
         }
       </div>
       <div className="board">
