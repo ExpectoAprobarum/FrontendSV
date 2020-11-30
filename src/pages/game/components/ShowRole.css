@@ -30,6 +30,18 @@
   color: white
 }
 
+.BoxShadow.phoenix {
+  -webkit-box-shadow: 0px 0px 14px 1px #DD4937;
+  -moz-box-shadow: 0px 0px 14px 1px #DD4937;
+  box-shadow: 0px 0px 14px 1px #DD4937;
+}
+
+.BoxShadow.death {
+  -webkit-box-shadow: 0px 0px 14px 1px #8B008B;
+  -moz-box-shadow: 0px 0px 14px 1px #8B008B;
+  box-shadow: 0px 0px 14px 1px #8B008B;
+}
+
 .BoxShadowDead.dead {
   background-color: #941100;
   opacity: 0.6;
@@ -72,6 +84,11 @@
   margin-left: 5%;
 }
 
+.hDivRole.rol {
+  font-size: 23px;
+  font-family: 'Harry P';
+}
+
 .hDivPlayers {
   width: 100%;
   list-style: none;
@@ -87,7 +104,7 @@
   float: right;
   height: 100px;
   margin-right: 15%;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .imgDivRole.volde {
@@ -112,6 +129,14 @@
   margin-right: 5%;
 }
 
+.imgDivRole.rol  {
+  top: 50%;
+  left: 82%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%);
+  position: absolute;
+}
+
 .modalRole {
     position: fixed;
     top: 0;
@@ -124,11 +149,26 @@
 
 .modal-mainRole {
     position:fixed;
-    background: white;
+    background: #222831;
+    color: white;
     width: 50%;
     height: 300px;
     top: 55%;
     left:50%;
     transform: translate(-50%,-50%);
-    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 14px 1px #34CEEC;
+    -moz-box-shadow: 0px 0px 14px 1px #34CEEC;
+    box-shadow: 0px 0px 14px 1px #34CEEC;
+    border-radius: 30px;
+}
+
+.h2Custom {
+  margin-block-start: 10px;
+  margin-block-end: 10px;
+}
+
+.h1Custom {
+  margin-block-start: 35px;
+  margin-block-end: 30px;
+  font-family: 'Harry P';
 }
