@@ -8,11 +8,13 @@ export default function PopupVote({open, headM}) {
     return ReactDom.createPortal(
       <div className='modalRole'>
         <div className="modal-mainRole">
-          <h1 style={{fontSize: '50px'}}>New Government!!</h1>
-          <h2 style={{fontSize: '35px'}}>
+          <h1 style={{fontSize: '90px'}} className='h1Custom'>
+            New Government!!
+          </h1>
+          <h2 style={{fontSize: '38px'}} className='h2Custom'>
             Headmaster: {headM[0].user.useralias}
           </h2>
-          <h2 style={{fontSize: '35px'}}>
+          <h2 style={{fontSize: '38px'}} className='h2Custom'>
             Minister: {headM[1].user.useralias}
           </h2>
         </div>
