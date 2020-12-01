@@ -19,7 +19,7 @@
 .env.production.local
 yarn.lock
 .eslintcache
-config.*
+src/config.json
 
 npm-debug.log*
 yarn-debug.log*
