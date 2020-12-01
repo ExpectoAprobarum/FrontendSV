@@ -7,11 +7,11 @@
   text-align: center;
   border: 5px solid black;
   border-radius: 30px;
-  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
-                rgb(118, 0, 122) 0px 0px 20px, 
-                rgb(202, 0, 209) 0px 0px 30px, 
-                rgb(134, 40, 138) 0px 0px 40px, 
-                rgb(202, 0, 209) 0px 0px 100px, 
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                rgb(118, 0, 122) 0px 0px 20px,
+                rgb(202, 0, 209) 0px 0px 30px,
+                rgb(134, 40, 138) 0px 0px 40px,
+                rgb(202, 0, 209) 0px 0px 100px,
                 rgb(178, 39, 233) 0px 0px 100px;
 }
 
@@ -44,6 +44,7 @@
   padding-bottom: 10%;
   background-size: 230%;
   background-repeat: no-repeat;
+  background-position: center;
   background-position-x: 48%;
   background-position-y: 12%;
   outline: none;
@@ -64,13 +65,14 @@
 .divination .divination-cards .phoenix {
   background-image: url('../../assets/ProclamationPhoenix.png');
   border: 3px solid rgb(218, 22, 15);
-  background-size: 239%;
+  background-size: 114%;
 
 }
 
 .divination .divination-cards .death {
   background-image: url('../../assets/ProclamationDeathEater.png');
   border: 3px solid blueviolet;
+    background-size: 114%;
 }
 
 .showDivination {
@@ -97,11 +99,11 @@
 }
 
 .showDivination:hover {
-  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
-                rgb(118, 0, 122) 40px 50px 20px, 
-                rgb(202, 0, 209) 40px 50px 30px, 
-                rgb(134, 40, 138) 40px 50px 40px, 
-                rgb(202, 0, 209) 40px 50px 100px, 
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                rgb(118, 0, 122) 40px 50px 20px,
+                rgb(202, 0, 209) 40px 50px 30px,
+                rgb(134, 40, 138) 40px 50px 40px,
+                rgb(202, 0, 209) 40px 50px 100px,
                 rgb(178, 39, 233) 40px 50px 100px;
   margin-top: 9%;
 }
