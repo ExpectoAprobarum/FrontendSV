@@ -1,5 +1,3 @@
 {
-  /*
-  "API_URL": "Insert your API URL here"
-  */
+  "API_URL": "http://127.0.0.1:8000"
 }
