@@ -63,7 +63,7 @@ const RolesCommonMort = ({gameId}) => {
         <div>
           {showLoyalty  ? 
           <div className='showLoyalty'>
-            <div className='title'><h1>Team Mortifagos</h1></div>
+            <div className='titleTeammortifago'><h1>Team Mortifagos</h1></div>
             <div className={"containerAliados voldemort"}>
                     <img className='mortifago'
                       src={voldemortimg}

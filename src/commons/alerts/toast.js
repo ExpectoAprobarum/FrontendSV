@@ -47,7 +47,7 @@ export const notify_player_choose_err= () => {
 export const notify_player_vote_success= () => {
   toast.success('Your vote has been sent', {
     position: toast.POSITION.TOP_CENTER,
-    autoClose: false})
+    autoClose: 5000})
 }
 
 export const notify_player_vote_err= () => {
