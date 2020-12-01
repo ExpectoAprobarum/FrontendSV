@@ -116,6 +116,8 @@
     left:0%;
     overflow: scroll;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
     border: 1px solid #ffffff;
   }
   /* width */
@@ -141,7 +143,7 @@
     color:rgb(5, 5, 5);
     font-size: 17 px;
   }
-  
+
 .showChat  {
   background-image: url('./chat/com.random.chat.app_icon.png');
   background-size: 120%;
