@@ -46,8 +46,7 @@ const ShowRole = ({gameId, gameInfo}) => {
     <div className={rolePlayer.alive
         ? `BoxShadow myRole cust ${rolePlayer.role === 'phoenix order'
           ? ' phoenix' : ' death'}`
-        : `BoxShadow myRole cust dead ${rolePlayer.role === 'phoenix order'
-          ? ' phoenix' : ' death'}`
+        : ''
       }>
       { rolePlayer.is_voldemort
         ? <div style={{position: 'relative'}}>
