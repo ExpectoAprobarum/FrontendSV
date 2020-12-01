@@ -1,0 +1,70 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+
+.GameOver {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  height: 72%;
+  width: 100%;
+  top: -3%;
+  border-top: 8px solid black ;
+}
+
+.GameOver .winner {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid rgb(224, 205, 98);
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 3%;
+  border-top: 4px solid rgb(224, 205, 98);
+}
+
+.GameOver .winner h3 {
+  color: rgb(228, 228, 228);
+}
+
+.GameOver .phoenix-win .winner {
+  background-color: rgb(170, 3, 3);
+  background-image: url('../assets/fenix_sym.png');
+}
+
+.GameOver .death-win .winner {
+  background-color: rgb(131, 8, 161);
+  background-image: url('../assets/mortifagos_sym.png');
+  background-repeat: no-repeat;
+}
+
+.GameOver .winner h2 {
+  margin: 2px;
+  font-family:'Harry P';
+  font-size: 4em;
+}
+
+.GameOver .phoenix-win .winner h2{
+  color: #850a0a;
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                #f8300d 0px 0px 20px,
+                #f8300d 0px 0px 30px,
+                #f8300d 0px 0px 40px,
+                #f8300d 0px 0px 50px,
+                #f8300d 0px 0px 75px;
+}
+
+.GameOver .death-win .winner h2{
+  color: #410841;
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                #ad14ad 0px 0px 20px,
+                #ad14ad 0px 0px 30px,
+                #ad14ad 0px 0px 40px,
+                #ad14ad 0px 0px 50px,
+                #ad14ad 0px 0px 75px;
+}
+
+.GameOver .button-container-1 {
+  margin-top: 1%;
+}

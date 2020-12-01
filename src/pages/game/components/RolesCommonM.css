@@ -1,0 +1,111 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+
+.showLoyalty {
+  position: absolute;
+  background-image: url(../assets/mortifagoLogos/fondo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: 30px;
+  height: 40%;
+  width: 50%;
+  bottom: 0%;
+  border-radius: 10px;
+}
+
+.titleTeammortifago{
+  font-family: Harry P;
+}
+.titleTeammortifago h1 {
+  font: 'Harry P';
+  font-size: 35px;
+}
+
+.containerAliados.voldemort{
+  position: absolute;
+  width: 38%;
+  bottom: 50%;
+  left: 6%;
+}
+
+.containerAliados.mortifago0{
+  position: absolute;
+  width: 38%;
+  bottom: 50%;
+  left: 56%;
+}
+
+.containerAliados.mortifago1{
+  position: absolute;
+  width: 38%;
+  bottom: 10%;
+  left: 56%;
+}
+
+.containerAliados.mortifago2{
+  position: absolute;
+  width: 38%;
+  bottom: 10%;
+  left: 6%;
+}
+.mortifago {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  border-radius: 30px;
+}
+.useralias{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+.useralias h1 {
+  background-color: #441b69;
+  color: white;
+  font-size: 15px;
+  padding: 0px 0px;
+}
+
+.containerAliados:hover .mortifago {
+  opacity: 0.3;
+}
+
+.containerAliados:hover .useralias {
+  opacity: 1;
+}
+
+
+.showLoyaltybutton {
+  background-image: url('../assets/mortifagoLogos/pergamino.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 130%;
+  height: 5%;
+  width: 8%;
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  border-radius: 10px;
+}
+.closeLoyaltybutton{
+  background-image: url('../assets/mortifagoLogos/cerrar.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 150%;
+  height: 8%;
+  width: 10%;
+  left: 90%;
+  bottom: 90%;
+  border-radius: 30px;
+  position: absolute;
+}

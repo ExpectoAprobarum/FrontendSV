@@ -1,0 +1,174 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+
+.BoxShadow {
+    margin: 20px auto;
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    width: 76%;
+    height: 130px;
+}
+
+.BoxShadowDead {
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    -moz-box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    box-shadow: 1px 1px 11px -4px rgba(0,0,0,0.86);
+    height: 100%;
+    width: 100%;
+    text-align: center
+}
+
+.BoxShadow.myRole {
+  background-color: #343842;
+  color: white
+}
+
+.BoxShadow.phoenix {
+  -webkit-box-shadow: 0px 0px 14px 1px #DD4937;
+  -moz-box-shadow: 0px 0px 14px 1px #DD4937;
+  box-shadow: 0px 0px 14px 1px #DD4937;
+}
+
+.BoxShadow.death {
+  -webkit-box-shadow: 0px 0px 14px 1px #8B008B;
+  -moz-box-shadow: 0px 0px 14px 1px #8B008B;
+  box-shadow: 0px 0px 14px 1px #8B008B;
+}
+
+.BoxShadowDead.dead {
+  background-color: #941100;
+  opacity: 0.6;
+  color: white;
+  position: relative;
+  font-family: 'Harry P';
+}
+
+.BoxShadow.voteBox {
+  padding: 0 0 0 0;
+  margin-right: 20%
+}
+
+.hDivRole {
+  width: 130px;
+  list-style: none;
+  float: left;
+  margin-top: 5px;
+}
+
+.hDivRoleDead {
+  list-style: none;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 58%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
+.hDivRole.my {
+  margin-top: 2%;
+  margin-left: 18%;
+}
+
+.hDivRole.cust {
+  margin-top: 9%;
+  margin-left: 5%;
+}
+
+.hDivRole.rol {
+  font-size: 23px;
+  font-family: 'Harry P';
+}
+
+.hDivPlayers {
+  width: 100%;
+  list-style: none;
+  float: left;
+}
+
+.hDivPlayers.votes{
+  width: 70%;
+  list-style: none;
+}
+
+.imgDivRole {
+  float: right;
+  height: 100px;
+  margin-right: 15%;
+  margin-top: 3%;
+}
+
+.imgDivRole.volde {
+  position: absolute;
+  height: 120px;
+  top: 50%;
+  left: 0%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%);
+}
+
+.fom-popup-BoxShadow.game{
+    width: 75%;
+    height: 50px;
+    background-color: #343842;
+    color: white;
+}
+
+.imgDivVote {
+  height: 30px;
+  margin-top: 2%;
+  margin-right: 5%;
+}
+
+.imgDivRole.rol  {
+  top: 50%;
+  left: 82%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%);
+  position: absolute;
+}
+
+.modalRole {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.modal-mainRole {
+    position:fixed;
+    background: #222831;
+    color: white;
+    width: 50%;
+    height: 300px;
+    top: 55%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-box-shadow: 0px 0px 14px 1px #34CEEC;
+    -moz-box-shadow: 0px 0px 14px 1px #34CEEC;
+    box-shadow: 0px 0px 14px 1px #34CEEC;
+    border-radius: 30px;
+}
+
+.h2Custom {
+  margin-block-start: 10px;
+  margin-block-end: 10px;
+}
+
+.h1Custom {
+  margin-block-start: 35px;
+  margin-block-end: 30px;
+  font-family: 'Harry P';
+}

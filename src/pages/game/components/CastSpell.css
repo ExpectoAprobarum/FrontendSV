@@ -1,0 +1,11 @@
+.not-minister .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: radial-gradient(indigo, rgb(133, 69, 179));
+  margin-top: 12%;
+  border-top: 4px solid black;
+}

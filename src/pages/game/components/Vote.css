@@ -1,0 +1,61 @@
+.Vote .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: dimgray;
+}
+
+.Vote .dead .header {
+  margin-top: 12%;
+  color: crimson;
+  border-top: 4px solid black;
+}
+
+.vote {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.vote-card {
+  margin: 0;
+  position: relative;
+  width: 20% ;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 14.5%;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  transition: 0.3s;
+}
+
+.vote-card:hover, .vote-card:focus {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                #fff67e 0px 0px 20px, 
+                #fff67e 0px 0px 30px, 
+                #fff67e 0px 0px 40px, 
+                #fff67e 0px 0px 50px, 
+                #fff67e 0px 0px 75px;
+}
+
+#nox {
+  background-image: url('../assets/NoxCard.png');
+  left: 5%;
+}
+
+#nox:hover, #nox:focus {
+  filter: hue-rotate(-80deg);
+}
+
+#lumos {
+  background-image: url('../assets/LumosCard.png');
+  right: 5%;
+}
+
+.Vote *:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

@@ -1,0 +1,14 @@
+.SaveConfig{
+  padding-top: 25%;
+  border-radius: 30px;
+  background-color: #000000;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 16px;
+  margin-right: 10px;
+  position: relative;
+  overflow: hidden;
+  width: 10%;
+  height: 30px;
+  padding: 0px 0px;
+}

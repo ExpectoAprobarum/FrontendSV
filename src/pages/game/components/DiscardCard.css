@@ -1,0 +1,82 @@
+.discard {
+  text-align: center;
+}
+
+.is-minister .header, .not-headmaster .header {
+  margin: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: 4px solid black;
+  text-align: center;
+  font-family: sans-serif;
+  background: dimgray;
+}
+
+.not-headmaster .header {
+  margin-top: 12%;
+  border-top: 4px solid black;
+}
+
+.is-minister .cards {
+  margin-top: 17px;
+  text-align: center;
+}
+
+.is-minister .cards button {
+  position: relative;
+  padding-top: 12%;
+  padding-left: 13%;
+  padding-bottom: 8%;
+  background-size: 112%;
+  background-position: center;
+  background-repeat: no-repeat;
+  outline: none;
+  border-radius: 25px;
+  border: 8px solid transparent;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+
+.is-minister .cards button:hover {
+  opacity: 1;
+  filter: saturate(2.5);
+}
+
+.is-minister .cards .left {
+  right: 5%;
+}
+
+.is-minister .cards .right {
+  left: 5%;
+}
+
+.is-minister .cards .phoenix {
+  background-image: url('../assets/ProclamationPhoenix.png');
+}
+
+.is-minister .cards .phoenix:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                rgb(255, 94, 0) 0px 0px 20px,
+                rgb(255, 94, 0) 0px 0px 30px,
+                rgb(255, 94, 0) 0px 0px 40px,
+                rgb(255, 94, 0) 0px 0px 50px,
+                rgb(255, 94, 0) 0px 0px 75px;
+}
+
+.is-minister .cards .death {
+  background-image: url('../assets/ProclamationDeathEater.png');
+}
+
+.is-minister .cards .death:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px,
+                rgb(202, 0, 209) 0px 0px 20px,
+                rgb(202, 0, 209) 0px 0px 30px,
+                rgb(202, 0, 209) 0px 0px 40px,
+                rgb(202, 0, 209) 0px 0px 50px,
+                rgb(202, 0, 209) 0px 0px 75px;
+}
+
+.is-minister .cards *:disabled {
+  opacity: 0.6;
+}

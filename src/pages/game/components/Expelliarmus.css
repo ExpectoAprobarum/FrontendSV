@@ -1,0 +1,63 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(../../../principalpages/components/HARRYP__.TTF)
+}
+.modal-mainRole.expelliarmus{
+  width: 40%;
+}
+
+.divExp {
+  position: fixed;
+  top: 28%;
+  left: 33%;
+  transform: translate(-50%,-50%);
+}
+
+.hExpell {
+  font-family: 'Harry P';
+  font-size: 95px;
+  margin-block-start: 50px;
+  margin-block-end: 20px;
+}
+
+.buttExpell {
+  font-size: 23px;
+  margin-right: 20px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 30px;
+  height: 50px;
+  width: 28%;
+  outline: none;
+}
+
+.buttExpell:hover{
+  transition: 1s;
+  background-color: black;
+  color: white;
+}
+
+.buttonBoard {
+  font-family: 'Harry P';
+  font-size: 35px;
+  background-color: #222831;
+  color: white;
+  margin-top: 15px;
+  height: 60px;
+  width: 75%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  -webkit-box-shadow: 0px 0px 14px 1px #34CEEC;
+  -moz-box-shadow: 0px 0px 14px 1px #34CEEC;
+  box-shadow: 0px 0px 14px 1px #34CEEC;
+  transition: 1s;
+}
+
+.buttonBoard:hover {
+  transition: 1s;
+  background-color: #1C1F23;
+  -webkit-box-shadow: 0px 0px 14px 6px #34CEEC;
+  -moz-box-shadow: 0px 0px 14px 6px #34CEEC;
+  box-shadow: 0px 0px 14px 6px #34CEEC;
+}

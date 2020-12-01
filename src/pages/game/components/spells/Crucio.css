@@ -1,0 +1,112 @@
+@font-face {
+  font-family:'Harry P';
+  src: url(../../../../principalpages/components/HARRYP__.TTF)
+}
+
+.modal-crucio .modal-dialog {
+  background: radial-gradient(indigo, rgb(133, 69, 179));
+  position: relative;
+  width: auto;
+  text-align: center;
+  width: 50%;
+  left: 39%;
+  height: auto;
+  top: 57.5%;
+  border: 5px solid black;
+  border-radius: 50px;
+}
+
+.modal-crucio .modal-dialog hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(1, 0, 0);
+  border: 3px solid black;
+}
+
+.modal-crucio .modal-header {
+  margin: 0;
+  padding-top: 10px;
+  font-family:'Harry P';
+  font-size: 4em;
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                #ad14ad 0px 0px 20px, 
+                #ad14ad 0px 0px 30px, 
+                #ad14ad 0px 0px 40px, 
+                #ad14ad 0px 0px 50px, 
+                #ad14ad 0px 0px 75px;
+}
+
+.modal-crucio .modal-body .investigate,
+.modal-crucio .modal-body .investigate-alias {
+  font-family: sans-serif;
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-crucio .modal-body .crucio-body,
+.modal-crucio .modal-body .reveal {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-crucio .modal-body .crucio-body .loyalty {
+  margin: 0;
+  padding: 0;
+  font-family:'Harry P';
+  font-size: 2.3em;
+}
+
+.modal-crucio .modal-body .crucio-body .loyalty.phoenix {
+  color: red;
+  text-shadow: #460c0c 0px 0px 5px, #460c0c 0px 0px 10px, #460c0c 0px 0px 15px,
+                #851c0a 0px 0px 20px,
+                #851c0a 0px 0px 30px,
+                #851c0a 0px 0px 40px,
+                #851c0a 0px 0px 50px,
+                #851c0a 0px 0px 75px;
+}
+
+.modal-crucio .modal-body .crucio-body .loyalty.death {
+  color: #ad14ad;
+  text-shadow: #0a090a 0px 0px 5px, #5e008a 0px 0px 10px, #09080a 0px 0px 15px,
+                #d000fa 0px 0px 20px,
+                #ff00ff 0px 0px 30px,
+                #3f234b 0px 0px 40px,
+                #d300fd 0px 0px 50px,
+                #870ab8 0px 0px 75px;
+}
+
+#reveal{
+  margin-bottom: 3.35%;
+  margin-top: 1%;
+  background-color: #430a52;
+  border-radius: 30px;
+  width: 50%;
+  padding: 4% 8%;
+  transition: 0.3s;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  font-family:'Harry P';
+  font-size: 104.7%;
+  color: #FFFFFF;
+  border: none;
+  text-shadow: #5e008a 0px 0px 5px, #5e008a 0px 0px 10px, #5e008a 0px 0px 15px,
+                #870ab8 0px 0px 20px,
+                #870ab8 0px 0px 30px,
+                #870ab8 0px 0px 40px,
+                #870ab8 0px 0px 50px,
+                #870ab8 0px 0px 75px;
+
+}
+
+#reveal:hover {
+  box-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, 
+                rgb(118, 0, 122) 0px 0px 20px, 
+                rgb(202, 0, 209) 0px 0px 30px, 
+                rgb(134, 40, 138) 0px 0px 40px, 
+                rgb(202, 0, 209) 0px 0px 50px, 
+                rgb(178, 39, 233) 0px 0px 70px;
+}

@@ -1,0 +1,73 @@
+.formRegister{
+    width: 90%;
+    margin: 25px auto;
+    padding-top: 10%;
+}
+
+.formRegister input{
+    width: 93%;
+    height: 50px;
+    padding-left: 20px;
+    color: black;
+    font-size: small;
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+.formRegister label {
+    font-size:xx-small ;
+    color: tomato;
+}
+
+.TitleRegister {
+    width: 10px;
+    margin: 100px;
+    font-size: x-large ;
+    color:blueviolet;
+}
+
+.fom-popup-BoxShadow.register {
+    width: 410px;
+    height: 600px;
+    padding-top: 70px;
+    margin: 30px auto;
+}
+
+.divTitleInput {
+    margin-left: 23px;
+}
+
+.buttonFound.registerLogin {
+    padding-top: 25%;
+    border-radius: 30px;
+    background-color: #373737;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 16px;
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    height: 50px;
+    padding: 0px 0px;
+}
+
+.buttonFound.registerLogin:hover {
+    background-color: #000000;
+}
+
+.boxBtt {
+    padding-top: 15%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.boxBtt.login {
+    padding-top: 30%;
+}
+
+input:focus {
+    outline:none;
+    border-color: rgb(42, 82, 168);
+    border-radius: 30px;
+}

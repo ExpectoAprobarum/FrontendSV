@@ -1,0 +1,13 @@
+@font-face{
+  font-family:'Harry P';
+  src: url(./components/HARRYP__.TTF)
+}
+
+.DivCreateRegisterandL {
+  font-family: 'Harry P';
+}
+
+.DivRegisterandLogin {
+  padding-top: 0px;
+  text-align: center;
+}

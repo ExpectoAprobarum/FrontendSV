@@ -1,0 +1,27 @@
+.formLogin{
+    width: 90%;
+    margin: 25px auto;
+    padding-top: 10%;
+}
+
+.formLogin input{
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+    color: black;
+    font-size: small;
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+.formLogin label {
+    font-size:xx-small ;
+    color: tomato;
+}
+
+.TitleRegister {
+    width: 10px;
+    margin: 100px;
+    font-size: x-large ;
+    color:blueviolet;
+}
