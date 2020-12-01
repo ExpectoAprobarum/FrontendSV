@@ -133,7 +133,6 @@ const LobbyPage = (props) => {
   }, [idPlayer])
 
   const copyToClipboard = () => {
-    console.log(copyState);
     setCopyState(!copyState)
     setTimeout(
       () => setCopyState(false), 1500

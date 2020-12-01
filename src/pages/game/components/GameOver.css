@@ -30,12 +30,12 @@
 
 .GameOver .phoenix-win .winner {
   background-color: rgb(170, 3, 3);
-  background-image: url('../../../assets/fenix_sym.png');
+  background-image: url('../assets/fenix_sym.png');
 }
 
 .GameOver .death-win .winner {
   background-color: rgb(131, 8, 161);
-  background-image: url('../../../assets/mortifagos_sym.png');
+  background-image: url('../assets/mortifagos_sym.png');
   background-repeat: no-repeat;
 }
 

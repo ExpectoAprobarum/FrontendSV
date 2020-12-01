@@ -26,7 +26,6 @@ const Register = () =>{
           password: contraseña,
           frontURL: 'http://localhost:3000/verification?',
         } 
-        console.log(infotosend)       
         axios.post(configData.API_URL + '/users/', infotosend )
           .then(response => { 
             if(response.status === 200){

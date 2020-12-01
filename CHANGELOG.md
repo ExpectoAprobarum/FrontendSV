@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 
 ### [Latest release]
 
+## 30-11-2020
+### Added
+- Added a button for Death Eater players which, when clicked, shows his Death Eater allies.
+
+### Changed
+- Changed styles for players role.
+- Changed how messages inside the chat window are displayed.
+
 ## 29-11-2020
 ### Added
 - Added the ability for the Headmaster to cast **Expelliarmus** when the requirements are met. The Headmaster has the ability to discard both proclamation cards shown and go to the next turn, only if the Minister agrees with this.
